@@ -1,0 +1,36 @@
+name: Unit Tests
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - name: Create environment
+        run: |
+          echo "EMAIL=${{ secrets.EMAIL }}" >> .env
+          echo "PASSWORD=${{ secrets.PASSWORD }}" >> .env
+          echo "CLIENT_ID=${{ secrets.CLIENT_ID }}" >> .env
+          echo "CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}" >> .env
+      - name: Install dependencies
+        run: npm install
+      - name: Add other dependencies
+        run: |
+          npm install dotenv
+          npm install @apimatic/test-utilities@^0.0.1 --save-dev
+          npm install @types/node@^22.0.0 --save-dev
+          npm install paypal-rest-apislib@file: --save
+      - name: Install jq
+        run: sudo apt-get install jq
+      - name: Add test scripts to package.json
+        run: |
+          jq '.scripts.test = "jest --passWithNoTests"' package.json > temp.json && mv temp.json package.json
+          jq '.scripts["test:coverage"] = "jest --coverage --passWithNoTests"' package.json > temp.json && mv temp.json package.json
+      - name: Run Jest tests
+        run: npm test
