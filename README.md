@@ -12,14 +12,14 @@ Find out more here: [https://developer.paypal.com/docs/api/orders/v2/](https://d
 Run the following command from your project directory to install the package from npm:
 
 ```ts
-npm install @paypal/paypal-server-sdk@0.5.0
+npm install @paypal/paypal-server-sdk@0.5.1
 ```
 
-For additional package details, see the [Npm page for the @paypal/paypal-server-sdk@0.5.0 npm](https://www.npmjs.com/package/@paypal/paypal-server-sdk/v/0.5.0).
+For additional package details, see the [Npm page for the @paypal/paypal-server-sdk@0.5.1 npm](https://www.npmjs.com/package/@paypal/paypal-server-sdk/v/0.5.1).
 
 ## Initialize the API Client
 
-**_Note:_** Documentation for the client can be found [here.](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.0/doc/client.md)
+**_Note:_** Documentation for the client can be found [here.](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.1/doc/client.md)
 
 The following parameters are configurable for the API Client:
 
@@ -29,8 +29,8 @@ The following parameters are configurable for the API Client:
 | `timeout` | `number` | Timeout for API calls.<br>*Default*: `0` |
 | `httpClientOptions` | `Partial<HttpClientOptions>` | Stable configurable http client options. |
 | `unstableHttpClientOptions` | `any` | Unstable configurable http client options. |
-| `logging` | [`PartialLoggingOptions`](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.0/doc/partial-logging-options.md) | Logging Configuration to enable logging |
-| `clientCredentialsAuthCredentials` | [`ClientCredentialsAuthCredentials`](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.0/doc/auth/oauth-2-client-credentials-grant.md) | The credential object for clientCredentialsAuth |
+| `logging` | [`PartialLoggingOptions`](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.1/doc/partial-logging-options.md) | Logging Configuration to enable logging |
+| `clientCredentialsAuthCredentials` | [`ClientCredentialsAuthCredentials`](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.1/doc/auth/oauth-2-client-credentials-grant.md) | The credential object for clientCredentialsAuth |
 
 ### HttpClientOptions
 
@@ -90,20 +90,20 @@ The SDK can be configured to use a different environment for making API calls. A
 
 This API uses the following authentication schemes.
 
-* [`Oauth2 (OAuth 2 Client Credentials Grant)`](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.0/doc/auth/oauth-2-client-credentials-grant.md)
+* [`Oauth2 (OAuth 2 Client Credentials Grant)`](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.1/doc/auth/oauth-2-client-credentials-grant.md)
 
 ## List of APIs
 
-* [Orders](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.0/doc/controllers/orders.md)
-* [Payments](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.0/doc/controllers/payments.md)
-* [Vault](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.0/doc/controllers/vault.md)
+* [Orders](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.1/doc/controllers/orders.md)
+* [Payments](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.1/doc/controllers/payments.md)
+* [Vault](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.1/doc/controllers/vault.md)
 
 ## Classes Documentation
 
-* [ApiResponse](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.0/doc/api-response.md)
-* [ApiError](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.0/doc/api-error.md)
-* [PartialLoggingOptions](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.0/doc/partial-logging-options.md)
-* [PartialRequestLoggingOptions](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.0/doc/partial-request-logging-options.md)
-* [PartialResponseLoggingOptions](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.0/doc/partial-response-logging-options.md)
-* [LoggerInterface](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.0/doc/logger-interface.md)
+* [ApiResponse](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.1/doc/api-response.md)
+* [ApiError](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.1/doc/api-error.md)
+* [PartialLoggingOptions](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.1/doc/partial-logging-options.md)
+* [PartialRequestLoggingOptions](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.1/doc/partial-request-logging-options.md)
+* [PartialResponseLoggingOptions](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.1/doc/partial-response-logging-options.md)
+* [LoggerInterface](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.1/doc/logger-interface.md)
 
