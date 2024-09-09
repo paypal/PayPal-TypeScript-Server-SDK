@@ -1,5 +1,5 @@
 {
-  "version": "0.4.0",
+  "version": "0.5.0",
   "license": "MIT",
   "sideEffects": false,
   "main": "dist/cjs/index.js",
@@ -29,7 +29,8 @@
   "name": "@paypal/paypal-server-sdk",
   "description": "PayPal's SDK for interacting with the REST APIs",
   "author": {
-    "name": "PayPal"
+    "name": "PayPal",
+    "url": ""
   },
   "devDependencies": {
     "@types/jest": "^29.4.0",
@@ -53,8 +54,10 @@
     "url": "https://github.com/paypal/PayPal-TypeScript-Server-SDK.git"
   },
   "bugs": {
+    "url": "https://github.com/paypal/PayPal-TypeScript-Server-SDK/issues",
     "email": "support@apimatic.io"
   },
+  "homepage": "https://github.com/paypal/PayPal-TypeScript-Server-SDK",
   "keywords": [],
   "contributors": []
 }
