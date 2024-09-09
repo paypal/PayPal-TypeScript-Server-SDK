@@ -1,5 +1,5 @@
 
-# Getting Started with paypal server sdk
+# Getting Started with Paypal Server SDK
 
 ## Introduction
 
