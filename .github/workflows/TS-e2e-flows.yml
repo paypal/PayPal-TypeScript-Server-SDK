@@ -24,7 +24,6 @@ jobs:
           npm install @apimatic/test-utilities@^0.0.1 --save-dev
           npm install @playwright/test@^1.46.0 --save-dev
           npm install @types/node@^22.0.0 --save-dev
-          npm install paypal-rest-apislib@file: --save
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests

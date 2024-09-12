@@ -22,12 +22,10 @@ jobs:
           npm install dotenv
           npm install @apimatic/test-utilities@^0.0.1 --save-dev
           npm install @types/node@^22.0.0 --save-dev
-          npm install paypal-rest-apislib@file: --save
       - name: Install jq
         run: sudo apt-get install jq
       - name: Add test scripts to package.json
         run: |
           jq '.scripts.test = "jest --passWithNoTests"' package.json > temp.json && mv temp.json package.json
-          jq '.scripts["test:coverage"] = "jest --coverage --passWithNoTests"' package.json > temp.json && mv temp.json package.json
       - name: Run Jest tests
         run: npm test

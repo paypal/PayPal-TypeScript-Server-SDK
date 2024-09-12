@@ -1,4 +1,4 @@
-import { VaultController, TokenType } from '../src';
+import { TokenRequestType, VaultController } from '../src';
 import { testClient } from './testClient';
 import { expectHeadersToMatch, makeApiCall } from './testHelper';
 
@@ -68,7 +68,7 @@ describe('Vault API', () => {
         paymentSource: {
           token: {
             id: invalidId,
-            type: TokenType.SETUPTOKEN,
+            type: TokenRequestType.SETUPTOKEN,
           },
         },
       },

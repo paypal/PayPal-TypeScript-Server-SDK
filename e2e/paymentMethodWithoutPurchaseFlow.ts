@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import {
   CheckoutPaymentIntent,
   OrdersController,
-  TokenType,
+  TokenRequestType,
   VaultController,
 } from '../src';
 import { testClient } from './testClient';
@@ -65,7 +65,7 @@ export default function paymentMethodWithoutPurchaseFlow() {
           paymentSource: {
             token: {
               id: setupTokenDetails.id,
-              type: TokenType.SETUPTOKEN,
+              type: TokenRequestType.SETUPTOKEN,
             },
           },
         },
