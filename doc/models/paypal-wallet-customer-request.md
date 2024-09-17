@@ -1,9 +1,9 @@
 
-# Pay Pal Wallet Customer Request
+# Paypal Wallet Customer Request
 
 ## Structure
 
-`PayPalWalletCustomerRequest`
+`PaypalWalletCustomerRequest`
 
 ## Fields
 

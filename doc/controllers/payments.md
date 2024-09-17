@@ -75,7 +75,7 @@ Captures an authorized payment, by ID.
 
 ```ts
 async authorizationsCapture(  authorizationId: string,
-  payPalRequestId?: string,
+  paypalRequestId?: string,
   prefer?: string,
   body?: CaptureRequest,
 requestOptions?: RequestOptions): Promise<ApiResponse<CapturedPayment>>
@@ -86,7 +86,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<CapturedPayment>>
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `authorizationId` | `string` | Template, Required | The PayPal-generated ID for the authorized payment to capture. |
-| `payPalRequestId` | `string \| undefined` | Header, Optional | The server stores keys for 45 days. |
+| `paypalRequestId` | `string \| undefined` | Header, Optional | The server stores keys for 45 days. |
 | `prefer` | `string \| undefined` | Header, Optional | The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul><br>**Default**: `'return=minimal'` |
 | `body` | [`CaptureRequest \| undefined`](../../doc/models/capture-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
@@ -138,7 +138,7 @@ Reauthorizes an authorized PayPal account payment, by ID. To ensure that funds a
 
 ```ts
 async authorizationsReauthorize(  authorizationId: string,
-  payPalRequestId?: string,
+  paypalRequestId?: string,
   prefer?: string,
   body?: ReauthorizeRequest,
 requestOptions?: RequestOptions): Promise<ApiResponse<PaymentAuthorization>>
@@ -149,7 +149,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<PaymentAuthorization>>
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `authorizationId` | `string` | Template, Required | The PayPal-generated ID for the authorized payment to reauthorize. |
-| `payPalRequestId` | `string \| undefined` | Header, Optional | The server stores keys for 45 days. |
+| `paypalRequestId` | `string \| undefined` | Header, Optional | The server stores keys for 45 days. |
 | `prefer` | `string \| undefined` | Header, Optional | The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul><br>**Default**: `'return=minimal'` |
 | `body` | [`ReauthorizeRequest \| undefined`](../../doc/models/reauthorize-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
@@ -197,7 +197,7 @@ Voids, or cancels, an authorized payment, by ID. You cannot void an authorized p
 
 ```ts
 async authorizationsVoid(  authorizationId: string,
-  payPalAuthAssertion?: string,
+  paypalAuthAssertion?: string,
   prefer?: string,
 requestOptions?: RequestOptions): Promise<ApiResponse<PaymentAuthorization | null>>
 ```
@@ -207,7 +207,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<PaymentAuthorization | nul
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `authorizationId` | `string` | Template, Required | The PayPal-generated ID for the authorized payment to void. |
-| `payPalAuthAssertion` | `string \| undefined` | Header, Optional | An API-caller-provided JSON Web Token (JWT) assertion that identifies the merchant. For details, see [PayPal-Auth-Assertion](/docs/api/reference/api-requests/#paypal-auth-assertion).<blockquote><strong>Note:</strong>For three party transactions in which a partner is managing the API calls on behalf of a merchant, the partner must identify the merchant using either a PayPal-Auth-Assertion header or an access token with target_subject.</blockquote> |
+| `paypalAuthAssertion` | `string \| undefined` | Header, Optional | An API-caller-provided JSON Web Token (JWT) assertion that identifies the merchant. For details, see [PayPal-Auth-Assertion](/docs/api/reference/api-requests/#paypal-auth-assertion).<blockquote><strong>Note:</strong>For three party transactions in which a partner is managing the API calls on behalf of a merchant, the partner must identify the merchant using either a PayPal-Auth-Assertion header or an access token with target_subject.</blockquote> |
 | `prefer` | `string \| undefined` | Header, Optional | The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul><br>**Default**: `'return=minimal'` |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -303,9 +303,9 @@ Refunds a captured payment, by ID. For a full refund, include an empty payload i
 
 ```ts
 async capturesRefund(  captureId: string,
-  payPalRequestId?: string,
+  paypalRequestId?: string,
   prefer?: string,
-  payPalAuthAssertion?: string,
+  paypalAuthAssertion?: string,
   body?: RefundRequest,
 requestOptions?: RequestOptions): Promise<ApiResponse<Refund>>
 ```
@@ -315,9 +315,9 @@ requestOptions?: RequestOptions): Promise<ApiResponse<Refund>>
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `captureId` | `string` | Template, Required | The PayPal-generated ID for the captured payment to refund. |
-| `payPalRequestId` | `string \| undefined` | Header, Optional | The server stores keys for 45 days. |
+| `paypalRequestId` | `string \| undefined` | Header, Optional | The server stores keys for 45 days. |
 | `prefer` | `string \| undefined` | Header, Optional | The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul><br>**Default**: `'return=minimal'` |
-| `payPalAuthAssertion` | `string \| undefined` | Header, Optional | An API-caller-provided JSON Web Token (JWT) assertion that identifies the merchant. For details, see [PayPal-Auth-Assertion](/docs/api/reference/api-requests/#paypal-auth-assertion).<blockquote><strong>Note:</strong>For three party transactions in which a partner is managing the API calls on behalf of a merchant, the partner must identify the merchant using either a PayPal-Auth-Assertion header or an access token with target_subject.</blockquote> |
+| `paypalAuthAssertion` | `string \| undefined` | Header, Optional | An API-caller-provided JSON Web Token (JWT) assertion that identifies the merchant. For details, see [PayPal-Auth-Assertion](/docs/api/reference/api-requests/#paypal-auth-assertion).<blockquote><strong>Note:</strong>For three party transactions in which a partner is managing the API calls on behalf of a merchant, the partner must identify the merchant using either a PayPal-Auth-Assertion header or an access token with target_subject.</blockquote> |
 | `body` | [`RefundRequest \| undefined`](../../doc/models/refund-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 

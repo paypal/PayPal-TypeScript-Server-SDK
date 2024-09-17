@@ -1,11 +1,11 @@
 
-# Pay Pal Wallet Customer
+# Paypal Wallet Customer
 
 The details about a customer in PayPal's system of record.
 
 ## Structure
 
-`PayPalWalletCustomer`
+`PaypalWalletCustomer`
 
 ## Fields
 

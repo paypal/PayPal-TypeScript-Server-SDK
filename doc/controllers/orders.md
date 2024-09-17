@@ -28,9 +28,9 @@ Creates an order. Merchants and partners can add Level 2 and 3 data to payments 
 
 ```ts
 async ordersCreate(  body: OrderRequest,
-  payPalRequestId?: string,
-  payPalPartnerAttributionId?: string,
-  payPalClientMetadataId?: string,
+  paypalRequestId?: string,
+  paypalPartnerAttributionId?: string,
+  paypalClientMetadataId?: string,
   prefer?: string,
 requestOptions?: RequestOptions): Promise<ApiResponse<Order>>
 ```
@@ -40,9 +40,9 @@ requestOptions?: RequestOptions): Promise<ApiResponse<Order>>
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `body` | [`OrderRequest`](../../doc/models/order-request.md) | Body, Required | - |
-| `payPalRequestId` | `string \| undefined` | Header, Optional | The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `108` |
-| `payPalPartnerAttributionId` | `string \| undefined` | Header, Optional | **Constraints**: *Minimum Length*: `1`, *Maximum Length*: `36` |
-| `payPalClientMetadataId` | `string \| undefined` | Header, Optional | **Constraints**: *Minimum Length*: `1`, *Maximum Length*: `36` |
+| `paypalRequestId` | `string \| undefined` | Header, Optional | The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `108` |
+| `paypalPartnerAttributionId` | `string \| undefined` | Header, Optional | **Constraints**: *Minimum Length*: `1`, *Maximum Length*: `36` |
+| `paypalClientMetadataId` | `string \| undefined` | Header, Optional | **Constraints**: *Minimum Length*: `1`, *Maximum Length*: `36` |
 | `prefer` | `string \| undefined` | Header, Optional | The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul><br>**Default**: `'return=minimal'`<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `25`, *Pattern*: `^[a-zA-Z=,-]*$` |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -203,7 +203,7 @@ Payer confirms their intent to pay for the the Order with the given payment sour
 
 ```ts
 async ordersConfirm(  id: string,
-  payPalClientMetadataId?: string,
+  paypalClientMetadataId?: string,
   prefer?: string,
   body?: ConfirmOrderRequest,
 requestOptions?: RequestOptions): Promise<ApiResponse<Order>>
@@ -214,7 +214,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<Order>>
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `id` | `string` | Template, Required | The ID of the order for which the payer confirms their intent to pay.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `36`, *Pattern*: `^[A-Z0-9]+$` |
-| `payPalClientMetadataId` | `string \| undefined` | Header, Optional | **Constraints**: *Minimum Length*: `1`, *Maximum Length*: `36` |
+| `paypalClientMetadataId` | `string \| undefined` | Header, Optional | **Constraints**: *Minimum Length*: `1`, *Maximum Length*: `36` |
 | `prefer` | `string \| undefined` | Header, Optional | The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul><br>**Default**: `'return=minimal'`<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `25`, *Pattern*: `^[a-zA-Z=]*$` |
 | `body` | [`ConfirmOrderRequest \| undefined`](../../doc/models/confirm-order-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
@@ -264,10 +264,10 @@ Authorizes payment for an order. To successfully authorize payment for an order,
 
 ```ts
 async ordersAuthorize(  id: string,
-  payPalRequestId?: string,
+  paypalRequestId?: string,
   prefer?: string,
-  payPalClientMetadataId?: string,
-  payPalAuthAssertion?: string,
+  paypalClientMetadataId?: string,
+  paypalAuthAssertion?: string,
   body?: OrderAuthorizeRequest,
 requestOptions?: RequestOptions): Promise<ApiResponse<OrderAuthorizeResponse>>
 ```
@@ -277,10 +277,10 @@ requestOptions?: RequestOptions): Promise<ApiResponse<OrderAuthorizeResponse>>
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `id` | `string` | Template, Required | The ID of the order for which to authorize.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `36`, *Pattern*: `^[A-Z0-9]+$` |
-| `payPalRequestId` | `string \| undefined` | Header, Optional | The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `108` |
+| `paypalRequestId` | `string \| undefined` | Header, Optional | The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `108` |
 | `prefer` | `string \| undefined` | Header, Optional | The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul><br>**Default**: `'return=minimal'`<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `25`, *Pattern*: `^[a-zA-Z=,-]*$` |
-| `payPalClientMetadataId` | `string \| undefined` | Header, Optional | **Constraints**: *Minimum Length*: `1`, *Maximum Length*: `36` |
-| `payPalAuthAssertion` | `string \| undefined` | Header, Optional | An API-caller-provided JSON Web Token (JWT) assertion that identifies the merchant. For details, see <a href="https://developer.paypal.com/api/rest/requests/#paypal-auth-assertion">PayPal-Auth-Assertion</a>. |
+| `paypalClientMetadataId` | `string \| undefined` | Header, Optional | **Constraints**: *Minimum Length*: `1`, *Maximum Length*: `36` |
+| `paypalAuthAssertion` | `string \| undefined` | Header, Optional | An API-caller-provided JSON Web Token (JWT) assertion that identifies the merchant. For details, see <a href="https://developer.paypal.com/api/rest/requests/#paypal-auth-assertion">PayPal-Auth-Assertion</a>. |
 | `body` | [`OrderAuthorizeRequest \| undefined`](../../doc/models/order-authorize-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -327,10 +327,10 @@ Captures payment for an order. To successfully capture payment for an order, the
 
 ```ts
 async ordersCapture(  id: string,
-  payPalRequestId?: string,
+  paypalRequestId?: string,
   prefer?: string,
-  payPalClientMetadataId?: string,
-  payPalAuthAssertion?: string,
+  paypalClientMetadataId?: string,
+  paypalAuthAssertion?: string,
   body?: OrderCaptureRequest,
 requestOptions?: RequestOptions): Promise<ApiResponse<Order>>
 ```
@@ -340,10 +340,10 @@ requestOptions?: RequestOptions): Promise<ApiResponse<Order>>
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `id` | `string` | Template, Required | The ID of the order for which to capture a payment.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `36`, *Pattern*: `^[A-Z0-9]+$` |
-| `payPalRequestId` | `string \| undefined` | Header, Optional | The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `108` |
+| `paypalRequestId` | `string \| undefined` | Header, Optional | The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `108` |
 | `prefer` | `string \| undefined` | Header, Optional | The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul><br>**Default**: `'return=minimal'`<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `25`, *Pattern*: `^[a-zA-Z=,-]*$` |
-| `payPalClientMetadataId` | `string \| undefined` | Header, Optional | **Constraints**: *Minimum Length*: `1`, *Maximum Length*: `36` |
-| `payPalAuthAssertion` | `string \| undefined` | Header, Optional | An API-caller-provided JSON Web Token (JWT) assertion that identifies the merchant. For details, see <a href="https://developer.paypal.com/api/rest/requests/#paypal-auth-assertion">PayPal-Auth-Assertion</a>. |
+| `paypalClientMetadataId` | `string \| undefined` | Header, Optional | **Constraints**: *Minimum Length*: `1`, *Maximum Length*: `36` |
+| `paypalAuthAssertion` | `string \| undefined` | Header, Optional | An API-caller-provided JSON Web Token (JWT) assertion that identifies the merchant. For details, see <a href="https://developer.paypal.com/api/rest/requests/#paypal-auth-assertion">PayPal-Auth-Assertion</a>. |
 | `body` | [`OrderCaptureRequest \| undefined`](../../doc/models/order-capture-request.md) | Body, Optional | - |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
@@ -391,7 +391,7 @@ Adds tracking information for an Order.
 ```ts
 async ordersTrackCreate(  id: string,
   body: OrderTrackerRequest,
-  payPalAuthAssertion?: string,
+  paypalAuthAssertion?: string,
 requestOptions?: RequestOptions): Promise<ApiResponse<Order>>
 ```
 
@@ -401,7 +401,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<Order>>
 |  --- | --- | --- | --- |
 | `id` | `string` | Template, Required | The ID of the order that the tracking information is associated with.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `36`, *Pattern*: `^[A-Z0-9]+$` |
 | `body` | [`OrderTrackerRequest`](../../doc/models/order-tracker-request.md) | Body, Required | - |
-| `payPalAuthAssertion` | `string \| undefined` | Header, Optional | An API-caller-provided JSON Web Token (JWT) assertion that identifies the merchant. For details, see <a href="https://developer.paypal.com/api/rest/requests/#paypal-auth-assertion">PayPal-Auth-Assertion</a>. |
+| `paypalAuthAssertion` | `string \| undefined` | Header, Optional | An API-caller-provided JSON Web Token (JWT) assertion that identifies the merchant. For details, see <a href="https://developer.paypal.com/api/rest/requests/#paypal-auth-assertion">PayPal-Auth-Assertion</a>. |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
