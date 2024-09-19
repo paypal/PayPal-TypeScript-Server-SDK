@@ -1,5 +1,5 @@
 {
-  "version": "0.5.1",
+  "version": "0.6.0",
   "license": "MIT",
   "sideEffects": false,
   "main": "dist/cjs/index.js",
@@ -29,8 +29,7 @@
   "name": "@paypal/paypal-server-sdk",
   "description": "PayPal's SDK for interacting with the REST APIs",
   "author": {
-    "name": "PayPal",
-    "url": ""
+    "name": "PayPal"
   },
   "devDependencies": {
     "@types/jest": "^29.4.0",
@@ -45,7 +44,7 @@
   "dependencies": {
     "@apimatic/authentication-adapters": "^0.5.4",
     "@apimatic/axios-client-adapter": "^0.3.4",
-    "@apimatic/core": "^0.10.13",
+    "@apimatic/core": "^0.10.14",
     "@apimatic/oauth-adapters": "^0.4.6",
     "@apimatic/schema": "^0.7.12"
   },

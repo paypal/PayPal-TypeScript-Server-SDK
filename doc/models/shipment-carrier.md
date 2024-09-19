@@ -273,7 +273,7 @@ The carrier for the shipment. Some carriers have a global version as well as loc
 | `DAIGLOBALTRACK` |
 | `GLOBALIPARCEL` |
 | `YURTICIKARGO` |
-| `CNPAYPALPACKAGE` |
+| `CNPaypalPACKAGE` |
 | `PARCEL2POST` |
 | `GLSIT` |
 | `PILLOGISTICS` |
