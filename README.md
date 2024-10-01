@@ -3,7 +3,22 @@
 
 ## Introduction
 
-An order represents a payment between two or more parties. Use the Orders API to create, update, retrieve, authorize, and capture orders., Call the Payments API to authorize payments, capture authorized payments, refund payments that have already been captured, and show payment information. Use the Payments API in conjunction with the <a href="/docs/api/orders/v2/">Orders API</a>. For more information, see the <a href="/docs/checkout/">PayPal Checkout Overview</a>., The Payment Method Tokens API saves payment methods so payers don't have to enter details for future transactions. Payers can check out faster or pay without being present after they agree to save a payment method.<br><br>The API associates a payment method with a temporary setup token. Pass the setup token to the API to exchange the setup token for a permanent token.<br><br>The permanent token represents a payment method that's saved to the vault. This token can be used repeatedly for checkout or recurring transactions such as subscriptions.<br><br>The Payment Method Tokens API is available in the US only.
+### ⚠️ Beta Release Notice
+
+This version is considered a **beta release**. While we have done our best to ensure stability and functionality, there may still be bugs, incomplete features, or breaking changes in future updates.
+
+#### Important Notes
+
+- **Available Features:** This SDK currently contains only 3 of PayPal's API endpoints. Additional endpoints and functionality will be added in the future.
+- **API Changes:** Expect potential changes in APIs and features as we finalize the product.
+
+### Information
+
+The PayPal Server SDK provides integration access to the PayPal REST APIs. The API endpoints are divided into distinct controllers:
+
+- Orders Controller: <a href="https://developer.paypal.com/docs/api/orders/v2/">Orders API v2</a>
+- Payments Controller: <a href="https://developer.paypal.com/docs/api/payments/v2/">Payments API v2</a>
+- Vault Controller: <a href="https://developer.paypal.com/docs/api/payment-tokens/v3/">Payment Method Tokens API v3</a> *Available in the US only.*
 
 Find out more here: [https://developer.paypal.com/docs/api/orders/v2/](https://developer.paypal.com/docs/api/orders/v2/)
 
@@ -12,14 +27,14 @@ Find out more here: [https://developer.paypal.com/docs/api/orders/v2/](https://d
 Run the following command from your project directory to install the package from npm:
 
 ```ts
-npm install @paypal/paypal-server-sdk@0.5.1
+npm install @paypal/paypal-server-sdk@0.5.2
 ```
 
-For additional package details, see the [Npm page for the @paypal/paypal-server-sdk@0.5.1 npm](https://www.npmjs.com/package/@paypal/paypal-server-sdk/v/0.5.1).
+For additional package details, see the [Npm page for the @paypal/paypal-server-sdk@0.5.2 npm](https://www.npmjs.com/package/@paypal/paypal-server-sdk/v/0.5.2).
 
 ## Initialize the API Client
 
-**_Note:_** Documentation for the client can be found [here.](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.1/doc/client.md)
+**_Note:_** Documentation for the client can be found [here.](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.2/doc/client.md)
 
 The following parameters are configurable for the API Client:
 
@@ -29,8 +44,8 @@ The following parameters are configurable for the API Client:
 | `timeout` | `number` | Timeout for API calls.<br>*Default*: `0` |
 | `httpClientOptions` | `Partial<HttpClientOptions>` | Stable configurable http client options. |
 | `unstableHttpClientOptions` | `any` | Unstable configurable http client options. |
-| `logging` | [`PartialLoggingOptions`](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.1/doc/partial-logging-options.md) | Logging Configuration to enable logging |
-| `clientCredentialsAuthCredentials` | [`ClientCredentialsAuthCredentials`](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.1/doc/auth/oauth-2-client-credentials-grant.md) | The credential object for clientCredentialsAuth |
+| `logging` | [`PartialLoggingOptions`](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.2/doc/partial-logging-options.md) | Logging Configuration to enable logging |
+| `clientCredentialsAuthCredentials` | [`ClientCredentialsAuthCredentials`](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.2/doc/auth/oauth-2-client-credentials-grant.md) | The credential object for clientCredentialsAuth |
 
 ### HttpClientOptions
 
@@ -90,20 +105,20 @@ The SDK can be configured to use a different environment for making API calls. A
 
 This API uses the following authentication schemes.
 
-* [`Oauth2 (OAuth 2 Client Credentials Grant)`](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.1/doc/auth/oauth-2-client-credentials-grant.md)
+* [`Oauth2 (OAuth 2 Client Credentials Grant)`](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.2/doc/auth/oauth-2-client-credentials-grant.md)
 
 ## List of APIs
 
-* [Orders](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.1/doc/controllers/orders.md)
-* [Payments](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.1/doc/controllers/payments.md)
-* [Vault](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.1/doc/controllers/vault.md)
+* [Orders](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.2/doc/controllers/orders.md)
+* [Payments](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.2/doc/controllers/payments.md)
+* [Vault](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.2/doc/controllers/vault.md)
 
 ## Classes Documentation
 
-* [ApiResponse](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.1/doc/api-response.md)
-* [ApiError](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.1/doc/api-error.md)
-* [PartialLoggingOptions](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.1/doc/partial-logging-options.md)
-* [PartialRequestLoggingOptions](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.1/doc/partial-request-logging-options.md)
-* [PartialResponseLoggingOptions](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.1/doc/partial-response-logging-options.md)
-* [LoggerInterface](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.1/doc/logger-interface.md)
+* [ApiResponse](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.2/doc/api-response.md)
+* [ApiError](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.2/doc/api-error.md)
+* [PartialLoggingOptions](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.2/doc/partial-logging-options.md)
+* [PartialRequestLoggingOptions](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.2/doc/partial-request-logging-options.md)
+* [PartialResponseLoggingOptions](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.2/doc/partial-response-logging-options.md)
+* [LoggerInterface](https://www.github.com/paypal/PayPal-TypeScript-Server-SDK/tree/0.5.2/doc/logger-interface.md)
 
