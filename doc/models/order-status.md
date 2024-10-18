@@ -11,10 +11,10 @@ The order status.
 
 | Name |
 |  --- |
-| `CREATED` |
-| `SAVED` |
-| `APPROVED` |
-| `VOIDED` |
-| `COMPLETED` |
-| `PAYERACTIONREQUIRED` |
+| `Created` |
+| `Saved` |
+| `Approved` |
+| `Voided` |
+| `Completed` |
+| `PayerActionRequired` |
 

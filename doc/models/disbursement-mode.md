@@ -11,6 +11,6 @@ The funds that are held on behalf of the merchant.
 
 | Name |
 |  --- |
-| `INSTANT` |
-| `DELAYED` |
+| `Instant` |
+| `Delayed` |
 

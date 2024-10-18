@@ -11,7 +11,7 @@ Indicates whether the transaction is eligible for seller protection. For informa
 
 | Name |
 |  --- |
-| `ELIGIBLE` |
-| `PARTIALLYELIGIBLE` |
-| `NOTELIGIBLE` |
+| `Eligible` |
+| `PartiallyEligible` |
+| `NotEligible` |
 

@@ -12,67 +12,12 @@ const vaultController = new VaultController(client);
 
 ## Methods
 
-* [Payment-Tokens Create](../../doc/controllers/vault.md#payment-tokens-create)
 * [Customer Payment-Tokens Get](../../doc/controllers/vault.md#customer-payment-tokens-get)
 * [Payment-Tokens Get](../../doc/controllers/vault.md#payment-tokens-get)
-* [Payment-Tokens Delete](../../doc/controllers/vault.md#payment-tokens-delete)
+* [Payment-Tokens Create](../../doc/controllers/vault.md#payment-tokens-create)
 * [Setup-Tokens Create](../../doc/controllers/vault.md#setup-tokens-create)
+* [Payment-Tokens Delete](../../doc/controllers/vault.md#payment-tokens-delete)
 * [Setup-Tokens Get](../../doc/controllers/vault.md#setup-tokens-get)
-
-
-# Payment-Tokens Create
-
-Creates a Payment Token from the given payment source and adds it to the Vault of the associated customer.
-
-```ts
-async paymentTokensCreate(  payPalRequestId: string,
-  body: PaymentTokenRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<PaymentTokenResponse>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `payPalRequestId` | `string` | Header, Required | The server stores keys for 3 hours. |
-| `body` | [`PaymentTokenRequest`](../../doc/models/payment-token-request.md) | Body, Required | Payment Token creation with a financial instrument and an optional customer_id. |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`PaymentTokenResponse`](../../doc/models/payment-token-response.md)
-
-## Example Usage
-
-```ts
-const collect = {
-  payPalRequestId: 'PayPal-Request-Id6',
-  body: {
-    paymentSource: {},
-  }
-}
-
-try {
-  const { result, ...httpResponse } = await vaultController.paymentTokensCreate(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 400 | Request is not well-formed, syntactically incorrect, or violates schema. | [`CustomError`](../../doc/models/custom-error.md) |
-| 403 | Authorization failed due to insufficient permissions. | [`CustomError`](../../doc/models/custom-error.md) |
-| 404 | Request contains reference to resources that do not exist. | [`CustomError`](../../doc/models/custom-error.md) |
-| 422 | The requested action could not be performed, semantically incorrect, or failed business validation. | [`CustomError`](../../doc/models/custom-error.md) |
-| 500 | An internal server error has occurred. | [`CustomError`](../../doc/models/custom-error.md) |
 
 
 # Customer Payment-Tokens Get
@@ -179,6 +124,115 @@ try {
 | 500 | An internal server error has occurred. | [`CustomError`](../../doc/models/custom-error.md) |
 
 
+# Payment-Tokens Create
+
+Creates a Payment Token from the given payment source and adds it to the Vault of the associated customer.
+
+```ts
+async paymentTokensCreate(  paypalRequestId: string,
+  body: PaymentTokenRequest,
+requestOptions?: RequestOptions): Promise<ApiResponse<PaymentTokenResponse>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `paypalRequestId` | `string` | Header, Required | The server stores keys for 3 hours. |
+| `body` | [`PaymentTokenRequest`](../../doc/models/payment-token-request.md) | Body, Required | Payment Token creation with a financial instrument and an optional customer_id. |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`PaymentTokenResponse`](../../doc/models/payment-token-response.md)
+
+## Example Usage
+
+```ts
+const collect = {
+  paypalRequestId: 'PayPal-Request-Id6',
+  body: {
+    paymentSource: {},
+  }
+}
+
+try {
+  const { result, ...httpResponse } = await vaultController.paymentTokensCreate(collect);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 400 | Request is not well-formed, syntactically incorrect, or violates schema. | [`CustomError`](../../doc/models/custom-error.md) |
+| 403 | Authorization failed due to insufficient permissions. | [`CustomError`](../../doc/models/custom-error.md) |
+| 404 | Request contains reference to resources that do not exist. | [`CustomError`](../../doc/models/custom-error.md) |
+| 422 | The requested action could not be performed, semantically incorrect, or failed business validation. | [`CustomError`](../../doc/models/custom-error.md) |
+| 500 | An internal server error has occurred. | [`CustomError`](../../doc/models/custom-error.md) |
+
+
+# Setup-Tokens Create
+
+Creates a Setup Token from the given payment source and adds it to the Vault of the associated customer.
+
+```ts
+async setupTokensCreate(  paypalRequestId: string,
+  body: SetupTokenRequest,
+requestOptions?: RequestOptions): Promise<ApiResponse<SetupTokenResponse>>
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `paypalRequestId` | `string` | Header, Required | The server stores keys for 3 hours. |
+| `body` | [`SetupTokenRequest`](../../doc/models/setup-token-request.md) | Body, Required | Setup Token creation with a instrument type optional financial instrument details and customer_id. |
+| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
+
+## Response Type
+
+[`SetupTokenResponse`](../../doc/models/setup-token-response.md)
+
+## Example Usage
+
+```ts
+const collect = {
+  paypalRequestId: 'PayPal-Request-Id6',
+  body: {
+    paymentSource: {},
+  }
+}
+
+try {
+  const { result, ...httpResponse } = await vaultController.setupTokensCreate(collect);
+  // Get more response info...
+  // const { statusCode, headers } = httpResponse;
+} catch (error) {
+  if (error instanceof ApiError) {
+    const errors = error.result;
+    // const { statusCode, headers } = error;
+  }
+}
+```
+
+## Errors
+
+| HTTP Status Code | Error Description | Exception Class |
+|  --- | --- | --- |
+| 400 | Request is not well-formed, syntactically incorrect, or violates schema. | [`CustomError`](../../doc/models/custom-error.md) |
+| 403 | Authorization failed due to insufficient permissions. | [`CustomError`](../../doc/models/custom-error.md) |
+| 422 | The requested action could not be performed, semantically incorrect, or failed business validation. | [`CustomError`](../../doc/models/custom-error.md) |
+| 500 | An internal server error has occurred. | [`CustomError`](../../doc/models/custom-error.md) |
+
+
 # Payment-Tokens Delete
 
 Delete the payment token associated with the payment token id.
@@ -222,60 +276,6 @@ try {
 |  --- | --- | --- |
 | 400 | Request is not well-formed, syntactically incorrect, or violates schema. | [`CustomError`](../../doc/models/custom-error.md) |
 | 403 | Authorization failed due to insufficient permissions. | [`CustomError`](../../doc/models/custom-error.md) |
-| 500 | An internal server error has occurred. | [`CustomError`](../../doc/models/custom-error.md) |
-
-
-# Setup-Tokens Create
-
-Creates a Setup Token from the given payment source and adds it to the Vault of the associated customer.
-
-```ts
-async setupTokensCreate(  payPalRequestId: string,
-  body: SetupTokenRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<SetupTokenResponse>>
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `payPalRequestId` | `string` | Header, Required | The server stores keys for 3 hours. |
-| `body` | [`SetupTokenRequest`](../../doc/models/setup-token-request.md) | Body, Required | Setup Token creation with a instrument type optional financial instrument details and customer_id. |
-| `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
-
-## Response Type
-
-[`SetupTokenResponse`](../../doc/models/setup-token-response.md)
-
-## Example Usage
-
-```ts
-const collect = {
-  payPalRequestId: 'PayPal-Request-Id6',
-  body: {
-    paymentSource: {},
-  }
-}
-
-try {
-  const { result, ...httpResponse } = await vaultController.setupTokensCreate(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
-} catch (error) {
-  if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
-  }
-}
-```
-
-## Errors
-
-| HTTP Status Code | Error Description | Exception Class |
-|  --- | --- | --- |
-| 400 | Request is not well-formed, syntactically incorrect, or violates schema. | [`CustomError`](../../doc/models/custom-error.md) |
-| 403 | Authorization failed due to insufficient permissions. | [`CustomError`](../../doc/models/custom-error.md) |
-| 422 | The requested action could not be performed, semantically incorrect, or failed business validation. | [`CustomError`](../../doc/models/custom-error.md) |
 | 500 | An internal server error has occurred. | [`CustomError`](../../doc/models/custom-error.md) |
 
 

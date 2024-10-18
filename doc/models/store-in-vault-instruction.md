@@ -11,5 +11,5 @@ Defines how and when the payment source gets vaulted.
 
 | Name |
 |  --- |
-| `ONSUCCESS` |
+| `OnSuccess` |
 

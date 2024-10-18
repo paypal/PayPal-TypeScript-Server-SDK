@@ -11,8 +11,8 @@ NACHA (the regulatory body governing the ACH network) requires that API callers 
 
 | Name |
 |  --- |
-| `TEL` |
-| `WEB` |
-| `CCD` |
-| `PPD` |
+| `Tel` |
+| `Web` |
+| `Ccd` |
+| `Ppd` |
 

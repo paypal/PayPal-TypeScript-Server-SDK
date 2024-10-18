@@ -11,6 +11,6 @@ The merchant-preferred payment methods.
 
 | Name |
 |  --- |
-| `UNRESTRICTED` |
-| `IMMEDIATEPAYMENTREQUIRED` |
+| `Unrestricted` |
+| `ImmediatePaymentRequired` |
 

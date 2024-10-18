@@ -11,16 +11,16 @@ The reason why the captured payment status is `PENDING` or `DENIED`.
 
 | Name |
 |  --- |
-| `BUYERCOMPLAINT` |
-| `CHARGEBACK` |
-| `ECHECK` |
-| `INTERNATIONALWITHDRAWAL` |
-| `OTHER` |
-| `PENDINGREVIEW` |
-| `RECEIVINGPREFERENCEMANDATESMANUALACTION` |
-| `REFUNDED` |
-| `TRANSACTIONAPPROVEDAWAITINGFUNDING` |
-| `UNILATERAL` |
-| `VERIFICATIONREQUIRED` |
-| `DECLINEDBYRISKFRAUDFILTERS` |
+| `BuyerComplaint` |
+| `Chargeback` |
+| `Echeck` |
+| `InternationalWithdrawal` |
+| `Other` |
+| `PendingReview` |
+| `ReceivingPreferenceMandatesManualAction` |
+| `Refunded` |
+| `TransactionApprovedAwaitingFunding` |
+| `Unilateral` |
+| `VerificationRequired` |
+| `DeclinedByRiskFraudFilters` |
 

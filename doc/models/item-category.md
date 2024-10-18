@@ -11,7 +11,7 @@ The item category type.
 
 | Name |
 |  --- |
-| `DIGITALGOODS` |
-| `PHYSICALGOODS` |
-| `DONATION` |
+| `DigitalGoods` |
+| `PhysicalGoods` |
+| `Donation` |
 

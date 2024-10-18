@@ -11,7 +11,7 @@ Liability shift indicator. The outcome of the issuer's authentication.
 
 | Name |
 |  --- |
-| `NO` |
-| `POSSIBLE` |
-| `UNKNOWN` |
+| `No` |
+| `Possible` |
+| `Unknown` |
 

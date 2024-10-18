@@ -11,6 +11,6 @@ Indicates the type of payment data passed, in case of Non China the payment data
 
 | Name |
 |  --- |
-| `Enum3DSECURE` |
-| `EMV` |
+| `Enum3Dsecure` |
+| `Emv` |
 

@@ -11,5 +11,5 @@ The reason why the refund has the `PENDING` or `FAILED` status.
 
 | Name |
 |  --- |
-| `ECHECK` |
+| `Echeck` |
 

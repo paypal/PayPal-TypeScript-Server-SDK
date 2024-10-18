@@ -11,6 +11,6 @@ The condition that is covered for the transaction.
 
 | Name |
 |  --- |
-| `ITEMNOTRECEIVED` |
-| `UNAUTHORIZEDTRANSACTION` |
+| `ItemNotReceived` |
+| `UnauthorizedTransaction` |
 

@@ -11,7 +11,7 @@ The vault status.
 
 | Name |
 |  --- |
-| `VAULTED` |
-| `CREATED` |
-| `APPROVED` |
+| `Vaulted` |
+| `Created` |
+| `Approved` |
 

@@ -11,6 +11,6 @@ The customer type associated with the Venmo payment token. This is to indicate w
 
 | Name |
 |  --- |
-| `CONSUMER` |
-| `BUSINESS` |
+| `Consumer` |
+| `Business` |
 

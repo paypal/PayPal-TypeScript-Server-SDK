@@ -11,9 +11,9 @@ Type of card. i.e Credit, Debit and so on.
 
 | Name |
 |  --- |
-| `CREDIT` |
-| `DEBIT` |
-| `PREPAID` |
-| `STORE` |
-| `UNKNOWN` |
+| `Credit` |
+| `Debit` |
+| `Prepaid` |
+| `Store` |
+| `Unknown` |
 

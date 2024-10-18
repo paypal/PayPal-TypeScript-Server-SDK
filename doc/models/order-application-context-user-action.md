@@ -11,6 +11,6 @@ DEPRECATED. Configures a <strong>Continue</strong> or <strong>Pay Now</strong> c
 
 | Name |
 |  --- |
-| `CONTINUE` |
-| `PAYNOW` |
+| `Continue` |
+| `PayNow` |
 
