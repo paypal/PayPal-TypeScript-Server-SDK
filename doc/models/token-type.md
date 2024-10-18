@@ -11,5 +11,5 @@ The tokenization method that generated the ID.
 
 | Name |
 |  --- |
-| `BILLINGAGREEMENT` |
+| `BillingAgreement` |
 

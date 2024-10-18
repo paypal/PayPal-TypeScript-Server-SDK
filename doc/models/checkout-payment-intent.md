@@ -11,6 +11,6 @@ The intent to either capture payment immediately or authorize a payment for an o
 
 | Name |
 |  --- |
-| `CAPTURE` |
-| `AUTHORIZE` |
+| `Capture` |
+| `Authorize` |
 
