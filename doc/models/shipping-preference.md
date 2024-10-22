@@ -11,7 +11,7 @@ The location from which the shipping address is derived.
 
 | Name |
 |  --- |
-| `GETFROMFILE` |
-| `NOSHIPPING` |
-| `SETPROVIDEDADDRESS` |
+| `GetFromFile` |
+| `NoShipping` |
+| `SetProvidedAddress` |
 

@@ -11,9 +11,9 @@ The phone type.
 
 | Name |
 |  --- |
-| `FAX` |
-| `HOME` |
-| `MOBILE` |
-| `OTHER` |
-| `PAGER` |
+| `Fax` |
+| `Home` |
+| `Mobile` |
+| `Other` |
+| `Pager` |
 

@@ -11,6 +11,6 @@ The reason why the authorized status is `PENDING`.
 
 | Name |
 |  --- |
-| `PENDINGREVIEW` |
-| `DECLINEDBYRISKFRAUDFILTERS` |
+| `PendingReview` |
+| `DeclinedByRiskFraudFilters` |
 

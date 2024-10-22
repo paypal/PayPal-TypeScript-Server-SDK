@@ -11,6 +11,6 @@ The customer's tax ID type.
 
 | Name |
 |  --- |
-| `BRCPF` |
-| `BRCNPJ` |
+| `BrCpf` |
+| `BrCnpj` |
 

@@ -11,7 +11,7 @@ Indicates if this is a `first` or `subsequent` payment using a stored payment so
 
 | Name |
 |  --- |
-| `FIRST` |
-| `SUBSEQUENT` |
-| `DERIVED` |
+| `First` |
+| `Subsequent` |
+| `Derived` |
 

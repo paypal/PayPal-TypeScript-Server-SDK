@@ -11,6 +11,6 @@ The person or party who initiated or triggered the payment.
 
 | Name |
 |  --- |
-| `CUSTOMER` |
-| `MERCHANT` |
+| `Customer` |
+| `Merchant` |
 

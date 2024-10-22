@@ -11,5 +11,5 @@ The type of the payment credential. Currently, only CARD is supported.
 
 | Name |
 |  --- |
-| `CARD` |
+| `Card` |
 

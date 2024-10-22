@@ -11,6 +11,6 @@ The usage type associated with the Venmo payment token.
 
 | Name |
 |  --- |
-| `MERCHANT` |
-| `PLATFORM` |
+| `Merchant` |
+| `Platform` |
 
