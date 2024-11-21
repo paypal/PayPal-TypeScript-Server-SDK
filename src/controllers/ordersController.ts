@@ -34,6 +34,314 @@ import { CustomError } from '../errors/customError';
 
 export class OrdersController extends BaseController {
   /**
+   * Creates an order. Merchants and partners can add Level 2 and 3 data to payments to reduce risk and
+   * payment processing costs. For more information about processing payments, see <a href="https:
+   * //developer.paypal.com/docs/checkout/advanced/processing/">checkout</a> or <a href="https:
+   * //developer.paypal.com/docs/multiparty/checkout/advanced/processing/">multiparty checkout</a>.
+   * <blockquote><strong>Note:</strong> For error handling and troubleshooting, see <a href="https:
+   * //developer.paypal.com/api/rest/reference/orders/v2/errors/#create-order">Orders v2 errors</a>.
+   * </blockquote>
+   *
+   * @param body
+   * @param paypalRequestId               The server stores keys for 6 hours. The API callers
+   *                                                             can request the times to up to 72 hours by speaking to
+   *                                                             their Account Manager. It is mandatory for all single-
+   *                                                             step create order calls (E.g. Create Order Request
+   *                                                             with payment source information like Card, PayPal.
+   *                                                             vault_id, PayPal.billing_agreement_id, etc).
+   * @param paypalPartnerAttributionId
+   * @param paypalClientMetadataId
+   * @param prefer                        The preferred server response upon successful
+   *                                                             completion of the request. Value is:
+   *                                                             <ul><li><code>return=minimal</code>. The server
+   *                                                             returns a minimal response to optimize communication
+   *                                                             between the API caller and the server. A minimal
+   *                                                             response includes the <code>id</code>,
+   *                                                             <code>status</code> and HATEOAS links.
+   *                                                             </li><li><code>return=representation</code>. The
+   *                                                             server returns a complete resource representation,
+   *                                                             including the current state of the resource.
+   *                                                             </li></ul>
+   * @param paypalAuthAssertion           An API-caller-provided JSON Web Token (JWT) assertion
+   *                                                             that identifies the merchant. For details, see <a
+   *                                                             href="https://developer.paypal.
+   *                                                             com/api/rest/requests/#paypal-auth-assertion">PayPal-
+   *                                                             Auth-Assertion</a>.
+   * @return Response from the API call
+   */
+  async ordersCreate(
+    {
+      body,
+      paypalRequestId,
+      paypalPartnerAttributionId,
+      paypalClientMetadataId,
+      prefer,
+      paypalAuthAssertion,
+    }: {
+      body: OrderRequest;
+      paypalRequestId?: string;
+      paypalPartnerAttributionId?: string;
+      paypalClientMetadataId?: string;
+      prefer?: string;
+      paypalAuthAssertion?: string;
+    },
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<Order>> {
+    const req = this.createRequest('POST', '/v2/checkout/orders');
+    const mapped = req.prepareArgs({
+      body: [body, orderRequestSchema],
+      paypalRequestId: [paypalRequestId, optional(string())],
+      paypalPartnerAttributionId: [
+        paypalPartnerAttributionId,
+        optional(string()),
+      ],
+      paypalClientMetadataId: [paypalClientMetadataId, optional(string())],
+      prefer: [prefer, optional(string())],
+      paypalAuthAssertion: [paypalAuthAssertion, optional(string())],
+    });
+    req.header('Content-Type', 'application/json');
+    req.header('PayPal-Request-Id', mapped.paypalRequestId);
+    req.header(
+      'PayPal-Partner-Attribution-Id',
+      mapped.paypalPartnerAttributionId
+    );
+    req.header('PayPal-Client-Metadata-Id', mapped.paypalClientMetadataId);
+    req.header('Prefer', mapped.prefer);
+    req.header('PayPal-Auth-Assertion', mapped.paypalAuthAssertion);
+    req.json(mapped.body);
+    req.throwOn(
+      400,
+      CustomError,
+      'Request is not well-formed, syntactically incorrect, or violates schema.'
+    );
+    req.throwOn(
+      401,
+      CustomError,
+      'Authentication failed due to missing authorization header, or invalid authentication credentials.'
+    );
+    req.throwOn(
+      422,
+      CustomError,
+      'The requested action could not be performed, semantically incorrect, or failed business validation.'
+    );
+    req.defaultToError(CustomError, 'The error response.');
+    req.authenticate([{ oauth2: true }]);
+    return req.callAsJson(orderSchema, requestOptions);
+  }
+
+  /**
+   * Shows details for an order, by ID.<blockquote><strong>Note:</strong> For error handling and
+   * troubleshooting, see <a href="https://developer.paypal.com/api/rest/reference/orders/v2/errors/#get-
+   * order">Orders v2 errors</a>.</blockquote>
+   *
+   * @param id                    The ID of the order for which to show details.
+   * @param paypalAuthAssertion   An API-caller-provided JSON Web Token (JWT) assertion that identifies the
+   *                                        merchant. For details, see <a href="https://developer.paypal.
+   *                                        com/api/rest/requests/#paypal-auth-assertion">PayPal-Auth-Assertion</a>.
+   * @param fields                A comma-separated list of fields that should be returned for the order.
+   *                                        Valid filter field is `payment_source`.
+   * @return Response from the API call
+   */
+  async ordersGet(
+    {
+      id,
+      paypalAuthAssertion,
+      fields,
+    }: {
+      id: string;
+      paypalAuthAssertion?: string;
+      fields?: string;
+    },
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<Order>> {
+    const req = this.createRequest('GET');
+    const mapped = req.prepareArgs({
+      id: [id, string()],
+      paypalAuthAssertion: [paypalAuthAssertion, optional(string())],
+      fields: [fields, optional(string())],
+    });
+    req.header('PayPal-Auth-Assertion', mapped.paypalAuthAssertion);
+    req.query('fields', mapped.fields);
+    req.appendTemplatePath`/v2/checkout/orders/${mapped.id}`;
+    req.throwOn(
+      401,
+      CustomError,
+      'Authentication failed due to missing authorization header, or invalid authentication credentials.'
+    );
+    req.throwOn(404, CustomError, 'The specified resource does not exist.');
+    req.defaultToError(CustomError, 'The error response.');
+    req.authenticate([{ oauth2: true }]);
+    return req.callAsJson(orderSchema, requestOptions);
+  }
+
+  /**
+   * Updates an order with a `CREATED` or `APPROVED` status. You cannot update an order with the
+   * `COMPLETED` status.<br/><br/>To make an update, you must provide a `reference_id`. If you omit this
+   * value with an order that contains only one purchase unit, PayPal sets the value to `default` which
+   * enables you to use the path: <code>\"/purchase_units/@reference_id=='default'/{attribute-or-
+   * object}\"</code>. Merchants and partners can add Level 2 and 3 data to payments to reduce risk and
+   * payment processing costs. For more information about processing payments, see <a href="https:
+   * //developer.paypal.com/docs/checkout/advanced/processing/">checkout</a> or <a href="https:
+   * //developer.paypal.com/docs/multiparty/checkout/advanced/processing/">multiparty checkout</a>.
+   * <blockquote><strong>Note:</strong> For error handling and troubleshooting, see <a href="https:
+   * //developer.paypal.com/api/rest/reference/orders/v2/errors/#patch-order">Orders v2 errors</a>.
+   * </blockquote>Patchable attributes or objects:
+   * <br/><br/><table><thead><th>Attribute</th><th>Op</th><th>Notes</th></thead><tbody><tr><td><code>inte
+   * nt</code></td><td>replace</td><td></td></tr><tr><td><code>payer</code></td><td>replace,
+   * add</td><td>Using replace op for <code>payer</code> will replace the whole <code>payer</code> object
+   * with the value sent in request.</td></tr><tr><td><code>purchase_units</code></td><td>replace,
+   * add</td><td></td></tr><tr><td><code>purchase_units[].custom_id</code></td><td>replace, add,
+   * remove</td><td></td></tr><tr><td><code>purchase_units[].description</code></td><td>replace, add,
+   * remove</td><td></td></tr><tr><td><code>purchase_units[].payee.
+   * email</code></td><td>replace</td><td></td></tr><tr><td><code>purchase_units[].shipping.
+   * name</code></td><td>replace, add</td><td></td></tr><tr><td><code>purchase_units[].shipping.
+   * email_address</code></td><td>replace, add</td><td></td></tr><tr><td><code>purchase_units[].shipping.
+   * phone_number</code></td><td>replace, add</td><td></td></tr><tr><td><code>purchase_units[].shipping.
+   * options</code></td><td>replace, add</td><td></td></tr><tr><td><code>purchase_units[].shipping.
+   * address</code></td><td>replace, add</td><td></td></tr><tr><td><code>purchase_units[].shipping.
+   * type</code></td><td>replace, add</td><td></td></tr><tr><td><code>purchase_units[].
+   * soft_descriptor</code></td><td>replace, remove</td><td></td></tr><tr><td><code>purchase_units[].
+   * amount</code></td><td>replace</td><td></td></tr><tr><td><code>purchase_units[].
+   * items</code></td><td>replace, add, remove</td><td></td></tr><tr><td><code>purchase_units[].
+   * invoice_id</code></td><td>replace, add, remove</td><td></td></tr><tr><td><code>purchase_units[].
+   * payment_instruction</code></td><td>replace</td><td></td></tr><tr><td><code>purchase_units[].
+   * payment_instruction.disbursement_mode</code></td><td>replace</td><td>By default,
+   * <code>disbursement_mode</code> is <code>INSTANT</code>.</td></tr><tr><td><code>purchase_units[].
+   * payment_instruction.payee_receivable_fx_rate_id</code></td><td>replace, add,
+   * remove</td><td></td></tr><tr><td><code>purchase_units[].payment_instruction.
+   * platform_fees</code></td><td>replace, add, remove</td><td></td></tr><tr><td><code>purchase_units[].
+   * supplementary_data.airline</code></td><td>replace, add,
+   * remove</td><td></td></tr><tr><td><code>purchase_units[].supplementary_data.
+   * card</code></td><td>replace, add, remove</td><td></td></tr><tr><td><code>application_context.
+   * client_configuration</code></td><td>replace, add</td><td></td></tr></tbody></table>
+   *
+   * @param id                    The ID of the order to update.
+   * @param paypalAuthAssertion   An API-caller-provided JSON Web Token (JWT) assertion that identifies the
+   *                                         merchant. For details, see <a href="https://developer.paypal.
+   *                                         com/api/rest/requests/#paypal-auth-assertion">PayPal-Auth-Assertion</a>.
+   * @param body
+   * @return Response from the API call
+   */
+  async ordersPatch(
+    {
+      id,
+      paypalAuthAssertion,
+      body,
+    }: {
+      id: string;
+      paypalAuthAssertion?: string;
+      body?: Patch[];
+    },
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<void>> {
+    const req = this.createRequest('PATCH');
+    const mapped = req.prepareArgs({
+      id: [id, string()],
+      paypalAuthAssertion: [paypalAuthAssertion, optional(string())],
+      body: [body, optional(array(patchSchema))],
+    });
+    req.header('Content-Type', 'application/json');
+    req.header('PayPal-Auth-Assertion', mapped.paypalAuthAssertion);
+    req.json(mapped.body);
+    req.appendTemplatePath`/v2/checkout/orders/${mapped.id}`;
+    req.throwOn(
+      400,
+      CustomError,
+      'Request is not well-formed, syntactically incorrect, or violates schema.'
+    );
+    req.throwOn(
+      401,
+      CustomError,
+      'Authentication failed due to missing authorization header, or invalid authentication credentials.'
+    );
+    req.throwOn(404, CustomError, 'The specified resource does not exist.');
+    req.throwOn(
+      422,
+      CustomError,
+      'The requested action could not be performed, semantically incorrect, or failed business validation.'
+    );
+    req.defaultToError(CustomError, 'The error response.');
+    req.authenticate([{ oauth2: true }]);
+    return req.call(requestOptions);
+  }
+
+  /**
+   * Payer confirms their intent to pay for the the Order with the given payment source.
+   *
+   * @param id                        The ID of the order for which the payer confirms
+   *                                                                their intent to pay.
+   * @param paypalClientMetadataId
+   * @param paypalAuthAssertion       An API-caller-provided JSON Web Token (JWT)
+   *                                                                assertion that identifies the merchant. For details,
+   *                                                                see <a href="https://developer.paypal.
+   *                                                                com/api/rest/requests/#paypal-auth-
+   *                                                                assertion">PayPal-Auth-Assertion</a>.
+   * @param prefer                    The preferred server response upon successful
+   *                                                                completion of the request. Value is:
+   *                                                                <ul><li><code>return=minimal</code>. The server
+   *                                                                returns a minimal response to optimize
+   *                                                                communication between the API caller and the server.
+   *                                                                A minimal response includes the <code>id</code>,
+   *                                                                <code>status</code> and HATEOAS links.
+   *                                                                </li><li><code>return=representation</code>. The
+   *                                                                server returns a complete resource representation,
+   *                                                                including the current state of the resource.
+   *                                                                </li></ul>
+   * @param body
+   * @return Response from the API call
+   */
+  async ordersConfirm(
+    {
+      id,
+      paypalClientMetadataId,
+      paypalAuthAssertion,
+      prefer,
+      body,
+    }: {
+      id: string;
+      paypalClientMetadataId?: string;
+      paypalAuthAssertion?: string;
+      prefer?: string;
+      body?: ConfirmOrderRequest;
+    },
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<Order>> {
+    const req = this.createRequest('POST');
+    const mapped = req.prepareArgs({
+      id: [id, string()],
+      paypalClientMetadataId: [paypalClientMetadataId, optional(string())],
+      paypalAuthAssertion: [paypalAuthAssertion, optional(string())],
+      prefer: [prefer, optional(string())],
+      body: [body, optional(confirmOrderRequestSchema)],
+    });
+    req.header('Content-Type', 'application/json');
+    req.header('PayPal-Client-Metadata-Id', mapped.paypalClientMetadataId);
+    req.header('PayPal-Auth-Assertion', mapped.paypalAuthAssertion);
+    req.header('Prefer', mapped.prefer);
+    req.json(mapped.body);
+    req.appendTemplatePath`/v2/checkout/orders/${mapped.id}/confirm-payment-source`;
+    req.throwOn(
+      400,
+      CustomError,
+      'Request is not well-formed, syntactically incorrect, or violates schema.'
+    );
+    req.throwOn(
+      403,
+      CustomError,
+      'Authorization failed due to insufficient permissions.'
+    );
+    req.throwOn(
+      422,
+      CustomError,
+      'The requested action could not be performed, semantically incorrect, or failed business validation.'
+    );
+    req.throwOn(500, CustomError, 'An internal server error has occurred.');
+    req.defaultToError(CustomError, 'The error response.');
+    req.authenticate([{ oauth2: true }]);
+    return req.callAsJson(orderSchema, requestOptions);
+  }
+
+  /**
    * Authorizes payment for an order. To successfully authorize payment for an order, the buyer must
    * first approve the order or a valid payment_source must be provided in the request. A buyer can
    * approve the order upon being redirected to the rel:approve URL that was returned in the HATEOAS
@@ -44,7 +352,11 @@ export class OrdersController extends BaseController {
    * @param id                        The ID of the order for which to authorize.
    * @param paypalRequestId           The server stores keys for 6 hours. The API
    *                                                                  callers can request the times to up to 72 hours
-   *                                                                  by speaking to their Account Manager.
+   *                                                                  by speaking to their Account Manager. It is
+   *                                                                  mandatory for all single-step create order calls
+   *                                                                  (E.g. Create Order Request with payment source
+   *                                                                  information like Card, PayPal.vault_id, PayPal.
+   *                                                                  billing_agreement_id, etc).
    * @param prefer                    The preferred server response upon successful
    *                                                                  completion of the request. Value is:
    *                                                                  <ul><li><code>return=minimal</code>. The server
@@ -127,231 +439,6 @@ export class OrdersController extends BaseController {
   }
 
   /**
-   * Adds tracking information for an Order.
-   *
-   * @param id                    The ID of the order that the tracking information is
-   *                                                            associated with.
-   * @param body
-   * @param paypalAuthAssertion   An API-caller-provided JSON Web Token (JWT) assertion
-   *                                                            that identifies the merchant. For details, see <a
-   *                                                            href="https://developer.paypal.
-   *                                                            com/api/rest/requests/#paypal-auth-assertion">PayPal-
-   *                                                            Auth-Assertion</a>.
-   * @return Response from the API call
-   */
-  async ordersTrackCreate(
-    {
-      id,
-      body,
-      paypalAuthAssertion,
-    }: {
-      id: string;
-      body: OrderTrackerRequest;
-      paypalAuthAssertion?: string;
-    },
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<Order>> {
-    const req = this.createRequest('POST');
-    const mapped = req.prepareArgs({
-      id: [id, string()],
-      body: [body, orderTrackerRequestSchema],
-      paypalAuthAssertion: [paypalAuthAssertion, optional(string())],
-    });
-    req.header('Content-Type', 'application/json');
-    req.header('PayPal-Auth-Assertion', mapped.paypalAuthAssertion);
-    req.json(mapped.body);
-    req.appendTemplatePath`/v2/checkout/orders/${mapped.id}/track`;
-    req.throwOn(
-      400,
-      CustomError,
-      'Request is not well-formed, syntactically incorrect, or violates schema.'
-    );
-    req.throwOn(
-      403,
-      CustomError,
-      'Authorization failed due to insufficient permissions.'
-    );
-    req.throwOn(404, CustomError, 'The specified resource does not exist.');
-    req.throwOn(
-      422,
-      CustomError,
-      'The requested action could not be performed, semantically incorrect, or failed business validation.'
-    );
-    req.throwOn(500, CustomError, 'An internal server error has occurred.');
-    req.defaultToError(CustomError, 'The error response.');
-    req.authenticate([{ oauth2: true }]);
-    return req.callAsJson(orderSchema, requestOptions);
-  }
-
-  /**
-   * Creates an order. Merchants and partners can add Level 2 and 3 data to payments to reduce risk and
-   * payment processing costs. For more information about processing payments, see <a href="https:
-   * //developer.paypal.com/docs/checkout/advanced/processing/">checkout</a> or <a href="https:
-   * //developer.paypal.com/docs/multiparty/checkout/advanced/processing/">multiparty checkout</a>.
-   * <blockquote><strong>Note:</strong> For error handling and troubleshooting, see <a href="https:
-   * //developer.paypal.com/api/rest/reference/orders/v2/errors/#create-order">Orders v2 errors</a>.
-   * </blockquote>
-   *
-   * @param body
-   * @param paypalRequestId               The server stores keys for 6 hours. The API callers
-   *                                                             can request the times to up to 72 hours by speaking to
-   *                                                             their Account Manager.
-   * @param paypalPartnerAttributionId
-   * @param paypalClientMetadataId
-   * @param prefer                        The preferred server response upon successful
-   *                                                             completion of the request. Value is:
-   *                                                             <ul><li><code>return=minimal</code>. The server
-   *                                                             returns a minimal response to optimize communication
-   *                                                             between the API caller and the server. A minimal
-   *                                                             response includes the <code>id</code>,
-   *                                                             <code>status</code> and HATEOAS links.
-   *                                                             </li><li><code>return=representation</code>. The
-   *                                                             server returns a complete resource representation,
-   *                                                             including the current state of the resource.
-   *                                                             </li></ul>
-   * @return Response from the API call
-   */
-  async ordersCreate(
-    {
-      body,
-      paypalRequestId,
-      paypalPartnerAttributionId,
-      paypalClientMetadataId,
-      prefer,
-    }: {
-      body: OrderRequest;
-      paypalRequestId?: string;
-      paypalPartnerAttributionId?: string;
-      paypalClientMetadataId?: string;
-      prefer?: string;
-    },
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<Order>> {
-    const req = this.createRequest('POST', '/v2/checkout/orders');
-    const mapped = req.prepareArgs({
-      body: [body, orderRequestSchema],
-      paypalRequestId: [paypalRequestId, optional(string())],
-      paypalPartnerAttributionId: [
-        paypalPartnerAttributionId,
-        optional(string()),
-      ],
-      paypalClientMetadataId: [paypalClientMetadataId, optional(string())],
-      prefer: [prefer, optional(string())],
-    });
-    req.header('Content-Type', 'application/json');
-    req.header('PayPal-Request-Id', mapped.paypalRequestId);
-    req.header(
-      'PayPal-Partner-Attribution-Id',
-      mapped.paypalPartnerAttributionId
-    );
-    req.header('PayPal-Client-Metadata-Id', mapped.paypalClientMetadataId);
-    req.header('Prefer', mapped.prefer);
-    req.json(mapped.body);
-    req.throwOn(
-      400,
-      CustomError,
-      'Request is not well-formed, syntactically incorrect, or violates schema.'
-    );
-    req.throwOn(
-      401,
-      CustomError,
-      'Authentication failed due to missing authorization header, or invalid authentication credentials.'
-    );
-    req.throwOn(
-      422,
-      CustomError,
-      'The requested action could not be performed, semantically incorrect, or failed business validation.'
-    );
-    req.defaultToError(CustomError, 'The error response.');
-    req.authenticate([{ oauth2: true }]);
-    return req.callAsJson(orderSchema, requestOptions);
-  }
-
-  /**
-   * Updates an order with a `CREATED` or `APPROVED` status. You cannot update an order with the
-   * `COMPLETED` status.<br/><br/>To make an update, you must provide a `reference_id`. If you omit this
-   * value with an order that contains only one purchase unit, PayPal sets the value to `default` which
-   * enables you to use the path: <code>\"/purchase_units/@reference_id=='default'/{attribute-or-
-   * object}\"</code>. Merchants and partners can add Level 2 and 3 data to payments to reduce risk and
-   * payment processing costs. For more information about processing payments, see <a href="https:
-   * //developer.paypal.com/docs/checkout/advanced/processing/">checkout</a> or <a href="https:
-   * //developer.paypal.com/docs/multiparty/checkout/advanced/processing/">multiparty checkout</a>.
-   * <blockquote><strong>Note:</strong> For error handling and troubleshooting, see <a href="https:
-   * //developer.paypal.com/api/rest/reference/orders/v2/errors/#patch-order">Orders v2 errors</a>.
-   * </blockquote>Patchable attributes or objects:
-   * <br/><br/><table><thead><th>Attribute</th><th>Op</th><th>Notes</th></thead><tbody><tr><td><code>inte
-   * nt</code></td><td>replace</td><td></td></tr><tr><td><code>payer</code></td><td>replace,
-   * add</td><td>Using replace op for <code>payer</code> will replace the whole <code>payer</code> object
-   * with the value sent in request.</td></tr><tr><td><code>purchase_units</code></td><td>replace,
-   * add</td><td></td></tr><tr><td><code>purchase_units[].custom_id</code></td><td>replace, add,
-   * remove</td><td></td></tr><tr><td><code>purchase_units[].description</code></td><td>replace, add,
-   * remove</td><td></td></tr><tr><td><code>purchase_units[].payee.
-   * email</code></td><td>replace</td><td></td></tr><tr><td><code>purchase_units[].shipping.
-   * name</code></td><td>replace, add</td><td></td></tr><tr><td><code>purchase_units[].shipping.
-   * email_address</code></td><td>replace, add</td><td></td></tr><tr><td><code>purchase_units[].shipping.
-   * phone_number</code></td><td>replace, add</td><td></td></tr><tr><td><code>purchase_units[].shipping.
-   * options</code></td><td>replace, add</td><td></td></tr><tr><td><code>purchase_units[].shipping.
-   * address</code></td><td>replace, add</td><td></td></tr><tr><td><code>purchase_units[].shipping.
-   * type</code></td><td>replace, add</td><td></td></tr><tr><td><code>purchase_units[].
-   * soft_descriptor</code></td><td>replace, remove</td><td></td></tr><tr><td><code>purchase_units[].
-   * amount</code></td><td>replace</td><td></td></tr><tr><td><code>purchase_units[].
-   * items</code></td><td>replace, add, remove</td><td></td></tr><tr><td><code>purchase_units[].
-   * invoice_id</code></td><td>replace, add, remove</td><td></td></tr><tr><td><code>purchase_units[].
-   * payment_instruction</code></td><td>replace</td><td></td></tr><tr><td><code>purchase_units[].
-   * payment_instruction.disbursement_mode</code></td><td>replace</td><td>By default,
-   * <code>disbursement_mode</code> is <code>INSTANT</code>.</td></tr><tr><td><code>purchase_units[].
-   * payment_instruction.payee_receivable_fx_rate_id</code></td><td>replace, add,
-   * remove</td><td></td></tr><tr><td><code>purchase_units[].payment_instruction.
-   * platform_fees</code></td><td>replace, add, remove</td><td></td></tr><tr><td><code>purchase_units[].
-   * supplementary_data.airline</code></td><td>replace, add,
-   * remove</td><td></td></tr><tr><td><code>purchase_units[].supplementary_data.
-   * card</code></td><td>replace, add, remove</td><td></td></tr><tr><td><code>application_context.
-   * client_configuration</code></td><td>replace, add</td><td></td></tr></tbody></table>
-   *
-   * @param id           The ID of the order to update.
-   * @param body
-   * @return Response from the API call
-   */
-  async ordersPatch(
-    {
-      id,
-      body,
-    }: {
-      id: string;
-      body?: Patch[];
-    },
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<void>> {
-    const req = this.createRequest('PATCH');
-    const mapped = req.prepareArgs({
-      id: [id, string()],
-      body: [body, optional(array(patchSchema))],
-    });
-    req.header('Content-Type', 'application/json');
-    req.json(mapped.body);
-    req.appendTemplatePath`/v2/checkout/orders/${mapped.id}`;
-    req.throwOn(
-      400,
-      CustomError,
-      'Request is not well-formed, syntactically incorrect, or violates schema.'
-    );
-    req.throwOn(
-      401,
-      CustomError,
-      'Authentication failed due to missing authorization header, or invalid authentication credentials.'
-    );
-    req.throwOn(404, CustomError, 'The specified resource does not exist.');
-    req.throwOn(
-      422,
-      CustomError,
-      'The requested action could not be performed, semantically incorrect, or failed business validation.'
-    );
-    req.defaultToError(CustomError, 'The error response.');
-    req.authenticate([{ oauth2: true }]);
-    return req.call(requestOptions);
-  }
-
-  /**
    * Captures payment for an order. To successfully capture payment for an order, the buyer must first
    * approve the order or a valid payment_source must be provided in the request. A buyer can approve the
    * order upon being redirected to the rel:approve URL that was returned in the HATEOAS links in the
@@ -362,7 +449,11 @@ export class OrdersController extends BaseController {
    * @param id                        The ID of the order for which to capture a payment.
    * @param paypalRequestId           The server stores keys for 6 hours. The API
    *                                                                callers can request the times to up to 72 hours by
-   *                                                                speaking to their Account Manager.
+   *                                                                speaking to their Account Manager. It is mandatory
+   *                                                                for all single-step create order calls (E.g. Create
+   *                                                                Order Request with payment source information like
+   *                                                                Card, PayPal.vault_id, PayPal.billing_agreement_id,
+   *                                                                etc).
    * @param prefer                    The preferred server response upon successful
    *                                                                completion of the request. Value is:
    *                                                                <ul><li><code>return=minimal</code>. The server
@@ -445,89 +536,40 @@ export class OrdersController extends BaseController {
   }
 
   /**
-   * Shows details for an order, by ID.<blockquote><strong>Note:</strong> For error handling and
-   * troubleshooting, see <a href="https://developer.paypal.com/api/rest/reference/orders/v2/errors/#get-
-   * order">Orders v2 errors</a>.</blockquote>
+   * Adds tracking information for an Order.
    *
-   * @param id     The ID of the order for which to show details.
-   * @param fields A comma-separated list of fields that should be returned for the order. Valid filter
-   *                         field is `payment_source`.
-   * @return Response from the API call
-   */
-  async ordersGet(
-    {
-      id,
-      fields,
-    }: {
-      id: string;
-      fields?: string;
-    },
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<Order>> {
-    const req = this.createRequest('GET');
-    const mapped = req.prepareArgs({
-      id: [id, string()],
-      fields: [fields, optional(string())],
-    });
-    req.query('fields', mapped.fields);
-    req.appendTemplatePath`/v2/checkout/orders/${mapped.id}`;
-    req.throwOn(
-      401,
-      CustomError,
-      'Authentication failed due to missing authorization header, or invalid authentication credentials.'
-    );
-    req.throwOn(404, CustomError, 'The specified resource does not exist.');
-    req.defaultToError(CustomError, 'The error response.');
-    req.authenticate([{ oauth2: true }]);
-    return req.callAsJson(orderSchema, requestOptions);
-  }
-
-  /**
-   * Payer confirms their intent to pay for the the Order with the given payment source.
-   *
-   * @param id                        The ID of the order for which the payer confirms
-   *                                                                their intent to pay.
-   * @param paypalClientMetadataId
-   * @param prefer                    The preferred server response upon successful
-   *                                                                completion of the request. Value is:
-   *                                                                <ul><li><code>return=minimal</code>. The server
-   *                                                                returns a minimal response to optimize
-   *                                                                communication between the API caller and the server.
-   *                                                                A minimal response includes the <code>id</code>,
-   *                                                                <code>status</code> and HATEOAS links.
-   *                                                                </li><li><code>return=representation</code>. The
-   *                                                                server returns a complete resource representation,
-   *                                                                including the current state of the resource.
-   *                                                                </li></ul>
+   * @param id                    The ID of the order that the tracking information is
+   *                                                            associated with.
    * @param body
+   * @param paypalAuthAssertion   An API-caller-provided JSON Web Token (JWT) assertion
+   *                                                            that identifies the merchant. For details, see <a
+   *                                                            href="https://developer.paypal.
+   *                                                            com/api/rest/requests/#paypal-auth-assertion">PayPal-
+   *                                                            Auth-Assertion</a>.
    * @return Response from the API call
    */
-  async ordersConfirm(
+  async ordersTrackCreate(
     {
       id,
-      paypalClientMetadataId,
-      prefer,
       body,
+      paypalAuthAssertion,
     }: {
       id: string;
-      paypalClientMetadataId?: string;
-      prefer?: string;
-      body?: ConfirmOrderRequest;
+      body: OrderTrackerRequest;
+      paypalAuthAssertion?: string;
     },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<Order>> {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
       id: [id, string()],
-      paypalClientMetadataId: [paypalClientMetadataId, optional(string())],
-      prefer: [prefer, optional(string())],
-      body: [body, optional(confirmOrderRequestSchema)],
+      body: [body, orderTrackerRequestSchema],
+      paypalAuthAssertion: [paypalAuthAssertion, optional(string())],
     });
     req.header('Content-Type', 'application/json');
-    req.header('PayPal-Client-Metadata-Id', mapped.paypalClientMetadataId);
-    req.header('Prefer', mapped.prefer);
+    req.header('PayPal-Auth-Assertion', mapped.paypalAuthAssertion);
     req.json(mapped.body);
-    req.appendTemplatePath`/v2/checkout/orders/${mapped.id}/confirm-payment-source`;
+    req.appendTemplatePath`/v2/checkout/orders/${mapped.id}/track`;
     req.throwOn(
       400,
       CustomError,
@@ -538,6 +580,7 @@ export class OrdersController extends BaseController {
       CustomError,
       'Authorization failed due to insufficient permissions.'
     );
+    req.throwOn(404, CustomError, 'The specified resource does not exist.');
     req.throwOn(
       422,
       CustomError,
@@ -559,8 +602,11 @@ export class OrdersController extends BaseController {
    * add</td><td></td></tr><tr><td><code>status</code></td><td>replace</td><td>Only patching status to
    * CANCELLED is currently supported.</td></tr></tbody></table>
    *
-   * @param id           The ID of the order that the tracking information is associated with.
-   * @param trackerId    The order tracking ID.
+   * @param id                    The ID of the order that the tracking information is associated with.
+   * @param trackerId             The order tracking ID.
+   * @param paypalAuthAssertion   An API-caller-provided JSON Web Token (JWT) assertion that identifies the
+   *                                         merchant. For details, see <a href="https://developer.paypal.
+   *                                         com/api/rest/requests/#paypal-auth-assertion">PayPal-Auth-Assertion</a>.
    * @param body
    * @return Response from the API call
    */
@@ -568,10 +614,12 @@ export class OrdersController extends BaseController {
     {
       id,
       trackerId,
+      paypalAuthAssertion,
       body,
     }: {
       id: string;
       trackerId: string;
+      paypalAuthAssertion?: string;
       body?: Patch[];
     },
     requestOptions?: RequestOptions
@@ -580,9 +628,11 @@ export class OrdersController extends BaseController {
     const mapped = req.prepareArgs({
       id: [id, string()],
       trackerId: [trackerId, string()],
+      paypalAuthAssertion: [paypalAuthAssertion, optional(string())],
       body: [body, optional(array(patchSchema))],
     });
     req.header('Content-Type', 'application/json');
+    req.header('PayPal-Auth-Assertion', mapped.paypalAuthAssertion);
     req.json(mapped.body);
     req.appendTemplatePath`/v2/checkout/orders/${mapped.id}/trackers/${mapped.trackerId}`;
     req.throwOn(

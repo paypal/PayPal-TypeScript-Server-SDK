@@ -14,7 +14,7 @@
 | `id` | `string \| undefined` | Optional | The ID of the order. |
 | `paymentSource` | [`OrderAuthorizeResponsePaymentSource \| undefined`](../../doc/models/order-authorize-response-payment-source.md) | Optional | The payment source used to fund the payment. |
 | `intent` | [`CheckoutPaymentIntent \| undefined`](../../doc/models/checkout-payment-intent.md) | Optional | The intent to either capture payment immediately or authorize a payment for an order after order creation. |
-| `processingInstruction` | [`ProcessingInstruction \| undefined`](../../doc/models/processing-instruction.md) | Optional | The instruction to process an order.<br>**Default**: `ProcessingInstruction.NoInstruction`<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `36`, *Pattern*: `^[0-9A-Z_]+$` |
+| `processingInstruction` | `unknown \| undefined` | Optional | - |
 | `payer` | [`Payer \| undefined`](../../doc/models/payer.md) | Optional | - |
 | `purchaseUnits` | [`PurchaseUnit[] \| undefined`](../../doc/models/purchase-unit.md) | Optional | An array of purchase units. Each purchase unit establishes a contract between a customer and merchant. Each purchase unit represents either a full or partial order that the customer intends to purchase from the merchant.<br>**Constraints**: *Minimum Items*: `1`, *Maximum Items*: `10` |
 | `status` | [`OrderStatus \| undefined`](../../doc/models/order-status.md) | Optional | The order status.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `255`, *Pattern*: `^[0-9A-Z_]+$` |
@@ -24,7 +24,6 @@
 
 ```json
 {
-  "processing_instruction": "NO_INSTRUCTION",
   "create_time": "create_time0",
   "update_time": "update_time4",
   "id": "id4",
