@@ -7,9 +7,9 @@
 import { Schema, stringEnum } from '../schema';
 
 /**
- * Enum for FullfillmentType
+ * Enum for FulfillmentType
  */
-export enum FullfillmentType {
+export enum FulfillmentType {
   Shipping = 'SHIPPING',
   PickupInPerson = 'PICKUP_IN_PERSON',
   PickupInStore = 'PICKUP_IN_STORE',
@@ -17,9 +17,9 @@ export enum FullfillmentType {
 }
 
 /**
- * Schema for FullfillmentType
+ * Schema for FulfillmentType
  */
-export const fullfillmentTypeSchema: Schema<FullfillmentType> = stringEnum(
-  FullfillmentType,
+export const fulfillmentTypeSchema: Schema<FulfillmentType> = stringEnum(
+  FulfillmentType,
   true
 );
