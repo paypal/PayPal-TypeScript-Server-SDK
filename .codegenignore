@@ -1,0 +1,6 @@
+unitTests/**
+e2e/**
+.gitignore
+.github/**
+playwright.config.ts
+jest.config.js
