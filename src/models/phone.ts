@@ -17,7 +17,7 @@ export interface Phone {
 }
 
 export const phoneSchema: Schema<Phone> = object({
-  countryCode: ['country_code', string()],
+  countryCode: ['country_code', optional(string())],
   nationalNumber: ['national_number', string()],
   extensionNumber: ['extension_number', optional(string())],
 });
