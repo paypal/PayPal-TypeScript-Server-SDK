@@ -49,6 +49,7 @@ export class ClientCredentialsAuthManager {
   }
 
   public async fetchToken(
+    scope?: string,
     additionalParams?: Record<string, unknown>
   ): Promise<OAuthToken> {
     const authorization = this.getClientBasicAuth(
@@ -58,7 +59,7 @@ export class ClientCredentialsAuthManager {
     const { result } = await this._oAuthController.requestToken(
       {
         authorization: authorization,
-        scope: undefined,
+        scope,
       },
       additionalParams
     );
