@@ -5,12 +5,15 @@
  */
 
 import { array, lazy, number, object, optional, Schema } from '../schema';
-import { CustomerRequest, customerRequestSchema } from './customerRequest';
 import { LinkDescription, linkDescriptionSchema } from './linkDescription';
 import {
   PaymentTokenResponse,
   paymentTokenResponseSchema,
 } from './paymentTokenResponse';
+import {
+  VaultResponseCustomer,
+  vaultResponseCustomerSchema,
+} from './vaultResponseCustomer';
 
 /** Collection of payment tokens saved for a given customer. */
 export interface CustomerVaultPaymentTokensResponse {
@@ -18,8 +21,8 @@ export interface CustomerVaultPaymentTokensResponse {
   totalItems?: number;
   /** Total number of pages. */
   totalPages?: number;
-  /** Customer in merchant's or partner's system of records. */
-  customer?: CustomerRequest;
+  /** This object defines a customer in your system. Use it to manage customer profiles, save payment methods and contact details. */
+  customer?: VaultResponseCustomer;
   paymentTokens?: PaymentTokenResponse[];
   /** An array of related [HATEOAS links](/api/rest/responses/#hateoas). */
   links?: LinkDescription[];
@@ -29,7 +32,7 @@ export const customerVaultPaymentTokensResponseSchema: Schema<CustomerVaultPayme
   {
     totalItems: ['total_items', optional(number())],
     totalPages: ['total_pages', optional(number())],
-    customer: ['customer', optional(lazy(() => customerRequestSchema))],
+    customer: ['customer', optional(lazy(() => vaultResponseCustomerSchema))],
     paymentTokens: [
       'payment_tokens',
       optional(array(lazy(() => paymentTokenResponseSchema))),

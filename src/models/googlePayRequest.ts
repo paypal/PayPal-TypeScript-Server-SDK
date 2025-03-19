@@ -7,10 +7,6 @@
 import { lazy, object, optional, Schema, string } from '../schema';
 import { AssuranceDetails, assuranceDetailsSchema } from './assuranceDetails';
 import {
-  GooglePayCardAttributes,
-  googlePayCardAttributesSchema,
-} from './googlePayCardAttributes';
-import {
   GooglePayDecryptedTokenData,
   googlePayDecryptedTokenDataSchema,
 } from './googlePayDecryptedTokenData';
@@ -27,7 +23,7 @@ import {
 export interface GooglePayRequest {
   /** The full name representation like Mr J Smith. */
   name?: string;
-  /** The internationalized email address.<blockquote><strong>Note:</strong> Up to 64 characters are allowed before and 255 characters are allowed after the <code>@</code> sign. However, the generally accepted maximum length for an email address is 254 characters. The pattern verifies that an unquoted <code>@</code> sign exists.</blockquote> */
+  /** The internationalized email address. Note: Up to 64 characters are allowed before and 255 characters are allowed after the @ sign. However, the generally accepted maximum length for an email address is 254 characters. The pattern verifies that an unquoted @ sign exists. */
   emailAddress?: string;
   /** The phone number in its canonical international [E.164 numbering plan format](https://www.itu.int/rec/T-REC-E.164/en). */
   phoneNumber?: PhoneNumberWithCountryCode;
@@ -37,8 +33,6 @@ export interface GooglePayRequest {
   decryptedToken?: GooglePayDecryptedTokenData;
   /** Information about cardholder possession validation and cardholder identification and verifications (ID&V). */
   assuranceDetails?: AssuranceDetails;
-  /** Additional attributes associated with the use of this card. */
-  attributes?: GooglePayCardAttributes;
 }
 
 export const googlePayRequestSchema: Schema<GooglePayRequest> = object({
@@ -56,9 +50,5 @@ export const googlePayRequestSchema: Schema<GooglePayRequest> = object({
   assuranceDetails: [
     'assurance_details',
     optional(lazy(() => assuranceDetailsSchema)),
-  ],
-  attributes: [
-    'attributes',
-    optional(lazy(() => googlePayCardAttributesSchema)),
   ],
 });

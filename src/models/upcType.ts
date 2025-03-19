@@ -10,11 +10,11 @@ import { Schema, stringEnum } from '../schema';
  * Enum for UpcType
  */
 export enum UpcType {
-  Upca = 'UPC-A',
-  Upcb = 'UPC-B',
-  Upcc = 'UPC-C',
-  Upcd = 'UPC-D',
-  Upce = 'UPC-E',
+  UpcA = 'UPC-A',
+  UpcB = 'UPC-B',
+  UpcC = 'UPC-C',
+  UpcD = 'UPC-D',
+  UpcE = 'UPC-E',
   Upc2 = 'UPC-2',
   Upc5 = 'UPC-5',
 }

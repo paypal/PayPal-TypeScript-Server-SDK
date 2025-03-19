@@ -10,10 +10,10 @@ import { Schema, stringEnum } from '../schema';
  * Enum for EnrollmentStatus
  */
 export enum EnrollmentStatus {
-  Y = 'Y',
-  N = 'N',
-  U = 'U',
-  B = 'B',
+  Enrolled = 'Y',
+  NotEnrolled = 'N',
+  Unavailable = 'U',
+  Bypass = 'B',
 }
 
 /**

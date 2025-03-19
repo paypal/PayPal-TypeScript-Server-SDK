@@ -9,8 +9,8 @@ The reason why the authorized status is `PENDING`.
 
 ## Fields
 
-| Name |
-|  --- |
-| `PendingReview` |
-| `DeclinedByRiskFraudFilters` |
+| Name | Description |
+|  --- | --- |
+| `PendingReview` | Authorization is pending manual review. |
+| `DeclinedByRiskFraudFilters` | Risk Filter set by the payee failed for the transaction. |
 

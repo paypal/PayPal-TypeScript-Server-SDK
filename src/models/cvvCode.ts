@@ -10,20 +10,20 @@ import { Schema, stringEnum } from '../schema';
  * Enum for CvvCode
  */
 export enum CvvCode {
-  E = 'E',
-  I = 'I',
-  M = 'M',
-  N = 'N',
-  P = 'P',
-  S = 'S',
-  U = 'U',
-  X = 'X',
+  CvvE = 'E',
+  CvvI = 'I',
+  CvvM = 'M',
+  CvvN = 'N',
+  CvvP = 'P',
+  CvvS = 'S',
+  CvvU = 'U',
+  CvvX = 'X',
   EnumAllOthers = 'All others',
-  Enum0 = '0',
-  Enum1 = '1',
-  Enum2 = '2',
-  Enum3 = '3',
-  Enum4 = '4',
+  Cvv0 = '0',
+  Cvv1 = '1',
+  Cvv2 = '2',
+  Cvv3 = '3',
+  Cvv4 = '4',
 }
 
 /**

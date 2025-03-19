@@ -10,14 +10,14 @@ import { Schema, stringEnum } from '../schema';
  * Enum for PaResStatus
  */
 export enum PaResStatus {
-  Y = 'Y',
-  N = 'N',
-  U = 'U',
-  A = 'A',
-  C = 'C',
-  R = 'R',
-  D = 'D',
-  I = 'I',
+  SuccessfulAuthentication = 'Y',
+  FailedAuthentication = 'N',
+  UnableToCompleteAuthentication = 'U',
+  SuccessfulAttemptsTransaction = 'A',
+  ChallengeRequired = 'C',
+  AuthenticationRejected = 'R',
+  DecoupledAuthentication = 'D',
+  InformationalOnly = 'I',
 }
 
 /**

@@ -5,7 +5,7 @@
  */
 
 import { lazy, object, optional, Schema } from '../schema';
-import { CustomerRequest, customerRequestSchema } from './customerRequest';
+import { Customer, customerSchema } from './customer';
 import {
   SetupTokenRequestPaymentSource,
   setupTokenRequestPaymentSourceSchema,
@@ -13,14 +13,14 @@ import {
 
 /** Setup Token Request where the `source` defines the type of instrument to be stored. */
 export interface SetupTokenRequest {
-  /** Customer in merchant's or partner's system of records. */
-  customer?: CustomerRequest;
+  /** This object defines a customer in your system. Use it to manage customer profiles, save payment methods and contact details. */
+  customer?: Customer;
   /** The payment method to vault with the instrument details. */
   paymentSource: SetupTokenRequestPaymentSource;
 }
 
 export const setupTokenRequestSchema: Schema<SetupTokenRequest> = object({
-  customer: ['customer', optional(lazy(() => customerRequestSchema))],
+  customer: ['customer', optional(lazy(() => customerSchema))],
   paymentSource: [
     'payment_source',
     lazy(() => setupTokenRequestPaymentSourceSchema),

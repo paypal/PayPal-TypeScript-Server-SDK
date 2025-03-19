@@ -14,19 +14,19 @@ import { Money, moneySchema } from './money';
 
 /** Card Verification details including the authorization details and 3D SECURE details. */
 export interface CardVerificationDetails {
-  /** Transaction Identifier as given by the network to indicate a previously executed CIT authorization. Only present when authorization is successful for a verification. */
+  /** DEPRECATED. This field is DEPRECATED. Please find the network transaction id data in the 'id' field under the 'network_transaction_reference' object instead of the 'verification' object. */
   networkTransactionId?: string;
-  /** The date that the transaction was authorized by the scheme. This field may not be returned for all networks. MasterCard refers to this field as "BankNet reference date". */
+  /** DEPRECATED. This field is DEPRECATED. Please find the date data in the 'date' field under the 'network_transaction_reference' object instead of the 'verification' object. */
   date?: string;
   /** The card network or brand. Applies to credit, debit, gift, and payment cards. */
   network?: CardBrand;
-  /** The date and time, in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6). Seconds are required while fractional seconds are optional.<blockquote><strong>Note:</strong> The regular expression provides guidance but does not reject all invalid dates.</blockquote> */
+  /** The date and time, in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6). Seconds are required while fractional seconds are optional. Note: The regular expression provides guidance but does not reject all invalid dates. */
   time?: string;
   /** The currency and amount for a financial transaction, such as a balance or payment due. */
   amount?: Money;
   /** The processor response information for payment requests, such as direct credit card transactions. */
   processorResponse?: CardVerificationProcessorResponse;
-  /** DEPRECATED. This field is DEPRECATED. Please find the 3D secure authentication data in 'three_d_secure' object under 'authentication_result' object instead of the 'verification' field. */
+  /** DEPRECATED. This field is DEPRECATED. Please find the 3D secure authentication data in the 'three_d_secure' object under the 'authentication_result' object instead of the 'verification' object. */
   threeDSecure?: unknown;
 }
 
