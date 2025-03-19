@@ -11,7 +11,7 @@ import {
   refundPaymentInstructionSchema,
 } from './refundPaymentInstruction';
 
-/** Refunds a captured payment, by ID. For a full refund, include an empty request body. For a partial refund, include an <code>amount</code> object in the request body. */
+/** Refunds a captured payment, by ID. For a full refund, include an empty request body. For a partial refund, include an amount object in the request body. */
 export interface RefundRequest {
   /** The currency and amount for a financial transaction, such as a balance or payment due. */
   amount?: Money;

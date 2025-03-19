@@ -11,11 +11,11 @@ import { PatchOp, patchOpSchema } from './patchOp';
 export interface Patch {
   /** The operation. */
   op: PatchOp;
-  /** The <a href="https://tools.ietf.org/html/rfc6901">JSON Pointer</a> to the target document location at which to complete the operation. */
+  /** The JSON Pointer to the target document location at which to complete the operation. */
   path?: string;
-  /** The value to apply. The <code>remove</code>, <code>copy</code>, and <code>move</code> operations do not require a value. Since <a href="https://www.rfc-editor.org/rfc/rfc69021">JSON Patch</a> allows any type for <code>value</code>, the <code>type</code> property is not specified. */
+  /** The value to apply. The remove, copy, and move operations do not require a value. Since JSON Patch allows any type for value, the type property is not specified. */
   value?: unknown;
-  /** The <a href="https://tools.ietf.org/html/rfc6901">JSON Pointer</a> to the target document location from which to move the value. Required for the <code>move</code> operation. */
+  /** The JSON Pointer to the target document location from which to move the value. Required for the move operation. */
   from?: string;
 }
 

@@ -5,18 +5,25 @@
  */
 
 import { lazy, object, optional, Schema, string } from '../schema';
-import { AddressDetails, addressDetailsSchema } from './addressDetails';
 import { BinDetails, binDetailsSchema } from './binDetails';
 import {
   CardAuthenticationResponse,
   cardAuthenticationResponseSchema,
 } from './cardAuthenticationResponse';
 import { CardBrand, cardBrandSchema } from './cardBrand';
+import {
+  CardResponseAddress,
+  cardResponseAddressSchema,
+} from './cardResponseAddress';
 import { CardType, cardTypeSchema } from './cardType';
 import {
   CardVerificationDetails,
   cardVerificationDetailsSchema,
 } from './cardVerificationDetails';
+import {
+  CardVerificationStatus,
+  cardVerificationStatusSchema,
+} from './cardVerificationStatus';
 import {
   NetworkTransactionReferenceEntity,
   networkTransactionReferenceEntitySchema,
@@ -32,9 +39,9 @@ export interface SetupTokenResponseCard {
   /** The year and month, in ISO-8601 `YYYY-MM` date format. See [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6). */
   expiry?: string;
   /** Address request details. */
-  billingAddress?: AddressDetails;
+  billingAddress?: CardResponseAddress;
   /** Verification status of Card. */
-  verificationStatus?: string;
+  verificationStatus?: CardVerificationStatus;
   /** Card Verification details including the authorization details and 3D SECURE details. */
   verification?: CardVerificationDetails;
   /** Previous network transaction reference including id in response. */
@@ -55,9 +62,12 @@ export const setupTokenResponseCardSchema: Schema<SetupTokenResponseCard> = obje
     expiry: ['expiry', optional(string())],
     billingAddress: [
       'billing_address',
-      optional(lazy(() => addressDetailsSchema)),
+      optional(lazy(() => cardResponseAddressSchema)),
     ],
-    verificationStatus: ['verification_status', optional(string())],
+    verificationStatus: [
+      'verification_status',
+      optional(cardVerificationStatusSchema),
+    ],
     verification: [
       'verification',
       optional(lazy(() => cardVerificationDetailsSchema)),

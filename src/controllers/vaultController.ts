@@ -34,28 +34,28 @@ export class VaultController extends BaseController {
    * Creates a Payment Token from the given payment source and adds it to the Vault of the associated
    * customer.
    *
-   * @param paypalRequestId   The server stores keys for 3 hours.
    * @param body              Payment Token creation with a financial instrument and an
    *                                                        optional customer_id.
+   * @param paypalRequestId   The server stores keys for 3 hours.
    * @return Response from the API call
    */
-  async paymentTokensCreate(
+  async createPaymentToken(
     {
-      paypalRequestId,
       body,
+      paypalRequestId,
     }: {
-      paypalRequestId: string;
       body: PaymentTokenRequest;
+      paypalRequestId?: string;
     },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<PaymentTokenResponse>> {
     const req = this.createRequest('POST', '/v3/vault/payment-tokens');
     const mapped = req.prepareArgs({
-      paypalRequestId: [paypalRequestId, string()],
       body: [body, paymentTokenRequestSchema],
+      paypalRequestId: [paypalRequestId, optional(string())],
     });
-    req.header('PayPal-Request-Id', mapped.paypalRequestId);
     req.header('Content-Type', 'application/json');
+    req.header('PayPal-Request-Id', mapped.paypalRequestId);
     req.json(mapped.body);
     req.throwOn(
       400,
@@ -94,7 +94,7 @@ export class VaultController extends BaseController {
    *                                  are expected to be returned in the response.
    * @return Response from the API call
    */
-  async customerPaymentTokensGet(
+  async listCustomerPaymentTokens(
     {
       customerId,
       pageSize,
@@ -143,7 +143,7 @@ export class VaultController extends BaseController {
    * @param id ID of the payment token.
    * @return Response from the API call
    */
-  async paymentTokensGet(
+  async getPaymentToken(
     id: string,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<PaymentTokenResponse>> {
@@ -172,7 +172,7 @@ export class VaultController extends BaseController {
    * @param id ID of the payment token.
    * @return Response from the API call
    */
-  async paymentTokensDelete(
+  async deletePaymentToken(
     id: string,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<void>> {
@@ -198,28 +198,28 @@ export class VaultController extends BaseController {
    * Creates a Setup Token from the given payment source and adds it to the Vault of the associated
    * customer.
    *
-   * @param paypalRequestId   The server stores keys for 3 hours.
    * @param body              Setup Token creation with a instrument type optional
    *                                                      financial instrument details and customer_id.
+   * @param paypalRequestId   The server stores keys for 3 hours.
    * @return Response from the API call
    */
-  async setupTokensCreate(
+  async createSetupToken(
     {
-      paypalRequestId,
       body,
+      paypalRequestId,
     }: {
-      paypalRequestId: string;
       body: SetupTokenRequest;
+      paypalRequestId?: string;
     },
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<SetupTokenResponse>> {
     const req = this.createRequest('POST', '/v3/vault/setup-tokens');
     const mapped = req.prepareArgs({
-      paypalRequestId: [paypalRequestId, string()],
       body: [body, setupTokenRequestSchema],
+      paypalRequestId: [paypalRequestId, optional(string())],
     });
-    req.header('PayPal-Request-Id', mapped.paypalRequestId);
     req.header('Content-Type', 'application/json');
+    req.header('PayPal-Request-Id', mapped.paypalRequestId);
     req.json(mapped.body);
     req.throwOn(
       400,
@@ -248,7 +248,7 @@ export class VaultController extends BaseController {
    * @param id ID of the setup token.
    * @return Response from the API call
    */
-  async setupTokensGet(
+  async getSetupToken(
     id: string,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<SetupTokenResponse>> {
