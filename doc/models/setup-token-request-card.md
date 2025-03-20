@@ -17,9 +17,8 @@ A Resource representing a request to vault a Card.
 | `securityCode` | `string \| undefined` | Optional | The three- or four-digit security code of the card. Also known as the CVV, CVC, CVN, CVE, or CID. This parameter cannot be present in the request when `payment_initiator=MERCHANT`.<br>**Constraints**: *Minimum Length*: `3`, *Maximum Length*: `4`, *Pattern*: `^[0-9]{3,4}$` |
 | `brand` | [`CardBrand \| undefined`](../../doc/models/card-brand.md) | Optional | The card network or brand. Applies to credit, debit, gift, and payment cards.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `255`, *Pattern*: `^[A-Z_]+$` |
 | `billingAddress` | [`Address \| undefined`](../../doc/models/address.md) | Optional | The portable international postal address. Maps to [AddressValidationMetadata](https://github.com/googlei18n/libaddressinput/wiki/AddressValidationMetadata) and HTML 5.1 [Autofilling form controls: the autocomplete attribute](https://www.w3.org/TR/html51/sec-forms.html#autofilling-form-controls-the-autocomplete-attribute). |
-| `verificationMethod` | `string \| undefined` | Optional | The verification method of the card.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `255`, *Pattern*: `^[0-9A-Z_]+$` |
+| `verificationMethod` | [`VaultCardVerificationMethod \| undefined`](../../doc/models/vault-card-verification-method.md) | Optional | The verification method of the card.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `255`, *Pattern*: `^[0-9A-Z_]+$` |
 | `experienceContext` | [`SetupTokenCardExperienceContext \| undefined`](../../doc/models/setup-token-card-experience-context.md) | Optional | Customizes the Vault creation flow experience for your customers. |
-| `networkTransactionReference` | `unknown \| undefined` | Optional | - |
 
 ## Example (as JSON)
 

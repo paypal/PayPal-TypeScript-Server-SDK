@@ -5,6 +5,10 @@
  */
 
 import { object, optional, Schema, string } from '../schema';
+import {
+  VaultInstructionAction,
+  vaultInstructionActionSchema,
+} from './vaultInstructionAction';
 
 /** Customizes the Vault creation flow experience for your customers. */
 export interface SetupTokenCardExperienceContext {
@@ -17,7 +21,7 @@ export interface SetupTokenCardExperienceContext {
   /** The URL where the customer is redirected after customer cancels or leaves the flow. It is a required field for contingency flows like PayPal wallet, 3DS. */
   cancelUrl?: string;
   /** Vault Instruction on action to be performed after a successful payer approval. */
-  vaultInstruction?: string;
+  vaultInstruction?: VaultInstructionAction;
 }
 
 export const setupTokenCardExperienceContextSchema: Schema<SetupTokenCardExperienceContext> = object(
@@ -26,6 +30,9 @@ export const setupTokenCardExperienceContextSchema: Schema<SetupTokenCardExperie
     locale: ['locale', optional(string())],
     returnUrl: ['return_url', optional(string())],
     cancelUrl: ['cancel_url', optional(string())],
-    vaultInstruction: ['vault_instruction', optional(string())],
+    vaultInstruction: [
+      'vault_instruction',
+      optional(vaultInstructionActionSchema),
+    ],
   }
 );

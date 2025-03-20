@@ -7,8 +7,17 @@
 import { boolean, lazy, object, optional, Schema, string } from '../schema';
 import { Address, addressSchema } from './address';
 import { Name, nameSchema } from './name';
+import {
+  PaypalPaymentTokenCustomerType,
+  paypalPaymentTokenCustomerTypeSchema,
+} from './paypalPaymentTokenCustomerType';
+import {
+  PaypalPaymentTokenUsageType,
+  paypalPaymentTokenUsageTypeSchema,
+} from './paypalPaymentTokenUsageType';
 import { Phone, phoneSchema } from './phone';
 import { PhoneWithType, phoneWithTypeSchema } from './phoneWithType';
+import { UsagePattern, usagePatternSchema } from './usagePattern';
 import {
   VaultedDigitalWalletShippingDetails,
   vaultedDigitalWalletShippingDetailsSchema,
@@ -17,15 +26,17 @@ import {
 export interface PaypalPaymentToken {
   /** The description displayed to the consumer on the approval flow for a digital wallet, as well as on the merchant view of the payment token management experience. exp: PayPal.com. */
   description?: string;
+  /** Expected business/charge model for the billing agreement. */
+  usagePattern?: UsagePattern;
   /** The shipping details. */
   shipping?: VaultedDigitalWalletShippingDetails;
   /** Create multiple payment tokens for the same payer, merchant/platform combination. Use this when the customer has not logged in at merchant/platform. The payment token thus generated, can then also be used to create the customer account at merchant/platform. Use this also when multiple payment tokens are required for the same payer, different customer at merchant/platform. This helps to identify customers distinctly even though they may share the same PayPal account. This only applies to PayPal payment source. */
   permitMultiplePaymentTokens?: boolean;
   /** The usage type associated with a digital wallet payment token. */
-  usageType?: string;
+  usageType?: PaypalPaymentTokenUsageType;
   /** The customer type associated with a digital wallet payment token. This is to indicate whether the customer acting on the merchant / platform is either a business or a consumer. */
-  customerType?: string;
-  /** The internationalized email address.<blockquote><strong>Note:</strong> Up to 64 characters are allowed before and 255 characters are allowed after the <code>@</code> sign. However, the generally accepted maximum length for an email address is 254 characters. The pattern verifies that an unquoted <code>@</code> sign exists.</blockquote> */
+  customerType?: PaypalPaymentTokenCustomerType;
+  /** The internationalized email address. Note: Up to 64 characters are allowed before and 255 characters are allowed after the @ sign. However, the generally accepted maximum length for an email address is 254 characters. The pattern verifies that an unquoted @ sign exists. */
   emailAddress?: string;
   /** The account identifier for a PayPal account. */
   payerId?: string;
@@ -43,6 +54,7 @@ export interface PaypalPaymentToken {
 
 export const paypalPaymentTokenSchema: Schema<PaypalPaymentToken> = object({
   description: ['description', optional(string())],
+  usagePattern: ['usage_pattern', optional(usagePatternSchema)],
   shipping: [
     'shipping',
     optional(lazy(() => vaultedDigitalWalletShippingDetailsSchema)),
@@ -51,8 +63,11 @@ export const paypalPaymentTokenSchema: Schema<PaypalPaymentToken> = object({
     'permit_multiple_payment_tokens',
     optional(boolean()),
   ],
-  usageType: ['usage_type', optional(string())],
-  customerType: ['customer_type', optional(string())],
+  usageType: ['usage_type', optional(paypalPaymentTokenUsageTypeSchema)],
+  customerType: [
+    'customer_type',
+    optional(paypalPaymentTokenCustomerTypeSchema),
+  ],
   emailAddress: ['email_address', optional(string())],
   payerId: ['payer_id', optional(string())],
   name: ['name', optional(lazy(() => nameSchema))],

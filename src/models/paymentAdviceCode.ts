@@ -10,10 +10,21 @@ import { Schema, stringEnum } from '../schema';
  * Enum for PaymentAdviceCode
  */
 export enum PaymentAdviceCode {
-  Enum01 = '01',
-  Enum02 = '02',
-  Enum03 = '03',
-  Enum21 = '21',
+  PaymentAdvice01 = '01',
+  PaymentAdvice02 = '02',
+  PaymentAdvice03 = '03',
+  PaymentAdvice04 = '04',
+  PaymentAdvice21 = '21',
+  PaymentAdvice22 = '22',
+  PaymentAdvice24 = '24',
+  PaymentAdvice25 = '25',
+  PaymentAdvice26 = '26',
+  PaymentAdvice27 = '27',
+  PaymentAdvice28 = '28',
+  PaymentAdvice29 = '29',
+  PaymentAdvice30 = '30',
+  PaymentAdvice40 = '40',
+  PaymentAdvice43 = '43',
 }
 
 /**

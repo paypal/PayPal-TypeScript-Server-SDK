@@ -10,10 +10,6 @@ import {
   paypalPaymentTokenCustomerTypeSchema,
 } from './paypalPaymentTokenCustomerType';
 import {
-  PaypalPaymentTokenUsagePattern,
-  paypalPaymentTokenUsagePatternSchema,
-} from './paypalPaymentTokenUsagePattern';
-import {
   PaypalPaymentTokenUsageType,
   paypalPaymentTokenUsageTypeSchema,
 } from './paypalPaymentTokenUsageType';
@@ -21,6 +17,7 @@ import {
   StoreInVaultInstruction,
   storeInVaultInstructionSchema,
 } from './storeInVaultInstruction';
+import { UsagePattern, usagePatternSchema } from './usagePattern';
 
 export interface PaypalWalletVaultInstruction {
   /** Defines how and when the payment source gets vaulted. */
@@ -28,7 +25,7 @@ export interface PaypalWalletVaultInstruction {
   /** The description displayed to PayPal consumer on the approval flow for PayPal, as well as on the PayPal payment token management experience on PayPal.com. */
   description?: string;
   /** Expected business/pricing model for the billing agreement. */
-  usagePattern?: PaypalPaymentTokenUsagePattern;
+  usagePattern?: UsagePattern;
   /** The usage type associated with the PayPal payment token. */
   usageType: PaypalPaymentTokenUsageType;
   /** The customer type associated with the PayPal payment token. This is to indicate whether the customer acting on the merchant / platform is either a business or a consumer. */
@@ -41,10 +38,7 @@ export const paypalWalletVaultInstructionSchema: Schema<PaypalWalletVaultInstruc
   {
     storeInVault: ['store_in_vault', optional(storeInVaultInstructionSchema)],
     description: ['description', optional(string())],
-    usagePattern: [
-      'usage_pattern',
-      optional(paypalPaymentTokenUsagePatternSchema),
-    ],
+    usagePattern: ['usage_pattern', optional(usagePatternSchema)],
     usageType: ['usage_type', paypalPaymentTokenUsageTypeSchema],
     customerType: [
       'customer_type',

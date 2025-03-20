@@ -5,6 +5,14 @@
  */
 
 import { object, optional, Schema, string } from '../schema';
+import {
+  OrderApplicationContextShippingPreference,
+  orderApplicationContextShippingPreferenceSchema,
+} from './orderApplicationContextShippingPreference';
+import {
+  VaultInstructionAction,
+  vaultInstructionActionSchema,
+} from './vaultInstructionAction';
 
 /** Customizes the Vault creation flow experience for your customers. */
 export interface VaultExperienceContext {
@@ -17,9 +25,9 @@ export interface VaultExperienceContext {
   /** The URL where the customer is redirected after customer cancels or leaves the flow. It is a required field for contingency flows like PayPal wallet, 3DS. */
   cancelUrl?: string;
   /** The shipping preference. This only applies to PayPal payment source. */
-  shippingPreference?: string;
+  shippingPreference?: OrderApplicationContextShippingPreference;
   /** Vault Instruction on action to be performed after a successful payer approval. */
-  vaultInstruction?: string;
+  vaultInstruction?: VaultInstructionAction;
 }
 
 export const vaultExperienceContextSchema: Schema<VaultExperienceContext> = object(
@@ -28,7 +36,13 @@ export const vaultExperienceContextSchema: Schema<VaultExperienceContext> = obje
     locale: ['locale', optional(string())],
     returnUrl: ['return_url', optional(string())],
     cancelUrl: ['cancel_url', optional(string())],
-    shippingPreference: ['shipping_preference', optional(string())],
-    vaultInstruction: ['vault_instruction', optional(string())],
+    shippingPreference: [
+      'shipping_preference',
+      optional(orderApplicationContextShippingPreferenceSchema),
+    ],
+    vaultInstruction: [
+      'vault_instruction',
+      optional(vaultInstructionActionSchema),
+    ],
   }
 );

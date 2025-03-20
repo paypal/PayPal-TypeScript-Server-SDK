@@ -9,7 +9,7 @@ The type of the payment credential. Currently, only CARD is supported.
 
 ## Fields
 
-| Name |
-|  --- |
-| `Card` |
+| Name | Description |
+|  --- | --- |
+| `Card` | CARD is the only value that Google Pay accepts. |
 

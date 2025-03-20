@@ -35,14 +35,14 @@ import { CustomError } from '../errors/customError';
 export class OrdersController extends BaseController {
   /**
    * Creates an order. Merchants and partners can add Level 2 and 3 data to payments to reduce risk and
-   * payment processing costs. For more information about processing payments, see <a href="https:
-   * //developer.paypal.com/docs/checkout/advanced/processing/">checkout</a> or <a href="https:
-   * //developer.paypal.com/docs/multiparty/checkout/advanced/processing/">multiparty checkout</a>.
-   * <blockquote><strong>Note:</strong> For error handling and troubleshooting, see <a href="https:
-   * //developer.paypal.com/api/rest/reference/orders/v2/errors/#create-order">Orders v2 errors</a>.
-   * </blockquote>
+   * payment processing costs. For more information about processing payments, see checkout or multiparty
+   * checkout. Note: For error handling and troubleshooting, see Orders v2 errors.
    *
    * @param body
+   * @param paypalMockResponse            PayPal's REST API uses a request header to invoke
+   *                                                             negative testing in the sandbox. This header
+   *                                                             configures the sandbox into a negative testing state
+   *                                                             for transactions that include the merchant.
    * @param paypalRequestId               The server stores keys for 6 hours. The API callers
    *                                                             can request the times to up to 72 hours by speaking to
    *                                                             their Account Manager. It is mandatory for all single-
@@ -52,26 +52,22 @@ export class OrdersController extends BaseController {
    * @param paypalPartnerAttributionId
    * @param paypalClientMetadataId
    * @param prefer                        The preferred server response upon successful
-   *                                                             completion of the request. Value is:
-   *                                                             <ul><li><code>return=minimal</code>. The server
-   *                                                             returns a minimal response to optimize communication
-   *                                                             between the API caller and the server. A minimal
-   *                                                             response includes the <code>id</code>,
-   *                                                             <code>status</code> and HATEOAS links.
-   *                                                             </li><li><code>return=representation</code>. The
-   *                                                             server returns a complete resource representation,
-   *                                                             including the current state of the resource.
-   *                                                             </li></ul>
+   *                                                             completion of the request. Value is: return=minimal.
+   *                                                             The server returns a minimal response to optimize
+   *                                                             communication between the API caller and the server. A
+   *                                                             minimal response includes the id, status and HATEOAS
+   *                                                             links. return=representation. The server returns a
+   *                                                             complete resource representation, including the
+   *                                                             current state of the resource.
    * @param paypalAuthAssertion           An API-caller-provided JSON Web Token (JWT) assertion
-   *                                                             that identifies the merchant. For details, see <a
-   *                                                             href="https://developer.paypal.
-   *                                                             com/api/rest/requests/#paypal-auth-assertion">PayPal-
-   *                                                             Auth-Assertion</a>.
+   *                                                             that identifies the merchant. For details, see PayPal-
+   *                                                             Auth-Assertion.
    * @return Response from the API call
    */
-  async ordersCreate(
+  async createOrder(
     {
       body,
+      paypalMockResponse,
       paypalRequestId,
       paypalPartnerAttributionId,
       paypalClientMetadataId,
@@ -79,6 +75,7 @@ export class OrdersController extends BaseController {
       paypalAuthAssertion,
     }: {
       body: OrderRequest;
+      paypalMockResponse?: string;
       paypalRequestId?: string;
       paypalPartnerAttributionId?: string;
       paypalClientMetadataId?: string;
@@ -90,6 +87,7 @@ export class OrdersController extends BaseController {
     const req = this.createRequest('POST', '/v2/checkout/orders');
     const mapped = req.prepareArgs({
       body: [body, orderRequestSchema],
+      paypalMockResponse: [paypalMockResponse, optional(string())],
       paypalRequestId: [paypalRequestId, optional(string())],
       paypalPartnerAttributionId: [
         paypalPartnerAttributionId,
@@ -100,6 +98,7 @@ export class OrdersController extends BaseController {
       paypalAuthAssertion: [paypalAuthAssertion, optional(string())],
     });
     req.header('Content-Type', 'application/json');
+    req.header('PayPal-Mock-Response', mapped.paypalMockResponse);
     req.header('PayPal-Request-Id', mapped.paypalRequestId);
     req.header(
       'PayPal-Partner-Attribution-Id',
@@ -130,25 +129,28 @@ export class OrdersController extends BaseController {
   }
 
   /**
-   * Shows details for an order, by ID.<blockquote><strong>Note:</strong> For error handling and
-   * troubleshooting, see <a href="https://developer.paypal.com/api/rest/reference/orders/v2/errors/#get-
-   * order">Orders v2 errors</a>.</blockquote>
+   * Shows details for an order, by ID. Note: For error handling and troubleshooting, see Orders v2
+   * errors.
    *
    * @param id                    The ID of the order for which to show details.
+   * @param paypalMockResponse    PayPal's REST API uses a request header to invoke negative testing in the
+   *                                        sandbox. This header configures the sandbox into a negative testing state
+   *                                        for transactions that include the merchant.
    * @param paypalAuthAssertion   An API-caller-provided JSON Web Token (JWT) assertion that identifies the
-   *                                        merchant. For details, see <a href="https://developer.paypal.
-   *                                        com/api/rest/requests/#paypal-auth-assertion">PayPal-Auth-Assertion</a>.
+   *                                        merchant. For details, see PayPal-Auth-Assertion.
    * @param fields                A comma-separated list of fields that should be returned for the order.
    *                                        Valid filter field is `payment_source`.
    * @return Response from the API call
    */
-  async ordersGet(
+  async getOrder(
     {
       id,
+      paypalMockResponse,
       paypalAuthAssertion,
       fields,
     }: {
       id: string;
+      paypalMockResponse?: string;
       paypalAuthAssertion?: string;
       fields?: string;
     },
@@ -157,9 +159,11 @@ export class OrdersController extends BaseController {
     const req = this.createRequest('GET');
     const mapped = req.prepareArgs({
       id: [id, string()],
+      paypalMockResponse: [paypalMockResponse, optional(string())],
       paypalAuthAssertion: [paypalAuthAssertion, optional(string())],
       fields: [fields, optional(string())],
     });
+    req.header('PayPal-Mock-Response', mapped.paypalMockResponse);
     req.header('PayPal-Auth-Assertion', mapped.paypalAuthAssertion);
     req.query('fields', mapped.fields);
     req.appendTemplatePath`/v2/checkout/orders/${mapped.id}`;
@@ -176,59 +180,45 @@ export class OrdersController extends BaseController {
 
   /**
    * Updates an order with a `CREATED` or `APPROVED` status. You cannot update an order with the
-   * `COMPLETED` status.<br/><br/>To make an update, you must provide a `reference_id`. If you omit this
-   * value with an order that contains only one purchase unit, PayPal sets the value to `default` which
-   * enables you to use the path: <code>\"/purchase_units/@reference_id=='default'/{attribute-or-
-   * object}\"</code>. Merchants and partners can add Level 2 and 3 data to payments to reduce risk and
-   * payment processing costs. For more information about processing payments, see <a href="https:
-   * //developer.paypal.com/docs/checkout/advanced/processing/">checkout</a> or <a href="https:
-   * //developer.paypal.com/docs/multiparty/checkout/advanced/processing/">multiparty checkout</a>.
-   * <blockquote><strong>Note:</strong> For error handling and troubleshooting, see <a href="https:
-   * //developer.paypal.com/api/rest/reference/orders/v2/errors/#patch-order">Orders v2 errors</a>.
-   * </blockquote>Patchable attributes or objects:
-   * <br/><br/><table><thead><th>Attribute</th><th>Op</th><th>Notes</th></thead><tbody><tr><td><code>inte
-   * nt</code></td><td>replace</td><td></td></tr><tr><td><code>payer</code></td><td>replace,
-   * add</td><td>Using replace op for <code>payer</code> will replace the whole <code>payer</code> object
-   * with the value sent in request.</td></tr><tr><td><code>purchase_units</code></td><td>replace,
-   * add</td><td></td></tr><tr><td><code>purchase_units[].custom_id</code></td><td>replace, add,
-   * remove</td><td></td></tr><tr><td><code>purchase_units[].description</code></td><td>replace, add,
-   * remove</td><td></td></tr><tr><td><code>purchase_units[].payee.
-   * email</code></td><td>replace</td><td></td></tr><tr><td><code>purchase_units[].shipping.
-   * name</code></td><td>replace, add</td><td></td></tr><tr><td><code>purchase_units[].shipping.
-   * email_address</code></td><td>replace, add</td><td></td></tr><tr><td><code>purchase_units[].shipping.
-   * phone_number</code></td><td>replace, add</td><td></td></tr><tr><td><code>purchase_units[].shipping.
-   * options</code></td><td>replace, add</td><td></td></tr><tr><td><code>purchase_units[].shipping.
-   * address</code></td><td>replace, add</td><td></td></tr><tr><td><code>purchase_units[].shipping.
-   * type</code></td><td>replace, add</td><td></td></tr><tr><td><code>purchase_units[].
-   * soft_descriptor</code></td><td>replace, remove</td><td></td></tr><tr><td><code>purchase_units[].
-   * amount</code></td><td>replace</td><td></td></tr><tr><td><code>purchase_units[].
-   * items</code></td><td>replace, add, remove</td><td></td></tr><tr><td><code>purchase_units[].
-   * invoice_id</code></td><td>replace, add, remove</td><td></td></tr><tr><td><code>purchase_units[].
-   * payment_instruction</code></td><td>replace</td><td></td></tr><tr><td><code>purchase_units[].
-   * payment_instruction.disbursement_mode</code></td><td>replace</td><td>By default,
-   * <code>disbursement_mode</code> is <code>INSTANT</code>.</td></tr><tr><td><code>purchase_units[].
-   * payment_instruction.payee_receivable_fx_rate_id</code></td><td>replace, add,
-   * remove</td><td></td></tr><tr><td><code>purchase_units[].payment_instruction.
-   * platform_fees</code></td><td>replace, add, remove</td><td></td></tr><tr><td><code>purchase_units[].
-   * supplementary_data.airline</code></td><td>replace, add,
-   * remove</td><td></td></tr><tr><td><code>purchase_units[].supplementary_data.
-   * card</code></td><td>replace, add, remove</td><td></td></tr><tr><td><code>application_context.
-   * client_configuration</code></td><td>replace, add</td><td></td></tr></tbody></table>
+   * `COMPLETED` status. To make an update, you must provide a `reference_id`. If you omit this value
+   * with an order that contains only one purchase unit, PayPal sets the value to `default` which enables
+   * you to use the path: \"/purchase_units/@reference_id=='default'/{attribute-or-object}\". Merchants
+   * and partners can add Level 2 and 3 data to payments to reduce risk and payment processing costs. For
+   * more information about processing payments, see checkout or multiparty checkout. Note: For error
+   * handling and troubleshooting, see Orders v2 errors. Patchable attributes or objects: Attribute Op
+   * Notes intent replace payer replace, add Using replace op for payer will replace the whole payer
+   * object with the value sent in request. purchase_units replace, add purchase_units[].custom_id
+   * replace, add, remove purchase_units[].description replace, add, remove purchase_units[].payee.email
+   * replace purchase_units[].shipping.name replace, add purchase_units[].shipping.email_address replace,
+   * add purchase_units[].shipping.phone_number replace, add purchase_units[].shipping.options replace,
+   * add purchase_units[].shipping.address replace, add purchase_units[].shipping.type replace, add
+   * purchase_units[].soft_descriptor replace, remove purchase_units[].amount replace purchase_units[].
+   * items replace, add, remove purchase_units[].invoice_id replace, add, remove purchase_units[].
+   * payment_instruction replace purchase_units[].payment_instruction.disbursement_mode replace By
+   * default, disbursement_mode is INSTANT. purchase_units[].payment_instruction.
+   * payee_receivable_fx_rate_id replace, add, remove purchase_units[].payment_instruction.platform_fees
+   * replace, add, remove purchase_units[].supplementary_data.airline replace, add, remove
+   * purchase_units[].supplementary_data.card replace, add, remove application_context.
+   * client_configuration replace, add
    *
    * @param id                    The ID of the order to update.
+   * @param paypalMockResponse    PayPal's REST API uses a request header to invoke negative testing in the
+   *                                         sandbox. This header configures the sandbox into a negative testing state
+   *                                         for transactions that include the merchant.
    * @param paypalAuthAssertion   An API-caller-provided JSON Web Token (JWT) assertion that identifies the
-   *                                         merchant. For details, see <a href="https://developer.paypal.
-   *                                         com/api/rest/requests/#paypal-auth-assertion">PayPal-Auth-Assertion</a>.
+   *                                         merchant. For details, see PayPal-Auth-Assertion.
    * @param body
    * @return Response from the API call
    */
-  async ordersPatch(
+  async patchOrder(
     {
       id,
+      paypalMockResponse,
       paypalAuthAssertion,
       body,
     }: {
       id: string;
+      paypalMockResponse?: string;
       paypalAuthAssertion?: string;
       body?: Patch[];
     },
@@ -237,10 +227,12 @@ export class OrdersController extends BaseController {
     const req = this.createRequest('PATCH');
     const mapped = req.prepareArgs({
       id: [id, string()],
+      paypalMockResponse: [paypalMockResponse, optional(string())],
       paypalAuthAssertion: [paypalAuthAssertion, optional(string())],
       body: [body, optional(array(patchSchema))],
     });
     req.header('Content-Type', 'application/json');
+    req.header('PayPal-Mock-Response', mapped.paypalMockResponse);
     req.header('PayPal-Auth-Assertion', mapped.paypalAuthAssertion);
     req.json(mapped.body);
     req.appendTemplatePath`/v2/checkout/orders/${mapped.id}`;
@@ -273,24 +265,19 @@ export class OrdersController extends BaseController {
    * @param paypalClientMetadataId
    * @param paypalAuthAssertion       An API-caller-provided JSON Web Token (JWT)
    *                                                                assertion that identifies the merchant. For details,
-   *                                                                see <a href="https://developer.paypal.
-   *                                                                com/api/rest/requests/#paypal-auth-
-   *                                                                assertion">PayPal-Auth-Assertion</a>.
+   *                                                                see PayPal-Auth-Assertion.
    * @param prefer                    The preferred server response upon successful
-   *                                                                completion of the request. Value is:
-   *                                                                <ul><li><code>return=minimal</code>. The server
-   *                                                                returns a minimal response to optimize
+   *                                                                completion of the request. Value is: return=minimal.
+   *                                                                The server returns a minimal response to optimize
    *                                                                communication between the API caller and the server.
-   *                                                                A minimal response includes the <code>id</code>,
-   *                                                                <code>status</code> and HATEOAS links.
-   *                                                                </li><li><code>return=representation</code>. The
-   *                                                                server returns a complete resource representation,
+   *                                                                A minimal response includes the id, status and
+   *                                                                HATEOAS links. return=representation. The server
+   *                                                                returns a complete resource representation,
    *                                                                including the current state of the resource.
-   *                                                                </li></ul>
    * @param body
    * @return Response from the API call
    */
-  async ordersConfirm(
+  async confirmOrder(
     {
       id,
       paypalClientMetadataId,
@@ -345,11 +332,15 @@ export class OrdersController extends BaseController {
    * Authorizes payment for an order. To successfully authorize payment for an order, the buyer must
    * first approve the order or a valid payment_source must be provided in the request. A buyer can
    * approve the order upon being redirected to the rel:approve URL that was returned in the HATEOAS
-   * links in the create order response.<blockquote><strong>Note:</strong> For error handling and
-   * troubleshooting, see <a href="https://developer.paypal.
-   * com/api/rest/reference/orders/v2/errors/#authorize-order">Orders v2 errors</a>.</blockquote>
+   * links in the create order response. Note: For error handling and troubleshooting, see Orders v2
+   * errors.
    *
    * @param id                        The ID of the order for which to authorize.
+   * @param paypalMockResponse        PayPal's REST API uses a request header to
+   *                                                                  invoke negative testing in the sandbox. This
+   *                                                                  header configures the sandbox into a negative
+   *                                                                  testing state for transactions that include the
+   *                                                                  merchant.
    * @param paypalRequestId           The server stores keys for 6 hours. The API
    *                                                                  callers can request the times to up to 72 hours
    *                                                                  by speaking to their Account Manager. It is
@@ -359,27 +350,24 @@ export class OrdersController extends BaseController {
    *                                                                  billing_agreement_id, etc).
    * @param prefer                    The preferred server response upon successful
    *                                                                  completion of the request. Value is:
-   *                                                                  <ul><li><code>return=minimal</code>. The server
-   *                                                                  returns a minimal response to optimize
-   *                                                                  communication between the API caller and the
-   *                                                                  server. A minimal response includes the
-   *                                                                  <code>id</code>, <code>status</code> and HATEOAS
-   *                                                                  links.</li><li><code>return=representation</code>.
-   *                                                                  The server returns a complete resource
-   *                                                                  representation, including the current state of
-   *                                                                  the resource.</li></ul>
+   *                                                                  return=minimal. The server returns a minimal
+   *                                                                  response to optimize communication between the
+   *                                                                  API caller and the server. A minimal response
+   *                                                                  includes the id, status and HATEOAS links.
+   *                                                                  return=representation. The server returns a
+   *                                                                  complete resource representation, including the
+   *                                                                  current state of the resource.
    * @param paypalClientMetadataId
    * @param paypalAuthAssertion       An API-caller-provided JSON Web Token (JWT)
    *                                                                  assertion that identifies the merchant. For
-   *                                                                  details, see <a href="https://developer.paypal.
-   *                                                                  com/api/rest/requests/#paypal-auth-
-   *                                                                  assertion">PayPal-Auth-Assertion</a>.
+   *                                                                  details, see PayPal-Auth-Assertion.
    * @param body
    * @return Response from the API call
    */
-  async ordersAuthorize(
+  async authorizeOrder(
     {
       id,
+      paypalMockResponse,
       paypalRequestId,
       prefer,
       paypalClientMetadataId,
@@ -387,6 +375,7 @@ export class OrdersController extends BaseController {
       body,
     }: {
       id: string;
+      paypalMockResponse?: string;
       paypalRequestId?: string;
       prefer?: string;
       paypalClientMetadataId?: string;
@@ -398,6 +387,7 @@ export class OrdersController extends BaseController {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
       id: [id, string()],
+      paypalMockResponse: [paypalMockResponse, optional(string())],
       paypalRequestId: [paypalRequestId, optional(string())],
       prefer: [prefer, optional(string())],
       paypalClientMetadataId: [paypalClientMetadataId, optional(string())],
@@ -405,6 +395,7 @@ export class OrdersController extends BaseController {
       body: [body, optional(orderAuthorizeRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
+    req.header('PayPal-Mock-Response', mapped.paypalMockResponse);
     req.header('PayPal-Request-Id', mapped.paypalRequestId);
     req.header('Prefer', mapped.prefer);
     req.header('PayPal-Client-Metadata-Id', mapped.paypalClientMetadataId);
@@ -442,11 +433,13 @@ export class OrdersController extends BaseController {
    * Captures payment for an order. To successfully capture payment for an order, the buyer must first
    * approve the order or a valid payment_source must be provided in the request. A buyer can approve the
    * order upon being redirected to the rel:approve URL that was returned in the HATEOAS links in the
-   * create order response.<blockquote><strong>Note:</strong> For error handling and troubleshooting, see
-   * <a href="https://developer.paypal.com/api/rest/reference/orders/v2/errors/#capture-order">Orders v2
-   * errors</a>.</blockquote>
+   * create order response. Note: For error handling and troubleshooting, see Orders v2 errors.
    *
    * @param id                        The ID of the order for which to capture a payment.
+   * @param paypalMockResponse        PayPal's REST API uses a request header to invoke
+   *                                                                negative testing in the sandbox. This header
+   *                                                                configures the sandbox into a negative testing
+   *                                                                state for transactions that include the merchant.
    * @param paypalRequestId           The server stores keys for 6 hours. The API
    *                                                                callers can request the times to up to 72 hours by
    *                                                                speaking to their Account Manager. It is mandatory
@@ -455,28 +448,24 @@ export class OrdersController extends BaseController {
    *                                                                Card, PayPal.vault_id, PayPal.billing_agreement_id,
    *                                                                etc).
    * @param prefer                    The preferred server response upon successful
-   *                                                                completion of the request. Value is:
-   *                                                                <ul><li><code>return=minimal</code>. The server
-   *                                                                returns a minimal response to optimize
+   *                                                                completion of the request. Value is: return=minimal.
+   *                                                                The server returns a minimal response to optimize
    *                                                                communication between the API caller and the server.
-   *                                                                A minimal response includes the <code>id</code>,
-   *                                                                <code>status</code> and HATEOAS links.
-   *                                                                </li><li><code>return=representation</code>. The
-   *                                                                server returns a complete resource representation,
+   *                                                                A minimal response includes the id, status and
+   *                                                                HATEOAS links. return=representation. The server
+   *                                                                returns a complete resource representation,
    *                                                                including the current state of the resource.
-   *                                                                </li></ul>
    * @param paypalClientMetadataId
    * @param paypalAuthAssertion       An API-caller-provided JSON Web Token (JWT)
    *                                                                assertion that identifies the merchant. For details,
-   *                                                                see <a href="https://developer.paypal.
-   *                                                                com/api/rest/requests/#paypal-auth-
-   *                                                                assertion">PayPal-Auth-Assertion</a>.
+   *                                                                see PayPal-Auth-Assertion.
    * @param body
    * @return Response from the API call
    */
-  async ordersCapture(
+  async captureOrder(
     {
       id,
+      paypalMockResponse,
       paypalRequestId,
       prefer,
       paypalClientMetadataId,
@@ -484,6 +473,7 @@ export class OrdersController extends BaseController {
       body,
     }: {
       id: string;
+      paypalMockResponse?: string;
       paypalRequestId?: string;
       prefer?: string;
       paypalClientMetadataId?: string;
@@ -495,6 +485,7 @@ export class OrdersController extends BaseController {
     const req = this.createRequest('POST');
     const mapped = req.prepareArgs({
       id: [id, string()],
+      paypalMockResponse: [paypalMockResponse, optional(string())],
       paypalRequestId: [paypalRequestId, optional(string())],
       prefer: [prefer, optional(string())],
       paypalClientMetadataId: [paypalClientMetadataId, optional(string())],
@@ -502,6 +493,7 @@ export class OrdersController extends BaseController {
       body: [body, optional(orderCaptureRequestSchema)],
     });
     req.header('Content-Type', 'application/json');
+    req.header('PayPal-Mock-Response', mapped.paypalMockResponse);
     req.header('PayPal-Request-Id', mapped.paypalRequestId);
     req.header('Prefer', mapped.prefer);
     req.header('PayPal-Client-Metadata-Id', mapped.paypalClientMetadataId);
@@ -542,13 +534,11 @@ export class OrdersController extends BaseController {
    *                                                            associated with.
    * @param body
    * @param paypalAuthAssertion   An API-caller-provided JSON Web Token (JWT) assertion
-   *                                                            that identifies the merchant. For details, see <a
-   *                                                            href="https://developer.paypal.
-   *                                                            com/api/rest/requests/#paypal-auth-assertion">PayPal-
-   *                                                            Auth-Assertion</a>.
+   *                                                            that identifies the merchant. For details, see PayPal-
+   *                                                            Auth-Assertion.
    * @return Response from the API call
    */
-  async ordersTrackCreate(
+  async createOrderTracking(
     {
       id,
       body,
@@ -594,23 +584,18 @@ export class OrdersController extends BaseController {
 
   /**
    * Updates or cancels the tracking information for a PayPal order, by ID. Updatable attributes or
-   * objects:
-   * <br/><br/><table><thead><th>Attribute</th><th>Op</th><th>Notes</th></thead><tbody></tr><tr><td><code
-   * >items</code></td><td>replace</td><td>Using replace op for <code>items</code> will replace the
-   * entire <code>items</code> object with the value sent in request.
-   * </td></tr><tr><td><code>notify_payer</code></td><td>replace,
-   * add</td><td></td></tr><tr><td><code>status</code></td><td>replace</td><td>Only patching status to
-   * CANCELLED is currently supported.</td></tr></tbody></table>
+   * objects: Attribute Op Notes items replace Using replace op for items will replace the entire items
+   * object with the value sent in request. notify_payer replace, add status replace Only patching status
+   * to CANCELLED is currently supported.
    *
    * @param id                    The ID of the order that the tracking information is associated with.
    * @param trackerId             The order tracking ID.
    * @param paypalAuthAssertion   An API-caller-provided JSON Web Token (JWT) assertion that identifies the
-   *                                         merchant. For details, see <a href="https://developer.paypal.
-   *                                         com/api/rest/requests/#paypal-auth-assertion">PayPal-Auth-Assertion</a>.
+   *                                         merchant. For details, see PayPal-Auth-Assertion.
    * @param body
    * @return Response from the API call
    */
-  async ordersTrackersPatch(
+  async updateOrderTracking(
     {
       id,
       trackerId,
