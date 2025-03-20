@@ -6,21 +6,21 @@
 
 import { lazy, object, optional, Schema } from '../schema';
 import {
-  ThreeDSecureAuthenticationResponse,
-  threeDSecureAuthenticationResponseSchema,
-} from './threeDSecureAuthenticationResponse';
+  ThreeDSecureCardAuthenticationResponse,
+  threeDSecureCardAuthenticationResponseSchema,
+} from './threeDSecureCardAuthenticationResponse';
 
 /** Results of Authentication such as 3D Secure. */
 export interface CardAuthenticationResponse {
   /** Results of 3D Secure Authentication. */
-  threeDSecure?: ThreeDSecureAuthenticationResponse;
+  threeDSecure?: ThreeDSecureCardAuthenticationResponse;
 }
 
 export const cardAuthenticationResponseSchema: Schema<CardAuthenticationResponse> = object(
   {
     threeDSecure: [
       'three_d_secure',
-      optional(lazy(() => threeDSecureAuthenticationResponseSchema)),
+      optional(lazy(() => threeDSecureCardAuthenticationResponseSchema)),
     ],
   }
 );

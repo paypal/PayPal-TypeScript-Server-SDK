@@ -9,7 +9,7 @@ import {
   AuthorizationWithAdditionalData,
   authorizationWithAdditionalDataSchema,
 } from './authorizationWithAdditionalData';
-import { Capture, captureSchema } from './capture';
+import { OrdersCapture, ordersCaptureSchema } from './ordersCapture';
 import { Refund, refundSchema } from './refund';
 
 /** The collection of payments, or transactions, for a purchase unit in an order. For example, authorized payments, captured payments, and refunds. */
@@ -17,7 +17,7 @@ export interface PaymentCollection {
   /** An array of authorized payments for a purchase unit. A purchase unit can have zero or more authorized payments. */
   authorizations?: AuthorizationWithAdditionalData[];
   /** An array of captured payments for a purchase unit. A purchase unit can have zero or more captured payments. */
-  captures?: Capture[];
+  captures?: OrdersCapture[];
   /** An array of refunds for a purchase unit. A purchase unit can have zero or more refunds. */
   refunds?: Refund[];
 }
@@ -27,6 +27,6 @@ export const paymentCollectionSchema: Schema<PaymentCollection> = object({
     'authorizations',
     optional(array(lazy(() => authorizationWithAdditionalDataSchema))),
   ],
-  captures: ['captures', optional(array(lazy(() => captureSchema)))],
+  captures: ['captures', optional(array(lazy(() => ordersCaptureSchema)))],
   refunds: ['refunds', optional(array(lazy(() => refundSchema)))],
 });

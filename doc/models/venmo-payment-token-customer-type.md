@@ -9,8 +9,8 @@ The customer type associated with the Venmo payment token. This is to indicate w
 
 ## Fields
 
-| Name |
-|  --- |
-| `Consumer` |
-| `Business` |
+| Name | Description |
+|  --- | --- |
+| `Consumer` | The customer vaulting the Venmo payment token is a consumer on the merchant / platform. |
+| `Business` | The customer vaulting the Venmo payment token is a business on merchant / platform. |
 

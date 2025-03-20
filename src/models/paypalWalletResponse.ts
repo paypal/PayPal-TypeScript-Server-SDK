@@ -15,13 +15,17 @@ import {
   PaypalWalletAttributesResponse,
   paypalWalletAttributesResponseSchema,
 } from './paypalWalletAttributesResponse';
+import {
+  PaypalWalletStoredCredential,
+  paypalWalletStoredCredentialSchema,
+} from './paypalWalletStoredCredential';
 import { PhoneNumber, phoneNumberSchema } from './phoneNumber';
 import { PhoneType, phoneTypeSchema } from './phoneType';
 import { TaxInfo, taxInfoSchema } from './taxInfo';
 
 /** The PayPal Wallet response. */
 export interface PaypalWalletResponse {
-  /** The internationalized email address.<blockquote><strong>Note:</strong> Up to 64 characters are allowed before and 255 characters are allowed after the <code>@</code> sign. However, the generally accepted maximum length for an email address is 254 characters. The pattern verifies that an unquoted <code>@</code> sign exists.</blockquote> */
+  /** The internationalized email address. Note: Up to 64 characters are allowed before and 255 characters are allowed after the @ sign. However, the generally accepted maximum length for an email address is 254 characters. The pattern verifies that an unquoted @ sign exists. */
   emailAddress?: string;
   /** The PayPal payer ID, which is a masked version of the PayPal account number intended for use with third parties. The account number is reversibly encrypted and a proprietary variant of Base32 is used to encode the result. */
   accountId?: string;
@@ -43,6 +47,8 @@ export interface PaypalWalletResponse {
   address?: Address;
   /** Additional attributes associated with the use of a PayPal Wallet. */
   attributes?: PaypalWalletAttributesResponse;
+  /** Provides additional details to process a payment using the PayPal wallet billing agreement or a vaulted payment method that has been stored or is intended to be stored. */
+  storedCredential?: PaypalWalletStoredCredential;
 }
 
 export const paypalWalletResponseSchema: Schema<PaypalWalletResponse> = object({
@@ -62,5 +68,9 @@ export const paypalWalletResponseSchema: Schema<PaypalWalletResponse> = object({
   attributes: [
     'attributes',
     optional(lazy(() => paypalWalletAttributesResponseSchema)),
+  ],
+  storedCredential: [
+    'stored_credential',
+    optional(lazy(() => paypalWalletStoredCredentialSchema)),
   ],
 });

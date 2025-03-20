@@ -11,7 +11,7 @@ Results of Authentication such as 3D Secure.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `threeDSecure` | [`ThreeDSecureAuthenticationResponse \| undefined`](../../doc/models/three-d-secure-authentication-response.md) | Optional | Results of 3D Secure Authentication. |
+| `threeDSecure` | [`ThreeDSecureCardAuthenticationResponse \| undefined`](../../doc/models/three-d-secure-card-authentication-response.md) | Optional | Results of 3D Secure Authentication. |
 
 ## Example (as JSON)
 
@@ -19,7 +19,8 @@ Results of Authentication such as 3D Secure.
 {
   "three_d_secure": {
     "authentication_status": "C",
-    "enrollment_status": "Y"
+    "enrollment_status": "Y",
+    "authentication_id": "authentication_id6"
   }
 }
 ```

@@ -5,17 +5,20 @@
  */
 
 import { object, Schema, string } from '../schema';
-import { TokenRequestType, tokenRequestTypeSchema } from './tokenRequestType';
+import {
+  VaultTokenRequestType,
+  vaultTokenRequestTypeSchema,
+} from './vaultTokenRequestType';
 
 /** The Tokenized Payment Source representing a Request to Vault a Token. */
 export interface VaultTokenRequest {
   /** The PayPal-generated ID for the token. */
   id: string;
   /** The tokenization method that generated the ID. */
-  type: TokenRequestType;
+  type: VaultTokenRequestType;
 }
 
 export const vaultTokenRequestSchema: Schema<VaultTokenRequest> = object({
   id: ['id', string()],
-  type: ['type', tokenRequestTypeSchema],
+  type: ['type', vaultTokenRequestTypeSchema],
 });

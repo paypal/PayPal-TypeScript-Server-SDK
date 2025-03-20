@@ -13,8 +13,8 @@
 | `lastDigits` | `string \| undefined` | Optional | The last digits of the payment card.<br>**Constraints**: *Minimum Length*: `2`, *Maximum Length*: `4`, *Pattern*: `[0-9]{2,}` |
 | `brand` | [`CardBrand \| undefined`](../../doc/models/card-brand.md) | Optional | The card network or brand. Applies to credit, debit, gift, and payment cards.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `255`, *Pattern*: `^[A-Z_]+$` |
 | `expiry` | `string \| undefined` | Optional | The year and month, in ISO-8601 `YYYY-MM` date format. See [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6).<br>**Constraints**: *Minimum Length*: `7`, *Maximum Length*: `7`, *Pattern*: `^[0-9]{4}-(0[1-9]\|1[0-2])$` |
-| `billingAddress` | [`AddressDetails \| undefined`](../../doc/models/address-details.md) | Optional | Address request details. |
-| `verificationStatus` | `string \| undefined` | Optional | Verification status of Card.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `255`, *Pattern*: `^[0-9A-Z_]+$` |
+| `billingAddress` | [`CardResponseAddress \| undefined`](../../doc/models/card-response-address.md) | Optional | Address request details. |
+| `verificationStatus` | [`CardVerificationStatus \| undefined`](../../doc/models/card-verification-status.md) | Optional | Verification status of Card.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `255`, *Pattern*: `^[0-9A-Z_]+$` |
 | `verification` | [`CardVerificationDetails \| undefined`](../../doc/models/card-verification-details.md) | Optional | Card Verification details including the authorization details and 3D SECURE details. |
 | `networkTransactionReference` | [`NetworkTransactionReferenceEntity \| undefined`](../../doc/models/network-transaction-reference-entity.md) | Optional | Previous network transaction reference including id in response. |
 | `authenticationResult` | [`CardAuthenticationResponse \| undefined`](../../doc/models/card-authentication-response.md) | Optional | Results of Authentication such as 3D Secure. |

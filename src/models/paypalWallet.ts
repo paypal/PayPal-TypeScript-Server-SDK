@@ -15,6 +15,10 @@ import {
   PaypalWalletExperienceContext,
   paypalWalletExperienceContextSchema,
 } from './paypalWalletExperienceContext';
+import {
+  PaypalWalletStoredCredential,
+  paypalWalletStoredCredentialSchema,
+} from './paypalWalletStoredCredential';
 import { PhoneWithType, phoneWithTypeSchema } from './phoneWithType';
 import { TaxInfo, taxInfoSchema } from './taxInfo';
 
@@ -22,7 +26,7 @@ import { TaxInfo, taxInfoSchema } from './taxInfo';
 export interface PaypalWallet {
   /** The PayPal-generated ID for the vaulted payment source. This ID should be stored on the merchant's server so the saved payment source can be used for future transactions. */
   vaultId?: string;
-  /** The internationalized email address.<blockquote><strong>Note:</strong> Up to 64 characters are allowed before and 255 characters are allowed after the <code>@</code> sign. However, the generally accepted maximum length for an email address is 254 characters. The pattern verifies that an unquoted <code>@</code> sign exists.</blockquote> */
+  /** The internationalized email address. Note: Up to 64 characters are allowed before and 255 characters are allowed after the @ sign. However, the generally accepted maximum length for an email address is 254 characters. The pattern verifies that an unquoted @ sign exists. */
   emailAddress?: string;
   /** The name of the party. */
   name?: Name;
@@ -36,10 +40,12 @@ export interface PaypalWallet {
   address?: Address;
   /** Additional attributes associated with the use of this PayPal Wallet. */
   attributes?: PaypalWalletAttributes;
-  /** Customizes the payer experience during the approval process for payment with PayPal.<blockquote><strong>Note:</strong> Partners and Marketplaces might configure <code>brand_name</code> and <code>shipping_preference</code> during partner account setup, which overrides the request values.</blockquote> */
+  /** Customizes the payer experience during the approval process for payment with PayPal. Note: Partners and Marketplaces might configure brand_name and shipping_preference during partner account setup, which overrides the request values. */
   experienceContext?: PaypalWalletExperienceContext;
   /** The PayPal billing agreement ID. References an approved recurring payment for goods or services. */
   billingAgreementId?: string;
+  /** Provides additional details to process a payment using the PayPal wallet billing agreement or a vaulted payment method that has been stored or is intended to be stored. */
+  storedCredential?: PaypalWalletStoredCredential;
 }
 
 export const paypalWalletSchema: Schema<PaypalWallet> = object({
@@ -59,4 +65,8 @@ export const paypalWalletSchema: Schema<PaypalWallet> = object({
     optional(lazy(() => paypalWalletExperienceContextSchema)),
   ],
   billingAgreementId: ['billing_agreement_id', optional(string())],
+  storedCredential: [
+    'stored_credential',
+    optional(lazy(() => paypalWalletStoredCredentialSchema)),
+  ],
 });
