@@ -1,12 +1,5 @@
-
-# Getting Started with PayPal Server SDK
-
-## Introduction
-
-### Important Notes
-
-- **Available Features:** This SDK currently contains only 3 of PayPal's API endpoints. Additional endpoints and functionality will be added in the future.
-- **API Changes:** Expect potential changes in APIs and features as we finalize the product.
+ **Available Features:** This SDK currently contains only 3 of PayPal's API endpoints. Additional endpoints and functionality will be added in the future.
+ **API Changes:** Expect potential changes in APIs and features as we finalize the product.
 
 ### Information
 
