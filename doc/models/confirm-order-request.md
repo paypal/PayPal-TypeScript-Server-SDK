@@ -12,7 +12,6 @@ Payer confirms the intent to pay for the Order using the provided payment source
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `paymentSource` | [`PaymentSource`](../../doc/models/payment-source.md) | Required | The payment source definition. |
-| `processingInstruction` | [`ProcessingInstruction \| undefined`](../../doc/models/processing-instruction.md) | Optional | The instruction to process an order.<br>**Default**: `ProcessingInstruction.NOINSTRUCTION`<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `36`, *Pattern*: `^[0-9A-Z_]+$` |
 | `applicationContext` | [`OrderConfirmApplicationContext \| undefined`](../../doc/models/order-confirm-application-context.md) | Optional | Customizes the payer confirmation experience. |
 
 ## Example (as JSON)
@@ -86,7 +85,6 @@ Payer confirms the intent to pay for the Order using the provided payment source
       }
     }
   },
-  "processing_instruction": "NO_INSTRUCTION",
   "application_context": {
     "brand_name": "brand_name8",
     "locale": "locale2",

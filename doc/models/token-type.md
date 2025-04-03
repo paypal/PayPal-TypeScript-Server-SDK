@@ -9,7 +9,7 @@ The tokenization method that generated the ID.
 
 ## Fields
 
-| Name |
-|  --- |
-| `BILLINGAGREEMENT` |
+| Name | Description |
+|  --- | --- |
+| `BillingAgreement` | The PayPal billing agreement ID. References an approved recurring payment for goods or services. |
 

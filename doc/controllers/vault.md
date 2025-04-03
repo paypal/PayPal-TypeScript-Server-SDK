@@ -12,48 +12,50 @@ const vaultController = new VaultController(client);
 
 ## Methods
 
-* [Payment-Tokens Create](../../doc/controllers/vault.md#payment-tokens-create)
-* [Customer Payment-Tokens Get](../../doc/controllers/vault.md#customer-payment-tokens-get)
-* [Payment-Tokens Get](../../doc/controllers/vault.md#payment-tokens-get)
-* [Payment-Tokens Delete](../../doc/controllers/vault.md#payment-tokens-delete)
-* [Setup-Tokens Create](../../doc/controllers/vault.md#setup-tokens-create)
-* [Setup-Tokens Get](../../doc/controllers/vault.md#setup-tokens-get)
+* [Create Payment Token](../../doc/controllers/vault.md#create-payment-token)
+* [List Customer Payment Tokens](../../doc/controllers/vault.md#list-customer-payment-tokens)
+* [Get Payment Token](../../doc/controllers/vault.md#get-payment-token)
+* [Delete Payment Token](../../doc/controllers/vault.md#delete-payment-token)
+* [Create Setup Token](../../doc/controllers/vault.md#create-setup-token)
+* [Get Setup Token](../../doc/controllers/vault.md#get-setup-token)
 
 
-# Payment-Tokens Create
+# Create Payment Token
 
 Creates a Payment Token from the given payment source and adds it to the Vault of the associated customer.
 
 ```ts
-async paymentTokensCreate(  payPalRequestId: string,
+async createPaymentToken(
   body: PaymentTokenRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<PaymentTokenResponse>>
+  paypalRequestId?: string,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<PaymentTokenResponse>>
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `payPalRequestId` | `string` | Header, Required | The server stores keys for 3 hours. |
 | `body` | [`PaymentTokenRequest`](../../doc/models/payment-token-request.md) | Body, Required | Payment Token creation with a financial instrument and an optional customer_id. |
+| `paypalRequestId` | `string \| undefined` | Header, Optional | The server stores keys for 3 hours.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `10000`, *Pattern*: `^.*$` |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`PaymentTokenResponse`](../../doc/models/payment-token-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [PaymentTokenResponse](../../doc/models/payment-token-response.md).
 
 ## Example Usage
 
 ```ts
 const collect = {
-  payPalRequestId: 'PayPal-Request-Id6',
   body: {
-    paymentSource: {},
+    paymentSource: {
+    },
   }
 }
 
 try {
-  const { result, ...httpResponse } = await vaultController.paymentTokensCreate(collect);
+  const { result, ...httpResponse } = await vaultController.createPaymentToken(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -75,16 +77,18 @@ try {
 | 500 | An internal server error has occurred. | [`CustomError`](../../doc/models/custom-error.md) |
 
 
-# Customer Payment-Tokens Get
+# List Customer Payment Tokens
 
 Returns all payment tokens for a customer.
 
 ```ts
-async customerPaymentTokensGet(  customerId: string,
+async listCustomerPaymentTokens(
+  customerId: string,
   pageSize?: number,
   page?: number,
   totalRequired?: boolean,
-requestOptions?: RequestOptions): Promise<ApiResponse<CustomerVaultPaymentTokensResponse>>
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<CustomerVaultPaymentTokensResponse>>
 ```
 
 ## Parameters
@@ -92,14 +96,14 @@ requestOptions?: RequestOptions): Promise<ApiResponse<CustomerVaultPaymentTokens
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `customerId` | `string` | Query, Required | A unique identifier representing a specific customer in merchant's/partner's system or records.<br>**Constraints**: *Minimum Length*: `7`, *Maximum Length*: `36`, *Pattern*: `^[0-9a-zA-Z_-]+$` |
-| `pageSize` | `number \| undefined` | Query, Optional | A non-negative, non-zero integer indicating the maximum number of results to return at one time.<br>**Default**: `5`<br>**Constraints**: `>= 1` |
-| `page` | `number \| undefined` | Query, Optional | A non-negative, non-zero integer representing the page of the results.<br>**Default**: `1`<br>**Constraints**: `>= 1` |
+| `pageSize` | `number \| undefined` | Query, Optional | A non-negative, non-zero integer indicating the maximum number of results to return at one time.<br>**Default**: `5`<br>**Constraints**: `>= 1`, `<= 5` |
+| `page` | `number \| undefined` | Query, Optional | A non-negative, non-zero integer representing the page of the results.<br>**Default**: `1`<br>**Constraints**: `>= 1`, `<= 10` |
 | `totalRequired` | `boolean \| undefined` | Query, Optional | A boolean indicating total number of items (total_items) and pages (total_pages) are expected to be returned in the response.<br>**Default**: `false` |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`CustomerVaultPaymentTokensResponse`](../../doc/models/customer-vault-payment-tokens-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [CustomerVaultPaymentTokensResponse](../../doc/models/customer-vault-payment-tokens-response.md).
 
 ## Example Usage
 
@@ -112,7 +116,7 @@ const collect = {
 }
 
 try {
-  const { result, ...httpResponse } = await vaultController.customerPaymentTokensGet(collect);
+  const { result, ...httpResponse } = await vaultController.listCustomerPaymentTokens(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -132,25 +136,27 @@ try {
 | 500 | An internal server error has occurred. | [`CustomError`](../../doc/models/custom-error.md) |
 
 
-# Payment-Tokens Get
+# Get Payment Token
 
 Returns a readable representation of vaulted payment source associated with the payment token id.
 
 ```ts
-async paymentTokensGet(  id: string,
-requestOptions?: RequestOptions): Promise<ApiResponse<PaymentTokenResponse>>
+async getPaymentToken(
+  id: string,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<PaymentTokenResponse>>
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `id` | `string` | Template, Required | ID of the payment token.<br>**Constraints**: *Maximum Length*: `36`, *Pattern*: `^[0-9a-zA-Z_-]+$` |
+| `id` | `string` | Template, Required | ID of the payment token.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `36`, *Pattern*: `^[0-9a-zA-Z_-]+$` |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`PaymentTokenResponse`](../../doc/models/payment-token-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [PaymentTokenResponse](../../doc/models/payment-token-response.md).
 
 ## Example Usage
 
@@ -158,7 +164,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<PaymentTokenResponse>>
 const id = 'id0';
 
 try {
-  const { result, ...httpResponse } = await vaultController.paymentTokensGet(id);
+  const { result, ...httpResponse } = await vaultController.getPaymentToken(id);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -179,25 +185,27 @@ try {
 | 500 | An internal server error has occurred. | [`CustomError`](../../doc/models/custom-error.md) |
 
 
-# Payment-Tokens Delete
+# Delete Payment Token
 
 Delete the payment token associated with the payment token id.
 
 ```ts
-async paymentTokensDelete(  id: string,
-requestOptions?: RequestOptions): Promise<ApiResponse<void>>
+async deletePaymentToken(
+  id: string,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<void>>
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `id` | `string` | Template, Required | ID of the payment token.<br>**Constraints**: *Maximum Length*: `36`, *Pattern*: `^[0-9a-zA-Z_-]+$` |
+| `id` | `string` | Template, Required | ID of the payment token.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `36`, *Pattern*: `^[0-9a-zA-Z_-]+$` |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-`void`
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 
 ## Example Usage
 
@@ -205,7 +213,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<void>>
 const id = 'id0';
 
 try {
-  const { result, ...httpResponse } = await vaultController.paymentTokensDelete(id);
+  const { result, ...httpResponse } = await vaultController.deletePaymentToken(id);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -225,40 +233,42 @@ try {
 | 500 | An internal server error has occurred. | [`CustomError`](../../doc/models/custom-error.md) |
 
 
-# Setup-Tokens Create
+# Create Setup Token
 
 Creates a Setup Token from the given payment source and adds it to the Vault of the associated customer.
 
 ```ts
-async setupTokensCreate(  payPalRequestId: string,
+async createSetupToken(
   body: SetupTokenRequest,
-requestOptions?: RequestOptions): Promise<ApiResponse<SetupTokenResponse>>
+  paypalRequestId?: string,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<SetupTokenResponse>>
 ```
 
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `payPalRequestId` | `string` | Header, Required | The server stores keys for 3 hours. |
 | `body` | [`SetupTokenRequest`](../../doc/models/setup-token-request.md) | Body, Required | Setup Token creation with a instrument type optional financial instrument details and customer_id. |
+| `paypalRequestId` | `string \| undefined` | Header, Optional | The server stores keys for 3 hours.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `10000`, *Pattern*: `^.*$` |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
 
-[`SetupTokenResponse`](../../doc/models/setup-token-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SetupTokenResponse](../../doc/models/setup-token-response.md).
 
 ## Example Usage
 
 ```ts
 const collect = {
-  payPalRequestId: 'PayPal-Request-Id6',
   body: {
-    paymentSource: {},
+    paymentSource: {
+    },
   }
 }
 
 try {
-  const { result, ...httpResponse } = await vaultController.setupTokensCreate(collect);
+  const { result, ...httpResponse } = await vaultController.createSetupToken(collect);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {
@@ -279,13 +289,15 @@ try {
 | 500 | An internal server error has occurred. | [`CustomError`](../../doc/models/custom-error.md) |
 
 
-# Setup-Tokens Get
+# Get Setup Token
 
 Returns a readable representation of temporarily vaulted payment source associated with the setup token id.
 
 ```ts
-async setupTokensGet(  id: string,
-requestOptions?: RequestOptions): Promise<ApiResponse<SetupTokenResponse>>
+async getSetupToken(
+  id: string,
+  requestOptions?: RequestOptions
+): Promise<ApiResponse<SetupTokenResponse>>
 ```
 
 ## Parameters
@@ -297,7 +309,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<SetupTokenResponse>>
 
 ## Response Type
 
-[`SetupTokenResponse`](../../doc/models/setup-token-response.md)
+This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [SetupTokenResponse](../../doc/models/setup-token-response.md).
 
 ## Example Usage
 
@@ -305,7 +317,7 @@ requestOptions?: RequestOptions): Promise<ApiResponse<SetupTokenResponse>>
 const id = 'id0';
 
 try {
-  const { result, ...httpResponse } = await vaultController.setupTokensGet(id);
+  const { result, ...httpResponse } = await vaultController.getSetupToken(id);
   // Get more response info...
   // const { statusCode, headers } = httpResponse;
 } catch (error) {

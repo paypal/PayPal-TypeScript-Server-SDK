@@ -12,7 +12,7 @@ The setup payment method details.
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `card` | [`SetupTokenResponseCard \| undefined`](../../doc/models/setup-token-response-card.md) | Optional | - |
-| `paypal` | [`PayPalPaymentToken \| undefined`](../../doc/models/pay-pal-payment-token.md) | Optional | - |
+| `paypal` | [`PaypalPaymentToken \| undefined`](../../doc/models/paypal-payment-token.md) | Optional | - |
 | `venmo` | [`VenmoPaymentToken \| undefined`](../../doc/models/venmo-payment-token.md) | Optional | - |
 
 ## Example (as JSON)
@@ -35,9 +35,14 @@ The setup payment method details.
   },
   "paypal": {
     "description": "description2",
+    "usage_pattern": "THRESHOLD_PREPAID",
     "shipping": {
       "name": {
         "full_name": "full_name6"
+      },
+      "phone_number": {
+        "country_code": "country_code2",
+        "national_number": "national_number6"
       },
       "type": "SHIPPING",
       "address": {
@@ -50,14 +55,18 @@ The setup payment method details.
       }
     },
     "permit_multiple_payment_tokens": false,
-    "usage_type": "usage_type2",
-    "customer_type": "customer_type6"
+    "usage_type": "MERCHANT"
   },
   "venmo": {
     "description": "description6",
+    "usage_pattern": "UNSCHEDULED_PREPAID",
     "shipping": {
       "name": {
         "full_name": "full_name6"
+      },
+      "phone_number": {
+        "country_code": "country_code2",
+        "national_number": "national_number6"
       },
       "type": "SHIPPING",
       "address": {
@@ -70,8 +79,7 @@ The setup payment method details.
       }
     },
     "permit_multiple_payment_tokens": false,
-    "usage_type": "usage_type6",
-    "customer_type": "customer_type0"
+    "usage_type": "MERCHANT"
   }
 }
 ```

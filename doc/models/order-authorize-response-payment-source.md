@@ -12,7 +12,7 @@ The payment source used to fund the payment.
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `card` | [`CardResponse \| undefined`](../../doc/models/card-response.md) | Optional | The payment card to use to fund a payment. Card can be a credit or debit card. |
-| `paypal` | [`PayPalWalletResponse \| undefined`](../../doc/models/pay-pal-wallet-response.md) | Optional | The PayPal Wallet response. |
+| `paypal` | [`PaypalWalletResponse \| undefined`](../../doc/models/paypal-wallet-response.md) | Optional | The PayPal Wallet response. |
 | `applePay` | [`ApplePayPaymentObject \| undefined`](../../doc/models/apple-pay-payment-object.md) | Optional | Information needed to pay using ApplePay. |
 | `googlePay` | [`GooglePayWalletResponse \| undefined`](../../doc/models/google-pay-wallet-response.md) | Optional | Google Pay Wallet payment data. |
 | `venmo` | [`VenmoWalletResponse \| undefined`](../../doc/models/venmo-wallet-response.md) | Optional | Venmo wallet response. |

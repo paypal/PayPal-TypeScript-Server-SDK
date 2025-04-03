@@ -1,21 +1,21 @@
 
-# UPC Type
+# Upc Type
 
 The Universal Product Code type.
 
 ## Enumeration
 
-`UPCType`
+`UpcType`
 
 ## Fields
 
 | Name |
 |  --- |
-| `UPCA` |
-| `UPCB` |
-| `UPCC` |
-| `UPCD` |
-| `UPCE` |
-| `UPC2` |
-| `UPC5` |
+| `UpcA` |
+| `UpcB` |
+| `UpcC` |
+| `UpcD` |
+| `UpcE` |
+| `Upc2` |
+| `Upc5` |
 

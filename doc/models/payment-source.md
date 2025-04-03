@@ -11,15 +11,15 @@ The payment source definition.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `card` | [`CardRequest \| undefined`](../../doc/models/card-request.md) | Optional | The payment card to use to fund a payment. Can be a credit or debit card.<blockquote><strong>Note:</strong> Passing card number, cvv and expiry directly via the API requires <a href="https://www.pcisecuritystandards.org/pci_security/completing_self_assessment"> PCI SAQ D compliance</a>. <br>*PayPal offers a mechanism by which you do not have to take on the <strong>PCI SAQ D</strong> burden by using hosted fields - refer to <a href="https://developer.paypal.com/docs/checkout/advanced/integrate/">this Integration Guide</a>*.</blockquote> |
+| `card` | [`CardRequest \| undefined`](../../doc/models/card-request.md) | Optional | The payment card to use to fund a payment. Can be a credit or debit card. Note: Passing card number, cvv and expiry directly via the API requires PCI SAQ D compliance. *PayPal offers a mechanism by which you do not have to take on the PCI SAQ D burden by using hosted fields - refer to this Integration Guide*. |
 | `token` | [`Token \| undefined`](../../doc/models/token.md) | Optional | The tokenized payment source to fund a payment. |
-| `paypal` | [`PayPalWallet \| undefined`](../../doc/models/pay-pal-wallet.md) | Optional | A resource that identifies a PayPal Wallet is used for payment. |
+| `paypal` | [`PaypalWallet \| undefined`](../../doc/models/paypal-wallet.md) | Optional | A resource that identifies a PayPal Wallet is used for payment. |
 | `bancontact` | [`BancontactPaymentRequest \| undefined`](../../doc/models/bancontact-payment-request.md) | Optional | Information needed to pay using Bancontact. |
-| `blik` | [`BLIKPaymentRequest \| undefined`](../../doc/models/blik-payment-request.md) | Optional | Information needed to pay using BLIK. |
-| `eps` | [`EPSPaymentRequest \| undefined`](../../doc/models/eps-payment-request.md) | Optional | Information needed to pay using eps. |
+| `blik` | [`BlikPaymentRequest \| undefined`](../../doc/models/blik-payment-request.md) | Optional | Information needed to pay using BLIK. |
+| `eps` | [`EpsPaymentRequest \| undefined`](../../doc/models/eps-payment-request.md) | Optional | Information needed to pay using eps. |
 | `giropay` | [`GiropayPaymentRequest \| undefined`](../../doc/models/giropay-payment-request.md) | Optional | Information needed to pay using giropay. |
-| `ideal` | [`IDEALPaymentRequest \| undefined`](../../doc/models/ideal-payment-request.md) | Optional | Information needed to pay using iDEAL. |
-| `mybank` | [`MyBankPaymentRequest \| undefined`](../../doc/models/my-bank-payment-request.md) | Optional | Information needed to pay using MyBank. |
+| `ideal` | [`IdealPaymentRequest \| undefined`](../../doc/models/ideal-payment-request.md) | Optional | Information needed to pay using iDEAL. |
+| `mybank` | [`MybankPaymentRequest \| undefined`](../../doc/models/mybank-payment-request.md) | Optional | Information needed to pay using MyBank. |
 | `p24` | [`P24PaymentRequest \| undefined`](../../doc/models/p24-payment-request.md) | Optional | Information needed to pay using P24 (Przelewy24). |
 | `sofort` | [`SofortPaymentRequest \| undefined`](../../doc/models/sofort-payment-request.md) | Optional | Information needed to pay using Sofort. |
 | `trustly` | [`TrustlyPaymentRequest \| undefined`](../../doc/models/trustly-payment-request.md) | Optional | Information needed to pay using Trustly. |
