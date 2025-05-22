@@ -9,7 +9,7 @@ import { CallbackEvents, callbackEventsSchema } from './callbackEvents';
 
 /** CallBack Configuration that the merchant can provide to PayPal/Venmo. */
 export interface CallbackConfiguration {
-  /** An array of callback events merchant can subscribe to for the corresponding callback url. The SHIPPING_ADDRESS callback event is required. */
+  /** An array of callback events merchant can subscribe to for the corresponding callback url. */
   callbackEvents: CallbackEvents[];
   /** Merchant provided CallBack url.PayPal/Venmo will use this url to call the merchant back when the events occur .PayPal/Venmo expects a secured url usually in the https format.merchant can append the cart id or other params part of the url as query or path params. */
   callbackUrl: string;

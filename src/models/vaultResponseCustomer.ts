@@ -12,7 +12,7 @@ export interface VaultResponseCustomer {
   id?: string;
   /** Merchants and partners may already have a data-store where their customer information is persisted. Use merchant_customer_id to associate the PayPal-generated customer.id to your representation of a customer. */
   merchantCustomerId?: string;
-  /** An array of request-related HATEOAS links. */
+  /** DEPRECATED. This field is DEPRECATED. */
   links?: unknown[];
 }
 

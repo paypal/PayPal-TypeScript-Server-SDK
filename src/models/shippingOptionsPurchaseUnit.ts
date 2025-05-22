@@ -9,6 +9,7 @@ import {
   AmountWithBreakdown,
   amountWithBreakdownSchema,
 } from './amountWithBreakdown';
+import { Item, itemSchema } from './item';
 import { ShippingOption, shippingOptionSchema } from './shippingOption';
 
 /** This would contain shipping option and amount data at purchase unit level. */
@@ -17,6 +18,8 @@ export interface ShippingOptionsPurchaseUnit {
   referenceId?: string;
   /** The total order amount with an optional breakdown that provides details, such as the total item amount, total tax amount, shipping, handling, insurance, and discounts, if any. If you specify `amount.breakdown`, the amount equals `item_total` plus `tax_total` plus `shipping` plus `handling` plus `insurance` minus `shipping_discount` minus discount. The amount must be a positive number. For listed of supported currencies and decimal precision, see the PayPal REST APIs Currency Codes. */
   amount?: AmountWithBreakdown;
+  /** An array of items that the customer purchases from the merchant. */
+  items?: Item[];
   /** An array of shipping options that the payee or merchant offers to the payer to ship or pick up their items. */
   shippingOptions?: ShippingOption[];
 }
@@ -25,6 +28,7 @@ export const shippingOptionsPurchaseUnitSchema: Schema<ShippingOptionsPurchaseUn
   {
     referenceId: ['reference_id', optional(string())],
     amount: ['amount', optional(lazy(() => amountWithBreakdownSchema))],
+    items: ['items', optional(array(lazy(() => itemSchema)))],
     shippingOptions: [
       'shipping_options',
       optional(array(lazy(() => shippingOptionSchema))),
