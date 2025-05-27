@@ -27,62 +27,6 @@ import { CustomError } from '../errors/customError';
 
 export class PaymentsController extends BaseController {
   /**
-   * Shows details for an authorized payment, by ID.
-   *
-   * @param authorizationId       The ID of the authorized payment for which to show details.
-   * @param paypalMockResponse    PayPal's REST API uses a request header to invoke negative testing in the
-   *                                        sandbox. This header configures the sandbox into a negative testing state
-   *                                        for transactions that include the merchant.
-   * @param paypalAuthAssertion   An API-caller-provided JSON Web Token (JWT) assertion that identifies the
-   *                                        merchant. For details, see [PayPal-Auth-Assertion](/docs/api/reference/api-
-   *                                        requests/#paypal-auth-assertion). Note:For three party transactions in
-   *                                        which a partner is managing the API calls on behalf of a merchant, the
-   *                                        partner must identify the merchant using either a PayPal-Auth-Assertion
-   *                                        header or an access token with target_subject.
-   * @return Response from the API call
-   */
-  async getAuthorizedPayment(
-    {
-      authorizationId,
-      paypalMockResponse,
-      paypalAuthAssertion,
-    }: {
-      authorizationId: string;
-      paypalMockResponse?: string;
-      paypalAuthAssertion?: string;
-    },
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<PaymentAuthorization>> {
-    const req = this.createRequest('GET');
-    const mapped = req.prepareArgs({
-      authorizationId: [authorizationId, string()],
-      paypalMockResponse: [paypalMockResponse, optional(string())],
-      paypalAuthAssertion: [paypalAuthAssertion, optional(string())],
-    });
-    req.header('PayPal-Mock-Response', mapped.paypalMockResponse);
-    req.header('PayPal-Auth-Assertion', mapped.paypalAuthAssertion);
-    req.appendTemplatePath`/v2/payments/authorizations/${mapped.authorizationId}`;
-    req.throwOn(
-      401,
-      CustomError,
-      'Authentication failed due to missing authorization header, or invalid authentication credentials.'
-    );
-    req.throwOn(
-      404,
-      CustomError,
-      'The request failed because the resource does not exist.'
-    );
-    req.throwOn(
-      500,
-      ApiError,
-      'The request failed because an internal server error occurred.'
-    );
-    req.defaultToError(CustomError, 'The error response.');
-    req.authenticate([{ oauth2: true }]);
-    return req.callAsJson(paymentAuthorizationSchema, requestOptions);
-  }
-
-  /**
    * Captures an authorized payment, by ID.
    *
    * @param authorizationId       The PayPal-generated ID for the authorized payment to
@@ -172,6 +116,57 @@ export class PaymentsController extends BaseController {
       422,
       CustomError,
       'The request failed because it is semantically incorrect or failed business validation.'
+    );
+    req.throwOn(
+      500,
+      ApiError,
+      'The request failed because an internal server error occurred.'
+    );
+    req.defaultToError(CustomError, 'The error response.');
+    req.authenticate([{ oauth2: true }]);
+    return req.callAsJson(capturedPaymentSchema, requestOptions);
+  }
+
+  /**
+   * Shows details for a captured payment, by ID.
+   *
+   * @param captureId            The PayPal-generated ID for the captured payment for which to show details.
+   * @param paypalMockResponse   PayPal's REST API uses a request header to invoke negative testing in the
+   *                                       sandbox. This header configures the sandbox into a negative testing state
+   *                                       for transactions that include the merchant.
+   * @return Response from the API call
+   */
+  async getCapturedPayment(
+    {
+      captureId,
+      paypalMockResponse,
+    }: {
+      captureId: string;
+      paypalMockResponse?: string;
+    },
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<CapturedPayment>> {
+    const req = this.createRequest('GET');
+    const mapped = req.prepareArgs({
+      captureId: [captureId, string()],
+      paypalMockResponse: [paypalMockResponse, optional(string())],
+    });
+    req.header('PayPal-Mock-Response', mapped.paypalMockResponse);
+    req.appendTemplatePath`/v2/payments/captures/${mapped.captureId}`;
+    req.throwOn(
+      401,
+      CustomError,
+      'Authentication failed due to missing authorization header, or invalid authentication credentials.'
+    );
+    req.throwOn(
+      403,
+      CustomError,
+      'The request failed because the caller has insufficient permissions.'
+    );
+    req.throwOn(
+      404,
+      CustomError,
+      'The request failed because the resource does not exist.'
     );
     req.throwOn(
       500,
@@ -364,57 +359,6 @@ export class PaymentsController extends BaseController {
   }
 
   /**
-   * Shows details for a captured payment, by ID.
-   *
-   * @param captureId            The PayPal-generated ID for the captured payment for which to show details.
-   * @param paypalMockResponse   PayPal's REST API uses a request header to invoke negative testing in the
-   *                                       sandbox. This header configures the sandbox into a negative testing state
-   *                                       for transactions that include the merchant.
-   * @return Response from the API call
-   */
-  async getCapturedPayment(
-    {
-      captureId,
-      paypalMockResponse,
-    }: {
-      captureId: string;
-      paypalMockResponse?: string;
-    },
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<CapturedPayment>> {
-    const req = this.createRequest('GET');
-    const mapped = req.prepareArgs({
-      captureId: [captureId, string()],
-      paypalMockResponse: [paypalMockResponse, optional(string())],
-    });
-    req.header('PayPal-Mock-Response', mapped.paypalMockResponse);
-    req.appendTemplatePath`/v2/payments/captures/${mapped.captureId}`;
-    req.throwOn(
-      401,
-      CustomError,
-      'Authentication failed due to missing authorization header, or invalid authentication credentials.'
-    );
-    req.throwOn(
-      403,
-      CustomError,
-      'The request failed because the caller has insufficient permissions.'
-    );
-    req.throwOn(
-      404,
-      CustomError,
-      'The request failed because the resource does not exist.'
-    );
-    req.throwOn(
-      500,
-      ApiError,
-      'The request failed because an internal server error occurred.'
-    );
-    req.defaultToError(CustomError, 'The error response.');
-    req.authenticate([{ oauth2: true }]);
-    return req.callAsJson(capturedPaymentSchema, requestOptions);
-  }
-
-  /**
    * Refunds a captured payment, by ID. For a full refund, include an empty payload in the JSON request
    * body. For a partial refund, include an amount object in the JSON request body.
    *
@@ -513,6 +457,62 @@ export class PaymentsController extends BaseController {
     req.defaultToError(CustomError, 'The error response.');
     req.authenticate([{ oauth2: true }]);
     return req.callAsJson(refundSchema, requestOptions);
+  }
+
+  /**
+   * Shows details for an authorized payment, by ID.
+   *
+   * @param authorizationId       The ID of the authorized payment for which to show details.
+   * @param paypalMockResponse    PayPal's REST API uses a request header to invoke negative testing in the
+   *                                        sandbox. This header configures the sandbox into a negative testing state
+   *                                        for transactions that include the merchant.
+   * @param paypalAuthAssertion   An API-caller-provided JSON Web Token (JWT) assertion that identifies the
+   *                                        merchant. For details, see [PayPal-Auth-Assertion](/docs/api/reference/api-
+   *                                        requests/#paypal-auth-assertion). Note:For three party transactions in
+   *                                        which a partner is managing the API calls on behalf of a merchant, the
+   *                                        partner must identify the merchant using either a PayPal-Auth-Assertion
+   *                                        header or an access token with target_subject.
+   * @return Response from the API call
+   */
+  async getAuthorizedPayment(
+    {
+      authorizationId,
+      paypalMockResponse,
+      paypalAuthAssertion,
+    }: {
+      authorizationId: string;
+      paypalMockResponse?: string;
+      paypalAuthAssertion?: string;
+    },
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<PaymentAuthorization>> {
+    const req = this.createRequest('GET');
+    const mapped = req.prepareArgs({
+      authorizationId: [authorizationId, string()],
+      paypalMockResponse: [paypalMockResponse, optional(string())],
+      paypalAuthAssertion: [paypalAuthAssertion, optional(string())],
+    });
+    req.header('PayPal-Mock-Response', mapped.paypalMockResponse);
+    req.header('PayPal-Auth-Assertion', mapped.paypalAuthAssertion);
+    req.appendTemplatePath`/v2/payments/authorizations/${mapped.authorizationId}`;
+    req.throwOn(
+      401,
+      CustomError,
+      'Authentication failed due to missing authorization header, or invalid authentication credentials.'
+    );
+    req.throwOn(
+      404,
+      CustomError,
+      'The request failed because the resource does not exist.'
+    );
+    req.throwOn(
+      500,
+      ApiError,
+      'The request failed because an internal server error occurred.'
+    );
+    req.defaultToError(CustomError, 'The error response.');
+    req.authenticate([{ oauth2: true }]);
+    return req.callAsJson(paymentAuthorizationSchema, requestOptions);
   }
 
   /**

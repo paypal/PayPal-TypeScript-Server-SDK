@@ -12,7 +12,7 @@ The card network or brand. Applies to credit, debit, gift, and payment cards.
 | Name | Description |
 |  --- | --- |
 | `Visa` | Visa card. |
-| `Mastercard` | Mastecard card. |
+| `Mastercard` | Mastercard card. |
 | `Discover` | Discover card. |
 | `Amex` | American Express card. |
 | `Solo` | Solo debit card. |

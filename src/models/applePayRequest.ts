@@ -14,6 +14,10 @@ import {
   applePayDecryptedTokenDataSchema,
 } from './applePayDecryptedTokenData';
 import {
+  ApplePayExperienceContext,
+  applePayExperienceContextSchema,
+} from './applePayExperienceContext';
+import {
   CardStoredCredential,
   cardStoredCredentialSchema,
 } from './cardStoredCredential';
@@ -37,6 +41,8 @@ export interface ApplePayRequest {
   vaultId?: string;
   /** Additional attributes associated with apple pay. */
   attributes?: ApplePayAttributes;
+  /** Customizes the payer experience during the approval process for the payment. */
+  experienceContext?: ApplePayExperienceContext;
 }
 
 export const applePayRequestSchema: Schema<ApplePayRequest> = object({
@@ -54,4 +60,8 @@ export const applePayRequestSchema: Schema<ApplePayRequest> = object({
   ],
   vaultId: ['vault_id', optional(string())],
   attributes: ['attributes', optional(lazy(() => applePayAttributesSchema))],
+  experienceContext: [
+    'experience_context',
+    optional(lazy(() => applePayExperienceContextSchema)),
+  ],
 });

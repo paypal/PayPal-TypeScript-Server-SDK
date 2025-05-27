@@ -11,6 +11,10 @@ import {
   googlePayDecryptedTokenDataSchema,
 } from './googlePayDecryptedTokenData';
 import {
+  GooglePayExperienceContext,
+  googlePayExperienceContextSchema,
+} from './googlePayExperienceContext';
+import {
   GooglePayRequestCard,
   googlePayRequestCardSchema,
 } from './googlePayRequestCard';
@@ -33,6 +37,8 @@ export interface GooglePayRequest {
   decryptedToken?: GooglePayDecryptedTokenData;
   /** Information about cardholder possession validation and cardholder identification and verifications (ID&V). */
   assuranceDetails?: AssuranceDetails;
+  /** Customizes the payer experience during the approval process for the payment. */
+  experienceContext?: GooglePayExperienceContext;
 }
 
 export const googlePayRequestSchema: Schema<GooglePayRequest> = object({
@@ -50,5 +56,9 @@ export const googlePayRequestSchema: Schema<GooglePayRequest> = object({
   assuranceDetails: [
     'assurance_details',
     optional(lazy(() => assuranceDetailsSchema)),
+  ],
+  experienceContext: [
+    'experience_context',
+    optional(lazy(() => googlePayExperienceContextSchema)),
   ],
 });

@@ -22,6 +22,10 @@ import {
   paypalExperienceUserActionSchema,
 } from './paypalExperienceUserAction';
 import {
+  PaypalWalletContactPreference,
+  paypalWalletContactPreferenceSchema,
+} from './paypalWalletContactPreference';
+import {
   PaypalWalletContextShippingPreference,
   paypalWalletContextShippingPreferenceSchema,
 } from './paypalWalletContextShippingPreference';
@@ -34,6 +38,8 @@ export interface PaypalWalletExperienceContext {
   locale?: string;
   /** The location from which the shipping address is derived. */
   shippingPreference?: PaypalWalletContextShippingPreference;
+  /** The preference to display the contact information (buyer’s shipping email & phone number) on PayPal's checkout for easy merchant-buyer communication. */
+  contactPreference?: PaypalWalletContactPreference;
   /** Describes the URL. */
   returnUrl?: string;
   /** Describes the URL. */
@@ -55,6 +61,10 @@ export const paypalWalletExperienceContextSchema: Schema<PaypalWalletExperienceC
     shippingPreference: [
       'shipping_preference',
       optional(paypalWalletContextShippingPreferenceSchema),
+    ],
+    contactPreference: [
+      'contact_preference',
+      optional(paypalWalletContactPreferenceSchema),
     ],
     returnUrl: ['return_url', optional(string())],
     cancelUrl: ['cancel_url', optional(string())],

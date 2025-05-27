@@ -7,13 +7,13 @@ Represents the result of an API call, including response metadata and the return
 
 | Name | Type | Description |
 |  --- | --- | --- |
-| request | [`HttpRequest`](http-request.md) | Original request that resulted in this response. |
+| request | [`HttpRequest`](../doc/http-request.md) | Original request that resulted in this response. |
 | statusCode | `number` | Response status codee. |
 | headers | `Record<string, string>` | Response headers. |
 | result | `T` | Response data. |
 | body | `string \| Blob \| NodeJS.ReadableStream` | Original body from the response. |
 
-## Example Usage
+## Usage Example
 
 ```ts
 try {

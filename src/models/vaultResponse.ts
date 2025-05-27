@@ -15,7 +15,7 @@ export interface VaultResponse {
   id?: string;
   /** The vault status. */
   status?: VaultStatus;
-  /** The details about a customer in PayPal's system of record. */
+  /** This object represents a merchant’s customer, allowing them to store contact details, and track all payments associated with the same customer. */
   customer?: VaultCustomer;
   /** An array of request-related HATEOAS links. */
   links?: LinkDescription[];

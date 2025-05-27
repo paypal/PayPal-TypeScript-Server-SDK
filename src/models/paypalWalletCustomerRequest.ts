@@ -5,6 +5,7 @@
  */
 
 import { lazy, object, optional, Schema, string } from '../schema';
+import { Name, nameSchema } from './name';
 import { PhoneWithType, phoneWithTypeSchema } from './phoneWithType';
 
 export interface PaypalWalletCustomerRequest {
@@ -14,6 +15,8 @@ export interface PaypalWalletCustomerRequest {
   emailAddress?: string;
   /** The phone information. */
   phone?: PhoneWithType;
+  /** The name of the party. */
+  name?: Name;
   /** Merchants and partners may already have a data-store where their customer information is persisted. Use merchant_customer_id to associate the PayPal-generated customer.id to your representation of a customer. */
   merchantCustomerId?: string;
 }
@@ -23,6 +26,7 @@ export const paypalWalletCustomerRequestSchema: Schema<PaypalWalletCustomerReque
     id: ['id', optional(string())],
     emailAddress: ['email_address', optional(string())],
     phone: ['phone', optional(lazy(() => phoneWithTypeSchema))],
+    name: ['name', optional(lazy(() => nameSchema))],
     merchantCustomerId: ['merchant_customer_id', optional(string())],
   }
 );
