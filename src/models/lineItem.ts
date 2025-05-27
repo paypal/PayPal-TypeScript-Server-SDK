@@ -6,6 +6,7 @@
 
 import { lazy, object, optional, Schema, string } from '../schema';
 import { Money, moneySchema } from './money';
+import { OrderBillingPlan, orderBillingPlanSchema } from './orderBillingPlan';
 import {
   UniversalProductCode,
   universalProductCodeSchema,
@@ -27,6 +28,8 @@ export interface LineItem {
   imageUrl?: string;
   /** The Universal Product Code of the item. */
   upc?: UniversalProductCode;
+  /** Metadata for merchant-managed recurring billing plans. Valid only during the saved payment method token or billing agreement creation. */
+  billingPlan?: OrderBillingPlan;
   /** The currency and amount for a financial transaction, such as a balance or payment due. */
   unitAmount?: Money;
   /** The currency and amount for a financial transaction, such as a balance or payment due. */
@@ -49,6 +52,7 @@ export const lineItemSchema: Schema<LineItem> = object({
   url: ['url', optional(string())],
   imageUrl: ['image_url', optional(string())],
   upc: ['upc', optional(lazy(() => universalProductCodeSchema))],
+  billingPlan: ['billing_plan', optional(lazy(() => orderBillingPlanSchema))],
   unitAmount: ['unit_amount', optional(lazy(() => moneySchema))],
   tax: ['tax', optional(lazy(() => moneySchema))],
   commodityCode: ['commodity_code', optional(string())],

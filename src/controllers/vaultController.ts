@@ -31,6 +31,111 @@ import { CustomError } from '../errors/customError';
 
 export class VaultController extends BaseController {
   /**
+   * Delete the payment token associated with the payment token id.
+   *
+   * @param id ID of the payment token.
+   * @return Response from the API call
+   */
+  async deletePaymentToken(
+    id: string,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<void>> {
+    const req = this.createRequest('DELETE');
+    const mapped = req.prepareArgs({ id: [id, string()] });
+    req.appendTemplatePath`/v3/vault/payment-tokens/${mapped.id}`;
+    req.throwOn(
+      400,
+      CustomError,
+      'Request is not well-formed, syntactically incorrect, or violates schema.'
+    );
+    req.throwOn(
+      403,
+      CustomError,
+      'Authorization failed due to insufficient permissions.'
+    );
+    req.throwOn(500, CustomError, 'An internal server error has occurred.');
+    req.authenticate([{ oauth2: true }]);
+    return req.call(requestOptions);
+  }
+
+  /**
+   * Creates a Setup Token from the given payment source and adds it to the Vault of the associated
+   * customer.
+   *
+   * @param body              Setup Token creation with a instrument type optional
+   *                                                      financial instrument details and customer_id.
+   * @param paypalRequestId   The server stores keys for 3 hours.
+   * @return Response from the API call
+   */
+  async createSetupToken(
+    {
+      body,
+      paypalRequestId,
+    }: {
+      body: SetupTokenRequest;
+      paypalRequestId?: string;
+    },
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<SetupTokenResponse>> {
+    const req = this.createRequest('POST', '/v3/vault/setup-tokens');
+    const mapped = req.prepareArgs({
+      body: [body, setupTokenRequestSchema],
+      paypalRequestId: [paypalRequestId, optional(string())],
+    });
+    req.header('Content-Type', 'application/json');
+    req.header('PayPal-Request-Id', mapped.paypalRequestId);
+    req.json(mapped.body);
+    req.throwOn(
+      400,
+      CustomError,
+      'Request is not well-formed, syntactically incorrect, or violates schema.'
+    );
+    req.throwOn(
+      403,
+      CustomError,
+      'Authorization failed due to insufficient permissions.'
+    );
+    req.throwOn(
+      422,
+      CustomError,
+      'The requested action could not be performed, semantically incorrect, or failed business validation.'
+    );
+    req.throwOn(500, CustomError, 'An internal server error has occurred.');
+    req.authenticate([{ oauth2: true }]);
+    return req.callAsJson(setupTokenResponseSchema, requestOptions);
+  }
+
+  /**
+   * Returns a readable representation of temporarily vaulted payment source associated with the setup
+   * token id.
+   *
+   * @param id ID of the setup token.
+   * @return Response from the API call
+   */
+  async getSetupToken(
+    id: string,
+    requestOptions?: RequestOptions
+  ): Promise<ApiResponse<SetupTokenResponse>> {
+    const req = this.createRequest('GET');
+    const mapped = req.prepareArgs({ id: [id, string()] });
+    req.appendTemplatePath`/v3/vault/setup-tokens/${mapped.id}`;
+    req.throwOn(
+      403,
+      CustomError,
+      'Authorization failed due to insufficient permissions.'
+    );
+    req.throwOn(404, CustomError, 'The specified resource does not exist.');
+    req.throwOn(
+      422,
+      CustomError,
+      'The requested action could not be performed, semantically incorrect, or failed business validation.'
+    );
+    req.throwOn(500, CustomError, 'An internal server error has occurred.');
+    req.authenticate([{ oauth2: true }]);
+    return req.callAsJson(setupTokenResponseSchema, requestOptions);
+  }
+
+  /**
    * Creates a Payment Token from the given payment source and adds it to the Vault of the associated
    * customer.
    *
@@ -164,110 +269,5 @@ export class VaultController extends BaseController {
     req.throwOn(500, CustomError, 'An internal server error has occurred.');
     req.authenticate([{ oauth2: true }]);
     return req.callAsJson(paymentTokenResponseSchema, requestOptions);
-  }
-
-  /**
-   * Delete the payment token associated with the payment token id.
-   *
-   * @param id ID of the payment token.
-   * @return Response from the API call
-   */
-  async deletePaymentToken(
-    id: string,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<void>> {
-    const req = this.createRequest('DELETE');
-    const mapped = req.prepareArgs({ id: [id, string()] });
-    req.appendTemplatePath`/v3/vault/payment-tokens/${mapped.id}`;
-    req.throwOn(
-      400,
-      CustomError,
-      'Request is not well-formed, syntactically incorrect, or violates schema.'
-    );
-    req.throwOn(
-      403,
-      CustomError,
-      'Authorization failed due to insufficient permissions.'
-    );
-    req.throwOn(500, CustomError, 'An internal server error has occurred.');
-    req.authenticate([{ oauth2: true }]);
-    return req.call(requestOptions);
-  }
-
-  /**
-   * Creates a Setup Token from the given payment source and adds it to the Vault of the associated
-   * customer.
-   *
-   * @param body              Setup Token creation with a instrument type optional
-   *                                                      financial instrument details and customer_id.
-   * @param paypalRequestId   The server stores keys for 3 hours.
-   * @return Response from the API call
-   */
-  async createSetupToken(
-    {
-      body,
-      paypalRequestId,
-    }: {
-      body: SetupTokenRequest;
-      paypalRequestId?: string;
-    },
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<SetupTokenResponse>> {
-    const req = this.createRequest('POST', '/v3/vault/setup-tokens');
-    const mapped = req.prepareArgs({
-      body: [body, setupTokenRequestSchema],
-      paypalRequestId: [paypalRequestId, optional(string())],
-    });
-    req.header('Content-Type', 'application/json');
-    req.header('PayPal-Request-Id', mapped.paypalRequestId);
-    req.json(mapped.body);
-    req.throwOn(
-      400,
-      CustomError,
-      'Request is not well-formed, syntactically incorrect, or violates schema.'
-    );
-    req.throwOn(
-      403,
-      CustomError,
-      'Authorization failed due to insufficient permissions.'
-    );
-    req.throwOn(
-      422,
-      CustomError,
-      'The requested action could not be performed, semantically incorrect, or failed business validation.'
-    );
-    req.throwOn(500, CustomError, 'An internal server error has occurred.');
-    req.authenticate([{ oauth2: true }]);
-    return req.callAsJson(setupTokenResponseSchema, requestOptions);
-  }
-
-  /**
-   * Returns a readable representation of temporarily vaulted payment source associated with the setup
-   * token id.
-   *
-   * @param id ID of the setup token.
-   * @return Response from the API call
-   */
-  async getSetupToken(
-    id: string,
-    requestOptions?: RequestOptions
-  ): Promise<ApiResponse<SetupTokenResponse>> {
-    const req = this.createRequest('GET');
-    const mapped = req.prepareArgs({ id: [id, string()] });
-    req.appendTemplatePath`/v3/vault/setup-tokens/${mapped.id}`;
-    req.throwOn(
-      403,
-      CustomError,
-      'Authorization failed due to insufficient permissions.'
-    );
-    req.throwOn(404, CustomError, 'The specified resource does not exist.');
-    req.throwOn(
-      422,
-      CustomError,
-      'The requested action could not be performed, semantically incorrect, or failed business validation.'
-    );
-    req.throwOn(500, CustomError, 'An internal server error has occurred.');
-    req.authenticate([{ oauth2: true }]);
-    return req.callAsJson(setupTokenResponseSchema, requestOptions);
   }
 }

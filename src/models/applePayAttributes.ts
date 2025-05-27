@@ -13,7 +13,7 @@ import { VaultInstruction, vaultInstructionSchema } from './vaultInstruction';
 
 /** Additional attributes associated with apple pay. */
 export interface ApplePayAttributes {
-  /** The details about a customer in PayPal's system of record. */
+  /** This object represents a merchant’s customer, allowing them to store contact details, and track all payments associated with the same customer. */
   customer?: CustomerInformation;
   /** Base vaulting specification. The object can be extended for specific use cases within each payment_source that supports vaulting. */
   vault?: VaultInstruction;

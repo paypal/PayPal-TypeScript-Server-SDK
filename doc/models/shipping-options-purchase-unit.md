@@ -11,9 +11,10 @@ This would contain shipping option and amount data at purchase unit level.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `referenceId` | `string \| undefined` | Optional | The API caller-provided external ID for the purchase unit. Required for multiple purchase units when you must update the order through `PATCH`. If you omit this value and the order contains only one purchase unit, PayPal sets this value to `default`. Note: If there are multiple purchase units, reference_id is required for each purchase unit.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `256`, *Pattern*: `^.*$` |
+| `referenceId` | `string \| undefined` | Optional | The API caller-provided external ID for the purchase unit. Required for multiple purchase units when you must update the order through `PATCH`. If you omit this value and the order contains only one purchase unit, PayPal sets this value to `default`. Note: If there are multiple purchase units, reference_id is required for each purchase unit.<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `256`, *Pattern*: `^.*$` |
 | `amount` | [`AmountWithBreakdown \| undefined`](../../doc/models/amount-with-breakdown.md) | Optional | The total order amount with an optional breakdown that provides details, such as the total item amount, total tax amount, shipping, handling, insurance, and discounts, if any. If you specify `amount.breakdown`, the amount equals `item_total` plus `tax_total` plus `shipping` plus `handling` plus `insurance` minus `shipping_discount` minus discount. The amount must be a positive number. For listed of supported currencies and decimal precision, see the PayPal REST APIs Currency Codes. |
-| `shippingOptions` | [`ShippingOption[] \| undefined`](../../doc/models/shipping-option.md) | Optional | An array of shipping options that the payee or merchant offers to the payer to ship or pick up their items.<br>**Constraints**: *Minimum Items*: `1`, *Maximum Items*: `10` |
+| `items` | [`Item[] \| undefined`](../../doc/models/item.md) | Optional | An array of items that the customer purchases from the merchant. |
+| `shippingOptions` | [`ShippingOption[] \| undefined`](../../doc/models/shipping-option.md) | Optional | An array of shipping options that the payee or merchant offers to the payer to ship or pick up their items.<br><br>**Constraints**: *Minimum Items*: `1`, *Maximum Items*: `10` |
 
 ## Example (as JSON)
 
@@ -46,6 +47,40 @@ This would contain shipping option and amount data at purchase unit level.
       }
     }
   },
+  "items": [
+    {
+      "name": "name8",
+      "unit_amount": {
+        "currency_code": "currency_code2",
+        "value": "value8"
+      },
+      "tax": {
+        "currency_code": "currency_code0",
+        "value": "value6"
+      },
+      "quantity": "quantity4",
+      "description": "description2",
+      "sku": "sku6",
+      "url": "url2",
+      "category": "DONATION"
+    },
+    {
+      "name": "name8",
+      "unit_amount": {
+        "currency_code": "currency_code2",
+        "value": "value8"
+      },
+      "tax": {
+        "currency_code": "currency_code0",
+        "value": "value6"
+      },
+      "quantity": "quantity4",
+      "description": "description2",
+      "sku": "sku6",
+      "url": "url2",
+      "category": "DONATION"
+    }
+  ],
   "shipping_options": [
     {
       "id": "id8",

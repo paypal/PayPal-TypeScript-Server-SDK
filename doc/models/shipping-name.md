@@ -11,7 +11,7 @@ The name of the party.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `fullName` | `string \| undefined` | Optional | When the party is a person, the party's full name.<br>**Constraints**: *Maximum Length*: `300` |
+| `fullName` | `string \| undefined` | Optional | When the party is a person, the party's full name.<br><br>**Constraints**: *Maximum Length*: `300` |
 
 ## Example (as JSON)
 

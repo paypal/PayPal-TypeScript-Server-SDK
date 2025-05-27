@@ -16,7 +16,7 @@ import {
 export interface PaymentTokenResponse {
   /** The PayPal-generated ID for the vault token. */
   id?: string;
-  /** This object defines a customer in your system. Use it to manage customer profiles, save payment methods and contact details. */
+  /** Customer in merchant's or partner's system of records. */
   customer?: CustomerResponse;
   /** The vaulted payment method details. */
   paymentSource?: PaymentTokenResponsePaymentSource;

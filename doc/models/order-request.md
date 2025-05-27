@@ -13,7 +13,7 @@ The order request details.
 |  --- | --- | --- | --- |
 | `intent` | [`CheckoutPaymentIntent`](../../doc/models/checkout-payment-intent.md) | Required | The intent to either capture payment immediately or authorize a payment for an order after order creation. |
 | `payer` | [`Payer \| undefined`](../../doc/models/payer.md) | Optional | - |
-| `purchaseUnits` | [`PurchaseUnitRequest[]`](../../doc/models/purchase-unit-request.md) | Required | An array of purchase units. Each purchase unit establishes a contract between a payer and the payee. Each purchase unit represents either a full or partial order that the payer intends to purchase from the payee.<br>**Constraints**: *Minimum Items*: `1`, *Maximum Items*: `10` |
+| `purchaseUnits` | [`PurchaseUnitRequest[]`](../../doc/models/purchase-unit-request.md) | Required | An array of purchase units. Each purchase unit establishes a contract between a payer and the payee. Each purchase unit represents either a full or partial order that the payer intends to purchase from the payee.<br><br>**Constraints**: *Minimum Items*: `1`, *Maximum Items*: `10` |
 | `paymentSource` | [`PaymentSource \| undefined`](../../doc/models/payment-source.md) | Optional | The payment source definition. |
 | `applicationContext` | [`OrderApplicationContext \| undefined`](../../doc/models/order-application-context.md) | Optional | Customizes the payer experience during the approval process for the payment with PayPal. Note: Partners and Marketplaces might configure brand_name and shipping_preference during partner account setup, which overrides the request values. |
 
