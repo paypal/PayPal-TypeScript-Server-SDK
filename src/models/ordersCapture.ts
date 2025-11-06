@@ -12,28 +12,34 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { CaptureStatus, captureStatusSchema } from './captureStatus';
+} from '../schema.js';
+import { CaptureStatus, captureStatusSchema } from './captureStatus.js';
 import {
   CaptureStatusDetails,
   captureStatusDetailsSchema,
-} from './captureStatusDetails';
-import { DisbursementMode, disbursementModeSchema } from './disbursementMode';
-import { LinkDescription, linkDescriptionSchema } from './linkDescription';
-import { Money, moneySchema } from './money';
+} from './captureStatusDetails.js';
 import {
-  NetworkTransactionReference,
-  networkTransactionReferenceSchema,
-} from './networkTransactionReference';
+  DisbursementMode,
+  disbursementModeSchema,
+} from './disbursementMode.js';
+import { LinkDescription, linkDescriptionSchema } from './linkDescription.js';
+import { Money, moneySchema } from './money.js';
+import {
+  NetworkTransaction,
+  networkTransactionSchema,
+} from './networkTransaction.js';
 import {
   ProcessorResponse,
   processorResponseSchema,
-} from './processorResponse';
-import { SellerProtection, sellerProtectionSchema } from './sellerProtection';
+} from './processorResponse.js';
+import {
+  SellerProtection,
+  sellerProtectionSchema,
+} from './sellerProtection.js';
 import {
   SellerReceivableBreakdown,
   sellerReceivableBreakdownSchema,
-} from './sellerReceivableBreakdown';
+} from './sellerReceivableBreakdown.js';
 
 /** A captured payment. */
 export interface OrdersCapture {
@@ -50,7 +56,7 @@ export interface OrdersCapture {
   /** The API caller-provided external ID. Used to reconcile API caller-initiated transactions with PayPal transactions. Appears in transaction and settlement reports. */
   customId?: string;
   /** Reference values used by the card network to identify a transaction. */
-  networkTransactionReference?: NetworkTransactionReference;
+  networkTransactionReference?: NetworkTransaction;
   /** The level of protection offered as defined by [PayPal Seller Protection for Merchants](https://www.paypal.com/us/webapps/mpp/security/seller-protection). */
   sellerProtection?: SellerProtection;
   /** Indicates whether you can make additional captures against the authorized payment. Set to `true` if you do not intend to capture additional payments against the authorization. Set to `false` if you intend to capture additional payments against the authorization. */
@@ -81,7 +87,7 @@ export const ordersCaptureSchema: Schema<OrdersCapture> = object({
   customId: ['custom_id', optional(string())],
   networkTransactionReference: [
     'network_transaction_reference',
-    optional(lazy(() => networkTransactionReferenceSchema)),
+    optional(lazy(() => networkTransactionSchema)),
   ],
   sellerProtection: [
     'seller_protection',

@@ -35,5 +35,10 @@ The card network or brand. Applies to credit, debit, gift, and payment cards.
 | `Ge` | The GE Credit Union 3Point card payment network. |
 | `Synchrony` | The Synchrony Financial (SYF) payment network. |
 | `Eftpos` | The Electronic Fund Transfer At Point of Sale(EFTPOS) Debit card payment network. |
+| `CarteBancaire` | The Carte Bancaire payment network. |
+| `StarAccess` | The Star Access payment network. |
+| `Pulse` | The Pulse payment network. |
+| `Nyce` | The NYCE payment network. |
+| `Accel` | The Accel payment network. |
 | `Unknown` | UNKNOWN payment network. |
 

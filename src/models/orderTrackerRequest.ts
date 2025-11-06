@@ -12,9 +12,12 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { OrderTrackerItem, orderTrackerItemSchema } from './orderTrackerItem';
-import { ShipmentCarrier, shipmentCarrierSchema } from './shipmentCarrier';
+} from '../schema.js';
+import {
+  OrderTrackerItem,
+  orderTrackerItemSchema,
+} from './orderTrackerItem.js';
+import { ShipmentCarrier, shipmentCarrierSchema } from './shipmentCarrier.js';
 
 /** The tracking details of an order. */
 export interface OrderTrackerRequest {

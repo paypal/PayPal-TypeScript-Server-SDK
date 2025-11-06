@@ -12,29 +12,29 @@ import {
   Schema,
   string,
   unknown,
-} from '../schema';
+} from '../schema.js';
 import {
   AmountWithBreakdown,
   amountWithBreakdownSchema,
-} from './amountWithBreakdown';
-import { Item, itemSchema } from './item';
-import { PayeeBase, payeeBaseSchema } from './payeeBase';
+} from './amountWithBreakdown.js';
+import { Item, itemSchema } from './item.js';
+import { PayeeBase, payeeBaseSchema } from './payeeBase.js';
 import {
   PaymentCollection,
   paymentCollectionSchema,
-} from './paymentCollection';
+} from './paymentCollection.js';
 import {
   PaymentInstruction,
   paymentInstructionSchema,
-} from './paymentInstruction';
+} from './paymentInstruction.js';
 import {
   ShippingWithTrackingDetails,
   shippingWithTrackingDetailsSchema,
-} from './shippingWithTrackingDetails';
+} from './shippingWithTrackingDetails.js';
 import {
   SupplementaryData,
   supplementaryDataSchema,
-} from './supplementaryData';
+} from './supplementaryData.js';
 
 /** The purchase unit details. Used to capture required information for the payment contract. */
 export interface PurchaseUnit {

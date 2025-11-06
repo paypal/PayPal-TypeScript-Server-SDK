@@ -15,6 +15,8 @@ The following parameters are configurable for the API Client:
 The API client can be initialized as follows:
 
 ```ts
+import { Client, Environment, LogLevel } from '@paypal/paypal-server-sdk';
+
 const client = new Client({
   clientCredentialsAuthCredentials: {
     oAuthClientId: 'OAuthClientId',
@@ -33,17 +35,4 @@ const client = new Client({
   },
 });
 ```
-
-## PayPal Server SDK Client
-
-The gateway for the SDK. This class acts as a factory for the Controllers and also holds the configuration of the SDK.
-
-## Controllers
-
-| Name | Description |
-|  --- | --- |
-| orders | Gets OrdersController |
-| payments | Gets PaymentsController |
-| vault | Gets VaultController |
-| oAuthAuthorization | Gets OAuthAuthorizationController |
 

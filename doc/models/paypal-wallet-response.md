@@ -23,6 +23,7 @@ The PayPal Wallet response.
 | `address` | [`Address \| undefined`](../../doc/models/address.md) | Optional | The portable international postal address. Maps to [AddressValidationMetadata](https://github.com/googlei18n/libaddressinput/wiki/AddressValidationMetadata) and HTML 5.1 [Autofilling form controls: the autocomplete attribute](https://www.w3.org/TR/html51/sec-forms.html#autofilling-form-controls-the-autocomplete-attribute). |
 | `attributes` | [`PaypalWalletAttributesResponse \| undefined`](../../doc/models/paypal-wallet-attributes-response.md) | Optional | Additional attributes associated with the use of a PayPal Wallet. |
 | `storedCredential` | [`PaypalWalletStoredCredential \| undefined`](../../doc/models/paypal-wallet-stored-credential.md) | Optional | Provides additional details to process a payment using the PayPal wallet billing agreement or a vaulted payment method that has been stored or is intended to be stored. |
+| `experienceStatus` | [`ExperienceStatus \| undefined`](../../doc/models/experience-status.md) | Optional | This field indicates the status of PayPal's Checkout experience throughout the order lifecycle. The values reflect the current stage of the checkout process.<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `255`, *Pattern*: `^[A-Z_]+$` |
 
 ## Example (as JSON)
 

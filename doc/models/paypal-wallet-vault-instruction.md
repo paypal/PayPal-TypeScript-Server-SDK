@@ -1,6 +1,8 @@
 
 # Paypal Wallet Vault Instruction
 
+Resource consolidating common request and response attributes for vaulting PayPal Wallet.
+
 ## Structure
 
 `PaypalWalletVaultInstruction`
@@ -9,7 +11,6 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `storeInVault` | [`StoreInVaultInstruction \| undefined`](../../doc/models/store-in-vault-instruction.md) | Optional | Defines how and when the payment source gets vaulted.<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `255`, *Pattern*: `^[0-9A-Z_]+$` |
 | `description` | `string \| undefined` | Optional | The description displayed to PayPal consumer on the approval flow for PayPal, as well as on the PayPal payment token management experience on PayPal.com.<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `128` |
 | `usagePattern` | [`UsagePattern \| undefined`](../../doc/models/usage-pattern.md) | Optional | Expected business/pricing model for the billing agreement.<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `30` |
 | `usageType` | [`PaypalPaymentTokenUsageType`](../../doc/models/paypal-payment-token-usage-type.md) | Required | The usage type associated with the PayPal payment token.<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `255`, *Pattern*: `^[0-9A-Z_]+$` |
@@ -23,7 +24,6 @@
   "usage_type": "MERCHANT",
   "customer_type": "CONSUMER",
   "permit_multiple_payment_tokens": false,
-  "store_in_vault": "ON_SUCCESS",
   "description": "description4",
   "usage_pattern": "UNSCHEDULED_PREPAID"
 }

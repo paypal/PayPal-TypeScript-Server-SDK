@@ -9,11 +9,11 @@ The phone type.
 
 ## Fields
 
-| Name |
-|  --- |
-| `Fax` |
-| `Home` |
-| `Mobile` |
-| `Other` |
-| `Pager` |
+| Name | Description |
+|  --- | --- |
+| `Fax` | Fax number. |
+| `Home` | Home phone number. |
+| `Mobile` | Mobile phone number. |
+| `Other` | Other phone number. |
+| `Pager` | Pager number. |
 
