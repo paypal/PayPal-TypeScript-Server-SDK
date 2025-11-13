@@ -18,7 +18,7 @@ A resource representing a request to vault PayPal Wallet.
 | `usageType` | [`PaypalPaymentTokenUsageType \| undefined`](../../doc/models/paypal-payment-token-usage-type.md) | Optional | The usage type associated with a digital wallet payment token.<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `255`, *Pattern*: `^[0-9A-Z_]+$` |
 | `customerType` | [`PaypalPaymentTokenCustomerType \| undefined`](../../doc/models/paypal-payment-token-customer-type.md) | Optional | The customer type associated with a digital wallet payment token. This is to indicate whether the customer acting on the merchant / platform is either a business or a consumer.<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `255`, *Pattern*: `^[0-9A-Z_]+$` |
 | `billingPlan` | [`Plan \| undefined`](../../doc/models/plan.md) | Optional | The merchant level Recurring Billing plan metadata for the Billing Agreement. |
-| `experienceContext` | [`VaultExperienceContext \| undefined`](../../doc/models/vault-experience-context.md) | Optional | Customizes the Vault creation flow experience for your customers. |
+| `experienceContext` | [`VaultExperienceContext \| undefined`](../../doc/models/vault-experience-context.md) | Optional | A resource representing an experience context of vault PayPal Wallet. |
 
 ## Example (as JSON)
 
@@ -31,6 +31,7 @@ A resource representing a request to vault PayPal Wallet.
     "name": {
       "full_name": "full_name6"
     },
+    "email_address": "email_address2",
     "phone_number": {
       "country_code": "country_code2",
       "national_number": "national_number6"

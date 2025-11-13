@@ -12,28 +12,34 @@ import {
   optional,
   Schema,
   string,
-} from '../schema';
-import { CaptureStatus, captureStatusSchema } from './captureStatus';
+} from '../schema.js';
+import { CaptureStatus, captureStatusSchema } from './captureStatus.js';
 import {
   CaptureStatusDetails,
   captureStatusDetailsSchema,
-} from './captureStatusDetails';
-import { DisbursementMode, disbursementModeSchema } from './disbursementMode';
-import { LinkDescription, linkDescriptionSchema } from './linkDescription';
-import { Money, moneySchema } from './money';
+} from './captureStatusDetails.js';
 import {
-  NetworkTransactionReference,
-  networkTransactionReferenceSchema,
-} from './networkTransactionReference';
+  DisbursementMode,
+  disbursementModeSchema,
+} from './disbursementMode.js';
+import { LinkDescription, linkDescriptionSchema } from './linkDescription.js';
+import { Money, moneySchema } from './money.js';
 import {
-  PaymentsProcessorResponse,
-  paymentsProcessorResponseSchema,
-} from './paymentsProcessorResponse';
-import { SellerProtection, sellerProtectionSchema } from './sellerProtection';
+  NetworkTransaction,
+  networkTransactionSchema,
+} from './networkTransaction.js';
+import {
+  ProcessorResponse,
+  processorResponseSchema,
+} from './processorResponse.js';
+import {
+  SellerProtection,
+  sellerProtectionSchema,
+} from './sellerProtection.js';
 import {
   SellerReceivableBreakdown,
   sellerReceivableBreakdownSchema,
-} from './sellerReceivableBreakdown';
+} from './sellerReceivableBreakdown.js';
 
 /** A captured payment. */
 export interface PaymentsCapture {
@@ -50,7 +56,7 @@ export interface PaymentsCapture {
   /** The API caller-provided external ID. Used to reconcile API caller-initiated transactions with PayPal transactions. Appears in transaction and settlement reports. */
   customId?: string;
   /** Reference values used by the card network to identify a transaction. */
-  networkTransactionReference?: NetworkTransactionReference;
+  networkTransactionReference?: NetworkTransaction;
   /** The level of protection offered as defined by [PayPal Seller Protection for Merchants](https://www.paypal.com/us/webapps/mpp/security/seller-protection). */
   sellerProtection?: SellerProtection;
   /** Indicates whether you can make additional captures against the authorized payment. Set to `true` if you do not intend to capture additional payments against the authorization. Set to `false` if you intend to capture additional payments against the authorization. */
@@ -62,7 +68,7 @@ export interface PaymentsCapture {
   /** An array of related [HATEOAS links](/docs/api/reference/api-responses/#hateoas-links). */
   links?: LinkDescription[];
   /** The processor response information for payment requests, such as direct credit card transactions. */
-  processorResponse?: PaymentsProcessorResponse;
+  processorResponse?: ProcessorResponse;
   /** The date and time, in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6). Seconds are required while fractional seconds are optional. Note: The regular expression provides guidance but does not reject all invalid dates. */
   createTime?: string;
   /** The date and time, in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6). Seconds are required while fractional seconds are optional. Note: The regular expression provides guidance but does not reject all invalid dates. */
@@ -81,7 +87,7 @@ export const paymentsCaptureSchema: Schema<PaymentsCapture> = object({
   customId: ['custom_id', optional(string())],
   networkTransactionReference: [
     'network_transaction_reference',
-    optional(lazy(() => networkTransactionReferenceSchema)),
+    optional(lazy(() => networkTransactionSchema)),
   ],
   sellerProtection: [
     'seller_protection',
@@ -96,7 +102,7 @@ export const paymentsCaptureSchema: Schema<PaymentsCapture> = object({
   links: ['links', optional(array(lazy(() => linkDescriptionSchema)))],
   processorResponse: [
     'processor_response',
-    optional(lazy(() => paymentsProcessorResponseSchema)),
+    optional(lazy(() => processorResponseSchema)),
   ],
   createTime: ['create_time', optional(string())],
   updateTime: ['update_time', optional(string())],

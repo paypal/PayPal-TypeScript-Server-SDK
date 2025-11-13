@@ -8,10 +8,10 @@ import {
   compositeAuthenticationProvider,
   OAuthConfiguration,
   requestAuthenticationProvider,
-} from './authentication';
-import { ClientCredentialsAuthManager } from './clientCredentialsAuthManager';
-import { Configuration } from './configuration';
-import { OAuthToken } from './models/oAuthToken';
+} from './authentication.js';
+import { ClientCredentialsAuthManager } from './clientCredentialsAuthManager.js';
+import { Configuration } from './configuration.js';
+import { OAuthToken } from './models/oAuthToken.js';
 
 export function createAuthProviderFromConfig(
   config: Partial<Configuration>,

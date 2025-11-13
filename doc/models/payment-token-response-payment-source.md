@@ -12,8 +12,8 @@ The vaulted payment method details.
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `card` | [`CardPaymentTokenEntity \| undefined`](../../doc/models/card-payment-token-entity.md) | Optional | Full representation of a Card Payment Token including network token. |
-| `paypal` | [`PaypalPaymentToken \| undefined`](../../doc/models/paypal-payment-token.md) | Optional | - |
-| `venmo` | [`VenmoPaymentToken \| undefined`](../../doc/models/venmo-payment-token.md) | Optional | - |
+| `paypal` | [`PaypalPaymentToken \| undefined`](../../doc/models/paypal-payment-token.md) | Optional | Full representation of a PayPal Payment Token. |
+| `venmo` | [`VenmoPaymentToken \| undefined`](../../doc/models/venmo-payment-token.md) | Optional | Full representation of a Venmo Payment Token. |
 | `applePay` | [`ApplePayPaymentToken \| undefined`](../../doc/models/apple-pay-payment-token.md) | Optional | A resource representing a response for Apple Pay. |
 
 ## Example (as JSON)
@@ -23,7 +23,7 @@ The vaulted payment method details.
   "card": {
     "name": "name6",
     "last_digits": "last_digits0",
-    "brand": "RUPAY",
+    "brand": "CB_NATIONALE",
     "expiry": "expiry4",
     "billing_address": {
       "address_line_1": "address_line_12",
@@ -41,6 +41,7 @@ The vaulted payment method details.
       "name": {
         "full_name": "full_name6"
       },
+      "email_address": "email_address2",
       "phone_number": {
         "country_code": "country_code2",
         "national_number": "national_number6"
@@ -65,6 +66,7 @@ The vaulted payment method details.
       "name": {
         "full_name": "full_name6"
       },
+      "email_address": "email_address2",
       "phone_number": {
         "country_code": "country_code2",
         "national_number": "national_number6"
@@ -87,7 +89,7 @@ The vaulted payment method details.
       "name": "name6",
       "last_digits": "last_digits0",
       "type": "UNKNOWN",
-      "brand": "RUPAY",
+      "brand": "CB_NATIONALE",
       "billing_address": {
         "address_line_1": "address_line_12",
         "address_line_2": "address_line_28",
