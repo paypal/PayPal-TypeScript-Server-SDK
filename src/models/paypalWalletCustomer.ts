@@ -22,10 +22,13 @@ export interface PaypalWalletCustomer {
   merchantCustomerId?: string;
 }
 
-export const paypalWalletCustomerSchema: Schema<PaypalWalletCustomer> = object({
-  id: ['id', optional(string())],
-  emailAddress: ['email_address', optional(string())],
-  phone: ['phone', optional(lazy(() => phoneWithTypeSchema))],
-  name: ['name', optional(lazy(() => nameSchema))],
-  merchantCustomerId: ['merchant_customer_id', optional(string())],
-});
+export const paypalWalletCustomerSchema: Schema<PaypalWalletCustomer> = lazy(
+  () =>
+    object({
+      id: ['id', optional(string())],
+      emailAddress: ['email_address', optional(string())],
+      phone: ['phone', optional(phoneWithTypeSchema)],
+      name: ['name', optional(nameSchema)],
+      merchantCustomerId: ['merchant_customer_id', optional(string())],
+    })
+);

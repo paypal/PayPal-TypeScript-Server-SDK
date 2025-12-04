@@ -22,9 +22,10 @@ export interface PaymentTokenRequestPaymentSource {
   token?: VaultTokenRequest;
 }
 
-export const paymentTokenRequestPaymentSourceSchema: Schema<PaymentTokenRequestPaymentSource> = object(
-  {
-    card: ['card', optional(lazy(() => paymentTokenRequestCardSchema))],
-    token: ['token', optional(lazy(() => vaultTokenRequestSchema))],
-  }
+export const paymentTokenRequestPaymentSourceSchema: Schema<PaymentTokenRequestPaymentSource> = lazy(
+  () =>
+    object({
+      card: ['card', optional(paymentTokenRequestCardSchema)],
+      token: ['token', optional(vaultTokenRequestSchema)],
+    })
 );

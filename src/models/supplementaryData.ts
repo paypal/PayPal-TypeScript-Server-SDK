@@ -22,7 +22,9 @@ export interface SupplementaryData {
   risk?: RiskSupplementaryData;
 }
 
-export const supplementaryDataSchema: Schema<SupplementaryData> = object({
-  card: ['card', optional(lazy(() => cardSupplementaryDataSchema))],
-  risk: ['risk', optional(lazy(() => riskSupplementaryDataSchema))],
-});
+export const supplementaryDataSchema: Schema<SupplementaryData> = lazy(() =>
+  object({
+    card: ['card', optional(cardSupplementaryDataSchema)],
+    risk: ['risk', optional(riskSupplementaryDataSchema)],
+  })
+);

@@ -31,19 +31,17 @@ export interface SubscriptionTransactionDetails {
   time: string;
 }
 
-export const subscriptionTransactionDetailsSchema: Schema<SubscriptionTransactionDetails> = object(
-  {
-    status: ['status', optional(captureStatusSchema)],
-    id: ['id', string()],
-    amountWithBreakdown: [
-      'amount_with_breakdown',
-      lazy(() => subscriptionAmountWithBreakdownSchema),
-    ],
-    payerName: [
-      'payer_name',
-      optional(lazy(() => subscriptionPayerNameSchema)),
-    ],
-    payerEmail: ['payer_email', optional(string())],
-    time: ['time', string()],
-  }
+export const subscriptionTransactionDetailsSchema: Schema<SubscriptionTransactionDetails> = lazy(
+  () =>
+    object({
+      status: ['status', optional(captureStatusSchema)],
+      id: ['id', string()],
+      amountWithBreakdown: [
+        'amount_with_breakdown',
+        subscriptionAmountWithBreakdownSchema,
+      ],
+      payerName: ['payer_name', optional(subscriptionPayerNameSchema)],
+      payerEmail: ['payer_email', optional(string())],
+      time: ['time', string()],
+    })
 );

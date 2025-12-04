@@ -41,24 +41,23 @@ export interface VaultVenmoRequest {
   experienceContext?: VenmoExperienceContext;
 }
 
-export const vaultVenmoRequestSchema: Schema<VaultVenmoRequest> = object({
-  description: ['description', optional(string())],
-  usagePattern: ['usage_pattern', optional(usagePatternSchema)],
-  shipping: [
-    'shipping',
-    optional(lazy(() => vaultedDigitalWalletShippingDetailsSchema)),
-  ],
-  permitMultiplePaymentTokens: [
-    'permit_multiple_payment_tokens',
-    optional(boolean()),
-  ],
-  usageType: ['usage_type', optional(paypalPaymentTokenUsageTypeSchema)],
-  customerType: [
-    'customer_type',
-    optional(paypalPaymentTokenCustomerTypeSchema),
-  ],
-  experienceContext: [
-    'experience_context',
-    optional(lazy(() => venmoExperienceContextSchema)),
-  ],
-});
+export const vaultVenmoRequestSchema: Schema<VaultVenmoRequest> = lazy(() =>
+  object({
+    description: ['description', optional(string())],
+    usagePattern: ['usage_pattern', optional(usagePatternSchema)],
+    shipping: ['shipping', optional(vaultedDigitalWalletShippingDetailsSchema)],
+    permitMultiplePaymentTokens: [
+      'permit_multiple_payment_tokens',
+      optional(boolean()),
+    ],
+    usageType: ['usage_type', optional(paypalPaymentTokenUsageTypeSchema)],
+    customerType: [
+      'customer_type',
+      optional(paypalPaymentTokenCustomerTypeSchema),
+    ],
+    experienceContext: [
+      'experience_context',
+      optional(venmoExperienceContextSchema),
+    ],
+  })
+);

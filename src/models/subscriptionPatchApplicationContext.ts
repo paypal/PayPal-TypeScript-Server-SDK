@@ -27,19 +27,17 @@ export interface SubscriptionPatchApplicationContext {
   cancelUrl: string;
 }
 
-export const subscriptionPatchApplicationContextSchema: Schema<SubscriptionPatchApplicationContext> = object(
-  {
-    brandName: ['brand_name', optional(string())],
-    locale: ['locale', optional(string())],
-    shippingPreference: [
-      'shipping_preference',
-      optional(experienceContextShippingPreferenceSchema),
-    ],
-    paymentMethod: [
-      'payment_method',
-      optional(lazy(() => paymentMethodSchema)),
-    ],
-    returnUrl: ['return_url', string()],
-    cancelUrl: ['cancel_url', string()],
-  }
+export const subscriptionPatchApplicationContextSchema: Schema<SubscriptionPatchApplicationContext> = lazy(
+  () =>
+    object({
+      brandName: ['brand_name', optional(string())],
+      locale: ['locale', optional(string())],
+      shippingPreference: [
+        'shipping_preference',
+        optional(experienceContextShippingPreferenceSchema),
+      ],
+      paymentMethod: ['payment_method', optional(paymentMethodSchema)],
+      returnUrl: ['return_url', string()],
+      cancelUrl: ['cancel_url', string()],
+    })
 );

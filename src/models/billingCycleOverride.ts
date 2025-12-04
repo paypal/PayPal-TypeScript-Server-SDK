@@ -20,11 +20,14 @@ export interface BillingCycleOverride {
   totalCycles?: number;
 }
 
-export const billingCycleOverrideSchema: Schema<BillingCycleOverride> = object({
-  pricingScheme: [
-    'pricing_scheme',
-    optional(lazy(() => subscriptionPricingSchemeSchema)),
-  ],
-  sequence: ['sequence', number()],
-  totalCycles: ['total_cycles', optional(number())],
-});
+export const billingCycleOverrideSchema: Schema<BillingCycleOverride> = lazy(
+  () =>
+    object({
+      pricingScheme: [
+        'pricing_scheme',
+        optional(subscriptionPricingSchemeSchema),
+      ],
+      sequence: ['sequence', number()],
+      totalCycles: ['total_cycles', optional(number())],
+    })
+);

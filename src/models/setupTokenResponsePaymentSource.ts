@@ -27,10 +27,11 @@ export interface SetupTokenResponsePaymentSource {
   venmo?: VenmoPaymentToken;
 }
 
-export const setupTokenResponsePaymentSourceSchema: Schema<SetupTokenResponsePaymentSource> = object(
-  {
-    card: ['card', optional(lazy(() => setupTokenResponseCardSchema))],
-    paypal: ['paypal', optional(lazy(() => paypalPaymentTokenSchema))],
-    venmo: ['venmo', optional(lazy(() => venmoPaymentTokenSchema))],
-  }
+export const setupTokenResponsePaymentSourceSchema: Schema<SetupTokenResponsePaymentSource> = lazy(
+  () =>
+    object({
+      card: ['card', optional(setupTokenResponseCardSchema)],
+      paypal: ['paypal', optional(paypalPaymentTokenSchema)],
+      venmo: ['venmo', optional(venmoPaymentTokenSchema)],
+    })
 );

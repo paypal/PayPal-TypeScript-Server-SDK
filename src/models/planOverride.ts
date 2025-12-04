@@ -25,14 +25,16 @@ export interface PlanOverride {
   taxes?: TaxesOverride;
 }
 
-export const planOverrideSchema: Schema<PlanOverride> = object({
-  billingCycles: [
-    'billing_cycles',
-    optional(array(lazy(() => billingCycleOverrideSchema))),
-  ],
-  paymentPreferences: [
-    'payment_preferences',
-    optional(lazy(() => paymentPreferencesOverrideSchema)),
-  ],
-  taxes: ['taxes', optional(lazy(() => taxesOverrideSchema))],
-});
+export const planOverrideSchema: Schema<PlanOverride> = lazy(() =>
+  object({
+    billingCycles: [
+      'billing_cycles',
+      optional(array(billingCycleOverrideSchema)),
+    ],
+    paymentPreferences: [
+      'payment_preferences',
+      optional(paymentPreferencesOverrideSchema),
+    ],
+    taxes: ['taxes', optional(taxesOverrideSchema)],
+  })
+);

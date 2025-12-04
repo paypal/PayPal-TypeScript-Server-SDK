@@ -16,7 +16,9 @@ export interface PlatformFee {
   payee?: PayeeBase;
 }
 
-export const platformFeeSchema: Schema<PlatformFee> = object({
-  amount: ['amount', lazy(() => moneySchema)],
-  payee: ['payee', optional(lazy(() => payeeBaseSchema))],
-});
+export const platformFeeSchema: Schema<PlatformFee> = lazy(() =>
+  object({
+    amount: ['amount', moneySchema],
+    payee: ['payee', optional(payeeBaseSchema)],
+  })
+);

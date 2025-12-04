@@ -36,18 +36,16 @@ export interface SubscriptionCardRequest {
   attributes?: SubscriptionsCardAttributes;
 }
 
-export const subscriptionCardRequestSchema: Schema<SubscriptionCardRequest> = object(
-  {
-    name: ['name', optional(string())],
-    number: ['number', optional(string())],
-    expiry: ['expiry', optional(string())],
-    securityCode: ['security_code', optional(string())],
-    type: ['type', optional(cardTypeSchema)],
-    brand: ['brand', optional(subscriptionsCardBrandSchema)],
-    billingAddress: ['billing_address', optional(lazy(() => addressSchema))],
-    attributes: [
-      'attributes',
-      optional(lazy(() => subscriptionsCardAttributesSchema)),
-    ],
-  }
+export const subscriptionCardRequestSchema: Schema<SubscriptionCardRequest> = lazy(
+  () =>
+    object({
+      name: ['name', optional(string())],
+      number: ['number', optional(string())],
+      expiry: ['expiry', optional(string())],
+      securityCode: ['security_code', optional(string())],
+      type: ['type', optional(cardTypeSchema)],
+      brand: ['brand', optional(subscriptionsCardBrandSchema)],
+      billingAddress: ['billing_address', optional(addressSchema)],
+      attributes: ['attributes', optional(subscriptionsCardAttributesSchema)],
+    })
 );

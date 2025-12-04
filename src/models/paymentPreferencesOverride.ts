@@ -23,14 +23,18 @@ export interface PaymentPreferencesOverride {
   paymentFailureThreshold?: number;
 }
 
-export const paymentPreferencesOverrideSchema: Schema<PaymentPreferencesOverride> = object(
-  {
-    autoBillOutstanding: ['auto_bill_outstanding', optional(boolean())],
-    setupFee: ['setup_fee', optional(lazy(() => moneySchema))],
-    setupFeeFailureAction: [
-      'setup_fee_failure_action',
-      optional(setupFeeFailureActionSchema),
-    ],
-    paymentFailureThreshold: ['payment_failure_threshold', optional(number())],
-  }
+export const paymentPreferencesOverrideSchema: Schema<PaymentPreferencesOverride> = lazy(
+  () =>
+    object({
+      autoBillOutstanding: ['auto_bill_outstanding', optional(boolean())],
+      setupFee: ['setup_fee', optional(moneySchema)],
+      setupFeeFailureAction: [
+        'setup_fee_failure_action',
+        optional(setupFeeFailureActionSchema),
+      ],
+      paymentFailureThreshold: [
+        'payment_failure_threshold',
+        optional(number()),
+      ],
+    })
 );

@@ -57,27 +57,30 @@ export interface PaypalWalletResponse {
   experienceStatus?: ExperienceStatus;
 }
 
-export const paypalWalletResponseSchema: Schema<PaypalWalletResponse> = object({
-  emailAddress: ['email_address', optional(string())],
-  accountId: ['account_id', optional(string())],
-  accountStatus: [
-    'account_status',
-    optional(paypalWalletAccountVerificationStatusSchema),
-  ],
-  name: ['name', optional(lazy(() => nameSchema))],
-  phoneType: ['phone_type', optional(phoneTypeSchema)],
-  phoneNumber: ['phone_number', optional(lazy(() => phoneNumberSchema))],
-  birthDate: ['birth_date', optional(string())],
-  businessName: ['business_name', optional(string())],
-  taxInfo: ['tax_info', optional(lazy(() => taxInfoSchema))],
-  address: ['address', optional(lazy(() => addressSchema))],
-  attributes: [
-    'attributes',
-    optional(lazy(() => paypalWalletAttributesResponseSchema)),
-  ],
-  storedCredential: [
-    'stored_credential',
-    optional(lazy(() => paypalWalletStoredCredentialSchema)),
-  ],
-  experienceStatus: ['experience_status', optional(experienceStatusSchema)],
-});
+export const paypalWalletResponseSchema: Schema<PaypalWalletResponse> = lazy(
+  () =>
+    object({
+      emailAddress: ['email_address', optional(string())],
+      accountId: ['account_id', optional(string())],
+      accountStatus: [
+        'account_status',
+        optional(paypalWalletAccountVerificationStatusSchema),
+      ],
+      name: ['name', optional(nameSchema)],
+      phoneType: ['phone_type', optional(phoneTypeSchema)],
+      phoneNumber: ['phone_number', optional(phoneNumberSchema)],
+      birthDate: ['birth_date', optional(string())],
+      businessName: ['business_name', optional(string())],
+      taxInfo: ['tax_info', optional(taxInfoSchema)],
+      address: ['address', optional(addressSchema)],
+      attributes: [
+        'attributes',
+        optional(paypalWalletAttributesResponseSchema),
+      ],
+      storedCredential: [
+        'stored_credential',
+        optional(paypalWalletStoredCredentialSchema),
+      ],
+      experienceStatus: ['experience_status', optional(experienceStatusSchema)],
+    })
+);

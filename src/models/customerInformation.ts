@@ -20,9 +20,11 @@ export interface CustomerInformation {
   name?: Name;
 }
 
-export const customerInformationSchema: Schema<CustomerInformation> = object({
-  id: ['id', optional(string())],
-  emailAddress: ['email_address', optional(string())],
-  phone: ['phone', optional(lazy(() => phoneWithTypeSchema))],
-  name: ['name', optional(lazy(() => nameSchema))],
-});
+export const customerInformationSchema: Schema<CustomerInformation> = lazy(() =>
+  object({
+    id: ['id', optional(string())],
+    emailAddress: ['email_address', optional(string())],
+    phone: ['phone', optional(phoneWithTypeSchema)],
+    name: ['name', optional(nameSchema)],
+  })
+);

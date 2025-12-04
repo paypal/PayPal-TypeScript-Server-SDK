@@ -35,11 +35,13 @@ export interface OrderTrackerRequest {
   items?: OrderTrackerItem[];
 }
 
-export const orderTrackerRequestSchema: Schema<OrderTrackerRequest> = object({
-  trackingNumber: ['tracking_number', optional(string())],
-  carrier: ['carrier', optional(shipmentCarrierSchema)],
-  carrierNameOther: ['carrier_name_other', optional(string())],
-  captureId: ['capture_id', string()],
-  notifyPayer: ['notify_payer', optional(boolean())],
-  items: ['items', optional(array(lazy(() => orderTrackerItemSchema)))],
-});
+export const orderTrackerRequestSchema: Schema<OrderTrackerRequest> = lazy(() =>
+  object({
+    trackingNumber: ['tracking_number', optional(string())],
+    carrier: ['carrier', optional(shipmentCarrierSchema)],
+    carrierNameOther: ['carrier_name_other', optional(string())],
+    captureId: ['capture_id', string()],
+    notifyPayer: ['notify_payer', optional(boolean())],
+    items: ['items', optional(array(orderTrackerItemSchema))],
+  })
+);

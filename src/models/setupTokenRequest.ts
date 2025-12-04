@@ -19,10 +19,9 @@ export interface SetupTokenRequest {
   paymentSource: SetupTokenRequestPaymentSource;
 }
 
-export const setupTokenRequestSchema: Schema<SetupTokenRequest> = object({
-  customer: ['customer', optional(lazy(() => customerSchema))],
-  paymentSource: [
-    'payment_source',
-    lazy(() => setupTokenRequestPaymentSourceSchema),
-  ],
-});
+export const setupTokenRequestSchema: Schema<SetupTokenRequest> = lazy(() =>
+  object({
+    customer: ['customer', optional(customerSchema)],
+    paymentSource: ['payment_source', setupTokenRequestPaymentSourceSchema],
+  })
+);

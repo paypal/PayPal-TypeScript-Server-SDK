@@ -28,15 +28,16 @@ export interface CustomerVaultPaymentTokensResponse {
   links?: LinkDescription[];
 }
 
-export const customerVaultPaymentTokensResponseSchema: Schema<CustomerVaultPaymentTokensResponse> = object(
-  {
-    totalItems: ['total_items', optional(number())],
-    totalPages: ['total_pages', optional(number())],
-    customer: ['customer', optional(lazy(() => vaultResponseCustomerSchema))],
-    paymentTokens: [
-      'payment_tokens',
-      optional(array(lazy(() => paymentTokenResponseSchema))),
-    ],
-    links: ['links', optional(array(lazy(() => linkDescriptionSchema)))],
-  }
+export const customerVaultPaymentTokensResponseSchema: Schema<CustomerVaultPaymentTokensResponse> = lazy(
+  () =>
+    object({
+      totalItems: ['total_items', optional(number())],
+      totalPages: ['total_pages', optional(number())],
+      customer: ['customer', optional(vaultResponseCustomerSchema)],
+      paymentTokens: [
+        'payment_tokens',
+        optional(array(paymentTokenResponseSchema)),
+      ],
+      links: ['links', optional(array(linkDescriptionSchema))],
+    })
 );

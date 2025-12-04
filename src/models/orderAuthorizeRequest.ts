@@ -16,11 +16,12 @@ export interface OrderAuthorizeRequest {
   paymentSource?: OrderAuthorizeRequestPaymentSource;
 }
 
-export const orderAuthorizeRequestSchema: Schema<OrderAuthorizeRequest> = object(
-  {
-    paymentSource: [
-      'payment_source',
-      optional(lazy(() => orderAuthorizeRequestPaymentSourceSchema)),
-    ],
-  }
+export const orderAuthorizeRequestSchema: Schema<OrderAuthorizeRequest> = lazy(
+  () =>
+    object({
+      paymentSource: [
+        'payment_source',
+        optional(orderAuthorizeRequestPaymentSourceSchema),
+      ],
+    })
 );

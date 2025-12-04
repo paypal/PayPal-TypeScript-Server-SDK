@@ -44,27 +44,28 @@ export interface VaultPaypalWalletRequest {
   experienceContext?: VaultExperienceContext;
 }
 
-export const vaultPaypalWalletRequestSchema: Schema<VaultPaypalWalletRequest> = object(
-  {
-    description: ['description', optional(string())],
-    usagePattern: ['usage_pattern', optional(usagePatternSchema)],
-    shipping: [
-      'shipping',
-      optional(lazy(() => vaultedDigitalWalletShippingDetailsSchema)),
-    ],
-    permitMultiplePaymentTokens: [
-      'permit_multiple_payment_tokens',
-      optional(boolean()),
-    ],
-    usageType: ['usage_type', optional(paypalPaymentTokenUsageTypeSchema)],
-    customerType: [
-      'customer_type',
-      optional(paypalPaymentTokenCustomerTypeSchema),
-    ],
-    billingPlan: ['billing_plan', optional(lazy(() => planSchema))],
-    experienceContext: [
-      'experience_context',
-      optional(lazy(() => vaultExperienceContextSchema)),
-    ],
-  }
+export const vaultPaypalWalletRequestSchema: Schema<VaultPaypalWalletRequest> = lazy(
+  () =>
+    object({
+      description: ['description', optional(string())],
+      usagePattern: ['usage_pattern', optional(usagePatternSchema)],
+      shipping: [
+        'shipping',
+        optional(vaultedDigitalWalletShippingDetailsSchema),
+      ],
+      permitMultiplePaymentTokens: [
+        'permit_multiple_payment_tokens',
+        optional(boolean()),
+      ],
+      usageType: ['usage_type', optional(paypalPaymentTokenUsageTypeSchema)],
+      customerType: [
+        'customer_type',
+        optional(paypalPaymentTokenCustomerTypeSchema),
+      ],
+      billingPlan: ['billing_plan', optional(planSchema)],
+      experienceContext: [
+        'experience_context',
+        optional(vaultExperienceContextSchema),
+      ],
+    })
 );

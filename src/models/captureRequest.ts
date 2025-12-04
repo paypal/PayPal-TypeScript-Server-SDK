@@ -27,14 +27,16 @@ export interface CaptureRequest {
   softDescriptor?: string;
 }
 
-export const captureRequestSchema: Schema<CaptureRequest> = object({
-  amount: ['amount', optional(lazy(() => moneySchema))],
-  invoiceId: ['invoice_id', optional(string())],
-  finalCapture: ['final_capture', optional(boolean())],
-  paymentInstruction: [
-    'payment_instruction',
-    optional(lazy(() => capturePaymentInstructionSchema)),
-  ],
-  noteToPayer: ['note_to_payer', optional(string())],
-  softDescriptor: ['soft_descriptor', optional(string())],
-});
+export const captureRequestSchema: Schema<CaptureRequest> = lazy(() =>
+  object({
+    amount: ['amount', optional(moneySchema)],
+    invoiceId: ['invoice_id', optional(string())],
+    finalCapture: ['final_capture', optional(boolean())],
+    paymentInstruction: [
+      'payment_instruction',
+      optional(capturePaymentInstructionSchema),
+    ],
+    noteToPayer: ['note_to_payer', optional(string())],
+    softDescriptor: ['soft_descriptor', optional(string())],
+  })
+);

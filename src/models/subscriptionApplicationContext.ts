@@ -33,20 +33,18 @@ export interface SubscriptionApplicationContext {
   cancelUrl: string;
 }
 
-export const subscriptionApplicationContextSchema: Schema<SubscriptionApplicationContext> = object(
-  {
-    brandName: ['brand_name', optional(string())],
-    locale: ['locale', optional(string())],
-    shippingPreference: [
-      'shipping_preference',
-      optional(experienceContextShippingPreferenceSchema),
-    ],
-    userAction: ['user_action', optional(applicationContextUserActionSchema)],
-    paymentMethod: [
-      'payment_method',
-      optional(lazy(() => paymentMethodSchema)),
-    ],
-    returnUrl: ['return_url', string()],
-    cancelUrl: ['cancel_url', string()],
-  }
+export const subscriptionApplicationContextSchema: Schema<SubscriptionApplicationContext> = lazy(
+  () =>
+    object({
+      brandName: ['brand_name', optional(string())],
+      locale: ['locale', optional(string())],
+      shippingPreference: [
+        'shipping_preference',
+        optional(experienceContextShippingPreferenceSchema),
+      ],
+      userAction: ['user_action', optional(applicationContextUserActionSchema)],
+      paymentMethod: ['payment_method', optional(paymentMethodSchema)],
+      returnUrl: ['return_url', string()],
+      cancelUrl: ['cancel_url', string()],
+    })
 );

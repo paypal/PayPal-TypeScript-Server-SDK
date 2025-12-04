@@ -48,24 +48,23 @@ export interface Refund {
   updateTime?: string;
 }
 
-export const refundSchema: Schema<Refund> = object({
-  status: ['status', optional(refundStatusSchema)],
-  statusDetails: [
-    'status_details',
-    optional(lazy(() => refundStatusDetailsSchema)),
-  ],
-  id: ['id', optional(string())],
-  amount: ['amount', optional(lazy(() => moneySchema))],
-  invoiceId: ['invoice_id', optional(string())],
-  customId: ['custom_id', optional(string())],
-  acquirerReferenceNumber: ['acquirer_reference_number', optional(string())],
-  noteToPayer: ['note_to_payer', optional(string())],
-  sellerPayableBreakdown: [
-    'seller_payable_breakdown',
-    optional(lazy(() => sellerPayableBreakdownSchema)),
-  ],
-  payer: ['payer', optional(lazy(() => payeeBaseSchema))],
-  links: ['links', optional(array(lazy(() => linkDescriptionSchema)))],
-  createTime: ['create_time', optional(string())],
-  updateTime: ['update_time', optional(string())],
-});
+export const refundSchema: Schema<Refund> = lazy(() =>
+  object({
+    status: ['status', optional(refundStatusSchema)],
+    statusDetails: ['status_details', optional(refundStatusDetailsSchema)],
+    id: ['id', optional(string())],
+    amount: ['amount', optional(moneySchema)],
+    invoiceId: ['invoice_id', optional(string())],
+    customId: ['custom_id', optional(string())],
+    acquirerReferenceNumber: ['acquirer_reference_number', optional(string())],
+    noteToPayer: ['note_to_payer', optional(string())],
+    sellerPayableBreakdown: [
+      'seller_payable_breakdown',
+      optional(sellerPayableBreakdownSchema),
+    ],
+    payer: ['payer', optional(payeeBaseSchema)],
+    links: ['links', optional(array(linkDescriptionSchema))],
+    createTime: ['create_time', optional(string())],
+    updateTime: ['update_time', optional(string())],
+  })
+);

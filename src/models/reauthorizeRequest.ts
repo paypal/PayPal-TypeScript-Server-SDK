@@ -13,6 +13,6 @@ export interface ReauthorizeRequest {
   amount?: Money;
 }
 
-export const reauthorizeRequestSchema: Schema<ReauthorizeRequest> = object({
-  amount: ['amount', optional(lazy(() => moneySchema))],
-});
+export const reauthorizeRequestSchema: Schema<ReauthorizeRequest> = lazy(() =>
+  object({ amount: ['amount', optional(moneySchema)] })
+);

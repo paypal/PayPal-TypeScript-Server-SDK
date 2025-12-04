@@ -34,13 +34,14 @@ export interface OrderAuthorizeRequestPaymentSource {
   venmo?: VenmoWalletRequest;
 }
 
-export const orderAuthorizeRequestPaymentSourceSchema: Schema<OrderAuthorizeRequestPaymentSource> = object(
-  {
-    card: ['card', optional(lazy(() => cardRequestSchema))],
-    token: ['token', optional(lazy(() => tokenSchema))],
-    paypal: ['paypal', optional(lazy(() => paypalWalletSchema))],
-    applePay: ['apple_pay', optional(lazy(() => applePayRequestSchema))],
-    googlePay: ['google_pay', optional(lazy(() => googlePayRequestSchema))],
-    venmo: ['venmo', optional(lazy(() => venmoWalletRequestSchema))],
-  }
+export const orderAuthorizeRequestPaymentSourceSchema: Schema<OrderAuthorizeRequestPaymentSource> = lazy(
+  () =>
+    object({
+      card: ['card', optional(cardRequestSchema)],
+      token: ['token', optional(tokenSchema)],
+      paypal: ['paypal', optional(paypalWalletSchema)],
+      applePay: ['apple_pay', optional(applePayRequestSchema)],
+      googlePay: ['google_pay', optional(googlePayRequestSchema)],
+      venmo: ['venmo', optional(venmoWalletRequestSchema)],
+    })
 );

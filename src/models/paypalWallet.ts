@@ -48,25 +48,24 @@ export interface PaypalWallet {
   storedCredential?: PaypalWalletStoredCredential;
 }
 
-export const paypalWalletSchema: Schema<PaypalWallet> = object({
-  vaultId: ['vault_id', optional(string())],
-  emailAddress: ['email_address', optional(string())],
-  name: ['name', optional(lazy(() => nameSchema))],
-  phone: ['phone', optional(lazy(() => phoneWithTypeSchema))],
-  birthDate: ['birth_date', optional(string())],
-  taxInfo: ['tax_info', optional(lazy(() => taxInfoSchema))],
-  address: ['address', optional(lazy(() => addressSchema))],
-  attributes: [
-    'attributes',
-    optional(lazy(() => paypalWalletAttributesSchema)),
-  ],
-  experienceContext: [
-    'experience_context',
-    optional(lazy(() => paypalWalletExperienceContextSchema)),
-  ],
-  billingAgreementId: ['billing_agreement_id', optional(string())],
-  storedCredential: [
-    'stored_credential',
-    optional(lazy(() => paypalWalletStoredCredentialSchema)),
-  ],
-});
+export const paypalWalletSchema: Schema<PaypalWallet> = lazy(() =>
+  object({
+    vaultId: ['vault_id', optional(string())],
+    emailAddress: ['email_address', optional(string())],
+    name: ['name', optional(nameSchema)],
+    phone: ['phone', optional(phoneWithTypeSchema)],
+    birthDate: ['birth_date', optional(string())],
+    taxInfo: ['tax_info', optional(taxInfoSchema)],
+    address: ['address', optional(addressSchema)],
+    attributes: ['attributes', optional(paypalWalletAttributesSchema)],
+    experienceContext: [
+      'experience_context',
+      optional(paypalWalletExperienceContextSchema),
+    ],
+    billingAgreementId: ['billing_agreement_id', optional(string())],
+    storedCredential: [
+      'stored_credential',
+      optional(paypalWalletStoredCredentialSchema),
+    ],
+  })
+);

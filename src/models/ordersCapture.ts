@@ -75,35 +75,31 @@ export interface OrdersCapture {
   updateTime?: string;
 }
 
-export const ordersCaptureSchema: Schema<OrdersCapture> = object({
-  status: ['status', optional(captureStatusSchema)],
-  statusDetails: [
-    'status_details',
-    optional(lazy(() => captureStatusDetailsSchema)),
-  ],
-  id: ['id', optional(string())],
-  amount: ['amount', optional(lazy(() => moneySchema))],
-  invoiceId: ['invoice_id', optional(string())],
-  customId: ['custom_id', optional(string())],
-  networkTransactionReference: [
-    'network_transaction_reference',
-    optional(lazy(() => networkTransactionSchema)),
-  ],
-  sellerProtection: [
-    'seller_protection',
-    optional(lazy(() => sellerProtectionSchema)),
-  ],
-  finalCapture: ['final_capture', optional(boolean())],
-  sellerReceivableBreakdown: [
-    'seller_receivable_breakdown',
-    optional(lazy(() => sellerReceivableBreakdownSchema)),
-  ],
-  disbursementMode: ['disbursement_mode', optional(disbursementModeSchema)],
-  links: ['links', optional(array(lazy(() => linkDescriptionSchema)))],
-  processorResponse: [
-    'processor_response',
-    optional(lazy(() => processorResponseSchema)),
-  ],
-  createTime: ['create_time', optional(string())],
-  updateTime: ['update_time', optional(string())],
-});
+export const ordersCaptureSchema: Schema<OrdersCapture> = lazy(() =>
+  object({
+    status: ['status', optional(captureStatusSchema)],
+    statusDetails: ['status_details', optional(captureStatusDetailsSchema)],
+    id: ['id', optional(string())],
+    amount: ['amount', optional(moneySchema)],
+    invoiceId: ['invoice_id', optional(string())],
+    customId: ['custom_id', optional(string())],
+    networkTransactionReference: [
+      'network_transaction_reference',
+      optional(networkTransactionSchema),
+    ],
+    sellerProtection: ['seller_protection', optional(sellerProtectionSchema)],
+    finalCapture: ['final_capture', optional(boolean())],
+    sellerReceivableBreakdown: [
+      'seller_receivable_breakdown',
+      optional(sellerReceivableBreakdownSchema),
+    ],
+    disbursementMode: ['disbursement_mode', optional(disbursementModeSchema)],
+    links: ['links', optional(array(linkDescriptionSchema))],
+    processorResponse: [
+      'processor_response',
+      optional(processorResponseSchema),
+    ],
+    createTime: ['create_time', optional(string())],
+    updateTime: ['update_time', optional(string())],
+  })
+);

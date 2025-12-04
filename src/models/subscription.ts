@@ -52,21 +52,23 @@ export interface Subscription {
   links?: LinkDescription[];
 }
 
-export const subscriptionSchema: Schema<Subscription> = object({
-  id: ['id', optional(string())],
-  planId: ['plan_id', optional(string())],
-  startTime: ['start_time', optional(string())],
-  quantity: ['quantity', optional(string())],
-  shippingAmount: ['shipping_amount', optional(lazy(() => moneySchema))],
-  subscriber: ['subscriber', optional(lazy(() => subscriberSchema))],
-  billingInfo: [
-    'billing_info',
-    optional(lazy(() => subscriptionBillingInformationSchema)),
-  ],
-  createTime: ['create_time', optional(string())],
-  updateTime: ['update_time', optional(string())],
-  customId: ['custom_id', optional(string())],
-  planOverridden: ['plan_overridden', optional(boolean())],
-  plan: ['plan', optional(lazy(() => planDetailsSchema))],
-  links: ['links', optional(array(lazy(() => linkDescriptionSchema)))],
-});
+export const subscriptionSchema: Schema<Subscription> = lazy(() =>
+  object({
+    id: ['id', optional(string())],
+    planId: ['plan_id', optional(string())],
+    startTime: ['start_time', optional(string())],
+    quantity: ['quantity', optional(string())],
+    shippingAmount: ['shipping_amount', optional(moneySchema)],
+    subscriber: ['subscriber', optional(subscriberSchema)],
+    billingInfo: [
+      'billing_info',
+      optional(subscriptionBillingInformationSchema),
+    ],
+    createTime: ['create_time', optional(string())],
+    updateTime: ['update_time', optional(string())],
+    customId: ['custom_id', optional(string())],
+    planOverridden: ['plan_overridden', optional(boolean())],
+    plan: ['plan', optional(planDetailsSchema)],
+    links: ['links', optional(array(linkDescriptionSchema))],
+  })
+);

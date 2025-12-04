@@ -42,23 +42,21 @@ export interface SubscriptionBillingInformation {
   lastFailedPayment?: FailedPaymentDetails;
 }
 
-export const subscriptionBillingInformationSchema: Schema<SubscriptionBillingInformation> = object(
-  {
-    outstandingBalance: ['outstanding_balance', lazy(() => moneySchema)],
-    cycleExecutions: [
-      'cycle_executions',
-      optional(array(lazy(() => cycleExecutionSchema))),
-    ],
-    lastPayment: [
-      'last_payment',
-      optional(lazy(() => lastPaymentDetailsSchema)),
-    ],
-    nextBillingTime: ['next_billing_time', optional(string())],
-    finalPaymentTime: ['final_payment_time', optional(string())],
-    failedPaymentsCount: ['failed_payments_count', number()],
-    lastFailedPayment: [
-      'last_failed_payment',
-      optional(lazy(() => failedPaymentDetailsSchema)),
-    ],
-  }
+export const subscriptionBillingInformationSchema: Schema<SubscriptionBillingInformation> = lazy(
+  () =>
+    object({
+      outstandingBalance: ['outstanding_balance', moneySchema],
+      cycleExecutions: [
+        'cycle_executions',
+        optional(array(cycleExecutionSchema)),
+      ],
+      lastPayment: ['last_payment', optional(lastPaymentDetailsSchema)],
+      nextBillingTime: ['next_billing_time', optional(string())],
+      finalPaymentTime: ['final_payment_time', optional(string())],
+      failedPaymentsCount: ['failed_payments_count', number()],
+      lastFailedPayment: [
+        'last_failed_payment',
+        optional(failedPaymentDetailsSchema),
+      ],
+    })
 );

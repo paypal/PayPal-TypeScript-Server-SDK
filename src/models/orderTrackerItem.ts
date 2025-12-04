@@ -26,11 +26,13 @@ export interface OrderTrackerItem {
   upc?: UniversalProductCode;
 }
 
-export const orderTrackerItemSchema: Schema<OrderTrackerItem> = object({
-  name: ['name', optional(string())],
-  quantity: ['quantity', optional(string())],
-  sku: ['sku', optional(string())],
-  url: ['url', optional(string())],
-  imageUrl: ['image_url', optional(string())],
-  upc: ['upc', optional(lazy(() => universalProductCodeSchema))],
-});
+export const orderTrackerItemSchema: Schema<OrderTrackerItem> = lazy(() =>
+  object({
+    name: ['name', optional(string())],
+    quantity: ['quantity', optional(string())],
+    sku: ['sku', optional(string())],
+    url: ['url', optional(string())],
+    imageUrl: ['image_url', optional(string())],
+    upc: ['upc', optional(universalProductCodeSchema)],
+  })
+);

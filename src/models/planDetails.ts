@@ -47,22 +47,24 @@ export interface PlanDetails {
   quantitySupported?: boolean;
 }
 
-export const planDetailsSchema: Schema<PlanDetails> = object({
-  productId: ['product_id', optional(string())],
-  name: ['name', optional(string())],
-  description: ['description', optional(string())],
-  billingCycles: [
-    'billing_cycles',
-    optional(array(lazy(() => subscriptionBillingCycleSchema))),
-  ],
-  paymentPreferences: [
-    'payment_preferences',
-    optional(lazy(() => paymentPreferencesSchema)),
-  ],
-  merchantPreferences: [
-    'merchant_preferences',
-    optional(lazy(() => merchantPreferencesSchema)),
-  ],
-  taxes: ['taxes', optional(lazy(() => taxesSchema))],
-  quantitySupported: ['quantity_supported', optional(boolean())],
-});
+export const planDetailsSchema: Schema<PlanDetails> = lazy(() =>
+  object({
+    productId: ['product_id', optional(string())],
+    name: ['name', optional(string())],
+    description: ['description', optional(string())],
+    billingCycles: [
+      'billing_cycles',
+      optional(array(subscriptionBillingCycleSchema)),
+    ],
+    paymentPreferences: [
+      'payment_preferences',
+      optional(paymentPreferencesSchema),
+    ],
+    merchantPreferences: [
+      'merchant_preferences',
+      optional(merchantPreferencesSchema),
+    ],
+    taxes: ['taxes', optional(taxesSchema)],
+    quantitySupported: ['quantity_supported', optional(boolean())],
+  })
+);

@@ -19,12 +19,10 @@ export interface RefundStatusWithDetails {
   statusDetails?: RefundStatusDetails;
 }
 
-export const refundStatusWithDetailsSchema: Schema<RefundStatusWithDetails> = object(
-  {
-    status: ['status', optional(refundStatusSchema)],
-    statusDetails: [
-      'status_details',
-      optional(lazy(() => refundStatusDetailsSchema)),
-    ],
-  }
+export const refundStatusWithDetailsSchema: Schema<RefundStatusWithDetails> = lazy(
+  () =>
+    object({
+      status: ['status', optional(refundStatusSchema)],
+      statusDetails: ['status_details', optional(refundStatusDetailsSchema)],
+    })
 );

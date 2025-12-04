@@ -43,22 +43,24 @@ export interface CardRequest {
   experienceContext?: CardExperienceContext;
 }
 
-export const cardRequestSchema: Schema<CardRequest> = object({
-  name: ['name', optional(string())],
-  number: ['number', optional(string())],
-  expiry: ['expiry', optional(string())],
-  securityCode: ['security_code', optional(string())],
-  billingAddress: ['billing_address', optional(lazy(() => addressSchema))],
-  attributes: ['attributes', optional(lazy(() => cardAttributesSchema))],
-  vaultId: ['vault_id', optional(string())],
-  singleUseToken: ['single_use_token', optional(string())],
-  storedCredential: [
-    'stored_credential',
-    optional(lazy(() => cardStoredCredentialSchema)),
-  ],
-  networkToken: ['network_token', optional(lazy(() => networkTokenSchema))],
-  experienceContext: [
-    'experience_context',
-    optional(lazy(() => cardExperienceContextSchema)),
-  ],
-});
+export const cardRequestSchema: Schema<CardRequest> = lazy(() =>
+  object({
+    name: ['name', optional(string())],
+    number: ['number', optional(string())],
+    expiry: ['expiry', optional(string())],
+    securityCode: ['security_code', optional(string())],
+    billingAddress: ['billing_address', optional(addressSchema)],
+    attributes: ['attributes', optional(cardAttributesSchema)],
+    vaultId: ['vault_id', optional(string())],
+    singleUseToken: ['single_use_token', optional(string())],
+    storedCredential: [
+      'stored_credential',
+      optional(cardStoredCredentialSchema),
+    ],
+    networkToken: ['network_token', optional(networkTokenSchema)],
+    experienceContext: [
+      'experience_context',
+      optional(cardExperienceContextSchema),
+    ],
+  })
+);

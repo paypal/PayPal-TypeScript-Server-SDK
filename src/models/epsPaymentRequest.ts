@@ -20,11 +20,13 @@ export interface EpsPaymentRequest {
   experienceContext?: ExperienceContext;
 }
 
-export const epsPaymentRequestSchema: Schema<EpsPaymentRequest> = object({
-  name: ['name', string()],
-  countryCode: ['country_code', string()],
-  experienceContext: [
-    'experience_context',
-    optional(lazy(() => experienceContextSchema)),
-  ],
-});
+export const epsPaymentRequestSchema: Schema<EpsPaymentRequest> = lazy(() =>
+  object({
+    name: ['name', string()],
+    countryCode: ['country_code', string()],
+    experienceContext: [
+      'experience_context',
+      optional(experienceContextSchema),
+    ],
+  })
+);

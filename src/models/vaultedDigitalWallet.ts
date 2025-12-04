@@ -35,20 +35,23 @@ export interface VaultedDigitalWallet {
   customerType?: PaypalPaymentTokenCustomerType;
 }
 
-export const vaultedDigitalWalletSchema: Schema<VaultedDigitalWallet> = object({
-  description: ['description', optional(string())],
-  usagePattern: ['usage_pattern', optional(usagePatternSchema)],
-  shipping: [
-    'shipping',
-    optional(lazy(() => vaultedDigitalWalletShippingDetailsSchema)),
-  ],
-  permitMultiplePaymentTokens: [
-    'permit_multiple_payment_tokens',
-    optional(boolean()),
-  ],
-  usageType: ['usage_type', optional(paypalPaymentTokenUsageTypeSchema)],
-  customerType: [
-    'customer_type',
-    optional(paypalPaymentTokenCustomerTypeSchema),
-  ],
-});
+export const vaultedDigitalWalletSchema: Schema<VaultedDigitalWallet> = lazy(
+  () =>
+    object({
+      description: ['description', optional(string())],
+      usagePattern: ['usage_pattern', optional(usagePatternSchema)],
+      shipping: [
+        'shipping',
+        optional(vaultedDigitalWalletShippingDetailsSchema),
+      ],
+      permitMultiplePaymentTokens: [
+        'permit_multiple_payment_tokens',
+        optional(boolean()),
+      ],
+      usageType: ['usage_type', optional(paypalPaymentTokenUsageTypeSchema)],
+      customerType: [
+        'customer_type',
+        optional(paypalPaymentTokenCustomerTypeSchema),
+      ],
+    })
+);

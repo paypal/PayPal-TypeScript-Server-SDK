@@ -21,16 +21,14 @@ export interface CapturePaymentInstruction {
   payeeReceivableFxRateId?: string;
 }
 
-export const capturePaymentInstructionSchema: Schema<CapturePaymentInstruction> = object(
-  {
-    platformFees: [
-      'platform_fees',
-      optional(array(lazy(() => platformFeeSchema))),
-    ],
-    disbursementMode: ['disbursement_mode', optional(disbursementModeSchema)],
-    payeeReceivableFxRateId: [
-      'payee_receivable_fx_rate_id',
-      optional(string()),
-    ],
-  }
+export const capturePaymentInstructionSchema: Schema<CapturePaymentInstruction> = lazy(
+  () =>
+    object({
+      platformFees: ['platform_fees', optional(array(platformFeeSchema))],
+      disbursementMode: ['disbursement_mode', optional(disbursementModeSchema)],
+      payeeReceivableFxRateId: [
+        'payee_receivable_fx_rate_id',
+        optional(string()),
+      ],
+    })
 );

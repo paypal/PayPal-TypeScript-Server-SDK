@@ -19,10 +19,9 @@ export interface PaymentTokenRequest {
   paymentSource: PaymentTokenRequestPaymentSource;
 }
 
-export const paymentTokenRequestSchema: Schema<PaymentTokenRequest> = object({
-  customer: ['customer', optional(lazy(() => customerSchema))],
-  paymentSource: [
-    'payment_source',
-    lazy(() => paymentTokenRequestPaymentSourceSchema),
-  ],
-});
+export const paymentTokenRequestSchema: Schema<PaymentTokenRequest> = lazy(() =>
+  object({
+    customer: ['customer', optional(customerSchema)],
+    paymentSource: ['payment_source', paymentTokenRequestPaymentSourceSchema],
+  })
+);

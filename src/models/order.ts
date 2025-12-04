@@ -40,20 +40,16 @@ export interface Order {
   links?: LinkDescription[];
 }
 
-export const orderSchema: Schema<Order> = object({
-  createTime: ['create_time', optional(string())],
-  updateTime: ['update_time', optional(string())],
-  id: ['id', optional(string())],
-  paymentSource: [
-    'payment_source',
-    optional(lazy(() => paymentSourceResponseSchema)),
-  ],
-  intent: ['intent', optional(checkoutPaymentIntentSchema)],
-  payer: ['payer', optional(lazy(() => payerSchema))],
-  purchaseUnits: [
-    'purchase_units',
-    optional(array(lazy(() => purchaseUnitSchema))),
-  ],
-  status: ['status', optional(orderStatusSchema)],
-  links: ['links', optional(array(lazy(() => linkDescriptionSchema)))],
-});
+export const orderSchema: Schema<Order> = lazy(() =>
+  object({
+    createTime: ['create_time', optional(string())],
+    updateTime: ['update_time', optional(string())],
+    id: ['id', optional(string())],
+    paymentSource: ['payment_source', optional(paymentSourceResponseSchema)],
+    intent: ['intent', optional(checkoutPaymentIntentSchema)],
+    payer: ['payer', optional(payerSchema)],
+    purchaseUnits: ['purchase_units', optional(array(purchaseUnitSchema))],
+    status: ['status', optional(orderStatusSchema)],
+    links: ['links', optional(array(linkDescriptionSchema))],
+  })
+);

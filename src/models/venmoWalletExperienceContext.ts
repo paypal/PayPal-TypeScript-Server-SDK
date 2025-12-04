@@ -30,20 +30,21 @@ export interface VenmoWalletExperienceContext {
   userAction?: VenmoWalletExperienceContextUserAction;
 }
 
-export const venmoWalletExperienceContextSchema: Schema<VenmoWalletExperienceContext> = object(
-  {
-    brandName: ['brand_name', optional(string())],
-    shippingPreference: [
-      'shipping_preference',
-      optional(venmoWalletExperienceContextShippingPreferenceSchema),
-    ],
-    orderUpdateCallbackConfig: [
-      'order_update_callback_config',
-      optional(lazy(() => callbackConfigurationSchema)),
-    ],
-    userAction: [
-      'user_action',
-      optional(venmoWalletExperienceContextUserActionSchema),
-    ],
-  }
+export const venmoWalletExperienceContextSchema: Schema<VenmoWalletExperienceContext> = lazy(
+  () =>
+    object({
+      brandName: ['brand_name', optional(string())],
+      shippingPreference: [
+        'shipping_preference',
+        optional(venmoWalletExperienceContextShippingPreferenceSchema),
+      ],
+      orderUpdateCallbackConfig: [
+        'order_update_callback_config',
+        optional(callbackConfigurationSchema),
+      ],
+      userAction: [
+        'user_action',
+        optional(venmoWalletExperienceContextUserActionSchema),
+      ],
+    })
 );

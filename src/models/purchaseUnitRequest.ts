@@ -47,22 +47,24 @@ export interface PurchaseUnitRequest {
   supplementaryData?: SupplementaryData;
 }
 
-export const purchaseUnitRequestSchema: Schema<PurchaseUnitRequest> = object({
-  referenceId: ['reference_id', optional(string())],
-  amount: ['amount', lazy(() => amountWithBreakdownSchema)],
-  payee: ['payee', optional(lazy(() => payeeBaseSchema))],
-  paymentInstruction: [
-    'payment_instruction',
-    optional(lazy(() => paymentInstructionSchema)),
-  ],
-  description: ['description', optional(string())],
-  customId: ['custom_id', optional(string())],
-  invoiceId: ['invoice_id', optional(string())],
-  softDescriptor: ['soft_descriptor', optional(string())],
-  items: ['items', optional(array(lazy(() => itemRequestSchema)))],
-  shipping: ['shipping', optional(lazy(() => shippingDetailsSchema))],
-  supplementaryData: [
-    'supplementary_data',
-    optional(lazy(() => supplementaryDataSchema)),
-  ],
-});
+export const purchaseUnitRequestSchema: Schema<PurchaseUnitRequest> = lazy(() =>
+  object({
+    referenceId: ['reference_id', optional(string())],
+    amount: ['amount', amountWithBreakdownSchema],
+    payee: ['payee', optional(payeeBaseSchema)],
+    paymentInstruction: [
+      'payment_instruction',
+      optional(paymentInstructionSchema),
+    ],
+    description: ['description', optional(string())],
+    customId: ['custom_id', optional(string())],
+    invoiceId: ['invoice_id', optional(string())],
+    softDescriptor: ['soft_descriptor', optional(string())],
+    items: ['items', optional(array(itemRequestSchema))],
+    shipping: ['shipping', optional(shippingDetailsSchema)],
+    supplementaryData: [
+      'supplementary_data',
+      optional(supplementaryDataSchema),
+    ],
+  })
+);

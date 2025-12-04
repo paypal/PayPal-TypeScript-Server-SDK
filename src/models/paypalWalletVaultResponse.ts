@@ -27,11 +27,12 @@ export interface PaypalWalletVaultResponse {
   customer?: PaypalWalletCustomer;
 }
 
-export const paypalWalletVaultResponseSchema: Schema<PaypalWalletVaultResponse> = object(
-  {
-    id: ['id', optional(string())],
-    status: ['status', optional(paypalWalletVaultStatusSchema)],
-    links: ['links', optional(array(lazy(() => linkDescriptionSchema)))],
-    customer: ['customer', optional(lazy(() => paypalWalletCustomerSchema))],
-  }
+export const paypalWalletVaultResponseSchema: Schema<PaypalWalletVaultResponse> = lazy(
+  () =>
+    object({
+      id: ['id', optional(string())],
+      status: ['status', optional(paypalWalletVaultStatusSchema)],
+      links: ['links', optional(array(linkDescriptionSchema))],
+      customer: ['customer', optional(paypalWalletCustomerSchema)],
+    })
 );

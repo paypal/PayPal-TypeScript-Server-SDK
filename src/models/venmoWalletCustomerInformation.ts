@@ -20,11 +20,12 @@ export interface VenmoWalletCustomerInformation {
   name?: Name;
 }
 
-export const venmoWalletCustomerInformationSchema: Schema<VenmoWalletCustomerInformation> = object(
-  {
-    id: ['id', optional(string())],
-    emailAddress: ['email_address', optional(string())],
-    phone: ['phone', optional(lazy(() => phoneWithTypeSchema))],
-    name: ['name', optional(lazy(() => nameSchema))],
-  }
+export const venmoWalletCustomerInformationSchema: Schema<VenmoWalletCustomerInformation> = lazy(
+  () =>
+    object({
+      id: ['id', optional(string())],
+      emailAddress: ['email_address', optional(string())],
+      phone: ['phone', optional(phoneWithTypeSchema)],
+      name: ['name', optional(nameSchema)],
+    })
 );

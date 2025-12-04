@@ -18,7 +18,9 @@ export interface BankRequest {
   sepaDebit?: SepaDebitRequest;
 }
 
-export const bankRequestSchema: Schema<BankRequest> = object({
-  achDebit: ['ach_debit', optional(unknown())],
-  sepaDebit: ['sepa_debit', optional(lazy(() => sepaDebitRequestSchema))],
-});
+export const bankRequestSchema: Schema<BankRequest> = lazy(() =>
+  object({
+    achDebit: ['ach_debit', optional(unknown())],
+    sepaDebit: ['sepa_debit', optional(sepaDebitRequestSchema)],
+  })
+);

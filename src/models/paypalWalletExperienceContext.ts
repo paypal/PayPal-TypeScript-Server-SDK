@@ -60,33 +60,37 @@ export interface PaypalWalletExperienceContext {
   orderUpdateCallbackConfig?: CallbackConfiguration;
 }
 
-export const paypalWalletExperienceContextSchema: Schema<PaypalWalletExperienceContext> = object(
-  {
-    brandName: ['brand_name', optional(string())],
-    locale: ['locale', optional(string())],
-    shippingPreference: [
-      'shipping_preference',
-      optional(paypalWalletContextShippingPreferenceSchema),
-    ],
-    contactPreference: [
-      'contact_preference',
-      optional(paypalWalletContactPreferenceSchema),
-    ],
-    returnUrl: ['return_url', optional(string())],
-    cancelUrl: ['cancel_url', optional(string())],
-    appSwitchContext: [
-      'app_switch_context',
-      optional(lazy(() => appSwitchContextSchema)),
-    ],
-    landingPage: ['landing_page', optional(paypalExperienceLandingPageSchema)],
-    userAction: ['user_action', optional(paypalExperienceUserActionSchema)],
-    paymentMethodPreference: [
-      'payment_method_preference',
-      optional(payeePaymentMethodPreferenceSchema),
-    ],
-    orderUpdateCallbackConfig: [
-      'order_update_callback_config',
-      optional(lazy(() => callbackConfigurationSchema)),
-    ],
-  }
+export const paypalWalletExperienceContextSchema: Schema<PaypalWalletExperienceContext> = lazy(
+  () =>
+    object({
+      brandName: ['brand_name', optional(string())],
+      locale: ['locale', optional(string())],
+      shippingPreference: [
+        'shipping_preference',
+        optional(paypalWalletContextShippingPreferenceSchema),
+      ],
+      contactPreference: [
+        'contact_preference',
+        optional(paypalWalletContactPreferenceSchema),
+      ],
+      returnUrl: ['return_url', optional(string())],
+      cancelUrl: ['cancel_url', optional(string())],
+      appSwitchContext: [
+        'app_switch_context',
+        optional(appSwitchContextSchema),
+      ],
+      landingPage: [
+        'landing_page',
+        optional(paypalExperienceLandingPageSchema),
+      ],
+      userAction: ['user_action', optional(paypalExperienceUserActionSchema)],
+      paymentMethodPreference: [
+        'payment_method_preference',
+        optional(payeePaymentMethodPreferenceSchema),
+      ],
+      orderUpdateCallbackConfig: [
+        'order_update_callback_config',
+        optional(callbackConfigurationSchema),
+      ],
+    })
 );

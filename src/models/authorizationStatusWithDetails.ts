@@ -22,12 +22,13 @@ export interface AuthorizationStatusWithDetails {
   statusDetails?: AuthorizationStatusDetails;
 }
 
-export const authorizationStatusWithDetailsSchema: Schema<AuthorizationStatusWithDetails> = object(
-  {
-    status: ['status', optional(authorizationStatusSchema)],
-    statusDetails: [
-      'status_details',
-      optional(lazy(() => authorizationStatusDetailsSchema)),
-    ],
-  }
+export const authorizationStatusWithDetailsSchema: Schema<AuthorizationStatusWithDetails> = lazy(
+  () =>
+    object({
+      status: ['status', optional(authorizationStatusSchema)],
+      statusDetails: [
+        'status_details',
+        optional(authorizationStatusDetailsSchema),
+      ],
+    })
 );

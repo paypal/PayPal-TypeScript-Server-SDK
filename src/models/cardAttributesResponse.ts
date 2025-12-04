@@ -16,6 +16,6 @@ export interface CardAttributesResponse {
   vault?: CardVaultResponse;
 }
 
-export const cardAttributesResponseSchema: Schema<CardAttributesResponse> = object(
-  { vault: ['vault', optional(lazy(() => cardVaultResponseSchema))] }
+export const cardAttributesResponseSchema: Schema<CardAttributesResponse> = lazy(
+  () => object({ vault: ['vault', optional(cardVaultResponseSchema)] })
 );

@@ -36,17 +36,15 @@ export interface ModifySubscriptionResponse {
   links?: LinkDescription[];
 }
 
-export const modifySubscriptionResponseSchema: Schema<ModifySubscriptionResponse> = object(
-  {
-    planId: ['plan_id', optional(string())],
-    quantity: ['quantity', optional(string())],
-    shippingAmount: ['shipping_amount', optional(lazy(() => moneySchema))],
-    shippingAddress: [
-      'shipping_address',
-      optional(lazy(() => shippingDetailsSchema)),
-    ],
-    plan: ['plan', optional(lazy(() => planOverrideSchema))],
-    planOverridden: ['plan_overridden', optional(boolean())],
-    links: ['links', optional(array(lazy(() => linkDescriptionSchema)))],
-  }
+export const modifySubscriptionResponseSchema: Schema<ModifySubscriptionResponse> = lazy(
+  () =>
+    object({
+      planId: ['plan_id', optional(string())],
+      quantity: ['quantity', optional(string())],
+      shippingAmount: ['shipping_amount', optional(moneySchema)],
+      shippingAddress: ['shipping_address', optional(shippingDetailsSchema)],
+      plan: ['plan', optional(planOverrideSchema)],
+      planOverridden: ['plan_overridden', optional(boolean())],
+      links: ['links', optional(array(linkDescriptionSchema))],
+    })
 );

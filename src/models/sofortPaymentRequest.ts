@@ -20,11 +20,14 @@ export interface SofortPaymentRequest {
   experienceContext?: ExperienceContext;
 }
 
-export const sofortPaymentRequestSchema: Schema<SofortPaymentRequest> = object({
-  name: ['name', string()],
-  countryCode: ['country_code', string()],
-  experienceContext: [
-    'experience_context',
-    optional(lazy(() => experienceContextSchema)),
-  ],
-});
+export const sofortPaymentRequestSchema: Schema<SofortPaymentRequest> = lazy(
+  () =>
+    object({
+      name: ['name', string()],
+      countryCode: ['country_code', string()],
+      experienceContext: [
+        'experience_context',
+        optional(experienceContextSchema),
+      ],
+    })
+);

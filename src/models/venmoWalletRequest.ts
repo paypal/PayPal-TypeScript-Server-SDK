@@ -26,15 +26,14 @@ export interface VenmoWalletRequest {
   attributes?: VenmoWalletAdditionalAttributes;
 }
 
-export const venmoWalletRequestSchema: Schema<VenmoWalletRequest> = object({
-  vaultId: ['vault_id', optional(string())],
-  emailAddress: ['email_address', optional(string())],
-  experienceContext: [
-    'experience_context',
-    optional(lazy(() => venmoWalletExperienceContextSchema)),
-  ],
-  attributes: [
-    'attributes',
-    optional(lazy(() => venmoWalletAdditionalAttributesSchema)),
-  ],
-});
+export const venmoWalletRequestSchema: Schema<VenmoWalletRequest> = lazy(() =>
+  object({
+    vaultId: ['vault_id', optional(string())],
+    emailAddress: ['email_address', optional(string())],
+    experienceContext: [
+      'experience_context',
+      optional(venmoWalletExperienceContextSchema),
+    ],
+    attributes: ['attributes', optional(venmoWalletAdditionalAttributesSchema)],
+  })
+);

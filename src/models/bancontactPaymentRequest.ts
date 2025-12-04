@@ -20,13 +20,14 @@ export interface BancontactPaymentRequest {
   experienceContext?: ExperienceContext;
 }
 
-export const bancontactPaymentRequestSchema: Schema<BancontactPaymentRequest> = object(
-  {
-    name: ['name', string()],
-    countryCode: ['country_code', string()],
-    experienceContext: [
-      'experience_context',
-      optional(lazy(() => experienceContextSchema)),
-    ],
-  }
+export const bancontactPaymentRequestSchema: Schema<BancontactPaymentRequest> = lazy(
+  () =>
+    object({
+      name: ['name', string()],
+      countryCode: ['country_code', string()],
+      experienceContext: [
+        'experience_context',
+        optional(experienceContextSchema),
+      ],
+    })
 );

@@ -17,8 +17,10 @@ export interface PricingTier {
   amount: Money;
 }
 
-export const pricingTierSchema: Schema<PricingTier> = object({
-  startingQuantity: ['starting_quantity', string()],
-  endingQuantity: ['ending_quantity', optional(string())],
-  amount: ['amount', lazy(() => moneySchema)],
-});
+export const pricingTierSchema: Schema<PricingTier> = lazy(() =>
+  object({
+    startingQuantity: ['starting_quantity', string()],
+    endingQuantity: ['ending_quantity', optional(string())],
+    amount: ['amount', moneySchema],
+  })
+);

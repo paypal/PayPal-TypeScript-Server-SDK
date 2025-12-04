@@ -17,8 +17,10 @@ export interface AmountWithBreakdown {
   breakdown?: AmountBreakdown;
 }
 
-export const amountWithBreakdownSchema: Schema<AmountWithBreakdown> = object({
-  currencyCode: ['currency_code', string()],
-  value: ['value', string()],
-  breakdown: ['breakdown', optional(lazy(() => amountBreakdownSchema))],
-});
+export const amountWithBreakdownSchema: Schema<AmountWithBreakdown> = lazy(() =>
+  object({
+    currencyCode: ['currency_code', string()],
+    value: ['value', string()],
+    breakdown: ['breakdown', optional(amountBreakdownSchema)],
+  })
+);

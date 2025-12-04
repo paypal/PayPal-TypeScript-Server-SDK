@@ -19,11 +19,12 @@ export interface CardResponseWithBillingAddress {
   currencyCode?: string;
 }
 
-export const cardResponseWithBillingAddressSchema: Schema<CardResponseWithBillingAddress> = object(
-  {
-    name: ['name', optional(string())],
-    billingAddress: ['billing_address', optional(lazy(() => addressSchema))],
-    expiry: ['expiry', optional(string())],
-    currencyCode: ['currency_code', optional(string())],
-  }
+export const cardResponseWithBillingAddressSchema: Schema<CardResponseWithBillingAddress> = lazy(
+  () =>
+    object({
+      name: ['name', optional(string())],
+      billingAddress: ['billing_address', optional(addressSchema)],
+      expiry: ['expiry', optional(string())],
+      currencyCode: ['currency_code', optional(string())],
+    })
 );
