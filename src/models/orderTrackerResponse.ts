@@ -31,11 +31,14 @@ export interface OrderTrackerResponse {
   updateTime?: string;
 }
 
-export const orderTrackerResponseSchema: Schema<OrderTrackerResponse> = object({
-  id: ['id', optional(string())],
-  status: ['status', optional(orderTrackerStatusSchema)],
-  items: ['items', optional(array(lazy(() => orderTrackerItemSchema)))],
-  links: ['links', optional(array(lazy(() => linkDescriptionSchema)))],
-  createTime: ['create_time', optional(string())],
-  updateTime: ['update_time', optional(string())],
-});
+export const orderTrackerResponseSchema: Schema<OrderTrackerResponse> = lazy(
+  () =>
+    object({
+      id: ['id', optional(string())],
+      status: ['status', optional(orderTrackerStatusSchema)],
+      items: ['items', optional(array(orderTrackerItemSchema))],
+      links: ['links', optional(array(linkDescriptionSchema))],
+      createTime: ['create_time', optional(string())],
+      updateTime: ['update_time', optional(string())],
+    })
+);

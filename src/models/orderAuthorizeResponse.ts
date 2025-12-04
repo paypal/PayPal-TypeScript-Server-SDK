@@ -40,22 +40,20 @@ export interface OrderAuthorizeResponse {
   links?: LinkDescription[];
 }
 
-export const orderAuthorizeResponseSchema: Schema<OrderAuthorizeResponse> = object(
-  {
-    createTime: ['create_time', optional(string())],
-    updateTime: ['update_time', optional(string())],
-    id: ['id', optional(string())],
-    paymentSource: [
-      'payment_source',
-      optional(lazy(() => orderAuthorizeResponsePaymentSourceSchema)),
-    ],
-    intent: ['intent', optional(checkoutPaymentIntentSchema)],
-    payer: ['payer', optional(lazy(() => payerSchema))],
-    purchaseUnits: [
-      'purchase_units',
-      optional(array(lazy(() => purchaseUnitSchema))),
-    ],
-    status: ['status', optional(orderStatusSchema)],
-    links: ['links', optional(array(lazy(() => linkDescriptionSchema)))],
-  }
+export const orderAuthorizeResponseSchema: Schema<OrderAuthorizeResponse> = lazy(
+  () =>
+    object({
+      createTime: ['create_time', optional(string())],
+      updateTime: ['update_time', optional(string())],
+      id: ['id', optional(string())],
+      paymentSource: [
+        'payment_source',
+        optional(orderAuthorizeResponsePaymentSourceSchema),
+      ],
+      intent: ['intent', optional(checkoutPaymentIntentSchema)],
+      payer: ['payer', optional(payerSchema)],
+      purchaseUnits: ['purchase_units', optional(array(purchaseUnitSchema))],
+      status: ['status', optional(orderStatusSchema)],
+      links: ['links', optional(array(linkDescriptionSchema))],
+    })
 );

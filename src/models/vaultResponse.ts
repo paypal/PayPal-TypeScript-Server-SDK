@@ -21,9 +21,11 @@ export interface VaultResponse {
   links?: LinkDescription[];
 }
 
-export const vaultResponseSchema: Schema<VaultResponse> = object({
-  id: ['id', optional(string())],
-  status: ['status', optional(vaultStatusSchema)],
-  customer: ['customer', optional(lazy(() => vaultCustomerSchema))],
-  links: ['links', optional(array(lazy(() => linkDescriptionSchema)))],
-});
+export const vaultResponseSchema: Schema<VaultResponse> = lazy(() =>
+  object({
+    id: ['id', optional(string())],
+    status: ['status', optional(vaultStatusSchema)],
+    customer: ['customer', optional(vaultCustomerSchema)],
+    links: ['links', optional(array(linkDescriptionSchema))],
+  })
+);

@@ -49,21 +49,17 @@ export interface TransactionDetails {
   incentiveInfo?: IncentiveInformation;
 }
 
-export const transactionDetailsSchema: Schema<TransactionDetails> = object({
-  transactionInfo: [
-    'transaction_info',
-    optional(lazy(() => transactionInformationSchema)),
-  ],
-  payerInfo: ['payer_info', optional(lazy(() => payerInformationSchema))],
-  shippingInfo: [
-    'shipping_info',
-    optional(lazy(() => shippingInformationSchema)),
-  ],
-  cartInfo: ['cart_info', optional(lazy(() => cartInformationSchema))],
-  storeInfo: ['store_info', optional(lazy(() => storeInformationSchema))],
-  auctionInfo: ['auction_info', optional(lazy(() => auctionInformationSchema))],
-  incentiveInfo: [
-    'incentive_info',
-    optional(lazy(() => incentiveInformationSchema)),
-  ],
-});
+export const transactionDetailsSchema: Schema<TransactionDetails> = lazy(() =>
+  object({
+    transactionInfo: [
+      'transaction_info',
+      optional(transactionInformationSchema),
+    ],
+    payerInfo: ['payer_info', optional(payerInformationSchema)],
+    shippingInfo: ['shipping_info', optional(shippingInformationSchema)],
+    cartInfo: ['cart_info', optional(cartInformationSchema)],
+    storeInfo: ['store_info', optional(storeInformationSchema)],
+    auctionInfo: ['auction_info', optional(auctionInformationSchema)],
+    incentiveInfo: ['incentive_info', optional(incentiveInformationSchema)],
+  })
+);

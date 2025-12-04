@@ -13,6 +13,6 @@ export interface ApplePayAttributesResponse {
   vault?: VaultResponse;
 }
 
-export const applePayAttributesResponseSchema: Schema<ApplePayAttributesResponse> = object(
-  { vault: ['vault', optional(lazy(() => vaultResponseSchema))] }
+export const applePayAttributesResponseSchema: Schema<ApplePayAttributesResponse> = lazy(
+  () => object({ vault: ['vault', optional(vaultResponseSchema)] })
 );

@@ -68,28 +68,27 @@ export interface PurchaseUnit {
   mostRecentErrors?: unknown[];
 }
 
-export const purchaseUnitSchema: Schema<PurchaseUnit> = object({
-  referenceId: ['reference_id', optional(string())],
-  amount: ['amount', optional(lazy(() => amountWithBreakdownSchema))],
-  payee: ['payee', optional(lazy(() => payeeBaseSchema))],
-  paymentInstruction: [
-    'payment_instruction',
-    optional(lazy(() => paymentInstructionSchema)),
-  ],
-  description: ['description', optional(string())],
-  customId: ['custom_id', optional(string())],
-  invoiceId: ['invoice_id', optional(string())],
-  id: ['id', optional(string())],
-  softDescriptor: ['soft_descriptor', optional(string())],
-  items: ['items', optional(array(lazy(() => itemSchema)))],
-  shipping: [
-    'shipping',
-    optional(lazy(() => shippingWithTrackingDetailsSchema)),
-  ],
-  supplementaryData: [
-    'supplementary_data',
-    optional(lazy(() => supplementaryDataSchema)),
-  ],
-  payments: ['payments', optional(lazy(() => paymentCollectionSchema))],
-  mostRecentErrors: ['most_recent_errors', optional(array(unknown()))],
-});
+export const purchaseUnitSchema: Schema<PurchaseUnit> = lazy(() =>
+  object({
+    referenceId: ['reference_id', optional(string())],
+    amount: ['amount', optional(amountWithBreakdownSchema)],
+    payee: ['payee', optional(payeeBaseSchema)],
+    paymentInstruction: [
+      'payment_instruction',
+      optional(paymentInstructionSchema),
+    ],
+    description: ['description', optional(string())],
+    customId: ['custom_id', optional(string())],
+    invoiceId: ['invoice_id', optional(string())],
+    id: ['id', optional(string())],
+    softDescriptor: ['soft_descriptor', optional(string())],
+    items: ['items', optional(array(itemSchema))],
+    shipping: ['shipping', optional(shippingWithTrackingDetailsSchema)],
+    supplementaryData: [
+      'supplementary_data',
+      optional(supplementaryDataSchema),
+    ],
+    payments: ['payments', optional(paymentCollectionSchema)],
+    mostRecentErrors: ['most_recent_errors', optional(array(unknown()))],
+  })
+);

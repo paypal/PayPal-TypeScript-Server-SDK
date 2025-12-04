@@ -33,17 +33,18 @@ export interface GooglePayDecryptedTokenData {
   eciIndicator?: string;
 }
 
-export const googlePayDecryptedTokenDataSchema: Schema<GooglePayDecryptedTokenData> = object(
-  {
-    messageId: ['message_id', optional(string())],
-    messageExpiration: ['message_expiration', optional(string())],
-    paymentMethod: ['payment_method', googlePayPaymentMethodSchema],
-    card: ['card', lazy(() => googlePayCardSchema)],
-    authenticationMethod: [
-      'authentication_method',
-      googlePayAuthenticationMethodSchema,
-    ],
-    cryptogram: ['cryptogram', optional(string())],
-    eciIndicator: ['eci_indicator', optional(string())],
-  }
+export const googlePayDecryptedTokenDataSchema: Schema<GooglePayDecryptedTokenData> = lazy(
+  () =>
+    object({
+      messageId: ['message_id', optional(string())],
+      messageExpiration: ['message_expiration', optional(string())],
+      paymentMethod: ['payment_method', googlePayPaymentMethodSchema],
+      card: ['card', googlePayCardSchema],
+      authenticationMethod: [
+        'authentication_method',
+        googlePayAuthenticationMethodSchema,
+      ],
+      cryptogram: ['cryptogram', optional(string())],
+      eciIndicator: ['eci_indicator', optional(string())],
+    })
 );

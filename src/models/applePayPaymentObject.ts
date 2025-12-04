@@ -39,21 +39,19 @@ export interface ApplePayPaymentObject {
   storedCredential?: CardStoredCredential;
 }
 
-export const applePayPaymentObjectSchema: Schema<ApplePayPaymentObject> = object(
-  {
-    id: ['id', optional(string())],
-    token: ['token', optional(string())],
-    name: ['name', optional(string())],
-    emailAddress: ['email_address', optional(string())],
-    phoneNumber: ['phone_number', optional(lazy(() => phoneNumberSchema))],
-    card: ['card', optional(lazy(() => applePayCardResponseSchema))],
-    attributes: [
-      'attributes',
-      optional(lazy(() => applePayAttributesResponseSchema)),
-    ],
-    storedCredential: [
-      'stored_credential',
-      optional(lazy(() => cardStoredCredentialSchema)),
-    ],
-  }
+export const applePayPaymentObjectSchema: Schema<ApplePayPaymentObject> = lazy(
+  () =>
+    object({
+      id: ['id', optional(string())],
+      token: ['token', optional(string())],
+      name: ['name', optional(string())],
+      emailAddress: ['email_address', optional(string())],
+      phoneNumber: ['phone_number', optional(phoneNumberSchema)],
+      card: ['card', optional(applePayCardResponseSchema)],
+      attributes: ['attributes', optional(applePayAttributesResponseSchema)],
+      storedCredential: [
+        'stored_credential',
+        optional(cardStoredCredentialSchema),
+      ],
+    })
 );

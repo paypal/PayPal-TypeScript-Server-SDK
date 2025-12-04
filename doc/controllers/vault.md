@@ -60,13 +60,25 @@ const collect = {
 }
 
 try {
-  const { result, ...httpResponse } = await vaultController.createPaymentToken(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await vaultController.createPaymentToken(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -128,13 +140,25 @@ const collect = {
 }
 
 try {
-  const { result, ...httpResponse } = await vaultController.listCustomerPaymentTokens(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await vaultController.listCustomerPaymentTokens(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -176,13 +200,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const { result, ...httpResponse } = await vaultController.getPaymentToken(id);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await vaultController.getPaymentToken(id);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -225,13 +261,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 const id = 'id0';
 
 try {
-  const { result, ...httpResponse } = await vaultController.deletePaymentToken(id);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await vaultController.deletePaymentToken(id);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -285,13 +333,25 @@ const collect = {
 }
 
 try {
-  const { result, ...httpResponse } = await vaultController.createSetupToken(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await vaultController.createSetupToken(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -334,13 +394,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const { result, ...httpResponse } = await vaultController.getSetupToken(id);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await vaultController.getSetupToken(id);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```

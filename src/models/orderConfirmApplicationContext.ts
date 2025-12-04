@@ -24,15 +24,16 @@ export interface OrderConfirmApplicationContext {
   storedPaymentSource?: StoredPaymentSource;
 }
 
-export const orderConfirmApplicationContextSchema: Schema<OrderConfirmApplicationContext> = object(
-  {
-    brandName: ['brand_name', optional(string())],
-    locale: ['locale', optional(string())],
-    returnUrl: ['return_url', optional(string())],
-    cancelUrl: ['cancel_url', optional(string())],
-    storedPaymentSource: [
-      'stored_payment_source',
-      optional(lazy(() => storedPaymentSourceSchema)),
-    ],
-  }
+export const orderConfirmApplicationContextSchema: Schema<OrderConfirmApplicationContext> = lazy(
+  () =>
+    object({
+      brandName: ['brand_name', optional(string())],
+      locale: ['locale', optional(string())],
+      returnUrl: ['return_url', optional(string())],
+      cancelUrl: ['cancel_url', optional(string())],
+      storedPaymentSource: [
+        'stored_payment_source',
+        optional(storedPaymentSourceSchema),
+      ],
+    })
 );

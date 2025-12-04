@@ -43,13 +43,14 @@ export interface SetupTokenRequestPaymentSource {
   bank?: BankRequest;
 }
 
-export const setupTokenRequestPaymentSourceSchema: Schema<SetupTokenRequestPaymentSource> = object(
-  {
-    card: ['card', optional(lazy(() => setupTokenRequestCardSchema))],
-    paypal: ['paypal', optional(lazy(() => vaultPaypalWalletRequestSchema))],
-    venmo: ['venmo', optional(lazy(() => vaultVenmoRequestSchema))],
-    applePay: ['apple_pay', optional(lazy(() => vaultApplePayRequestSchema))],
-    token: ['token', optional(lazy(() => vaultTokenRequestSchema))],
-    bank: ['bank', optional(lazy(() => bankRequestSchema))],
-  }
+export const setupTokenRequestPaymentSourceSchema: Schema<SetupTokenRequestPaymentSource> = lazy(
+  () =>
+    object({
+      card: ['card', optional(setupTokenRequestCardSchema)],
+      paypal: ['paypal', optional(vaultPaypalWalletRequestSchema)],
+      venmo: ['venmo', optional(vaultVenmoRequestSchema)],
+      applePay: ['apple_pay', optional(vaultApplePayRequestSchema)],
+      token: ['token', optional(vaultTokenRequestSchema)],
+      bank: ['bank', optional(bankRequestSchema)],
+    })
 );

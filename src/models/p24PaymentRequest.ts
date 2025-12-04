@@ -22,12 +22,14 @@ export interface P24PaymentRequest {
   experienceContext?: ExperienceContext;
 }
 
-export const p24PaymentRequestSchema: Schema<P24PaymentRequest> = object({
-  name: ['name', string()],
-  email: ['email', string()],
-  countryCode: ['country_code', string()],
-  experienceContext: [
-    'experience_context',
-    optional(lazy(() => experienceContextSchema)),
-  ],
-});
+export const p24PaymentRequestSchema: Schema<P24PaymentRequest> = lazy(() =>
+  object({
+    name: ['name', string()],
+    email: ['email', string()],
+    countryCode: ['country_code', string()],
+    experienceContext: [
+      'experience_context',
+      optional(experienceContextSchema),
+    ],
+  })
+);

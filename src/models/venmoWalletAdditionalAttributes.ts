@@ -22,12 +22,10 @@ export interface VenmoWalletAdditionalAttributes {
   vault?: VenmoWalletVaultAttributes;
 }
 
-export const venmoWalletAdditionalAttributesSchema: Schema<VenmoWalletAdditionalAttributes> = object(
-  {
-    customer: [
-      'customer',
-      optional(lazy(() => venmoWalletCustomerInformationSchema)),
-    ],
-    vault: ['vault', optional(lazy(() => venmoWalletVaultAttributesSchema))],
-  }
+export const venmoWalletAdditionalAttributesSchema: Schema<VenmoWalletAdditionalAttributes> = lazy(
+  () =>
+    object({
+      customer: ['customer', optional(venmoWalletCustomerInformationSchema)],
+      vault: ['vault', optional(venmoWalletVaultAttributesSchema)],
+    })
 );

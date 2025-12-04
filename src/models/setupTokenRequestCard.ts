@@ -36,21 +36,22 @@ export interface SetupTokenRequestCard {
   experienceContext?: VaultCardExperienceContext;
 }
 
-export const setupTokenRequestCardSchema: Schema<SetupTokenRequestCard> = object(
-  {
-    name: ['name', optional(string())],
-    number: ['number', optional(string())],
-    expiry: ['expiry', optional(string())],
-    securityCode: ['security_code', optional(string())],
-    brand: ['brand', optional(cardBrandSchema)],
-    billingAddress: ['billing_address', optional(lazy(() => addressSchema))],
-    verificationMethod: [
-      'verification_method',
-      optional(vaultCardVerificationMethodSchema),
-    ],
-    experienceContext: [
-      'experience_context',
-      optional(lazy(() => vaultCardExperienceContextSchema)),
-    ],
-  }
+export const setupTokenRequestCardSchema: Schema<SetupTokenRequestCard> = lazy(
+  () =>
+    object({
+      name: ['name', optional(string())],
+      number: ['number', optional(string())],
+      expiry: ['expiry', optional(string())],
+      securityCode: ['security_code', optional(string())],
+      brand: ['brand', optional(cardBrandSchema)],
+      billingAddress: ['billing_address', optional(addressSchema)],
+      verificationMethod: [
+        'verification_method',
+        optional(vaultCardVerificationMethodSchema),
+      ],
+      experienceContext: [
+        'experience_context',
+        optional(vaultCardExperienceContextSchema),
+      ],
+    })
 );

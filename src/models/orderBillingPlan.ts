@@ -18,8 +18,10 @@ export interface OrderBillingPlan {
   name?: string;
 }
 
-export const orderBillingPlanSchema: Schema<OrderBillingPlan> = object({
-  billingCycles: ['billing_cycles', array(lazy(() => billingCycleSchema))],
-  setupFee: ['setup_fee', optional(lazy(() => moneySchema))],
-  name: ['name', optional(string())],
-});
+export const orderBillingPlanSchema: Schema<OrderBillingPlan> = lazy(() =>
+  object({
+    billingCycles: ['billing_cycles', array(billingCycleSchema)],
+    setupFee: ['setup_fee', optional(moneySchema)],
+    name: ['name', optional(string())],
+  })
+);

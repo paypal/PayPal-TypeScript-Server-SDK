@@ -18,8 +18,10 @@ export interface CobrandedCard {
   amount?: Money;
 }
 
-export const cobrandedCardSchema: Schema<CobrandedCard> = object({
-  labels: ['labels', optional(array(string()))],
-  payee: ['payee', optional(lazy(() => payeeBaseSchema))],
-  amount: ['amount', optional(lazy(() => moneySchema))],
-});
+export const cobrandedCardSchema: Schema<CobrandedCard> = lazy(() =>
+  object({
+    labels: ['labels', optional(array(string()))],
+    payee: ['payee', optional(payeeBaseSchema)],
+    amount: ['amount', optional(moneySchema)],
+  })
+);

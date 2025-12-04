@@ -15,7 +15,9 @@ export interface VaultCustomer {
   name?: Name;
 }
 
-export const vaultCustomerSchema: Schema<VaultCustomer> = object({
-  id: ['id', optional(string())],
-  name: ['name', optional(lazy(() => nameSchema))],
-});
+export const vaultCustomerSchema: Schema<VaultCustomer> = lazy(() =>
+  object({
+    id: ['id', optional(string())],
+    name: ['name', optional(nameSchema)],
+  })
+);

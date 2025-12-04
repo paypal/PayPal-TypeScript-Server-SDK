@@ -16,12 +16,10 @@ export interface SubscriptionCollection {
   links?: LinkDescription[];
 }
 
-export const subscriptionCollectionSchema: Schema<SubscriptionCollection> = object(
-  {
-    subscriptions: [
-      'subscriptions',
-      optional(array(lazy(() => subscriptionSchema))),
-    ],
-    links: ['links', optional(array(lazy(() => linkDescriptionSchema)))],
-  }
+export const subscriptionCollectionSchema: Schema<SubscriptionCollection> = lazy(
+  () =>
+    object({
+      subscriptions: ['subscriptions', optional(array(subscriptionSchema))],
+      links: ['links', optional(array(linkDescriptionSchema))],
+    })
 );

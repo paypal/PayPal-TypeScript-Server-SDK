@@ -16,8 +16,7 @@ export interface PaymentSupplementaryData {
   relatedIds?: RelatedIdentifiers;
 }
 
-export const paymentSupplementaryDataSchema: Schema<PaymentSupplementaryData> = object(
-  {
-    relatedIds: ['related_ids', optional(lazy(() => relatedIdentifiersSchema))],
-  }
+export const paymentSupplementaryDataSchema: Schema<PaymentSupplementaryData> = lazy(
+  () =>
+    object({ relatedIds: ['related_ids', optional(relatedIdentifiersSchema)] })
 );

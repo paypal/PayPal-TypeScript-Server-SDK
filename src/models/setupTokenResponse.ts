@@ -30,13 +30,15 @@ export interface SetupTokenResponse {
   links?: LinkDescription[];
 }
 
-export const setupTokenResponseSchema: Schema<SetupTokenResponse> = object({
-  id: ['id', optional(string())],
-  customer: ['customer', optional(lazy(() => customerSchema))],
-  status: ['status', optional(paymentTokenStatusSchema)],
-  paymentSource: [
-    'payment_source',
-    optional(lazy(() => setupTokenResponsePaymentSourceSchema)),
-  ],
-  links: ['links', optional(array(lazy(() => linkDescriptionSchema)))],
-});
+export const setupTokenResponseSchema: Schema<SetupTokenResponse> = lazy(() =>
+  object({
+    id: ['id', optional(string())],
+    customer: ['customer', optional(customerSchema)],
+    status: ['status', optional(paymentTokenStatusSchema)],
+    paymentSource: [
+      'payment_source',
+      optional(setupTokenResponsePaymentSourceSchema),
+    ],
+    links: ['links', optional(array(linkDescriptionSchema))],
+  })
+);

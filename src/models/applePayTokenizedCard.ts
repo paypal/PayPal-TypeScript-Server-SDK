@@ -27,14 +27,15 @@ export interface ApplePayTokenizedCard {
   billingAddress?: Address;
 }
 
-export const applePayTokenizedCardSchema: Schema<ApplePayTokenizedCard> = object(
-  {
-    name: ['name', optional(string())],
-    number: ['number', optional(string())],
-    expiry: ['expiry', optional(string())],
-    cardType: ['card_type', optional(cardBrandSchema)],
-    type: ['type', optional(cardTypeSchema)],
-    brand: ['brand', optional(cardBrandSchema)],
-    billingAddress: ['billing_address', optional(lazy(() => addressSchema))],
-  }
+export const applePayTokenizedCardSchema: Schema<ApplePayTokenizedCard> = lazy(
+  () =>
+    object({
+      name: ['name', optional(string())],
+      number: ['number', optional(string())],
+      expiry: ['expiry', optional(string())],
+      cardType: ['card_type', optional(cardBrandSchema)],
+      type: ['type', optional(cardTypeSchema)],
+      brand: ['brand', optional(cardBrandSchema)],
+      billingAddress: ['billing_address', optional(addressSchema)],
+    })
 );

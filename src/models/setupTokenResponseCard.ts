@@ -54,33 +54,28 @@ export interface SetupTokenResponseCard {
   type?: CardType;
 }
 
-export const setupTokenResponseCardSchema: Schema<SetupTokenResponseCard> = object(
-  {
-    name: ['name', optional(string())],
-    lastDigits: ['last_digits', optional(string())],
-    brand: ['brand', optional(cardBrandSchema)],
-    expiry: ['expiry', optional(string())],
-    billingAddress: [
-      'billing_address',
-      optional(lazy(() => cardResponseAddressSchema)),
-    ],
-    verificationStatus: [
-      'verification_status',
-      optional(cardVerificationStatusSchema),
-    ],
-    verification: [
-      'verification',
-      optional(lazy(() => cardVerificationDetailsSchema)),
-    ],
-    networkTransactionReference: [
-      'network_transaction_reference',
-      optional(lazy(() => networkTransactionReferenceEntitySchema)),
-    ],
-    authenticationResult: [
-      'authentication_result',
-      optional(lazy(() => cardAuthenticationResponseSchema)),
-    ],
-    binDetails: ['bin_details', optional(lazy(() => binDetailsSchema))],
-    type: ['type', optional(cardTypeSchema)],
-  }
+export const setupTokenResponseCardSchema: Schema<SetupTokenResponseCard> = lazy(
+  () =>
+    object({
+      name: ['name', optional(string())],
+      lastDigits: ['last_digits', optional(string())],
+      brand: ['brand', optional(cardBrandSchema)],
+      expiry: ['expiry', optional(string())],
+      billingAddress: ['billing_address', optional(cardResponseAddressSchema)],
+      verificationStatus: [
+        'verification_status',
+        optional(cardVerificationStatusSchema),
+      ],
+      verification: ['verification', optional(cardVerificationDetailsSchema)],
+      networkTransactionReference: [
+        'network_transaction_reference',
+        optional(networkTransactionReferenceEntitySchema),
+      ],
+      authenticationResult: [
+        'authentication_result',
+        optional(cardAuthenticationResponseSchema),
+      ],
+      binDetails: ['bin_details', optional(binDetailsSchema)],
+      type: ['type', optional(cardTypeSchema)],
+    })
 );

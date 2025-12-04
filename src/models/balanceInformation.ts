@@ -21,10 +21,12 @@ export interface BalanceInformation {
   withheldBalance?: Money;
 }
 
-export const balanceInformationSchema: Schema<BalanceInformation> = object({
-  currency: ['currency', string()],
-  primary: ['primary', optional(boolean())],
-  totalBalance: ['total_balance', lazy(() => moneySchema)],
-  availableBalance: ['available_balance', optional(lazy(() => moneySchema))],
-  withheldBalance: ['withheld_balance', optional(lazy(() => moneySchema))],
-});
+export const balanceInformationSchema: Schema<BalanceInformation> = lazy(() =>
+  object({
+    currency: ['currency', string()],
+    primary: ['primary', optional(boolean())],
+    totalBalance: ['total_balance', moneySchema],
+    availableBalance: ['available_balance', optional(moneySchema)],
+    withheldBalance: ['withheld_balance', optional(moneySchema)],
+  })
+);

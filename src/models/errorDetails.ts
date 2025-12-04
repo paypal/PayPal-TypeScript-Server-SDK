@@ -23,11 +23,13 @@ export interface ErrorDetails {
   description?: string;
 }
 
-export const errorDetailsSchema: Schema<ErrorDetails> = object({
-  field: ['field', optional(string())],
-  value: ['value', optional(string())],
-  location: ['location', optional(string())],
-  issue: ['issue', string()],
-  links: ['links', optional(array(lazy(() => linkDescriptionSchema)))],
-  description: ['description', optional(string())],
-});
+export const errorDetailsSchema: Schema<ErrorDetails> = lazy(() =>
+  object({
+    field: ['field', optional(string())],
+    value: ['value', optional(string())],
+    location: ['location', optional(string())],
+    issue: ['issue', string()],
+    links: ['links', optional(array(linkDescriptionSchema))],
+    description: ['description', optional(string())],
+  })
+);

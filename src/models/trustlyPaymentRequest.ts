@@ -22,14 +22,15 @@ export interface TrustlyPaymentRequest {
   experienceContext?: ExperienceContext;
 }
 
-export const trustlyPaymentRequestSchema: Schema<TrustlyPaymentRequest> = object(
-  {
-    name: ['name', string()],
-    countryCode: ['country_code', string()],
-    email: ['email', string()],
-    experienceContext: [
-      'experience_context',
-      optional(lazy(() => experienceContextSchema)),
-    ],
-  }
+export const trustlyPaymentRequestSchema: Schema<TrustlyPaymentRequest> = lazy(
+  () =>
+    object({
+      name: ['name', string()],
+      countryCode: ['country_code', string()],
+      email: ['email', string()],
+      experienceContext: [
+        'experience_context',
+        optional(experienceContextSchema),
+      ],
+    })
 );

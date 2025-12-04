@@ -18,11 +18,10 @@ export interface PricingScheme {
   reloadThresholdAmount?: Money;
 }
 
-export const pricingSchemeSchema: Schema<PricingScheme> = object({
-  price: ['price', optional(lazy(() => moneySchema))],
-  pricingModel: ['pricing_model', pricingModelSchema],
-  reloadThresholdAmount: [
-    'reload_threshold_amount',
-    optional(lazy(() => moneySchema)),
-  ],
-});
+export const pricingSchemeSchema: Schema<PricingScheme> = lazy(() =>
+  object({
+    price: ['price', optional(moneySchema)],
+    pricingModel: ['pricing_model', pricingModelSchema],
+    reloadThresholdAmount: ['reload_threshold_amount', optional(moneySchema)],
+  })
+);

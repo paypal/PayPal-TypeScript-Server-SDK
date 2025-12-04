@@ -53,23 +53,19 @@ export interface PlanRequest {
   quantitySupported?: boolean;
 }
 
-export const planRequestSchema: Schema<PlanRequest> = object({
-  productId: ['product_id', string()],
-  name: ['name', string()],
-  status: ['status', optional(planRequestStatusSchema)],
-  description: ['description', optional(string())],
-  billingCycles: [
-    'billing_cycles',
-    array(lazy(() => subscriptionBillingCycleSchema)),
-  ],
-  paymentPreferences: [
-    'payment_preferences',
-    lazy(() => paymentPreferencesSchema),
-  ],
-  merchantPreferences: [
-    'merchant_preferences',
-    optional(lazy(() => merchantPreferencesSchema)),
-  ],
-  taxes: ['taxes', optional(lazy(() => taxesSchema))],
-  quantitySupported: ['quantity_supported', optional(boolean())],
-});
+export const planRequestSchema: Schema<PlanRequest> = lazy(() =>
+  object({
+    productId: ['product_id', string()],
+    name: ['name', string()],
+    status: ['status', optional(planRequestStatusSchema)],
+    description: ['description', optional(string())],
+    billingCycles: ['billing_cycles', array(subscriptionBillingCycleSchema)],
+    paymentPreferences: ['payment_preferences', paymentPreferencesSchema],
+    merchantPreferences: [
+      'merchant_preferences',
+      optional(merchantPreferencesSchema),
+    ],
+    taxes: ['taxes', optional(taxesSchema)],
+    quantitySupported: ['quantity_supported', optional(boolean())],
+  })
+);

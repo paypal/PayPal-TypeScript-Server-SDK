@@ -34,16 +34,15 @@ export interface OrderRequest {
   applicationContext?: OrderApplicationContext;
 }
 
-export const orderRequestSchema: Schema<OrderRequest> = object({
-  intent: ['intent', checkoutPaymentIntentSchema],
-  payer: ['payer', optional(lazy(() => payerSchema))],
-  purchaseUnits: [
-    'purchase_units',
-    array(lazy(() => purchaseUnitRequestSchema)),
-  ],
-  paymentSource: ['payment_source', optional(lazy(() => paymentSourceSchema))],
-  applicationContext: [
-    'application_context',
-    optional(lazy(() => orderApplicationContextSchema)),
-  ],
-});
+export const orderRequestSchema: Schema<OrderRequest> = lazy(() =>
+  object({
+    intent: ['intent', checkoutPaymentIntentSchema],
+    payer: ['payer', optional(payerSchema)],
+    purchaseUnits: ['purchase_units', array(purchaseUnitRequestSchema)],
+    paymentSource: ['payment_source', optional(paymentSourceSchema)],
+    applicationContext: [
+      'application_context',
+      optional(orderApplicationContextSchema),
+    ],
+  })
+);

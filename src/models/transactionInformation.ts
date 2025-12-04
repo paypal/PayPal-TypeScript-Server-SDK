@@ -83,62 +83,54 @@ export interface TransactionInformation {
   instrumentSubType?: string;
 }
 
-export const transactionInformationSchema: Schema<TransactionInformation> = object(
-  {
-    paypalAccountId: ['paypal_account_id', optional(string())],
-    transactionId: ['transaction_id', optional(string())],
-    paypalReferenceId: ['paypal_reference_id', optional(string())],
-    paypalReferenceIdType: [
-      'paypal_reference_id_type',
-      optional(paypalReferenceIdTypeSchema),
-    ],
-    transactionEventCode: ['transaction_event_code', optional(string())],
-    transactionInitiationDate: [
-      'transaction_initiation_date',
-      optional(string()),
-    ],
-    transactionUpdatedDate: ['transaction_updated_date', optional(string())],
-    transactionAmount: [
-      'transaction_amount',
-      optional(lazy(() => moneySchema)),
-    ],
-    feeAmount: ['fee_amount', optional(lazy(() => moneySchema))],
-    discountAmount: ['discount_amount', optional(lazy(() => moneySchema))],
-    insuranceAmount: ['insurance_amount', optional(lazy(() => moneySchema))],
-    salesTaxAmount: ['sales_tax_amount', optional(lazy(() => moneySchema))],
-    shippingAmount: ['shipping_amount', optional(lazy(() => moneySchema))],
-    shippingDiscountAmount: [
-      'shipping_discount_amount',
-      optional(lazy(() => moneySchema)),
-    ],
-    shippingTaxAmount: [
-      'shipping_tax_amount',
-      optional(lazy(() => moneySchema)),
-    ],
-    otherAmount: ['other_amount', optional(lazy(() => moneySchema))],
-    tipAmount: ['tip_amount', optional(lazy(() => moneySchema))],
-    transactionStatus: ['transaction_status', optional(string())],
-    transactionSubject: ['transaction_subject', optional(string())],
-    transactionNote: ['transaction_note', optional(string())],
-    paymentTrackingId: ['payment_tracking_id', optional(string())],
-    bankReferenceId: ['bank_reference_id', optional(string())],
-    endingBalance: ['ending_balance', optional(lazy(() => moneySchema))],
-    availableBalance: ['available_balance', optional(lazy(() => moneySchema))],
-    invoiceId: ['invoice_id', optional(string())],
-    customField: ['custom_field', optional(string())],
-    protectionEligibility: ['protection_eligibility', optional(string())],
-    creditTerm: ['credit_term', optional(string())],
-    creditTransactionalFee: [
-      'credit_transactional_fee',
-      optional(lazy(() => moneySchema)),
-    ],
-    creditPromotionalFee: [
-      'credit_promotional_fee',
-      optional(lazy(() => moneySchema)),
-    ],
-    annualPercentageRate: ['annual_percentage_rate', optional(string())],
-    paymentMethodType: ['payment_method_type', optional(string())],
-    instrumentType: ['instrument_type', optional(string())],
-    instrumentSubType: ['instrument_sub_type', optional(string())],
-  }
+export const transactionInformationSchema: Schema<TransactionInformation> = lazy(
+  () =>
+    object({
+      paypalAccountId: ['paypal_account_id', optional(string())],
+      transactionId: ['transaction_id', optional(string())],
+      paypalReferenceId: ['paypal_reference_id', optional(string())],
+      paypalReferenceIdType: [
+        'paypal_reference_id_type',
+        optional(paypalReferenceIdTypeSchema),
+      ],
+      transactionEventCode: ['transaction_event_code', optional(string())],
+      transactionInitiationDate: [
+        'transaction_initiation_date',
+        optional(string()),
+      ],
+      transactionUpdatedDate: ['transaction_updated_date', optional(string())],
+      transactionAmount: ['transaction_amount', optional(moneySchema)],
+      feeAmount: ['fee_amount', optional(moneySchema)],
+      discountAmount: ['discount_amount', optional(moneySchema)],
+      insuranceAmount: ['insurance_amount', optional(moneySchema)],
+      salesTaxAmount: ['sales_tax_amount', optional(moneySchema)],
+      shippingAmount: ['shipping_amount', optional(moneySchema)],
+      shippingDiscountAmount: [
+        'shipping_discount_amount',
+        optional(moneySchema),
+      ],
+      shippingTaxAmount: ['shipping_tax_amount', optional(moneySchema)],
+      otherAmount: ['other_amount', optional(moneySchema)],
+      tipAmount: ['tip_amount', optional(moneySchema)],
+      transactionStatus: ['transaction_status', optional(string())],
+      transactionSubject: ['transaction_subject', optional(string())],
+      transactionNote: ['transaction_note', optional(string())],
+      paymentTrackingId: ['payment_tracking_id', optional(string())],
+      bankReferenceId: ['bank_reference_id', optional(string())],
+      endingBalance: ['ending_balance', optional(moneySchema)],
+      availableBalance: ['available_balance', optional(moneySchema)],
+      invoiceId: ['invoice_id', optional(string())],
+      customField: ['custom_field', optional(string())],
+      protectionEligibility: ['protection_eligibility', optional(string())],
+      creditTerm: ['credit_term', optional(string())],
+      creditTransactionalFee: [
+        'credit_transactional_fee',
+        optional(moneySchema),
+      ],
+      creditPromotionalFee: ['credit_promotional_fee', optional(moneySchema)],
+      annualPercentageRate: ['annual_percentage_rate', optional(string())],
+      paymentMethodType: ['payment_method_type', optional(string())],
+      instrumentType: ['instrument_type', optional(string())],
+      instrumentSubType: ['instrument_sub_type', optional(string())],
+    })
 );

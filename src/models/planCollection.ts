@@ -20,9 +20,11 @@ export interface PlanCollection {
   links?: LinkDescription[];
 }
 
-export const planCollectionSchema: Schema<PlanCollection> = object({
-  plans: ['plans', optional(array(lazy(() => billingPlanSchema)))],
-  totalItems: ['total_items', optional(number())],
-  totalPages: ['total_pages', optional(number())],
-  links: ['links', optional(array(lazy(() => linkDescriptionSchema)))],
-});
+export const planCollectionSchema: Schema<PlanCollection> = lazy(() =>
+  object({
+    plans: ['plans', optional(array(billingPlanSchema))],
+    totalItems: ['total_items', optional(number())],
+    totalPages: ['total_pages', optional(number())],
+    links: ['links', optional(array(linkDescriptionSchema))],
+  })
+);

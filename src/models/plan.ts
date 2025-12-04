@@ -18,8 +18,10 @@ export interface Plan {
   name?: string;
 }
 
-export const planSchema: Schema<Plan> = object({
-  billingCycles: ['billing_cycles', array(lazy(() => billingCycleSchema))],
-  oneTimeCharges: ['one_time_charges', lazy(() => oneTimeChargeSchema)],
-  name: ['name', optional(string())],
-});
+export const planSchema: Schema<Plan> = lazy(() =>
+  object({
+    billingCycles: ['billing_cycles', array(billingCycleSchema)],
+    oneTimeCharges: ['one_time_charges', oneTimeChargeSchema],
+    name: ['name', optional(string())],
+  })
+);

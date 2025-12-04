@@ -23,13 +23,14 @@ export interface SubscriptionAmountWithBreakdown {
   netAmount?: Money;
 }
 
-export const subscriptionAmountWithBreakdownSchema: Schema<SubscriptionAmountWithBreakdown> = object(
-  {
-    grossAmount: ['gross_amount', lazy(() => moneySchema)],
-    totalItemAmount: ['total_item_amount', optional(lazy(() => moneySchema))],
-    feeAmount: ['fee_amount', optional(lazy(() => moneySchema))],
-    shippingAmount: ['shipping_amount', optional(lazy(() => moneySchema))],
-    taxAmount: ['tax_amount', optional(lazy(() => moneySchema))],
-    netAmount: ['net_amount', optional(lazy(() => moneySchema))],
-  }
+export const subscriptionAmountWithBreakdownSchema: Schema<SubscriptionAmountWithBreakdown> = lazy(
+  () =>
+    object({
+      grossAmount: ['gross_amount', moneySchema],
+      totalItemAmount: ['total_item_amount', optional(moneySchema)],
+      feeAmount: ['fee_amount', optional(moneySchema)],
+      shippingAmount: ['shipping_amount', optional(moneySchema)],
+      taxAmount: ['tax_amount', optional(moneySchema)],
+      netAmount: ['net_amount', optional(moneySchema)],
+    })
 );

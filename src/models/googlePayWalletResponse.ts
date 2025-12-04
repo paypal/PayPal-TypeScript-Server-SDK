@@ -26,14 +26,12 @@ export interface GooglePayWalletResponse {
   card?: GooglePayCardResponse;
 }
 
-export const googlePayWalletResponseSchema: Schema<GooglePayWalletResponse> = object(
-  {
-    name: ['name', optional(string())],
-    emailAddress: ['email_address', optional(string())],
-    phoneNumber: [
-      'phone_number',
-      optional(lazy(() => phoneNumberWithCountryCodeSchema)),
-    ],
-    card: ['card', optional(lazy(() => googlePayCardResponseSchema))],
-  }
+export const googlePayWalletResponseSchema: Schema<GooglePayWalletResponse> = lazy(
+  () =>
+    object({
+      name: ['name', optional(string())],
+      emailAddress: ['email_address', optional(string())],
+      phoneNumber: ['phone_number', optional(phoneNumberWithCountryCodeSchema)],
+      card: ['card', optional(googlePayCardResponseSchema)],
+    })
 );

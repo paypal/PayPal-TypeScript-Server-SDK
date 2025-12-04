@@ -14,7 +14,9 @@ export interface LastPaymentDetails {
   time?: string;
 }
 
-export const lastPaymentDetailsSchema: Schema<LastPaymentDetails> = object({
-  amount: ['amount', optional(lazy(() => moneySchema))],
-  time: ['time', optional(string())],
-});
+export const lastPaymentDetailsSchema: Schema<LastPaymentDetails> = lazy(() =>
+  object({
+    amount: ['amount', optional(moneySchema)],
+    time: ['time', optional(string())],
+  })
+);

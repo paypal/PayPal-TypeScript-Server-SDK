@@ -53,27 +53,26 @@ export interface PaypalPaymentToken {
   phoneNumber?: Phone;
 }
 
-export const paypalPaymentTokenSchema: Schema<PaypalPaymentToken> = object({
-  description: ['description', optional(string())],
-  usagePattern: ['usage_pattern', optional(usagePatternSchema)],
-  shipping: [
-    'shipping',
-    optional(lazy(() => vaultedDigitalWalletShippingDetailsSchema)),
-  ],
-  permitMultiplePaymentTokens: [
-    'permit_multiple_payment_tokens',
-    optional(boolean()),
-  ],
-  usageType: ['usage_type', optional(paypalPaymentTokenUsageTypeSchema)],
-  customerType: [
-    'customer_type',
-    optional(paypalPaymentTokenCustomerTypeSchema),
-  ],
-  emailAddress: ['email_address', optional(string())],
-  payerId: ['payer_id', optional(string())],
-  name: ['name', optional(lazy(() => nameSchema))],
-  phone: ['phone', optional(lazy(() => phoneWithTypeSchema))],
-  address: ['address', optional(lazy(() => addressSchema))],
-  accountId: ['account_id', optional(string())],
-  phoneNumber: ['phone_number', optional(lazy(() => phoneSchema))],
-});
+export const paypalPaymentTokenSchema: Schema<PaypalPaymentToken> = lazy(() =>
+  object({
+    description: ['description', optional(string())],
+    usagePattern: ['usage_pattern', optional(usagePatternSchema)],
+    shipping: ['shipping', optional(vaultedDigitalWalletShippingDetailsSchema)],
+    permitMultiplePaymentTokens: [
+      'permit_multiple_payment_tokens',
+      optional(boolean()),
+    ],
+    usageType: ['usage_type', optional(paypalPaymentTokenUsageTypeSchema)],
+    customerType: [
+      'customer_type',
+      optional(paypalPaymentTokenCustomerTypeSchema),
+    ],
+    emailAddress: ['email_address', optional(string())],
+    payerId: ['payer_id', optional(string())],
+    name: ['name', optional(nameSchema)],
+    phone: ['phone', optional(phoneWithTypeSchema)],
+    address: ['address', optional(addressSchema)],
+    accountId: ['account_id', optional(string())],
+    phoneNumber: ['phone_number', optional(phoneSchema)],
+  })
+);

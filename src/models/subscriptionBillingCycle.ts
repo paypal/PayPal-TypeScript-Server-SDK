@@ -26,15 +26,16 @@ export interface SubscriptionBillingCycle {
   totalCycles?: number;
 }
 
-export const subscriptionBillingCycleSchema: Schema<SubscriptionBillingCycle> = object(
-  {
-    pricingScheme: [
-      'pricing_scheme',
-      optional(lazy(() => subscriptionPricingSchemeSchema)),
-    ],
-    frequency: ['frequency', lazy(() => frequencySchema)],
-    tenureType: ['tenure_type', tenureTypeSchema],
-    sequence: ['sequence', number()],
-    totalCycles: ['total_cycles', optional(number())],
-  }
+export const subscriptionBillingCycleSchema: Schema<SubscriptionBillingCycle> = lazy(
+  () =>
+    object({
+      pricingScheme: [
+        'pricing_scheme',
+        optional(subscriptionPricingSchemeSchema),
+      ],
+      frequency: ['frequency', frequencySchema],
+      tenureType: ['tenure_type', tenureTypeSchema],
+      sequence: ['sequence', number()],
+      totalCycles: ['total_cycles', optional(number())],
+    })
 );

@@ -19,12 +19,10 @@ export interface PaypalWalletAttributesResponse {
   cobrandedCards?: CobrandedCard[];
 }
 
-export const paypalWalletAttributesResponseSchema: Schema<PaypalWalletAttributesResponse> = object(
-  {
-    vault: ['vault', optional(lazy(() => paypalWalletVaultResponseSchema))],
-    cobrandedCards: [
-      'cobranded_cards',
-      optional(array(lazy(() => cobrandedCardSchema))),
-    ],
-  }
+export const paypalWalletAttributesResponseSchema: Schema<PaypalWalletAttributesResponse> = lazy(
+  () =>
+    object({
+      vault: ['vault', optional(paypalWalletVaultResponseSchema)],
+      cobrandedCards: ['cobranded_cards', optional(array(cobrandedCardSchema))],
+    })
 );

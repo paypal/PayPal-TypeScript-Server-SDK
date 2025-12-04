@@ -47,19 +47,21 @@ export interface LineItem {
   unitOfMeasure?: string;
 }
 
-export const lineItemSchema: Schema<LineItem> = object({
-  name: ['name', string()],
-  quantity: ['quantity', string()],
-  description: ['description', optional(string())],
-  sku: ['sku', optional(string())],
-  url: ['url', optional(string())],
-  imageUrl: ['image_url', optional(string())],
-  upc: ['upc', optional(lazy(() => universalProductCodeSchema))],
-  billingPlan: ['billing_plan', optional(lazy(() => orderBillingPlanSchema))],
-  unitAmount: ['unit_amount', optional(lazy(() => moneySchema))],
-  tax: ['tax', optional(lazy(() => moneySchema))],
-  commodityCode: ['commodity_code', optional(string())],
-  discountAmount: ['discount_amount', optional(lazy(() => moneySchema))],
-  totalAmount: ['total_amount', optional(lazy(() => moneySchema))],
-  unitOfMeasure: ['unit_of_measure', optional(string())],
-});
+export const lineItemSchema: Schema<LineItem> = lazy(() =>
+  object({
+    name: ['name', string()],
+    quantity: ['quantity', string()],
+    description: ['description', optional(string())],
+    sku: ['sku', optional(string())],
+    url: ['url', optional(string())],
+    imageUrl: ['image_url', optional(string())],
+    upc: ['upc', optional(universalProductCodeSchema)],
+    billingPlan: ['billing_plan', optional(orderBillingPlanSchema)],
+    unitAmount: ['unit_amount', optional(moneySchema)],
+    tax: ['tax', optional(moneySchema)],
+    commodityCode: ['commodity_code', optional(string())],
+    discountAmount: ['discount_amount', optional(moneySchema)],
+    totalAmount: ['total_amount', optional(moneySchema)],
+    unitOfMeasure: ['unit_of_measure', optional(string())],
+  })
+);

@@ -27,12 +27,15 @@ export interface PaymentTokenResponse {
   links?: LinkDescription[];
 }
 
-export const paymentTokenResponseSchema: Schema<PaymentTokenResponse> = object({
-  id: ['id', optional(string())],
-  customer: ['customer', optional(lazy(() => customerResponseSchema))],
-  paymentSource: [
-    'payment_source',
-    optional(lazy(() => paymentTokenResponsePaymentSourceSchema)),
-  ],
-  links: ['links', optional(array(lazy(() => linkDescriptionSchema)))],
-});
+export const paymentTokenResponseSchema: Schema<PaymentTokenResponse> = lazy(
+  () =>
+    object({
+      id: ['id', optional(string())],
+      customer: ['customer', optional(customerResponseSchema)],
+      paymentSource: [
+        'payment_source',
+        optional(paymentTokenResponsePaymentSourceSchema),
+      ],
+      links: ['links', optional(array(linkDescriptionSchema))],
+    })
+);

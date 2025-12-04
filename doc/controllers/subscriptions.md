@@ -93,13 +93,25 @@ const collect = {
 }
 
 try {
-  const { result, ...httpResponse } = await subscriptionsController.createBillingPlan(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await subscriptionsController.createBillingPlan(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -165,13 +177,25 @@ const collect = {
 }
 
 try {
-  const { result, ...httpResponse } = await subscriptionsController.listBillingPlans(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await subscriptionsController.listBillingPlans(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -216,13 +240,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const id = 'id0';
 
 try {
-  const { result, ...httpResponse } = await subscriptionsController.getBillingPlan(id);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await subscriptionsController.getBillingPlan(id);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -280,13 +316,25 @@ const collect = {
 }
 
 try {
-  const { result, ...httpResponse } = await subscriptionsController.patchBillingPlan(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await subscriptionsController.patchBillingPlan(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -332,13 +380,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 const id = 'id0';
 
 try {
-  const { result, ...httpResponse } = await subscriptionsController.activateBillingPlan(id);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await subscriptionsController.activateBillingPlan(id);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -383,13 +443,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 const id = 'id0';
 
 try {
-  const { result, ...httpResponse } = await subscriptionsController.deactivateBillingPlan(id);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await subscriptionsController.deactivateBillingPlan(id);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -452,13 +524,25 @@ const collect = {
 }
 
 try {
-  const { result, ...httpResponse } = await subscriptionsController.updateBillingPlanPricingSchemes(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await subscriptionsController.updateBillingPlanPricingSchemes(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -523,13 +607,25 @@ const collect = {
 }
 
 try {
-  const { result, ...httpResponse } = await subscriptionsController.createSubscription(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await subscriptionsController.createSubscription(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -608,13 +704,25 @@ const collect = {
 }
 
 try {
-  const { result, ...httpResponse } = await subscriptionsController.listSubscriptions(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await subscriptionsController.listSubscriptions(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -667,13 +775,25 @@ const collect = {
 }
 
 try {
-  const { result, ...httpResponse } = await subscriptionsController.getSubscription(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await subscriptionsController.getSubscription(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -731,13 +851,25 @@ const collect = {
 }
 
 try {
-  const { result, ...httpResponse } = await subscriptionsController.patchSubscription(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await subscriptionsController.patchSubscription(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -792,13 +924,25 @@ const collect = {
 }
 
 try {
-  const { result, ...httpResponse } = await subscriptionsController.reviseSubscription(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await subscriptionsController.reviseSubscription(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -853,13 +997,25 @@ const collect = {
 }
 
 try {
-  const { result, ...httpResponse } = await subscriptionsController.suspendSubscription(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await subscriptionsController.suspendSubscription(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -914,13 +1070,25 @@ const collect = {
 }
 
 try {
-  const { result, ...httpResponse } = await subscriptionsController.cancelSubscription(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await subscriptionsController.cancelSubscription(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -975,13 +1143,25 @@ const collect = {
 }
 
 try {
-  const { result, ...httpResponse } = await subscriptionsController.activateSubscription(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await subscriptionsController.activateSubscription(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -1039,13 +1219,25 @@ const collect = {
 }
 
 try {
-  const { result, ...httpResponse } = await subscriptionsController.captureSubscription(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await subscriptionsController.captureSubscription(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -1105,13 +1297,25 @@ const collect = {
 }
 
 try {
-  const { result, ...httpResponse } = await subscriptionsController.listSubscriptionTransactions(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await subscriptionsController.listSubscriptionTransactions(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```

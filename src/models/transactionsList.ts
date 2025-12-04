@@ -23,12 +23,14 @@ export interface TransactionsList {
   links?: LinkDescription[];
 }
 
-export const transactionsListSchema: Schema<TransactionsList> = object({
-  transactions: [
-    'transactions',
-    optional(array(lazy(() => subscriptionTransactionDetailsSchema))),
-  ],
-  totalItems: ['total_items', optional(number())],
-  totalPages: ['total_pages', optional(number())],
-  links: ['links', optional(array(lazy(() => linkDescriptionSchema)))],
-});
+export const transactionsListSchema: Schema<TransactionsList> = lazy(() =>
+  object({
+    transactions: [
+      'transactions',
+      optional(array(subscriptionTransactionDetailsSchema)),
+    ],
+    totalItems: ['total_items', optional(number())],
+    totalPages: ['total_pages', optional(number())],
+    links: ['links', optional(array(linkDescriptionSchema))],
+  })
+);

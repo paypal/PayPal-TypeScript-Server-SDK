@@ -30,14 +30,13 @@ export interface ShippingDetails {
   address?: Address;
 }
 
-export const shippingDetailsSchema: Schema<ShippingDetails> = object({
-  name: ['name', optional(lazy(() => shippingNameSchema))],
-  emailAddress: ['email_address', optional(string())],
-  phoneNumber: [
-    'phone_number',
-    optional(lazy(() => phoneNumberWithCountryCodeSchema)),
-  ],
-  type: ['type', optional(fulfillmentTypeSchema)],
-  options: ['options', optional(array(lazy(() => shippingOptionSchema)))],
-  address: ['address', optional(lazy(() => addressSchema))],
-});
+export const shippingDetailsSchema: Schema<ShippingDetails> = lazy(() =>
+  object({
+    name: ['name', optional(shippingNameSchema)],
+    emailAddress: ['email_address', optional(string())],
+    phoneNumber: ['phone_number', optional(phoneNumberWithCountryCodeSchema)],
+    type: ['type', optional(fulfillmentTypeSchema)],
+    options: ['options', optional(array(shippingOptionSchema))],
+    address: ['address', optional(addressSchema)],
+  })
+);

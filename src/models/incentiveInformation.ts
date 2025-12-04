@@ -16,9 +16,12 @@ export interface IncentiveInformation {
   incentiveDetails?: IncentiveDetails[];
 }
 
-export const incentiveInformationSchema: Schema<IncentiveInformation> = object({
-  incentiveDetails: [
-    'incentive_details',
-    optional(array(lazy(() => incentiveDetailsSchema))),
-  ],
-});
+export const incentiveInformationSchema: Schema<IncentiveInformation> = lazy(
+  () =>
+    object({
+      incentiveDetails: [
+        'incentive_details',
+        optional(array(incentiveDetailsSchema)),
+      ],
+    })
+);

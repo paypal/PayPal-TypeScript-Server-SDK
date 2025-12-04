@@ -34,12 +34,14 @@ export interface StoredPaymentSource {
   previousNetworkTransactionReference?: NetworkTransaction;
 }
 
-export const storedPaymentSourceSchema: Schema<StoredPaymentSource> = object({
-  paymentInitiator: ['payment_initiator', paymentInitiatorSchema],
-  paymentType: ['payment_type', storedPaymentSourcePaymentTypeSchema],
-  usage: ['usage', optional(storedPaymentSourceUsageTypeSchema)],
-  previousNetworkTransactionReference: [
-    'previous_network_transaction_reference',
-    optional(lazy(() => networkTransactionSchema)),
-  ],
-});
+export const storedPaymentSourceSchema: Schema<StoredPaymentSource> = lazy(() =>
+  object({
+    paymentInitiator: ['payment_initiator', paymentInitiatorSchema],
+    paymentType: ['payment_type', storedPaymentSourcePaymentTypeSchema],
+    usage: ['usage', optional(storedPaymentSourceUsageTypeSchema)],
+    previousNetworkTransactionReference: [
+      'previous_network_transaction_reference',
+      optional(networkTransactionSchema),
+    ],
+  })
+);

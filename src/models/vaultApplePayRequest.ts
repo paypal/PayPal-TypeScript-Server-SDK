@@ -18,7 +18,10 @@ export interface VaultApplePayRequest {
   card?: ApplePayRequestCard;
 }
 
-export const vaultApplePayRequestSchema: Schema<VaultApplePayRequest> = object({
-  token: ['token', optional(string())],
-  card: ['card', optional(lazy(() => applePayRequestCardSchema))],
-});
+export const vaultApplePayRequestSchema: Schema<VaultApplePayRequest> = lazy(
+  () =>
+    object({
+      token: ['token', optional(string())],
+      card: ['card', optional(applePayRequestCardSchema)],
+    })
+);

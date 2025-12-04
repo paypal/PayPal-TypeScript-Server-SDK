@@ -16,11 +16,9 @@ export interface UpdatePricingSchemesRequest {
   pricingSchemes: UpdatePricingScheme[];
 }
 
-export const updatePricingSchemesRequestSchema: Schema<UpdatePricingSchemesRequest> = object(
-  {
-    pricingSchemes: [
-      'pricing_schemes',
-      array(lazy(() => updatePricingSchemeSchema)),
-    ],
-  }
+export const updatePricingSchemesRequestSchema: Schema<UpdatePricingSchemesRequest> = lazy(
+  () =>
+    object({
+      pricingSchemes: ['pricing_schemes', array(updatePricingSchemeSchema)],
+    })
 );

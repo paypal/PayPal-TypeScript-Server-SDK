@@ -25,13 +25,14 @@ export interface Level3CardProcessingData {
   lineItems?: LineItem[];
 }
 
-export const level3CardProcessingDataSchema: Schema<Level3CardProcessingData> = object(
-  {
-    shippingAmount: ['shipping_amount', optional(lazy(() => moneySchema))],
-    dutyAmount: ['duty_amount', optional(lazy(() => moneySchema))],
-    discountAmount: ['discount_amount', optional(lazy(() => moneySchema))],
-    shippingAddress: ['shipping_address', optional(lazy(() => addressSchema))],
-    shipsFromPostalCode: ['ships_from_postal_code', optional(string())],
-    lineItems: ['line_items', optional(array(lazy(() => lineItemSchema)))],
-  }
+export const level3CardProcessingDataSchema: Schema<Level3CardProcessingData> = lazy(
+  () =>
+    object({
+      shippingAmount: ['shipping_amount', optional(moneySchema)],
+      dutyAmount: ['duty_amount', optional(moneySchema)],
+      discountAmount: ['discount_amount', optional(moneySchema)],
+      shippingAddress: ['shipping_address', optional(addressSchema)],
+      shipsFromPostalCode: ['ships_from_postal_code', optional(string())],
+      lineItems: ['line_items', optional(array(lineItemSchema))],
+    })
 );

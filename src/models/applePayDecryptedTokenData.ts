@@ -33,21 +33,16 @@ export interface ApplePayDecryptedTokenData {
   paymentData?: ApplePayPaymentData;
 }
 
-export const applePayDecryptedTokenDataSchema: Schema<ApplePayDecryptedTokenData> = object(
-  {
-    transactionAmount: [
-      'transaction_amount',
-      optional(lazy(() => moneySchema)),
-    ],
-    tokenizedCard: ['tokenized_card', lazy(() => applePayTokenizedCardSchema)],
-    deviceManufacturerId: ['device_manufacturer_id', optional(string())],
-    paymentDataType: [
-      'payment_data_type',
-      optional(applePayPaymentDataTypeSchema),
-    ],
-    paymentData: [
-      'payment_data',
-      optional(lazy(() => applePayPaymentDataSchema)),
-    ],
-  }
+export const applePayDecryptedTokenDataSchema: Schema<ApplePayDecryptedTokenData> = lazy(
+  () =>
+    object({
+      transactionAmount: ['transaction_amount', optional(moneySchema)],
+      tokenizedCard: ['tokenized_card', applePayTokenizedCardSchema],
+      deviceManufacturerId: ['device_manufacturer_id', optional(string())],
+      paymentDataType: [
+        'payment_data_type',
+        optional(applePayPaymentDataTypeSchema),
+      ],
+      paymentData: ['payment_data', optional(applePayPaymentDataSchema)],
+    })
 );

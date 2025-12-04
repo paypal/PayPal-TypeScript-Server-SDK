@@ -22,7 +22,9 @@ export interface ApplePayAttributes {
   vault?: VaultInstruction;
 }
 
-export const applePayAttributesSchema: Schema<ApplePayAttributes> = object({
-  customer: ['customer', optional(lazy(() => customerInformationSchema))],
-  vault: ['vault', optional(lazy(() => vaultInstructionSchema))],
-});
+export const applePayAttributesSchema: Schema<ApplePayAttributes> = lazy(() =>
+  object({
+    customer: ['customer', optional(customerInformationSchema)],
+    vault: ['vault', optional(vaultInstructionSchema)],
+  })
+);

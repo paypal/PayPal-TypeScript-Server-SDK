@@ -24,13 +24,14 @@ export interface PaymentTokenRequestCard {
   billingAddress?: Address;
 }
 
-export const paymentTokenRequestCardSchema: Schema<PaymentTokenRequestCard> = object(
-  {
-    name: ['name', optional(string())],
-    number: ['number', optional(string())],
-    expiry: ['expiry', optional(string())],
-    securityCode: ['security_code', optional(string())],
-    brand: ['brand', optional(cardBrandSchema)],
-    billingAddress: ['billing_address', optional(lazy(() => addressSchema))],
-  }
+export const paymentTokenRequestCardSchema: Schema<PaymentTokenRequestCard> = lazy(
+  () =>
+    object({
+      name: ['name', optional(string())],
+      number: ['number', optional(string())],
+      expiry: ['expiry', optional(string())],
+      securityCode: ['security_code', optional(string())],
+      brand: ['brand', optional(cardBrandSchema)],
+      billingAddress: ['billing_address', optional(addressSchema)],
+    })
 );

@@ -20,9 +20,12 @@ export interface FailedPaymentDetails {
   nextPaymentRetryTime?: string;
 }
 
-export const failedPaymentDetailsSchema: Schema<FailedPaymentDetails> = object({
-  amount: ['amount', lazy(() => moneySchema)],
-  time: ['time', string()],
-  reasonCode: ['reason_code', optional(reasonCodeSchema)],
-  nextPaymentRetryTime: ['next_payment_retry_time', optional(string())],
-});
+export const failedPaymentDetailsSchema: Schema<FailedPaymentDetails> = lazy(
+  () =>
+    object({
+      amount: ['amount', moneySchema],
+      time: ['time', string()],
+      reasonCode: ['reason_code', optional(reasonCodeSchema)],
+      nextPaymentRetryTime: ['next_payment_retry_time', optional(string())],
+    })
+);

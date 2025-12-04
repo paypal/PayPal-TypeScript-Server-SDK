@@ -27,9 +27,11 @@ export interface VenmoVaultResponse {
   customer?: CustomerInformation;
 }
 
-export const venmoVaultResponseSchema: Schema<VenmoVaultResponse> = object({
-  id: ['id', optional(string())],
-  status: ['status', optional(venmoVaultResponseStatusSchema)],
-  links: ['links', optional(array(lazy(() => linkDescriptionSchema)))],
-  customer: ['customer', optional(lazy(() => customerInformationSchema))],
-});
+export const venmoVaultResponseSchema: Schema<VenmoVaultResponse> = lazy(() =>
+  object({
+    id: ['id', optional(string())],
+    status: ['status', optional(venmoVaultResponseStatusSchema)],
+    links: ['links', optional(array(linkDescriptionSchema))],
+    customer: ['customer', optional(customerInformationSchema)],
+  })
+);

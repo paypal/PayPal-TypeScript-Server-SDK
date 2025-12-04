@@ -22,7 +22,9 @@ export interface AppSwitchContext {
   mobileWeb?: MobileWebContext;
 }
 
-export const appSwitchContextSchema: Schema<AppSwitchContext> = object({
-  nativeApp: ['native_app', optional(lazy(() => nativeAppContextSchema))],
-  mobileWeb: ['mobile_web', optional(lazy(() => mobileWebContextSchema))],
-});
+export const appSwitchContextSchema: Schema<AppSwitchContext> = lazy(() =>
+  object({
+    nativeApp: ['native_app', optional(nativeAppContextSchema)],
+    mobileWeb: ['mobile_web', optional(mobileWebContextSchema)],
+  })
+);

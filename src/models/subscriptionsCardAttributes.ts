@@ -25,13 +25,11 @@ export interface SubscriptionsCardAttributes {
   verification?: CardVerification;
 }
 
-export const subscriptionsCardAttributesSchema: Schema<SubscriptionsCardAttributes> = object(
-  {
-    customer: ['customer', optional(lazy(() => cardCustomerSchema))],
-    vault: ['vault', optional(lazy(() => vaultInstructionBaseSchema))],
-    verification: [
-      'verification',
-      optional(lazy(() => cardVerificationSchema)),
-    ],
-  }
+export const subscriptionsCardAttributesSchema: Schema<SubscriptionsCardAttributes> = lazy(
+  () =>
+    object({
+      customer: ['customer', optional(cardCustomerSchema)],
+      vault: ['vault', optional(vaultInstructionBaseSchema)],
+      verification: ['verification', optional(cardVerificationSchema)],
+    })
 );

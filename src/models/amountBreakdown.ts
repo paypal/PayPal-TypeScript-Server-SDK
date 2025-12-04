@@ -25,12 +25,14 @@ export interface AmountBreakdown {
   discount?: Money;
 }
 
-export const amountBreakdownSchema: Schema<AmountBreakdown> = object({
-  itemTotal: ['item_total', optional(lazy(() => moneySchema))],
-  shipping: ['shipping', optional(lazy(() => moneySchema))],
-  handling: ['handling', optional(lazy(() => moneySchema))],
-  taxTotal: ['tax_total', optional(lazy(() => moneySchema))],
-  insurance: ['insurance', optional(lazy(() => moneySchema))],
-  shippingDiscount: ['shipping_discount', optional(lazy(() => moneySchema))],
-  discount: ['discount', optional(lazy(() => moneySchema))],
-});
+export const amountBreakdownSchema: Schema<AmountBreakdown> = lazy(() =>
+  object({
+    itemTotal: ['item_total', optional(moneySchema)],
+    shipping: ['shipping', optional(moneySchema)],
+    handling: ['handling', optional(moneySchema)],
+    taxTotal: ['tax_total', optional(moneySchema)],
+    insurance: ['insurance', optional(moneySchema)],
+    shippingDiscount: ['shipping_discount', optional(moneySchema)],
+    discount: ['discount', optional(moneySchema)],
+  })
+);

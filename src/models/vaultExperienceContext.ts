@@ -39,24 +39,25 @@ export interface VaultExperienceContext {
   userAction?: VaultUserAction;
 }
 
-export const vaultExperienceContextSchema: Schema<VaultExperienceContext> = object(
-  {
-    brandName: ['brand_name', optional(string())],
-    locale: ['locale', optional(string())],
-    returnUrl: ['return_url', optional(string())],
-    cancelUrl: ['cancel_url', optional(string())],
-    shippingPreference: [
-      'shipping_preference',
-      optional(experienceContextShippingPreferenceSchema),
-    ],
-    vaultInstruction: [
-      'vault_instruction',
-      optional(vaultInstructionActionSchema),
-    ],
-    appSwitchContext: [
-      'app_switch_context',
-      optional(lazy(() => appSwitchContextSchema)),
-    ],
-    userAction: ['user_action', optional(vaultUserActionSchema)],
-  }
+export const vaultExperienceContextSchema: Schema<VaultExperienceContext> = lazy(
+  () =>
+    object({
+      brandName: ['brand_name', optional(string())],
+      locale: ['locale', optional(string())],
+      returnUrl: ['return_url', optional(string())],
+      cancelUrl: ['cancel_url', optional(string())],
+      shippingPreference: [
+        'shipping_preference',
+        optional(experienceContextShippingPreferenceSchema),
+      ],
+      vaultInstruction: [
+        'vault_instruction',
+        optional(vaultInstructionActionSchema),
+      ],
+      appSwitchContext: [
+        'app_switch_context',
+        optional(appSwitchContextSchema),
+      ],
+      userAction: ['user_action', optional(vaultUserActionSchema)],
+    })
 );

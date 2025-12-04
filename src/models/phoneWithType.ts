@@ -16,7 +16,9 @@ export interface PhoneWithType {
   phoneNumber: PhoneNumber;
 }
 
-export const phoneWithTypeSchema: Schema<PhoneWithType> = object({
-  phoneType: ['phone_type', optional(phoneTypeSchema)],
-  phoneNumber: ['phone_number', lazy(() => phoneNumberSchema)],
-});
+export const phoneWithTypeSchema: Schema<PhoneWithType> = lazy(() =>
+  object({
+    phoneType: ['phone_type', optional(phoneTypeSchema)],
+    phoneNumber: ['phone_number', phoneNumberSchema],
+  })
+);

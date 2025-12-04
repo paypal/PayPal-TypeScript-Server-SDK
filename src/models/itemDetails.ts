@@ -51,33 +51,29 @@ export interface ItemDetails {
   checkoutOptions?: CheckoutOption[];
 }
 
-export const itemDetailsSchema: Schema<ItemDetails> = object({
-  itemCode: ['item_code', optional(string())],
-  itemName: ['item_name', optional(string())],
-  itemDescription: ['item_description', optional(string())],
-  itemOptions: ['item_options', optional(string())],
-  itemQuantity: ['item_quantity', optional(string())],
-  itemUnitPrice: ['item_unit_price', optional(lazy(() => moneySchema))],
-  itemAmount: ['item_amount', optional(lazy(() => moneySchema))],
-  discountAmount: ['discount_amount', optional(lazy(() => moneySchema))],
-  adjustmentAmount: ['adjustment_amount', optional(lazy(() => moneySchema))],
-  giftWrapAmount: ['gift_wrap_amount', optional(lazy(() => moneySchema))],
-  taxPercentage: ['tax_percentage', optional(string())],
-  taxAmounts: ['tax_amounts', optional(array(lazy(() => taxAmountSchema)))],
-  basicShippingAmount: [
-    'basic_shipping_amount',
-    optional(lazy(() => moneySchema)),
-  ],
-  extraShippingAmount: [
-    'extra_shipping_amount',
-    optional(lazy(() => moneySchema)),
-  ],
-  handlingAmount: ['handling_amount', optional(lazy(() => moneySchema))],
-  insuranceAmount: ['insurance_amount', optional(lazy(() => moneySchema))],
-  totalItemAmount: ['total_item_amount', optional(lazy(() => moneySchema))],
-  invoiceNumber: ['invoice_number', optional(string())],
-  checkoutOptions: [
-    'checkout_options',
-    optional(array(lazy(() => checkoutOptionSchema))),
-  ],
-});
+export const itemDetailsSchema: Schema<ItemDetails> = lazy(() =>
+  object({
+    itemCode: ['item_code', optional(string())],
+    itemName: ['item_name', optional(string())],
+    itemDescription: ['item_description', optional(string())],
+    itemOptions: ['item_options', optional(string())],
+    itemQuantity: ['item_quantity', optional(string())],
+    itemUnitPrice: ['item_unit_price', optional(moneySchema)],
+    itemAmount: ['item_amount', optional(moneySchema)],
+    discountAmount: ['discount_amount', optional(moneySchema)],
+    adjustmentAmount: ['adjustment_amount', optional(moneySchema)],
+    giftWrapAmount: ['gift_wrap_amount', optional(moneySchema)],
+    taxPercentage: ['tax_percentage', optional(string())],
+    taxAmounts: ['tax_amounts', optional(array(taxAmountSchema))],
+    basicShippingAmount: ['basic_shipping_amount', optional(moneySchema)],
+    extraShippingAmount: ['extra_shipping_amount', optional(moneySchema)],
+    handlingAmount: ['handling_amount', optional(moneySchema)],
+    insuranceAmount: ['insurance_amount', optional(moneySchema)],
+    totalItemAmount: ['total_item_amount', optional(moneySchema)],
+    invoiceNumber: ['invoice_number', optional(string())],
+    checkoutOptions: [
+      'checkout_options',
+      optional(array(checkoutOptionSchema)),
+    ],
+  })
+);

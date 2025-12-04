@@ -19,9 +19,11 @@ export interface IncentiveDetails {
   incentiveProgramCode?: string;
 }
 
-export const incentiveDetailsSchema: Schema<IncentiveDetails> = object({
-  incentiveType: ['incentive_type', optional(string())],
-  incentiveCode: ['incentive_code', optional(string())],
-  incentiveAmount: ['incentive_amount', optional(lazy(() => moneySchema))],
-  incentiveProgramCode: ['incentive_program_code', optional(string())],
-});
+export const incentiveDetailsSchema: Schema<IncentiveDetails> = lazy(() =>
+  object({
+    incentiveType: ['incentive_type', optional(string())],
+    incentiveCode: ['incentive_code', optional(string())],
+    incentiveAmount: ['incentive_amount', optional(moneySchema)],
+    incentiveProgramCode: ['incentive_program_code', optional(string())],
+  })
+);

@@ -16,6 +16,6 @@ export interface RiskSupplementaryData {
   customer?: ParticipantMetadata;
 }
 
-export const riskSupplementaryDataSchema: Schema<RiskSupplementaryData> = object(
-  { customer: ['customer', optional(lazy(() => participantMetadataSchema))] }
+export const riskSupplementaryDataSchema: Schema<RiskSupplementaryData> = lazy(
+  () => object({ customer: ['customer', optional(participantMetadataSchema)] })
 );
