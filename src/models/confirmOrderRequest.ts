@@ -19,10 +19,12 @@ export interface ConfirmOrderRequest {
   applicationContext?: OrderConfirmApplicationContext;
 }
 
-export const confirmOrderRequestSchema: Schema<ConfirmOrderRequest> = object({
-  paymentSource: ['payment_source', lazy(() => paymentSourceSchema)],
-  applicationContext: [
-    'application_context',
-    optional(lazy(() => orderConfirmApplicationContextSchema)),
-  ],
-});
+export const confirmOrderRequestSchema: Schema<ConfirmOrderRequest> = lazy(() =>
+  object({
+    paymentSource: ['payment_source', paymentSourceSchema],
+    applicationContext: [
+      'application_context',
+      optional(orderConfirmApplicationContextSchema),
+    ],
+  })
+);

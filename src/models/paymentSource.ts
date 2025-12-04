@@ -88,23 +88,22 @@ export interface PaymentSource {
   venmo?: VenmoWalletRequest;
 }
 
-export const paymentSourceSchema: Schema<PaymentSource> = object({
-  card: ['card', optional(lazy(() => cardRequestSchema))],
-  token: ['token', optional(lazy(() => tokenSchema))],
-  paypal: ['paypal', optional(lazy(() => paypalWalletSchema))],
-  bancontact: [
-    'bancontact',
-    optional(lazy(() => bancontactPaymentRequestSchema)),
-  ],
-  blik: ['blik', optional(lazy(() => blikPaymentRequestSchema))],
-  eps: ['eps', optional(lazy(() => epsPaymentRequestSchema))],
-  giropay: ['giropay', optional(lazy(() => giropayPaymentRequestSchema))],
-  ideal: ['ideal', optional(lazy(() => idealPaymentRequestSchema))],
-  mybank: ['mybank', optional(lazy(() => mybankPaymentRequestSchema))],
-  p24: ['p24', optional(lazy(() => p24PaymentRequestSchema))],
-  sofort: ['sofort', optional(lazy(() => sofortPaymentRequestSchema))],
-  trustly: ['trustly', optional(lazy(() => trustlyPaymentRequestSchema))],
-  applePay: ['apple_pay', optional(lazy(() => applePayRequestSchema))],
-  googlePay: ['google_pay', optional(lazy(() => googlePayRequestSchema))],
-  venmo: ['venmo', optional(lazy(() => venmoWalletRequestSchema))],
-});
+export const paymentSourceSchema: Schema<PaymentSource> = lazy(() =>
+  object({
+    card: ['card', optional(cardRequestSchema)],
+    token: ['token', optional(tokenSchema)],
+    paypal: ['paypal', optional(paypalWalletSchema)],
+    bancontact: ['bancontact', optional(bancontactPaymentRequestSchema)],
+    blik: ['blik', optional(blikPaymentRequestSchema)],
+    eps: ['eps', optional(epsPaymentRequestSchema)],
+    giropay: ['giropay', optional(giropayPaymentRequestSchema)],
+    ideal: ['ideal', optional(idealPaymentRequestSchema)],
+    mybank: ['mybank', optional(mybankPaymentRequestSchema)],
+    p24: ['p24', optional(p24PaymentRequestSchema)],
+    sofort: ['sofort', optional(sofortPaymentRequestSchema)],
+    trustly: ['trustly', optional(trustlyPaymentRequestSchema)],
+    applePay: ['apple_pay', optional(applePayRequestSchema)],
+    googlePay: ['google_pay', optional(googlePayRequestSchema)],
+    venmo: ['venmo', optional(venmoWalletRequestSchema)],
+  })
+);

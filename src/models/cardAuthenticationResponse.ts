@@ -16,11 +16,12 @@ export interface CardAuthenticationResponse {
   threeDSecure?: ThreeDSecureCardAuthenticationResponse;
 }
 
-export const cardAuthenticationResponseSchema: Schema<CardAuthenticationResponse> = object(
-  {
-    threeDSecure: [
-      'three_d_secure',
-      optional(lazy(() => threeDSecureCardAuthenticationResponseSchema)),
-    ],
-  }
+export const cardAuthenticationResponseSchema: Schema<CardAuthenticationResponse> = lazy(
+  () =>
+    object({
+      threeDSecure: [
+        'three_d_secure',
+        optional(threeDSecureCardAuthenticationResponseSchema),
+      ],
+    })
 );

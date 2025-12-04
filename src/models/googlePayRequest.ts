@@ -44,24 +44,20 @@ export interface GooglePayRequest {
   experienceContext?: GooglePayExperienceContext;
 }
 
-export const googlePayRequestSchema: Schema<GooglePayRequest> = object({
-  name: ['name', optional(string())],
-  emailAddress: ['email_address', optional(string())],
-  phoneNumber: [
-    'phone_number',
-    optional(lazy(() => phoneNumberWithCountryCodeSchema)),
-  ],
-  card: ['card', optional(lazy(() => googlePayRequestCardSchema))],
-  decryptedToken: [
-    'decrypted_token',
-    optional(lazy(() => googlePayDecryptedTokenDataSchema)),
-  ],
-  assuranceDetails: [
-    'assurance_details',
-    optional(lazy(() => assuranceDetailsSchema)),
-  ],
-  experienceContext: [
-    'experience_context',
-    optional(lazy(() => googlePayExperienceContextSchema)),
-  ],
-});
+export const googlePayRequestSchema: Schema<GooglePayRequest> = lazy(() =>
+  object({
+    name: ['name', optional(string())],
+    emailAddress: ['email_address', optional(string())],
+    phoneNumber: ['phone_number', optional(phoneNumberWithCountryCodeSchema)],
+    card: ['card', optional(googlePayRequestCardSchema)],
+    decryptedToken: [
+      'decrypted_token',
+      optional(googlePayDecryptedTokenDataSchema),
+    ],
+    assuranceDetails: ['assurance_details', optional(assuranceDetailsSchema)],
+    experienceContext: [
+      'experience_context',
+      optional(googlePayExperienceContextSchema),
+    ],
+  })
+);

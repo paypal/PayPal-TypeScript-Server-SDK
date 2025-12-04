@@ -42,16 +42,18 @@ export interface Item {
   billingPlan?: OrderBillingPlan;
 }
 
-export const itemSchema: Schema<Item> = object({
-  name: ['name', string()],
-  unitAmount: ['unit_amount', lazy(() => moneySchema)],
-  tax: ['tax', optional(lazy(() => moneySchema))],
-  quantity: ['quantity', string()],
-  description: ['description', optional(string())],
-  sku: ['sku', optional(string())],
-  url: ['url', optional(string())],
-  category: ['category', optional(itemCategorySchema)],
-  imageUrl: ['image_url', optional(string())],
-  upc: ['upc', optional(lazy(() => universalProductCodeSchema))],
-  billingPlan: ['billing_plan', optional(lazy(() => orderBillingPlanSchema))],
-});
+export const itemSchema: Schema<Item> = lazy(() =>
+  object({
+    name: ['name', string()],
+    unitAmount: ['unit_amount', moneySchema],
+    tax: ['tax', optional(moneySchema)],
+    quantity: ['quantity', string()],
+    description: ['description', optional(string())],
+    sku: ['sku', optional(string())],
+    url: ['url', optional(string())],
+    category: ['category', optional(itemCategorySchema)],
+    imageUrl: ['image_url', optional(string())],
+    upc: ['upc', optional(universalProductCodeSchema)],
+    billingPlan: ['billing_plan', optional(orderBillingPlanSchema)],
+  })
+);

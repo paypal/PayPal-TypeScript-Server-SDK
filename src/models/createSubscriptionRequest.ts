@@ -38,19 +38,20 @@ export interface CreateSubscriptionRequest {
   plan?: PlanOverride;
 }
 
-export const createSubscriptionRequestSchema: Schema<CreateSubscriptionRequest> = object(
-  {
-    planId: ['plan_id', string()],
-    startTime: ['start_time', optional(string())],
-    quantity: ['quantity', optional(string())],
-    shippingAmount: ['shipping_amount', optional(lazy(() => moneySchema))],
-    subscriber: ['subscriber', optional(lazy(() => subscriberRequestSchema))],
-    autoRenewal: ['auto_renewal', optional(boolean())],
-    applicationContext: [
-      'application_context',
-      optional(lazy(() => subscriptionApplicationContextSchema)),
-    ],
-    customId: ['custom_id', optional(string())],
-    plan: ['plan', optional(lazy(() => planOverrideSchema))],
-  }
+export const createSubscriptionRequestSchema: Schema<CreateSubscriptionRequest> = lazy(
+  () =>
+    object({
+      planId: ['plan_id', string()],
+      startTime: ['start_time', optional(string())],
+      quantity: ['quantity', optional(string())],
+      shippingAmount: ['shipping_amount', optional(moneySchema)],
+      subscriber: ['subscriber', optional(subscriberRequestSchema)],
+      autoRenewal: ['auto_renewal', optional(boolean())],
+      applicationContext: [
+        'application_context',
+        optional(subscriptionApplicationContextSchema),
+      ],
+      customId: ['custom_id', optional(string())],
+      plan: ['plan', optional(planOverrideSchema)],
+    })
 );

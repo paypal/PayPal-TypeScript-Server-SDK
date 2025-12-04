@@ -21,12 +21,10 @@ export interface PaypalWalletAttributes {
   vault?: PaypalWalletVaultInstruction;
 }
 
-export const paypalWalletAttributesSchema: Schema<PaypalWalletAttributes> = object(
-  {
-    customer: [
-      'customer',
-      optional(lazy(() => paypalWalletCustomerRequestSchema)),
-    ],
-    vault: ['vault', optional(lazy(() => paypalWalletVaultInstructionSchema))],
-  }
+export const paypalWalletAttributesSchema: Schema<PaypalWalletAttributes> = lazy(
+  () =>
+    object({
+      customer: ['customer', optional(paypalWalletCustomerRequestSchema)],
+      vault: ['vault', optional(paypalWalletVaultInstructionSchema)],
+    })
 );

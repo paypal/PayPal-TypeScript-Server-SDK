@@ -48,31 +48,32 @@ export interface OrderApplicationContext {
   storedPaymentSource?: StoredPaymentSource;
 }
 
-export const orderApplicationContextSchema: Schema<OrderApplicationContext> = object(
-  {
-    brandName: ['brand_name', optional(string())],
-    locale: ['locale', optional(string())],
-    landingPage: [
-      'landing_page',
-      optional(orderApplicationContextLandingPageSchema),
-    ],
-    shippingPreference: [
-      'shipping_preference',
-      optional(orderApplicationContextShippingPreferenceSchema),
-    ],
-    userAction: [
-      'user_action',
-      optional(orderApplicationContextUserActionSchema),
-    ],
-    paymentMethod: [
-      'payment_method',
-      optional(lazy(() => paymentMethodPreferenceSchema)),
-    ],
-    returnUrl: ['return_url', optional(string())],
-    cancelUrl: ['cancel_url', optional(string())],
-    storedPaymentSource: [
-      'stored_payment_source',
-      optional(lazy(() => storedPaymentSourceSchema)),
-    ],
-  }
+export const orderApplicationContextSchema: Schema<OrderApplicationContext> = lazy(
+  () =>
+    object({
+      brandName: ['brand_name', optional(string())],
+      locale: ['locale', optional(string())],
+      landingPage: [
+        'landing_page',
+        optional(orderApplicationContextLandingPageSchema),
+      ],
+      shippingPreference: [
+        'shipping_preference',
+        optional(orderApplicationContextShippingPreferenceSchema),
+      ],
+      userAction: [
+        'user_action',
+        optional(orderApplicationContextUserActionSchema),
+      ],
+      paymentMethod: [
+        'payment_method',
+        optional(paymentMethodPreferenceSchema),
+      ],
+      returnUrl: ['return_url', optional(string())],
+      cancelUrl: ['cancel_url', optional(string())],
+      storedPaymentSource: [
+        'stored_payment_source',
+        optional(storedPaymentSourceSchema),
+      ],
+    })
 );

@@ -16,9 +16,11 @@ export interface SepaDebitRequest {
   experienceContext?: SepaDebitExperienceContext;
 }
 
-export const sepaDebitRequestSchema: Schema<SepaDebitRequest> = object({
-  experienceContext: [
-    'experience_context',
-    optional(lazy(() => sepaDebitExperienceContextSchema)),
-  ],
-});
+export const sepaDebitRequestSchema: Schema<SepaDebitRequest> = lazy(() =>
+  object({
+    experienceContext: [
+      'experience_context',
+      optional(sepaDebitExperienceContextSchema),
+    ],
+  })
+);

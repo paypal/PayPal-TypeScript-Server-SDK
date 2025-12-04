@@ -28,8 +28,10 @@ export interface CardAttributes {
   verification?: CardVerification;
 }
 
-export const cardAttributesSchema: Schema<CardAttributes> = object({
-  customer: ['customer', optional(lazy(() => cardCustomerInformationSchema))],
-  vault: ['vault', optional(lazy(() => vaultInstructionBaseSchema))],
-  verification: ['verification', optional(lazy(() => cardVerificationSchema))],
-});
+export const cardAttributesSchema: Schema<CardAttributes> = lazy(() =>
+  object({
+    customer: ['customer', optional(cardCustomerInformationSchema)],
+    vault: ['vault', optional(vaultInstructionBaseSchema)],
+    verification: ['verification', optional(cardVerificationSchema)],
+  })
+);

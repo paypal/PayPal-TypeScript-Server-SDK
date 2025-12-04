@@ -29,19 +29,17 @@ export interface ModifySubscriptionRequest {
   plan?: PlanOverride;
 }
 
-export const modifySubscriptionRequestSchema: Schema<ModifySubscriptionRequest> = object(
-  {
-    planId: ['plan_id', optional(string())],
-    quantity: ['quantity', optional(string())],
-    shippingAmount: ['shipping_amount', optional(lazy(() => moneySchema))],
-    shippingAddress: [
-      'shipping_address',
-      optional(lazy(() => shippingDetailsSchema)),
-    ],
-    applicationContext: [
-      'application_context',
-      optional(lazy(() => subscriptionPatchApplicationContextSchema)),
-    ],
-    plan: ['plan', optional(lazy(() => planOverrideSchema))],
-  }
+export const modifySubscriptionRequestSchema: Schema<ModifySubscriptionRequest> = lazy(
+  () =>
+    object({
+      planId: ['plan_id', optional(string())],
+      quantity: ['quantity', optional(string())],
+      shippingAmount: ['shipping_amount', optional(moneySchema)],
+      shippingAddress: ['shipping_address', optional(shippingDetailsSchema)],
+      applicationContext: [
+        'application_context',
+        optional(subscriptionPatchApplicationContextSchema),
+      ],
+      plan: ['plan', optional(planOverrideSchema)],
+    })
 );

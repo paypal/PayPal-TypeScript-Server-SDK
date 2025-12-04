@@ -62,27 +62,29 @@ export interface BillingPlan {
   links?: LinkDescription[];
 }
 
-export const billingPlanSchema: Schema<BillingPlan> = object({
-  id: ['id', optional(string())],
-  productId: ['product_id', optional(string())],
-  name: ['name', optional(string())],
-  status: ['status', optional(subscriptionPlanStatusSchema)],
-  description: ['description', optional(string())],
-  billingCycles: [
-    'billing_cycles',
-    optional(array(lazy(() => subscriptionBillingCycleSchema))),
-  ],
-  paymentPreferences: [
-    'payment_preferences',
-    optional(lazy(() => paymentPreferencesSchema)),
-  ],
-  merchantPreferences: [
-    'merchant_preferences',
-    optional(lazy(() => merchantPreferencesSchema)),
-  ],
-  taxes: ['taxes', optional(lazy(() => taxesSchema))],
-  quantitySupported: ['quantity_supported', optional(boolean())],
-  createTime: ['create_time', optional(string())],
-  updateTime: ['update_time', optional(string())],
-  links: ['links', optional(array(lazy(() => linkDescriptionSchema)))],
-});
+export const billingPlanSchema: Schema<BillingPlan> = lazy(() =>
+  object({
+    id: ['id', optional(string())],
+    productId: ['product_id', optional(string())],
+    name: ['name', optional(string())],
+    status: ['status', optional(subscriptionPlanStatusSchema)],
+    description: ['description', optional(string())],
+    billingCycles: [
+      'billing_cycles',
+      optional(array(subscriptionBillingCycleSchema)),
+    ],
+    paymentPreferences: [
+      'payment_preferences',
+      optional(paymentPreferencesSchema),
+    ],
+    merchantPreferences: [
+      'merchant_preferences',
+      optional(merchantPreferencesSchema),
+    ],
+    taxes: ['taxes', optional(taxesSchema)],
+    quantitySupported: ['quantity_supported', optional(boolean())],
+    createTime: ['create_time', optional(string())],
+    updateTime: ['update_time', optional(string())],
+    links: ['links', optional(array(linkDescriptionSchema))],
+  })
+);

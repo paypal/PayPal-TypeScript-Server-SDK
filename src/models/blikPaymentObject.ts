@@ -22,12 +22,11 @@ export interface BlikPaymentObject {
   oneClick?: BlikOneClickPaymentObject;
 }
 
-export const blikPaymentObjectSchema: Schema<BlikPaymentObject> = object({
-  name: ['name', optional(string())],
-  countryCode: ['country_code', optional(string())],
-  email: ['email', optional(string())],
-  oneClick: [
-    'one_click',
-    optional(lazy(() => blikOneClickPaymentObjectSchema)),
-  ],
-});
+export const blikPaymentObjectSchema: Schema<BlikPaymentObject> = lazy(() =>
+  object({
+    name: ['name', optional(string())],
+    countryCode: ['country_code', optional(string())],
+    email: ['email', optional(string())],
+    oneClick: ['one_click', optional(blikOneClickPaymentObjectSchema)],
+  })
+);

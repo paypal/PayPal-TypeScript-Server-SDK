@@ -22,11 +22,13 @@ export interface PaymentCollection {
   refunds?: Refund[];
 }
 
-export const paymentCollectionSchema: Schema<PaymentCollection> = object({
-  authorizations: [
-    'authorizations',
-    optional(array(lazy(() => authorizationWithAdditionalDataSchema))),
-  ],
-  captures: ['captures', optional(array(lazy(() => ordersCaptureSchema)))],
-  refunds: ['refunds', optional(array(lazy(() => refundSchema)))],
-});
+export const paymentCollectionSchema: Schema<PaymentCollection> = lazy(() =>
+  object({
+    authorizations: [
+      'authorizations',
+      optional(array(authorizationWithAdditionalDataSchema)),
+    ],
+    captures: ['captures', optional(array(ordersCaptureSchema))],
+    refunds: ['refunds', optional(array(refundSchema))],
+  })
+);

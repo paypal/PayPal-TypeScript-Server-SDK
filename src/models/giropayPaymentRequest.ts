@@ -20,13 +20,14 @@ export interface GiropayPaymentRequest {
   experienceContext?: ExperienceContext;
 }
 
-export const giropayPaymentRequestSchema: Schema<GiropayPaymentRequest> = object(
-  {
-    name: ['name', string()],
-    countryCode: ['country_code', string()],
-    experienceContext: [
-      'experience_context',
-      optional(lazy(() => experienceContextSchema)),
-    ],
-  }
+export const giropayPaymentRequestSchema: Schema<GiropayPaymentRequest> = lazy(
+  () =>
+    object({
+      name: ['name', string()],
+      countryCode: ['country_code', string()],
+      experienceContext: [
+        'experience_context',
+        optional(experienceContextSchema),
+      ],
+    })
 );

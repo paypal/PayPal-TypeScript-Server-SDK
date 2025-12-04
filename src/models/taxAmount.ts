@@ -13,6 +13,6 @@ export interface TaxAmount {
   taxAmount?: Money;
 }
 
-export const taxAmountSchema: Schema<TaxAmount> = object({
-  taxAmount: ['tax_amount', optional(lazy(() => moneySchema))],
-});
+export const taxAmountSchema: Schema<TaxAmount> = lazy(() =>
+  object({ taxAmount: ['tax_amount', optional(moneySchema)] })
+);

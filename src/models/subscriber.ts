@@ -22,14 +22,13 @@ export interface Subscriber {
   paymentSource?: SubscriptionPaymentSourceResponse;
 }
 
-export const subscriberSchema: Schema<Subscriber> = object({
-  name: ['name', optional(lazy(() => nameSchema))],
-  shippingAddress: [
-    'shipping_address',
-    optional(lazy(() => shippingDetailsSchema)),
-  ],
-  paymentSource: [
-    'payment_source',
-    optional(lazy(() => subscriptionPaymentSourceResponseSchema)),
-  ],
-});
+export const subscriberSchema: Schema<Subscriber> = lazy(() =>
+  object({
+    name: ['name', optional(nameSchema)],
+    shippingAddress: ['shipping_address', optional(shippingDetailsSchema)],
+    paymentSource: [
+      'payment_source',
+      optional(subscriptionPaymentSourceResponseSchema),
+    ],
+  })
+);

@@ -1,17 +1,19 @@
-# Transactionsearch
+# Transaction Search
+
+Use the `/transactions` resource to list transactions and the `/balances` resource to list balances.
 
 ```ts
-const transactionsearchController = new TransactionsearchController(client);
+const transactionSearchController = new TransactionSearchController(client);
 ```
 
 ## Class Name
 
-`TransactionsearchController`
+`TransactionSearchController`
 
 ## Methods
 
-* [Search Transactions](../../doc/controllers/transactionsearch.md#search-transactions)
-* [Search Balances](../../doc/controllers/transactionsearch.md#search-balances)
+* [Search Transactions](../../doc/controllers/transaction-search.md#search-transactions)
+* [Search Balances](../../doc/controllers/transaction-search.md#search-balances)
 
 
 # Search Transactions
@@ -92,13 +94,25 @@ const collect = {
 }
 
 try {
-  const { result, ...httpResponse } = await transactionSearchController.searchTransactions(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await transactionSearchController.searchTransactions(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```
@@ -145,13 +159,25 @@ This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The 
 const collect = {}
 
 try {
-  const { result, ...httpResponse } = await transactionSearchController.searchBalances(collect);
-  // Get more response info...
-  // const { statusCode, headers } = httpResponse;
+  const response = await transactionSearchController.searchBalances(collect);
+
+  // Extracting fully parsed response body.
+  console.log(response.result);
+
+  // Extracting response status code.
+  console.log(response.statusCode);
+  // Extracting response headers.
+  console.log(response.headers);
+  // Extracting response body of type `string | Stream`
+  console.log(response.body);
 } catch (error) {
   if (error instanceof ApiError) {
-    const errors = error.result;
-    // const { statusCode, headers } = error;
+    // Extracting response error status code.
+    console.log(error.statusCode);
+    // Extracting response error headers.
+    console.log(error.headers);
+    // Extracting response error body of type `string | Stream`.
+    console.log(error.body);
   }
 }
 ```

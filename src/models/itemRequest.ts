@@ -42,16 +42,18 @@ export interface ItemRequest {
   billingPlan?: OrderBillingPlan;
 }
 
-export const itemRequestSchema: Schema<ItemRequest> = object({
-  name: ['name', string()],
-  unitAmount: ['unit_amount', lazy(() => moneySchema)],
-  tax: ['tax', optional(lazy(() => moneySchema))],
-  quantity: ['quantity', string()],
-  description: ['description', optional(string())],
-  sku: ['sku', optional(string())],
-  url: ['url', optional(string())],
-  category: ['category', optional(itemCategorySchema)],
-  imageUrl: ['image_url', optional(string())],
-  upc: ['upc', optional(lazy(() => universalProductCodeSchema))],
-  billingPlan: ['billing_plan', optional(lazy(() => orderBillingPlanSchema))],
-});
+export const itemRequestSchema: Schema<ItemRequest> = lazy(() =>
+  object({
+    name: ['name', string()],
+    unitAmount: ['unit_amount', moneySchema],
+    tax: ['tax', optional(moneySchema)],
+    quantity: ['quantity', string()],
+    description: ['description', optional(string())],
+    sku: ['sku', optional(string())],
+    url: ['url', optional(string())],
+    category: ['category', optional(itemCategorySchema)],
+    imageUrl: ['image_url', optional(string())],
+    upc: ['upc', optional(universalProductCodeSchema)],
+    billingPlan: ['billing_plan', optional(orderBillingPlanSchema)],
+  })
+);

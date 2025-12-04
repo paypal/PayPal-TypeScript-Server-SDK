@@ -22,15 +22,14 @@ export interface ShippingInformation {
   secondaryShippingAddress?: SimplePostalAddressCoarseGrained;
 }
 
-export const shippingInformationSchema: Schema<ShippingInformation> = object({
-  name: ['name', optional(string())],
-  method: ['method', optional(string())],
-  address: [
-    'address',
-    optional(lazy(() => simplePostalAddressCoarseGrainedSchema)),
-  ],
-  secondaryShippingAddress: [
-    'secondary_shipping_address',
-    optional(lazy(() => simplePostalAddressCoarseGrainedSchema)),
-  ],
-});
+export const shippingInformationSchema: Schema<ShippingInformation> = lazy(() =>
+  object({
+    name: ['name', optional(string())],
+    method: ['method', optional(string())],
+    address: ['address', optional(simplePostalAddressCoarseGrainedSchema)],
+    secondaryShippingAddress: [
+      'secondary_shipping_address',
+      optional(simplePostalAddressCoarseGrainedSchema),
+    ],
+  })
+);

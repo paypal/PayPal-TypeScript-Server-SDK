@@ -22,9 +22,11 @@ export interface BalancesResponse {
   lastRefreshTime?: string;
 }
 
-export const balancesResponseSchema: Schema<BalancesResponse> = object({
-  balances: ['balances', optional(array(lazy(() => balanceInformationSchema)))],
-  accountId: ['account_id', optional(string())],
-  asOfTime: ['as_of_time', optional(string())],
-  lastRefreshTime: ['last_refresh_time', optional(string())],
-});
+export const balancesResponseSchema: Schema<BalancesResponse> = lazy(() =>
+  object({
+    balances: ['balances', optional(array(balanceInformationSchema))],
+    accountId: ['account_id', optional(string())],
+    asOfTime: ['as_of_time', optional(string())],
+    lastRefreshTime: ['last_refresh_time', optional(string())],
+  })
+);

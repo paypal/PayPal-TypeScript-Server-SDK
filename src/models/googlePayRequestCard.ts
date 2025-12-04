@@ -21,9 +21,12 @@ export interface GooglePayRequestCard {
   billingAddress?: Address;
 }
 
-export const googlePayRequestCardSchema: Schema<GooglePayRequestCard> = object({
-  name: ['name', optional(string())],
-  type: ['type', optional(cardTypeSchema)],
-  brand: ['brand', optional(cardBrandSchema)],
-  billingAddress: ['billing_address', optional(lazy(() => addressSchema))],
-});
+export const googlePayRequestCardSchema: Schema<GooglePayRequestCard> = lazy(
+  () =>
+    object({
+      name: ['name', optional(string())],
+      type: ['type', optional(cardTypeSchema)],
+      brand: ['brand', optional(cardBrandSchema)],
+      billingAddress: ['billing_address', optional(addressSchema)],
+    })
+);

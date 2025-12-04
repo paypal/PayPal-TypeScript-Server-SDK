@@ -22,12 +22,14 @@ export interface IdealPaymentRequest {
   experienceContext?: ExperienceContext;
 }
 
-export const idealPaymentRequestSchema: Schema<IdealPaymentRequest> = object({
-  name: ['name', string()],
-  countryCode: ['country_code', string()],
-  bic: ['bic', optional(string())],
-  experienceContext: [
-    'experience_context',
-    optional(lazy(() => experienceContextSchema)),
-  ],
-});
+export const idealPaymentRequestSchema: Schema<IdealPaymentRequest> = lazy(() =>
+  object({
+    name: ['name', string()],
+    countryCode: ['country_code', string()],
+    bic: ['bic', optional(string())],
+    experienceContext: [
+      'experience_context',
+      optional(experienceContextSchema),
+    ],
+  })
+);

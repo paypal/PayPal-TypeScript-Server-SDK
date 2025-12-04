@@ -34,17 +34,16 @@ export interface BlikPaymentRequest {
   oneClick?: BlikOneClickPaymentRequest;
 }
 
-export const blikPaymentRequestSchema: Schema<BlikPaymentRequest> = object({
-  name: ['name', string()],
-  countryCode: ['country_code', string()],
-  email: ['email', optional(string())],
-  experienceContext: [
-    'experience_context',
-    optional(lazy(() => blikExperienceContextSchema)),
-  ],
-  level0: ['level_0', optional(lazy(() => blikLevel0PaymentObjectSchema))],
-  oneClick: [
-    'one_click',
-    optional(lazy(() => blikOneClickPaymentRequestSchema)),
-  ],
-});
+export const blikPaymentRequestSchema: Schema<BlikPaymentRequest> = lazy(() =>
+  object({
+    name: ['name', string()],
+    countryCode: ['country_code', string()],
+    email: ['email', optional(string())],
+    experienceContext: [
+      'experience_context',
+      optional(blikExperienceContextSchema),
+    ],
+    level0: ['level_0', optional(blikLevel0PaymentObjectSchema)],
+    oneClick: ['one_click', optional(blikOneClickPaymentRequestSchema)],
+  })
+);

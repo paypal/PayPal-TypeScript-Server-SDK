@@ -22,10 +22,12 @@ export interface BillingCycle {
   startDate?: string;
 }
 
-export const billingCycleSchema: Schema<BillingCycle> = object({
-  tenureType: ['tenure_type', tenureTypeSchema],
-  pricingScheme: ['pricing_scheme', optional(lazy(() => pricingSchemeSchema))],
-  totalCycles: ['total_cycles', optional(number())],
-  sequence: ['sequence', optional(number())],
-  startDate: ['start_date', optional(string())],
-});
+export const billingCycleSchema: Schema<BillingCycle> = lazy(() =>
+  object({
+    tenureType: ['tenure_type', tenureTypeSchema],
+    pricingScheme: ['pricing_scheme', optional(pricingSchemeSchema)],
+    totalCycles: ['total_cycles', optional(number())],
+    sequence: ['sequence', optional(number())],
+    startDate: ['start_date', optional(string())],
+  })
+);

@@ -27,20 +27,18 @@ export interface SellerReceivableBreakdown {
   platformFees?: PlatformFee[];
 }
 
-export const sellerReceivableBreakdownSchema: Schema<SellerReceivableBreakdown> = object(
-  {
-    grossAmount: ['gross_amount', lazy(() => moneySchema)],
-    paypalFee: ['paypal_fee', optional(lazy(() => moneySchema))],
-    paypalFeeInReceivableCurrency: [
-      'paypal_fee_in_receivable_currency',
-      optional(lazy(() => moneySchema)),
-    ],
-    netAmount: ['net_amount', optional(lazy(() => moneySchema))],
-    receivableAmount: ['receivable_amount', optional(lazy(() => moneySchema))],
-    exchangeRate: ['exchange_rate', optional(lazy(() => exchangeRateSchema))],
-    platformFees: [
-      'platform_fees',
-      optional(array(lazy(() => platformFeeSchema))),
-    ],
-  }
+export const sellerReceivableBreakdownSchema: Schema<SellerReceivableBreakdown> = lazy(
+  () =>
+    object({
+      grossAmount: ['gross_amount', moneySchema],
+      paypalFee: ['paypal_fee', optional(moneySchema)],
+      paypalFeeInReceivableCurrency: [
+        'paypal_fee_in_receivable_currency',
+        optional(moneySchema),
+      ],
+      netAmount: ['net_amount', optional(moneySchema)],
+      receivableAmount: ['receivable_amount', optional(moneySchema)],
+      exchangeRate: ['exchange_rate', optional(exchangeRateSchema)],
+      platformFees: ['platform_fees', optional(array(platformFeeSchema))],
+    })
 );

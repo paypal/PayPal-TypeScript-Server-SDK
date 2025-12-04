@@ -25,13 +25,15 @@ export interface RefundRequest {
   paymentInstruction?: RefundPaymentInstruction;
 }
 
-export const refundRequestSchema: Schema<RefundRequest> = object({
-  amount: ['amount', optional(lazy(() => moneySchema))],
-  customId: ['custom_id', optional(string())],
-  invoiceId: ['invoice_id', optional(string())],
-  noteToPayer: ['note_to_payer', optional(string())],
-  paymentInstruction: [
-    'payment_instruction',
-    optional(lazy(() => refundPaymentInstructionSchema)),
-  ],
-});
+export const refundRequestSchema: Schema<RefundRequest> = lazy(() =>
+  object({
+    amount: ['amount', optional(moneySchema)],
+    customId: ['custom_id', optional(string())],
+    invoiceId: ['invoice_id', optional(string())],
+    noteToPayer: ['note_to_payer', optional(string())],
+    paymentInstruction: [
+      'payment_instruction',
+      optional(refundPaymentInstructionSchema),
+    ],
+  })
+);

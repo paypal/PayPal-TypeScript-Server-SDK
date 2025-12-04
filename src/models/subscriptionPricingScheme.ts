@@ -36,13 +36,14 @@ export interface SubscriptionPricingScheme {
   updateTime?: string;
 }
 
-export const subscriptionPricingSchemeSchema: Schema<SubscriptionPricingScheme> = object(
-  {
-    version: ['version', optional(number())],
-    fixedPrice: ['fixed_price', optional(lazy(() => moneySchema))],
-    pricingModel: ['pricing_model', optional(subscriptionPricingModelSchema)],
-    tiers: ['tiers', optional(array(lazy(() => pricingTierSchema)))],
-    createTime: ['create_time', optional(string())],
-    updateTime: ['update_time', optional(string())],
-  }
+export const subscriptionPricingSchemeSchema: Schema<SubscriptionPricingScheme> = lazy(
+  () =>
+    object({
+      version: ['version', optional(number())],
+      fixedPrice: ['fixed_price', optional(moneySchema)],
+      pricingModel: ['pricing_model', optional(subscriptionPricingModelSchema)],
+      tiers: ['tiers', optional(array(pricingTierSchema))],
+      createTime: ['create_time', optional(string())],
+      updateTime: ['update_time', optional(string())],
+    })
 );

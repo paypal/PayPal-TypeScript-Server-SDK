@@ -35,20 +35,18 @@ export interface ShippingWithTrackingDetails {
   address?: Address;
 }
 
-export const shippingWithTrackingDetailsSchema: Schema<ShippingWithTrackingDetails> = object(
-  {
-    trackers: [
-      'trackers',
-      optional(array(lazy(() => orderTrackerResponseSchema))),
-    ],
-    name: ['name', optional(lazy(() => shippingNameSchema))],
-    emailAddress: ['email_address', optional(string())],
-    phoneNumber: [
-      'phone_number',
-      optional(lazy(() => phoneNumberWithOptionalCountryCodeSchema)),
-    ],
-    type: ['type', optional(fulfillmentTypeSchema)],
-    options: ['options', optional(array(lazy(() => shippingOptionSchema)))],
-    address: ['address', optional(lazy(() => addressSchema))],
-  }
+export const shippingWithTrackingDetailsSchema: Schema<ShippingWithTrackingDetails> = lazy(
+  () =>
+    object({
+      trackers: ['trackers', optional(array(orderTrackerResponseSchema))],
+      name: ['name', optional(shippingNameSchema)],
+      emailAddress: ['email_address', optional(string())],
+      phoneNumber: [
+        'phone_number',
+        optional(phoneNumberWithOptionalCountryCodeSchema),
+      ],
+      type: ['type', optional(fulfillmentTypeSchema)],
+      options: ['options', optional(array(shippingOptionSchema))],
+      address: ['address', optional(addressSchema)],
+    })
 );

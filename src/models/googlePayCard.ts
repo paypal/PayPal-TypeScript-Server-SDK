@@ -27,12 +27,14 @@ export interface GooglePayCard {
   billingAddress?: Address;
 }
 
-export const googlePayCardSchema: Schema<GooglePayCard> = object({
-  name: ['name', optional(string())],
-  number: ['number', optional(string())],
-  expiry: ['expiry', optional(string())],
-  lastDigits: ['last_digits', optional(string())],
-  type: ['type', optional(cardTypeSchema)],
-  brand: ['brand', optional(cardBrandSchema)],
-  billingAddress: ['billing_address', optional(lazy(() => addressSchema))],
-});
+export const googlePayCardSchema: Schema<GooglePayCard> = lazy(() =>
+  object({
+    name: ['name', optional(string())],
+    number: ['number', optional(string())],
+    expiry: ['expiry', optional(string())],
+    lastDigits: ['last_digits', optional(string())],
+    type: ['type', optional(cardTypeSchema)],
+    brand: ['brand', optional(cardBrandSchema)],
+    billingAddress: ['billing_address', optional(addressSchema)],
+  })
+);

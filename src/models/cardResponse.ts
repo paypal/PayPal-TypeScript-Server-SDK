@@ -48,25 +48,24 @@ export interface CardResponse {
   storedCredential?: CardStoredCredential;
 }
 
-export const cardResponseSchema: Schema<CardResponse> = object({
-  name: ['name', optional(string())],
-  lastDigits: ['last_digits', optional(string())],
-  brand: ['brand', optional(cardBrandSchema)],
-  availableNetworks: ['available_networks', optional(array(cardBrandSchema))],
-  type: ['type', optional(cardTypeSchema)],
-  authenticationResult: [
-    'authentication_result',
-    optional(lazy(() => authenticationResponseSchema)),
-  ],
-  attributes: [
-    'attributes',
-    optional(lazy(() => cardAttributesResponseSchema)),
-  ],
-  fromRequest: ['from_request', optional(lazy(() => cardFromRequestSchema))],
-  expiry: ['expiry', optional(string())],
-  binDetails: ['bin_details', optional(lazy(() => binDetailsSchema))],
-  storedCredential: [
-    'stored_credential',
-    optional(lazy(() => cardStoredCredentialSchema)),
-  ],
-});
+export const cardResponseSchema: Schema<CardResponse> = lazy(() =>
+  object({
+    name: ['name', optional(string())],
+    lastDigits: ['last_digits', optional(string())],
+    brand: ['brand', optional(cardBrandSchema)],
+    availableNetworks: ['available_networks', optional(array(cardBrandSchema))],
+    type: ['type', optional(cardTypeSchema)],
+    authenticationResult: [
+      'authentication_result',
+      optional(authenticationResponseSchema),
+    ],
+    attributes: ['attributes', optional(cardAttributesResponseSchema)],
+    fromRequest: ['from_request', optional(cardFromRequestSchema)],
+    expiry: ['expiry', optional(string())],
+    binDetails: ['bin_details', optional(binDetailsSchema)],
+    storedCredential: [
+      'stored_credential',
+      optional(cardStoredCredentialSchema),
+    ],
+  })
+);

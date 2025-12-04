@@ -45,23 +45,25 @@ export interface ApplePayRequest {
   experienceContext?: ApplePayExperienceContext;
 }
 
-export const applePayRequestSchema: Schema<ApplePayRequest> = object({
-  id: ['id', optional(string())],
-  name: ['name', optional(string())],
-  emailAddress: ['email_address', optional(string())],
-  phoneNumber: ['phone_number', optional(lazy(() => phoneNumberSchema))],
-  decryptedToken: [
-    'decrypted_token',
-    optional(lazy(() => applePayDecryptedTokenDataSchema)),
-  ],
-  storedCredential: [
-    'stored_credential',
-    optional(lazy(() => cardStoredCredentialSchema)),
-  ],
-  vaultId: ['vault_id', optional(string())],
-  attributes: ['attributes', optional(lazy(() => applePayAttributesSchema))],
-  experienceContext: [
-    'experience_context',
-    optional(lazy(() => applePayExperienceContextSchema)),
-  ],
-});
+export const applePayRequestSchema: Schema<ApplePayRequest> = lazy(() =>
+  object({
+    id: ['id', optional(string())],
+    name: ['name', optional(string())],
+    emailAddress: ['email_address', optional(string())],
+    phoneNumber: ['phone_number', optional(phoneNumberSchema)],
+    decryptedToken: [
+      'decrypted_token',
+      optional(applePayDecryptedTokenDataSchema),
+    ],
+    storedCredential: [
+      'stored_credential',
+      optional(cardStoredCredentialSchema),
+    ],
+    vaultId: ['vault_id', optional(string())],
+    attributes: ['attributes', optional(applePayAttributesSchema)],
+    experienceContext: [
+      'experience_context',
+      optional(applePayExperienceContextSchema),
+    ],
+  })
+);

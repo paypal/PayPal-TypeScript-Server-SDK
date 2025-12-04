@@ -22,12 +22,13 @@ export interface CardCustomerInformation {
   merchantCustomerId?: string;
 }
 
-export const cardCustomerInformationSchema: Schema<CardCustomerInformation> = object(
-  {
-    id: ['id', optional(string())],
-    emailAddress: ['email_address', optional(string())],
-    phone: ['phone', optional(lazy(() => phoneWithTypeSchema))],
-    name: ['name', optional(lazy(() => nameSchema))],
-    merchantCustomerId: ['merchant_customer_id', optional(string())],
-  }
+export const cardCustomerInformationSchema: Schema<CardCustomerInformation> = lazy(
+  () =>
+    object({
+      id: ['id', optional(string())],
+      emailAddress: ['email_address', optional(string())],
+      phone: ['phone', optional(phoneWithTypeSchema)],
+      name: ['name', optional(nameSchema)],
+      merchantCustomerId: ['merchant_customer_id', optional(string())],
+    })
 );

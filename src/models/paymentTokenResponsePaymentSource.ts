@@ -34,11 +34,12 @@ export interface PaymentTokenResponsePaymentSource {
   applePay?: ApplePayPaymentToken;
 }
 
-export const paymentTokenResponsePaymentSourceSchema: Schema<PaymentTokenResponsePaymentSource> = object(
-  {
-    card: ['card', optional(lazy(() => cardPaymentTokenEntitySchema))],
-    paypal: ['paypal', optional(lazy(() => paypalPaymentTokenSchema))],
-    venmo: ['venmo', optional(lazy(() => venmoPaymentTokenSchema))],
-    applePay: ['apple_pay', optional(lazy(() => applePayPaymentTokenSchema))],
-  }
+export const paymentTokenResponsePaymentSourceSchema: Schema<PaymentTokenResponsePaymentSource> = lazy(
+  () =>
+    object({
+      card: ['card', optional(cardPaymentTokenEntitySchema)],
+      paypal: ['paypal', optional(paypalPaymentTokenSchema)],
+      venmo: ['venmo', optional(venmoPaymentTokenSchema)],
+      applePay: ['apple_pay', optional(applePayPaymentTokenSchema)],
+    })
 );

@@ -16,11 +16,9 @@ export interface RefundPaymentInstruction {
   platformFees?: RefundPlatformFee[];
 }
 
-export const refundPaymentInstructionSchema: Schema<RefundPaymentInstruction> = object(
-  {
-    platformFees: [
-      'platform_fees',
-      optional(array(lazy(() => refundPlatformFeeSchema))),
-    ],
-  }
+export const refundPaymentInstructionSchema: Schema<RefundPaymentInstruction> = lazy(
+  () =>
+    object({
+      platformFees: ['platform_fees', optional(array(refundPlatformFeeSchema))],
+    })
 );

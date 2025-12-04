@@ -16,6 +16,7 @@ export interface SubscriptionPaymentSourceResponse {
   card?: CardResponseWithBillingAddress;
 }
 
-export const subscriptionPaymentSourceResponseSchema: Schema<SubscriptionPaymentSourceResponse> = object(
-  { card: ['card', optional(lazy(() => cardResponseWithBillingAddressSchema))] }
+export const subscriptionPaymentSourceResponseSchema: Schema<SubscriptionPaymentSourceResponse> = lazy(
+  () =>
+    object({ card: ['card', optional(cardResponseWithBillingAddressSchema)] })
 );

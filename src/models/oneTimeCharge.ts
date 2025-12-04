@@ -23,11 +23,13 @@ export interface OneTimeCharge {
   totalAmount: Money;
 }
 
-export const oneTimeChargeSchema: Schema<OneTimeCharge> = object({
-  setupFee: ['setup_fee', optional(lazy(() => moneySchema))],
-  shippingAmount: ['shipping_amount', optional(lazy(() => moneySchema))],
-  taxes: ['taxes', optional(lazy(() => moneySchema))],
-  productPrice: ['product_price', optional(lazy(() => moneySchema))],
-  subtotal: ['subtotal', optional(lazy(() => moneySchema))],
-  totalAmount: ['total_amount', lazy(() => moneySchema)],
-});
+export const oneTimeChargeSchema: Schema<OneTimeCharge> = lazy(() =>
+  object({
+    setupFee: ['setup_fee', optional(moneySchema)],
+    shippingAmount: ['shipping_amount', optional(moneySchema)],
+    taxes: ['taxes', optional(moneySchema)],
+    productPrice: ['product_price', optional(moneySchema)],
+    subtotal: ['subtotal', optional(moneySchema)],
+    totalAmount: ['total_amount', moneySchema],
+  })
+);

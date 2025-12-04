@@ -53,27 +53,30 @@ export interface ApplePayCardResponse {
   countryCode?: string;
 }
 
-export const applePayCardResponseSchema: Schema<ApplePayCardResponse> = object({
-  name: ['name', optional(string())],
-  lastDigits: ['last_digits', optional(string())],
-  brand: ['brand', optional(cardBrandSchema)],
-  availableNetworks: ['available_networks', optional(array(cardBrandSchema))],
-  type: ['type', optional(cardTypeSchema)],
-  authenticationResult: [
-    'authentication_result',
-    optional(lazy(() => authenticationResponseSchema)),
-  ],
-  attributes: [
-    'attributes',
-    optional(lazy(() => cardAttributesResponseSchema)),
-  ],
-  fromRequest: ['from_request', optional(lazy(() => cardFromRequestSchema))],
-  expiry: ['expiry', optional(string())],
-  binDetails: ['bin_details', optional(lazy(() => binDetailsSchema))],
-  storedCredential: [
-    'stored_credential',
-    optional(lazy(() => cardStoredCredentialSchema)),
-  ],
-  billingAddress: ['billing_address', optional(lazy(() => addressSchema))],
-  countryCode: ['country_code', optional(string())],
-});
+export const applePayCardResponseSchema: Schema<ApplePayCardResponse> = lazy(
+  () =>
+    object({
+      name: ['name', optional(string())],
+      lastDigits: ['last_digits', optional(string())],
+      brand: ['brand', optional(cardBrandSchema)],
+      availableNetworks: [
+        'available_networks',
+        optional(array(cardBrandSchema)),
+      ],
+      type: ['type', optional(cardTypeSchema)],
+      authenticationResult: [
+        'authentication_result',
+        optional(authenticationResponseSchema),
+      ],
+      attributes: ['attributes', optional(cardAttributesResponseSchema)],
+      fromRequest: ['from_request', optional(cardFromRequestSchema)],
+      expiry: ['expiry', optional(string())],
+      binDetails: ['bin_details', optional(binDetailsSchema)],
+      storedCredential: [
+        'stored_credential',
+        optional(cardStoredCredentialSchema),
+      ],
+      billingAddress: ['billing_address', optional(addressSchema)],
+      countryCode: ['country_code', optional(string())],
+    })
+);

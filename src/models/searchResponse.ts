@@ -41,17 +41,19 @@ export interface SearchResponse {
   links?: LinkDescription[];
 }
 
-export const searchResponseSchema: Schema<SearchResponse> = object({
-  transactionDetails: [
-    'transaction_details',
-    optional(array(lazy(() => transactionDetailsSchema))),
-  ],
-  accountNumber: ['account_number', optional(string())],
-  startDate: ['start_date', optional(string())],
-  endDate: ['end_date', optional(string())],
-  lastRefreshedDatetime: ['last_refreshed_datetime', optional(string())],
-  page: ['page', optional(number())],
-  totalItems: ['total_items', optional(number())],
-  totalPages: ['total_pages', optional(number())],
-  links: ['links', optional(array(lazy(() => linkDescriptionSchema)))],
-});
+export const searchResponseSchema: Schema<SearchResponse> = lazy(() =>
+  object({
+    transactionDetails: [
+      'transaction_details',
+      optional(array(transactionDetailsSchema)),
+    ],
+    accountNumber: ['account_number', optional(string())],
+    startDate: ['start_date', optional(string())],
+    endDate: ['end_date', optional(string())],
+    lastRefreshedDatetime: ['last_refreshed_datetime', optional(string())],
+    page: ['page', optional(number())],
+    totalItems: ['total_items', optional(number())],
+    totalPages: ['total_pages', optional(number())],
+    links: ['links', optional(array(linkDescriptionSchema))],
+  })
+);

@@ -28,12 +28,14 @@ export interface Payer {
   address?: Address;
 }
 
-export const payerSchema: Schema<Payer> = object({
-  emailAddress: ['email_address', optional(string())],
-  payerId: ['payer_id', optional(string())],
-  name: ['name', optional(lazy(() => nameSchema))],
-  phone: ['phone', optional(lazy(() => phoneWithTypeSchema))],
-  birthDate: ['birth_date', optional(string())],
-  taxInfo: ['tax_info', optional(lazy(() => taxInfoSchema))],
-  address: ['address', optional(lazy(() => addressSchema))],
-});
+export const payerSchema: Schema<Payer> = lazy(() =>
+  object({
+    emailAddress: ['email_address', optional(string())],
+    payerId: ['payer_id', optional(string())],
+    name: ['name', optional(nameSchema)],
+    phone: ['phone', optional(phoneWithTypeSchema)],
+    birthDate: ['birth_date', optional(string())],
+    taxInfo: ['tax_info', optional(taxInfoSchema)],
+    address: ['address', optional(addressSchema)],
+  })
+);

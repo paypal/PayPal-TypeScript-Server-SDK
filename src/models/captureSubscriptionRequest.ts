@@ -18,10 +18,11 @@ export interface CaptureSubscriptionRequest {
   amount: Money;
 }
 
-export const captureSubscriptionRequestSchema: Schema<CaptureSubscriptionRequest> = object(
-  {
-    note: ['note', string()],
-    captureType: ['capture_type', captureTypeSchema],
-    amount: ['amount', lazy(() => moneySchema)],
-  }
+export const captureSubscriptionRequestSchema: Schema<CaptureSubscriptionRequest> = lazy(
+  () =>
+    object({
+      note: ['note', string()],
+      captureType: ['capture_type', captureTypeSchema],
+      amount: ['amount', moneySchema],
+    })
 );

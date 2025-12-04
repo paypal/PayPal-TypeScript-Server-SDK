@@ -32,16 +32,15 @@ export interface PayerInformation {
   address?: SimplePostalAddressCoarseGrained;
 }
 
-export const payerInformationSchema: Schema<PayerInformation> = object({
-  accountId: ['account_id', optional(string())],
-  emailAddress: ['email_address', optional(string())],
-  phoneNumber: ['phone_number', optional(lazy(() => phoneSchema))],
-  addressStatus: ['address_status', optional(string())],
-  payerStatus: ['payer_status', optional(string())],
-  payerName: ['payer_name', optional(lazy(() => payerNameSchema))],
-  countryCode: ['country_code', optional(string())],
-  address: [
-    'address',
-    optional(lazy(() => simplePostalAddressCoarseGrainedSchema)),
-  ],
-});
+export const payerInformationSchema: Schema<PayerInformation> = lazy(() =>
+  object({
+    accountId: ['account_id', optional(string())],
+    emailAddress: ['email_address', optional(string())],
+    phoneNumber: ['phone_number', optional(phoneSchema)],
+    addressStatus: ['address_status', optional(string())],
+    payerStatus: ['payer_status', optional(string())],
+    payerName: ['payer_name', optional(payerNameSchema)],
+    countryCode: ['country_code', optional(string())],
+    address: ['address', optional(simplePostalAddressCoarseGrainedSchema)],
+  })
+);

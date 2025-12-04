@@ -30,17 +30,18 @@ export interface CardVerificationDetails {
   threeDSecure?: unknown;
 }
 
-export const cardVerificationDetailsSchema: Schema<CardVerificationDetails> = object(
-  {
-    networkTransactionId: ['network_transaction_id', optional(string())],
-    date: ['date', optional(string())],
-    network: ['network', optional(cardBrandSchema)],
-    time: ['time', optional(string())],
-    amount: ['amount', optional(lazy(() => moneySchema))],
-    processorResponse: [
-      'processor_response',
-      optional(lazy(() => cardVerificationProcessorResponseSchema)),
-    ],
-    threeDSecure: ['three_d_secure', optional(unknown())],
-  }
+export const cardVerificationDetailsSchema: Schema<CardVerificationDetails> = lazy(
+  () =>
+    object({
+      networkTransactionId: ['network_transaction_id', optional(string())],
+      date: ['date', optional(string())],
+      network: ['network', optional(cardBrandSchema)],
+      time: ['time', optional(string())],
+      amount: ['amount', optional(moneySchema)],
+      processorResponse: [
+        'processor_response',
+        optional(cardVerificationProcessorResponseSchema),
+      ],
+      threeDSecure: ['three_d_secure', optional(unknown())],
+    })
 );

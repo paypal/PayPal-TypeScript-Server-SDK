@@ -91,27 +91,22 @@ export interface PaymentSourceResponse {
   venmo?: VenmoWalletResponse;
 }
 
-export const paymentSourceResponseSchema: Schema<PaymentSourceResponse> = object(
-  {
-    card: ['card', optional(lazy(() => cardResponseSchema))],
-    paypal: ['paypal', optional(lazy(() => paypalWalletResponseSchema))],
-    bancontact: [
-      'bancontact',
-      optional(lazy(() => bancontactPaymentObjectSchema)),
-    ],
-    blik: ['blik', optional(lazy(() => blikPaymentObjectSchema))],
-    eps: ['eps', optional(lazy(() => epsPaymentObjectSchema))],
-    giropay: ['giropay', optional(lazy(() => giropayPaymentObjectSchema))],
-    ideal: ['ideal', optional(lazy(() => idealPaymentObjectSchema))],
-    mybank: ['mybank', optional(lazy(() => mybankPaymentObjectSchema))],
-    p24: ['p24', optional(lazy(() => p24PaymentObjectSchema))],
-    sofort: ['sofort', optional(lazy(() => sofortPaymentObjectSchema))],
-    trustly: ['trustly', optional(lazy(() => trustlyPaymentObjectSchema))],
-    applePay: ['apple_pay', optional(lazy(() => applePayPaymentObjectSchema))],
-    googlePay: [
-      'google_pay',
-      optional(lazy(() => googlePayWalletResponseSchema)),
-    ],
-    venmo: ['venmo', optional(lazy(() => venmoWalletResponseSchema))],
-  }
+export const paymentSourceResponseSchema: Schema<PaymentSourceResponse> = lazy(
+  () =>
+    object({
+      card: ['card', optional(cardResponseSchema)],
+      paypal: ['paypal', optional(paypalWalletResponseSchema)],
+      bancontact: ['bancontact', optional(bancontactPaymentObjectSchema)],
+      blik: ['blik', optional(blikPaymentObjectSchema)],
+      eps: ['eps', optional(epsPaymentObjectSchema)],
+      giropay: ['giropay', optional(giropayPaymentObjectSchema)],
+      ideal: ['ideal', optional(idealPaymentObjectSchema)],
+      mybank: ['mybank', optional(mybankPaymentObjectSchema)],
+      p24: ['p24', optional(p24PaymentObjectSchema)],
+      sofort: ['sofort', optional(sofortPaymentObjectSchema)],
+      trustly: ['trustly', optional(trustlyPaymentObjectSchema)],
+      applePay: ['apple_pay', optional(applePayPaymentObjectSchema)],
+      googlePay: ['google_pay', optional(googlePayWalletResponseSchema)],
+      venmo: ['venmo', optional(venmoWalletResponseSchema)],
+    })
 );

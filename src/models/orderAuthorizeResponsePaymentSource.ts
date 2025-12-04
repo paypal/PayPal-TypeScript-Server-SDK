@@ -37,15 +37,13 @@ export interface OrderAuthorizeResponsePaymentSource {
   venmo?: VenmoWalletResponse;
 }
 
-export const orderAuthorizeResponsePaymentSourceSchema: Schema<OrderAuthorizeResponsePaymentSource> = object(
-  {
-    card: ['card', optional(lazy(() => cardResponseSchema))],
-    paypal: ['paypal', optional(lazy(() => paypalWalletResponseSchema))],
-    applePay: ['apple_pay', optional(lazy(() => applePayPaymentObjectSchema))],
-    googlePay: [
-      'google_pay',
-      optional(lazy(() => googlePayWalletResponseSchema)),
-    ],
-    venmo: ['venmo', optional(lazy(() => venmoWalletResponseSchema))],
-  }
+export const orderAuthorizeResponsePaymentSourceSchema: Schema<OrderAuthorizeResponsePaymentSource> = lazy(
+  () =>
+    object({
+      card: ['card', optional(cardResponseSchema)],
+      paypal: ['paypal', optional(paypalWalletResponseSchema)],
+      applePay: ['apple_pay', optional(applePayPaymentObjectSchema)],
+      googlePay: ['google_pay', optional(googlePayWalletResponseSchema)],
+      venmo: ['venmo', optional(venmoWalletResponseSchema)],
+    })
 );

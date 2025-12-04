@@ -17,10 +17,11 @@ export interface SubscriptionCustomerInformation {
   phone?: PhoneWithType;
 }
 
-export const subscriptionCustomerInformationSchema: Schema<SubscriptionCustomerInformation> = object(
-  {
-    id: ['id', optional(string())],
-    emailAddress: ['email_address', optional(string())],
-    phone: ['phone', optional(lazy(() => phoneWithTypeSchema))],
-  }
+export const subscriptionCustomerInformationSchema: Schema<SubscriptionCustomerInformation> = lazy(
+  () =>
+    object({
+      id: ['id', optional(string())],
+      emailAddress: ['email_address', optional(string())],
+      phone: ['phone', optional(phoneWithTypeSchema)],
+    })
 );

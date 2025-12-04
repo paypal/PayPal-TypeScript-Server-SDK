@@ -61,31 +61,31 @@ export interface PaymentAuthorization {
   payee?: PayeeBase;
 }
 
-export const paymentAuthorizationSchema: Schema<PaymentAuthorization> = object({
-  status: ['status', optional(authorizationStatusSchema)],
-  statusDetails: [
-    'status_details',
-    optional(lazy(() => authorizationStatusDetailsSchema)),
-  ],
-  id: ['id', optional(string())],
-  amount: ['amount', optional(lazy(() => moneySchema))],
-  invoiceId: ['invoice_id', optional(string())],
-  customId: ['custom_id', optional(string())],
-  networkTransactionReference: [
-    'network_transaction_reference',
-    optional(lazy(() => networkTransactionSchema)),
-  ],
-  sellerProtection: [
-    'seller_protection',
-    optional(lazy(() => sellerProtectionSchema)),
-  ],
-  expirationTime: ['expiration_time', optional(string())],
-  links: ['links', optional(array(lazy(() => linkDescriptionSchema)))],
-  createTime: ['create_time', optional(string())],
-  updateTime: ['update_time', optional(string())],
-  supplementaryData: [
-    'supplementary_data',
-    optional(lazy(() => paymentSupplementaryDataSchema)),
-  ],
-  payee: ['payee', optional(lazy(() => payeeBaseSchema))],
-});
+export const paymentAuthorizationSchema: Schema<PaymentAuthorization> = lazy(
+  () =>
+    object({
+      status: ['status', optional(authorizationStatusSchema)],
+      statusDetails: [
+        'status_details',
+        optional(authorizationStatusDetailsSchema),
+      ],
+      id: ['id', optional(string())],
+      amount: ['amount', optional(moneySchema)],
+      invoiceId: ['invoice_id', optional(string())],
+      customId: ['custom_id', optional(string())],
+      networkTransactionReference: [
+        'network_transaction_reference',
+        optional(networkTransactionSchema),
+      ],
+      sellerProtection: ['seller_protection', optional(sellerProtectionSchema)],
+      expirationTime: ['expiration_time', optional(string())],
+      links: ['links', optional(array(linkDescriptionSchema))],
+      createTime: ['create_time', optional(string())],
+      updateTime: ['update_time', optional(string())],
+      supplementaryData: [
+        'supplementary_data',
+        optional(paymentSupplementaryDataSchema),
+      ],
+      payee: ['payee', optional(payeeBaseSchema)],
+    })
+);

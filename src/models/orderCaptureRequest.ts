@@ -16,9 +16,11 @@ export interface OrderCaptureRequest {
   paymentSource?: OrderCaptureRequestPaymentSource;
 }
 
-export const orderCaptureRequestSchema: Schema<OrderCaptureRequest> = object({
-  paymentSource: [
-    'payment_source',
-    optional(lazy(() => orderCaptureRequestPaymentSourceSchema)),
-  ],
-});
+export const orderCaptureRequestSchema: Schema<OrderCaptureRequest> = lazy(() =>
+  object({
+    paymentSource: [
+      'payment_source',
+      optional(orderCaptureRequestPaymentSourceSchema),
+    ],
+  })
+);

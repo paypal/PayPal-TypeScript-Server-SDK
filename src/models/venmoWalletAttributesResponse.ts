@@ -16,6 +16,6 @@ export interface VenmoWalletAttributesResponse {
   vault?: VenmoVaultResponse;
 }
 
-export const venmoWalletAttributesResponseSchema: Schema<VenmoWalletAttributesResponse> = object(
-  { vault: ['vault', optional(lazy(() => venmoVaultResponseSchema))] }
+export const venmoWalletAttributesResponseSchema: Schema<VenmoWalletAttributesResponse> = lazy(
+  () => object({ vault: ['vault', optional(venmoVaultResponseSchema)] })
 );

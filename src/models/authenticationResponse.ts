@@ -22,15 +22,16 @@ export interface AuthenticationResponse {
   threeDSecure?: ThreeDSecureAuthenticationResponse;
 }
 
-export const authenticationResponseSchema: Schema<AuthenticationResponse> = object(
-  {
-    liabilityShift: [
-      'liability_shift',
-      optional(liabilityShiftIndicatorSchema),
-    ],
-    threeDSecure: [
-      'three_d_secure',
-      optional(lazy(() => threeDSecureAuthenticationResponseSchema)),
-    ],
-  }
+export const authenticationResponseSchema: Schema<AuthenticationResponse> = lazy(
+  () =>
+    object({
+      liabilityShift: [
+        'liability_shift',
+        optional(liabilityShiftIndicatorSchema),
+      ],
+      threeDSecure: [
+        'three_d_secure',
+        optional(threeDSecureAuthenticationResponseSchema),
+      ],
+    })
 );

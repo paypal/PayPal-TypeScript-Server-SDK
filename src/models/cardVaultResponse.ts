@@ -24,9 +24,11 @@ export interface CardVaultResponse {
   customer?: CardCustomerInformation;
 }
 
-export const cardVaultResponseSchema: Schema<CardVaultResponse> = object({
-  id: ['id', optional(string())],
-  status: ['status', optional(vaultStatusSchema)],
-  links: ['links', optional(array(lazy(() => linkDescriptionSchema)))],
-  customer: ['customer', optional(lazy(() => cardCustomerInformationSchema))],
-});
+export const cardVaultResponseSchema: Schema<CardVaultResponse> = lazy(() =>
+  object({
+    id: ['id', optional(string())],
+    status: ['status', optional(vaultStatusSchema)],
+    links: ['links', optional(array(linkDescriptionSchema))],
+    customer: ['customer', optional(cardCustomerInformationSchema)],
+  })
+);

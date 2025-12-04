@@ -13,6 +13,6 @@ export interface RefundPlatformFee {
   amount: Money;
 }
 
-export const refundPlatformFeeSchema: Schema<RefundPlatformFee> = object({
-  amount: ['amount', lazy(() => moneySchema)],
-});
+export const refundPlatformFeeSchema: Schema<RefundPlatformFee> = lazy(() =>
+  object({ amount: ['amount', moneySchema] })
+);

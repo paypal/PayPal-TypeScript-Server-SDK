@@ -13,6 +13,6 @@ export interface ApplePayPaymentToken {
   card?: ApplePayCard;
 }
 
-export const applePayPaymentTokenSchema: Schema<ApplePayPaymentToken> = object({
-  card: ['card', optional(lazy(() => applePayCardSchema))],
-});
+export const applePayPaymentTokenSchema: Schema<ApplePayPaymentToken> = lazy(
+  () => object({ card: ['card', optional(applePayCardSchema)] })
+);

@@ -19,8 +19,10 @@ export interface ApplePayRequestCard {
   billingAddress?: Address;
 }
 
-export const applePayRequestCardSchema: Schema<ApplePayRequestCard> = object({
-  type: ['type', optional(cardTypeSchema)],
-  brand: ['brand', optional(cardBrandSchema)],
-  billingAddress: ['billing_address', optional(lazy(() => addressSchema))],
-});
+export const applePayRequestCardSchema: Schema<ApplePayRequestCard> = lazy(() =>
+  object({
+    type: ['type', optional(cardTypeSchema)],
+    brand: ['brand', optional(cardBrandSchema)],
+    billingAddress: ['billing_address', optional(addressSchema)],
+  })
+);

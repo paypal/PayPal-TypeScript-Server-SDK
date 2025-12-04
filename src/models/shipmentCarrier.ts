@@ -1422,6 +1422,7 @@ export enum ShipmentCarrier {
   Swiftx = 'SWIFTX',
   Sfydexpress = 'SFYDEXPRESS',
   Toptrans = 'TOPTRANS',
+  Other = 'OTHER',
 }
 
 /**

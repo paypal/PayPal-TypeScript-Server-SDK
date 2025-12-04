@@ -15,9 +15,10 @@ export interface Level2CardProcessingData {
   taxTotal?: Money;
 }
 
-export const level2CardProcessingDataSchema: Schema<Level2CardProcessingData> = object(
-  {
-    invoiceId: ['invoice_id', optional(string())],
-    taxTotal: ['tax_total', optional(lazy(() => moneySchema))],
-  }
+export const level2CardProcessingDataSchema: Schema<Level2CardProcessingData> = lazy(
+  () =>
+    object({
+      invoiceId: ['invoice_id', optional(string())],
+      taxTotal: ['tax_total', optional(moneySchema)],
+    })
 );

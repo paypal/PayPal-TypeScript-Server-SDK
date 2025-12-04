@@ -23,12 +23,14 @@ export interface PaymentInstruction {
   payeeReceivableFxRateId?: string;
 }
 
-export const paymentInstructionSchema: Schema<PaymentInstruction> = object({
-  platformFees: [
-    'platform_fees',
-    optional(array(lazy(() => platformFeeSchema))),
-  ],
-  disbursementMode: ['disbursement_mode', optional(disbursementModeSchema)],
-  payeePricingTierId: ['payee_pricing_tier_id', optional(string())],
-  payeeReceivableFxRateId: ['payee_receivable_fx_rate_id', optional(string())],
-});
+export const paymentInstructionSchema: Schema<PaymentInstruction> = lazy(() =>
+  object({
+    platformFees: ['platform_fees', optional(array(platformFeeSchema))],
+    disbursementMode: ['disbursement_mode', optional(disbursementModeSchema)],
+    payeePricingTierId: ['payee_pricing_tier_id', optional(string())],
+    payeeReceivableFxRateId: [
+      'payee_receivable_fx_rate_id',
+      optional(string()),
+    ],
+  })
+);

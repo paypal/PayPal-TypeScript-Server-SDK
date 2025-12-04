@@ -19,12 +19,10 @@ export interface CaptureStatusWithDetails {
   statusDetails?: CaptureStatusDetails;
 }
 
-export const captureStatusWithDetailsSchema: Schema<CaptureStatusWithDetails> = object(
-  {
-    status: ['status', optional(captureStatusSchema)],
-    statusDetails: [
-      'status_details',
-      optional(lazy(() => captureStatusDetailsSchema)),
-    ],
-  }
+export const captureStatusWithDetailsSchema: Schema<CaptureStatusWithDetails> = lazy(
+  () =>
+    object({
+      status: ['status', optional(captureStatusSchema)],
+      statusDetails: ['status_details', optional(captureStatusDetailsSchema)],
+    })
 );

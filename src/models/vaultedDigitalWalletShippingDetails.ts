@@ -27,15 +27,13 @@ export interface VaultedDigitalWalletShippingDetails {
   address?: Address;
 }
 
-export const vaultedDigitalWalletShippingDetailsSchema: Schema<VaultedDigitalWalletShippingDetails> = object(
-  {
-    name: ['name', optional(lazy(() => shippingNameSchema))],
-    emailAddress: ['email_address', optional(string())],
-    phoneNumber: [
-      'phone_number',
-      optional(lazy(() => phoneNumberWithCountryCodeSchema)),
-    ],
-    type: ['type', optional(fulfillmentTypeSchema)],
-    address: ['address', optional(lazy(() => addressSchema))],
-  }
+export const vaultedDigitalWalletShippingDetailsSchema: Schema<VaultedDigitalWalletShippingDetails> = lazy(
+  () =>
+    object({
+      name: ['name', optional(shippingNameSchema)],
+      emailAddress: ['email_address', optional(string())],
+      phoneNumber: ['phone_number', optional(phoneNumberWithCountryCodeSchema)],
+      type: ['type', optional(fulfillmentTypeSchema)],
+      address: ['address', optional(addressSchema)],
+    })
 );

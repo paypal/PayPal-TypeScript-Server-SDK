@@ -18,10 +18,11 @@ export interface NetAmountBreakdownItem {
   exchangeRate?: ExchangeRate;
 }
 
-export const netAmountBreakdownItemSchema: Schema<NetAmountBreakdownItem> = object(
-  {
-    payableAmount: ['payable_amount', optional(lazy(() => moneySchema))],
-    convertedAmount: ['converted_amount', optional(lazy(() => moneySchema))],
-    exchangeRate: ['exchange_rate', optional(lazy(() => exchangeRateSchema))],
-  }
+export const netAmountBreakdownItemSchema: Schema<NetAmountBreakdownItem> = lazy(
+  () =>
+    object({
+      payableAmount: ['payable_amount', optional(moneySchema)],
+      convertedAmount: ['converted_amount', optional(moneySchema)],
+      exchangeRate: ['exchange_rate', optional(exchangeRateSchema)],
+    })
 );

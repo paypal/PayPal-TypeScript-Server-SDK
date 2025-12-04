@@ -29,16 +29,17 @@ export interface GooglePayCardResponse {
   authenticationResult?: AuthenticationResponse;
 }
 
-export const googlePayCardResponseSchema: Schema<GooglePayCardResponse> = object(
-  {
-    name: ['name', optional(string())],
-    lastDigits: ['last_digits', optional(string())],
-    type: ['type', optional(cardTypeSchema)],
-    brand: ['brand', optional(cardBrandSchema)],
-    billingAddress: ['billing_address', optional(lazy(() => addressSchema))],
-    authenticationResult: [
-      'authentication_result',
-      optional(lazy(() => authenticationResponseSchema)),
-    ],
-  }
+export const googlePayCardResponseSchema: Schema<GooglePayCardResponse> = lazy(
+  () =>
+    object({
+      name: ['name', optional(string())],
+      lastDigits: ['last_digits', optional(string())],
+      type: ['type', optional(cardTypeSchema)],
+      brand: ['brand', optional(cardBrandSchema)],
+      billingAddress: ['billing_address', optional(addressSchema)],
+      authenticationResult: [
+        'authentication_result',
+        optional(authenticationResponseSchema),
+      ],
+    })
 );

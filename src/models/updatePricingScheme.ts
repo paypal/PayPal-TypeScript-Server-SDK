@@ -18,10 +18,9 @@ export interface UpdatePricingScheme {
   pricingScheme: SubscriptionPricingScheme;
 }
 
-export const updatePricingSchemeSchema: Schema<UpdatePricingScheme> = object({
-  billingCycleSequence: ['billing_cycle_sequence', number()],
-  pricingScheme: [
-    'pricing_scheme',
-    lazy(() => subscriptionPricingSchemeSchema),
-  ],
-});
+export const updatePricingSchemeSchema: Schema<UpdatePricingScheme> = lazy(() =>
+  object({
+    billingCycleSequence: ['billing_cycle_sequence', number()],
+    pricingScheme: ['pricing_scheme', subscriptionPricingSchemeSchema],
+  })
+);

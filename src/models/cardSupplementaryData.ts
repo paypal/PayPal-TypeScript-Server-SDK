@@ -22,9 +22,10 @@ export interface CardSupplementaryData {
   level3?: Level3CardProcessingData;
 }
 
-export const cardSupplementaryDataSchema: Schema<CardSupplementaryData> = object(
-  {
-    level2: ['level_2', optional(lazy(() => level2CardProcessingDataSchema))],
-    level3: ['level_3', optional(lazy(() => level3CardProcessingDataSchema))],
-  }
+export const cardSupplementaryDataSchema: Schema<CardSupplementaryData> = lazy(
+  () =>
+    object({
+      level2: ['level_2', optional(level2CardProcessingDataSchema)],
+      level3: ['level_3', optional(level3CardProcessingDataSchema)],
+    })
 );

@@ -19,9 +19,11 @@ export interface CardCustomer {
   merchantCustomerId?: string;
 }
 
-export const cardCustomerSchema: Schema<CardCustomer> = object({
-  id: ['id', optional(string())],
-  emailAddress: ['email_address', optional(string())],
-  phone: ['phone', optional(lazy(() => phoneWithTypeSchema))],
-  merchantCustomerId: ['merchant_customer_id', optional(string())],
-});
+export const cardCustomerSchema: Schema<CardCustomer> = lazy(() =>
+  object({
+    id: ['id', optional(string())],
+    emailAddress: ['email_address', optional(string())],
+    phone: ['phone', optional(phoneWithTypeSchema)],
+    merchantCustomerId: ['merchant_customer_id', optional(string())],
+  })
+);

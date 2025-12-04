@@ -34,16 +34,15 @@ export interface VenmoWalletResponse {
   attributes?: VenmoWalletAttributesResponse;
 }
 
-export const venmoWalletResponseSchema: Schema<VenmoWalletResponse> = object({
-  emailAddress: ['email_address', optional(string())],
-  accountId: ['account_id', optional(string())],
-  userName: ['user_name', optional(string())],
-  name: ['name', optional(lazy(() => nameSchema))],
-  phoneNumber: ['phone_number', optional(lazy(() => phoneNumberSchema))],
-  address: ['address', optional(lazy(() => addressSchema))],
-  returnFlow: ['return_flow', optional(returnFlowSchema)],
-  attributes: [
-    'attributes',
-    optional(lazy(() => venmoWalletAttributesResponseSchema)),
-  ],
-});
+export const venmoWalletResponseSchema: Schema<VenmoWalletResponse> = lazy(() =>
+  object({
+    emailAddress: ['email_address', optional(string())],
+    accountId: ['account_id', optional(string())],
+    userName: ['user_name', optional(string())],
+    name: ['name', optional(nameSchema)],
+    phoneNumber: ['phone_number', optional(phoneNumberSchema)],
+    address: ['address', optional(addressSchema)],
+    returnFlow: ['return_flow', optional(returnFlowSchema)],
+    attributes: ['attributes', optional(venmoWalletAttributesResponseSchema)],
+  })
+);

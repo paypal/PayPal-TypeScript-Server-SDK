@@ -22,10 +22,12 @@ export interface ShippingOption {
   selected: boolean;
 }
 
-export const shippingOptionSchema: Schema<ShippingOption> = object({
-  id: ['id', string()],
-  label: ['label', string()],
-  type: ['type', optional(shippingTypeSchema)],
-  amount: ['amount', optional(lazy(() => moneySchema))],
-  selected: ['selected', boolean()],
-});
+export const shippingOptionSchema: Schema<ShippingOption> = lazy(() =>
+  object({
+    id: ['id', string()],
+    label: ['label', string()],
+    type: ['type', optional(shippingTypeSchema)],
+    amount: ['amount', optional(moneySchema)],
+    selected: ['selected', boolean()],
+  })
+);

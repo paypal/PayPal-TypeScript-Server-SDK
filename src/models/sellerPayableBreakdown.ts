@@ -32,30 +32,25 @@ export interface SellerPayableBreakdown {
   totalRefundedAmount?: Money;
 }
 
-export const sellerPayableBreakdownSchema: Schema<SellerPayableBreakdown> = object(
-  {
-    grossAmount: ['gross_amount', optional(lazy(() => moneySchema))],
-    paypalFee: ['paypal_fee', optional(lazy(() => moneySchema))],
-    paypalFeeInReceivableCurrency: [
-      'paypal_fee_in_receivable_currency',
-      optional(lazy(() => moneySchema)),
-    ],
-    netAmount: ['net_amount', optional(lazy(() => moneySchema))],
-    netAmountInReceivableCurrency: [
-      'net_amount_in_receivable_currency',
-      optional(lazy(() => moneySchema)),
-    ],
-    platformFees: [
-      'platform_fees',
-      optional(array(lazy(() => platformFeeSchema))),
-    ],
-    netAmountBreakdown: [
-      'net_amount_breakdown',
-      optional(array(lazy(() => netAmountBreakdownItemSchema))),
-    ],
-    totalRefundedAmount: [
-      'total_refunded_amount',
-      optional(lazy(() => moneySchema)),
-    ],
-  }
+export const sellerPayableBreakdownSchema: Schema<SellerPayableBreakdown> = lazy(
+  () =>
+    object({
+      grossAmount: ['gross_amount', optional(moneySchema)],
+      paypalFee: ['paypal_fee', optional(moneySchema)],
+      paypalFeeInReceivableCurrency: [
+        'paypal_fee_in_receivable_currency',
+        optional(moneySchema),
+      ],
+      netAmount: ['net_amount', optional(moneySchema)],
+      netAmountInReceivableCurrency: [
+        'net_amount_in_receivable_currency',
+        optional(moneySchema),
+      ],
+      platformFees: ['platform_fees', optional(array(platformFeeSchema))],
+      netAmountBreakdown: [
+        'net_amount_breakdown',
+        optional(array(netAmountBreakdownItemSchema)),
+      ],
+      totalRefundedAmount: ['total_refunded_amount', optional(moneySchema)],
+    })
 );

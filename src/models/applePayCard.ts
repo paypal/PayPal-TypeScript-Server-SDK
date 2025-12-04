@@ -23,10 +23,12 @@ export interface ApplePayCard {
   billingAddress?: Address;
 }
 
-export const applePayCardSchema: Schema<ApplePayCard> = object({
-  name: ['name', optional(string())],
-  lastDigits: ['last_digits', optional(string())],
-  type: ['type', optional(cardTypeSchema)],
-  brand: ['brand', optional(cardBrandSchema)],
-  billingAddress: ['billing_address', optional(lazy(() => addressSchema))],
-});
+export const applePayCardSchema: Schema<ApplePayCard> = lazy(() =>
+  object({
+    name: ['name', optional(string())],
+    lastDigits: ['last_digits', optional(string())],
+    type: ['type', optional(cardTypeSchema)],
+    brand: ['brand', optional(cardBrandSchema)],
+    billingAddress: ['billing_address', optional(addressSchema)],
+  })
+);

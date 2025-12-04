@@ -25,8 +25,10 @@ export interface CartInformation {
   paypalInvoiceId?: string;
 }
 
-export const cartInformationSchema: Schema<CartInformation> = object({
-  itemDetails: ['item_details', optional(array(lazy(() => itemDetailsSchema)))],
-  taxInclusive: ['tax_inclusive', optional(boolean())],
-  paypalInvoiceId: ['paypal_invoice_id', optional(string())],
-});
+export const cartInformationSchema: Schema<CartInformation> = lazy(() =>
+  object({
+    itemDetails: ['item_details', optional(array(itemDetailsSchema))],
+    taxInclusive: ['tax_inclusive', optional(boolean())],
+    paypalInvoiceId: ['paypal_invoice_id', optional(string())],
+  })
+);
