@@ -251,6 +251,7 @@ export type { PaypalWalletCustomerRequest } from './models/paypalWalletCustomerR
 export type { PaypalWalletExperienceContext } from './models/paypalWalletExperienceContext.js';
 export type { PaypalWalletResponse } from './models/paypalWalletResponse.js';
 export type { PaypalWalletStoredCredential } from './models/paypalWalletStoredCredential.js';
+export type { PaypalWalletVaultBase } from './models/paypalWalletVaultBase.js';
 export type { PaypalWalletVaultInstruction } from './models/paypalWalletVaultInstruction.js';
 export type { PaypalWalletVaultResponse } from './models/paypalWalletVaultResponse.js';
 export { PaypalWalletVaultStatus } from './models/paypalWalletVaultStatus.js';
@@ -328,6 +329,7 @@ export type { SubscriptionCardRequest } from './models/subscriptionCardRequest.j
 export type { SubscriptionCollection } from './models/subscriptionCollection.js';
 export type { SubscriptionCustomerInformation } from './models/subscriptionCustomerInformation.js';
 export type { SubscriptionPatchApplicationContext } from './models/subscriptionPatchApplicationContext.js';
+export type { SubscriptionPayer } from './models/subscriptionPayer.js';
 export type { SubscriptionPayerName } from './models/subscriptionPayerName.js';
 export type { SubscriptionPaymentSource } from './models/subscriptionPaymentSource.js';
 export type { SubscriptionPaymentSourceResponse } from './models/subscriptionPaymentSourceResponse.js';
@@ -360,6 +362,7 @@ export { UpcType } from './models/upcType.js';
 export type { UpdatePricingScheme } from './models/updatePricingScheme.js';
 export type { UpdatePricingSchemesRequest } from './models/updatePricingSchemesRequest.js';
 export { UsagePattern } from './models/usagePattern.js';
+export { UsageType } from './models/usageType.js';
 export type { VaultApplePayRequest } from './models/vaultApplePayRequest.js';
 export type { VaultCardExperienceContext } from './models/vaultCardExperienceContext.js';
 export { VaultCardVerificationMethod } from './models/vaultCardVerificationMethod.js';

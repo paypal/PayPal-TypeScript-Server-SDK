@@ -17,7 +17,6 @@ import {
 /** Additional attributes associated with the use of this PayPal Wallet. */
 export interface PaypalWalletAttributes {
   customer?: PaypalWalletCustomerRequest;
-  /** Resource consolidating common request and response attributes for vaulting PayPal Wallet. */
   vault?: PaypalWalletVaultInstruction;
 }
 

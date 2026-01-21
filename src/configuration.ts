@@ -6,8 +6,21 @@
 
 import { HttpClientOptions } from './clientAdapter.js';
 import { ClientCredentialsAuthManager } from './clientCredentialsAuthManager.js';
-import { PartialLoggingOptions } from './core.js';
+import { LogLevel, PartialLoggingOptions } from './core.js';
 import { OAuthToken } from './models/oAuthToken.js';
+import {
+  anyOf,
+  array,
+  boolean,
+  literal,
+  number,
+  object,
+  optional,
+  Schema,
+  string,
+  stringEnum,
+  validateAndMap,
+} from './schema.js';
 
 /** An interface for all configuration parameters required by the SDK. */
 export interface Configuration {
@@ -34,3 +47,235 @@ export enum Environment {
   Production = 'Production',
   Sandbox = 'Sandbox',
 }
+
+export namespace Configuration {
+  export function fromJsonConfig(jsonConfig: string): Partial<Configuration> {
+    const configurationObject = JSON.parse(jsonConfig);
+    const result = validateAndMap(jsonConfig, configurationObject);
+
+    if (result.errors) {
+      throw new Error(
+        'Invalid configuration provided. Please check the following errors:\n' +
+          result.errors.map((e: any) => e.message).join('\n')
+      );
+    }
+
+    return result.result;
+  }
+
+  export function fromEnvironment(
+    envVariables: Record<string, string | undefined>
+  ): Partial<Configuration> {
+    const config: any = {};
+
+    config.timeout = envVariables.TIMEOUT;
+    config.environment = envVariables.ENVIRONMENT;
+
+    if (envVariables.O_AUTH_CLIENT_ID && envVariables.O_AUTH_CLIENT_SECRET) {
+      config.clientCredentialsAuthCredentials = {
+        oAuthClientId: envVariables.O_AUTH_CLIENT_ID,
+        oAuthClientSecret: envVariables.O_AUTH_CLIENT_SECRET,
+        oAuthToken: envVariables.O_AUTH_TOKEN,
+        oAuthClockSkew: envVariables.O_AUTH_CLOCK_SKEW,
+      };
+    }
+
+    config.httpClientOptions = {
+      timeout: envVariables.TIMEOUT,
+      retryConfig: {
+        retryOnTimeout: envVariables.RETRY_ON_TIMEOUT,
+        retryInterval: envVariables.RETRY_INTERVAL,
+        maxNumberOfRetries: envVariables.MAX_NUMBER_OF_RETRIES,
+        maximumRetryWaitTime: envVariables.MAX_RETRY_WAIT_TIME,
+        backoffFactor: envVariables.RETRY_BACKOFF_FACTOR,
+        httpStatusCodesToRetry: envVariables.HTTP_STATUS_CODES_TO_RETRY?.split(
+          ','
+        ).map((s) => s.trim()),
+        httpMethodsToRetry: envVariables.HTTP_METHODS_TO_RETRY?.split(
+          ','
+        ).map((s) => s.trim()),
+      },
+    };
+
+    if (envVariables.PROXY_ADDRESS) {
+      config.httpClientOptions.proxySettings = {
+        address: envVariables.PROXY_ADDRESS,
+        port: envVariables.PROXY_PORT,
+      };
+
+      if (
+        envVariables.PROXY_AUTH_USERNAME &&
+        envVariables.PROXY_AUTH_PASSWORD
+      ) {
+        config.httpClientOptions.proxySettings.auth = {
+          username: envVariables.PROXY_AUTH_USERNAME,
+          password: envVariables.PROXY_AUTH_PASSWORD,
+        };
+      }
+    }
+
+    config.logging = {
+      logLevel: envVariables.LOG_LEVEL,
+      maskSensitiveHeaders: envVariables.MASK_SENSITIVE_HEADERS,
+      logRequest: {
+        logBody: envVariables.REQUEST_LOG_BODY,
+        logHeaders: envVariables.REQUEST_LOG_HEADERS,
+        includeQueryInPath: envVariables.REQUEST_INCLUDE_QUERY_IN_PATH,
+        headersToInclude: envVariables.REQUEST_HEADERS_TO_INCLUDE?.split(
+          ','
+        ).map((s) => s.trim()),
+        headersToExclude: envVariables.REQUEST_HEADERS_TO_EXCLUDE?.split(
+          ','
+        ).map((s) => s.trim()),
+        headersToWhitelist: envVariables.REQUEST_HEADERS_TO_WHITELIST?.split(
+          ','
+        ).map((s) => s.trim()),
+      },
+      logResponse: {
+        logBody: envVariables.RESPONSE_LOG_BODY,
+        logHeaders: envVariables.RESPONSE_LOG_HEADERS,
+        headersToInclude: envVariables.RESPONSE_HEADERS_TO_INCLUDE?.split(
+          ','
+        ).map((s) => s.trim()),
+        headersToExclude: envVariables.RESPONSE_HEADERS_TO_EXCLUDE?.split(
+          ','
+        ).map((s) => s.trim()),
+        headersToWhitelist: envVariables.RESPONSE_HEADERS_TO_WHITELIST?.split(
+          ','
+        ).map((s) => s.trim()),
+      },
+    };
+
+    const result = validateAndMap(config, configurationSchema);
+
+    if (result.errors) {
+      throw new Error(
+        'Invalid configuration provided. Please check the following errors:\n' +
+          result.errors.map((e: any) => e.message).join('\n')
+      );
+    }
+
+    return result.result;
+  }
+}
+
+const configurationSchema: Schema<Partial<Configuration>> = object({
+  timeout: ['timeout', optional(number())],
+  environment: ['environment', optional(stringEnum(Environment))],
+  clientCredentialsAuthCredentials: [
+    'clientCredentialsAuthCredentials',
+    optional(
+      object({
+        oAuthClientId: ['oAuthClientId', string()],
+        oAuthClientSecret: ['oAuthClientSecret', string()],
+        oAuthClockSkew: ['oAuthClockSkew', optional(number())],
+      })
+    ),
+  ],
+  httpClientOptions: [
+    'httpClientOptions',
+    optional(
+      object({
+        timeout: ['timeout', optional(number())],
+        retryConfig: [
+          'retryConfig',
+          optional(
+            object({
+              maxNumberOfRetries: ['maxNumberOfRetries', optional(number())],
+              retryOnTimeout: ['retryOnTimeout', optional(boolean())],
+              retryInterval: ['retryInterval', optional(number())],
+              maximumRetryWaitTime: [
+                'maximumRetryWaitTime',
+                optional(number()),
+              ],
+              backoffFactor: ['backoffFactor', optional(number())],
+              httpStatusCodesToRetry: [
+                'httpStatusCodesToRetry',
+                optional(array(number())),
+              ],
+              httpMethodsToRetry: [
+                'httpMethodsToRetry',
+                optional(
+                  array(
+                    anyOf([
+                      literal('GET'),
+                      literal('DELETE'),
+                      literal('HEAD'),
+                      literal('OPTIONS'),
+                      literal('POST'),
+                      literal('PUT'),
+                      literal('PATCH'),
+                      literal('LINK'),
+                      literal('UNLINK'),
+                    ])
+                  )
+                ),
+              ],
+            })
+          ),
+        ],
+        proxySettings: [
+          'proxySettings',
+          optional(
+            object({
+              address: ['address', string()],
+              port: ['port', optional(number())],
+              auth: [
+                'auth',
+                optional(
+                  object({
+                    username: ['username', string()],
+                    password: ['password', string()],
+                  })
+                ),
+              ],
+            })
+          ),
+        ],
+      })
+    ),
+  ],
+  logging: [
+    'logging',
+    optional(
+      object({
+        logLevel: ['logLevel', optional(stringEnum(LogLevel))],
+        logRequest: [
+          'logRequest',
+          optional(
+            object({
+              logBody: ['logBody', optional(boolean())],
+              logHeaders: ['logHeaders', optional(boolean())],
+              headersToExclude: ['headersToExclude', optional(array(string()))],
+              headersToInclude: ['headersToInclude', optional(array(string()))],
+              headersToWhiteList: [
+                'headersToWhiteList',
+                optional(array(string())),
+              ],
+              includeQueryInPath: ['includeQueryInPath', optional(boolean())],
+            })
+          ),
+        ],
+        logResponse: [
+          'logResponse',
+          optional(
+            object({
+              logBody: ['logBody', optional(boolean())],
+              logHeaders: ['logHeaders', optional(boolean())],
+              headersToExclude: ['headersToExclude', optional(array(string()))],
+              headersToInclude: ['headersToInclude', optional(array(string()))],
+              headersToWhiteList: [
+                'headersToWhiteList',
+                optional(array(string())),
+              ],
+              makeSensitiveHeaders: [
+                'makeSensitiveHeaders',
+                optional(boolean()),
+              ],
+            })
+          ),
+        ],
+      })
+    ),
+  ],
+});
