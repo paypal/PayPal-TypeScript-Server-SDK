@@ -6,35 +6,21 @@
 
 import { lazy, object, optional, Schema, string } from '../schema.js';
 import { Name, nameSchema } from './name.js';
-import { ShippingDetails, shippingDetailsSchema } from './shippingDetails.js';
-import {
-  SubscriptionPaymentSourceResponse,
-  subscriptionPaymentSourceResponseSchema,
-} from './subscriptionPaymentSourceResponse.js';
 
-/** The subscriber response information. */
-export interface Subscriber {
+/** The customer who approves and pays for the order. The customer is also known as the payer. */
+export interface SubscriptionPayer {
   /** The internationalized email address. Note: Up to 64 characters are allowed before and 255 characters are allowed after the @ sign. However, the generally accepted maximum length for an email address is 254 characters. The pattern verifies that an unquoted @ sign exists. */
   emailAddress?: string;
   /** The account identifier for a PayPal account. */
   payerId?: string;
   /** The name of the party. */
   name?: Name;
-  /** The shipping details. */
-  shippingAddress?: ShippingDetails;
-  /** The payment source used to fund the payment. */
-  paymentSource?: SubscriptionPaymentSourceResponse;
 }
 
-export const subscriberSchema: Schema<Subscriber> = lazy(() =>
+export const subscriptionPayerSchema: Schema<SubscriptionPayer> = lazy(() =>
   object({
     emailAddress: ['email_address', optional(string())],
     payerId: ['payer_id', optional(string())],
     name: ['name', optional(nameSchema)],
-    shippingAddress: ['shipping_address', optional(shippingDetailsSchema)],
-    paymentSource: [
-      'payment_source',
-      optional(subscriptionPaymentSourceResponseSchema),
-    ],
   })
 );

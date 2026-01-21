@@ -4,8 +4,7 @@
       "module": "esnext",
       "lib": ["esnext"],
       "outDir": "dist/esm",
-      "declarationDir": "dist/types",
+      "declarationDir": "dist/esm/types",
       "target": "ES2017"
   }
 }
-

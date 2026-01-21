@@ -1,9 +1,9 @@
 {
-  "version": "2.1.0",
+  "version": "2.2.0",
   "license": "MIT",
   "sideEffects": false,
   "main": "dist/cjs/index.js",
-  "typings": "dist/types/index.d.ts",
+  "typings": "dist/cjs/types/index.d.ts",
   "module": "dist/esm/index.js",
   "files": [
     "dist",
@@ -59,5 +59,27 @@
   },
   "homepage": "https://github.com/paypal/PayPal-TypeScript-Server-SDK",
   "keywords": [],
-  "contributors": []
+  "contributors": [],
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/esm/types/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/types/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
+    },
+    "./metadata": {
+      "import": {
+        "types": "./dist/esm/types/metadata/index.d.ts",
+        "default": "./dist/esm/metadata/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/types/metadata/index.d.ts",
+        "default": "./dist/cjs/metadata/index.js"
+      }
+    }
+  }
 }
