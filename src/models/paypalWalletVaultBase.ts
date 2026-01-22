@@ -10,16 +10,14 @@ import {
   paypalPaymentTokenCustomerTypeSchema,
 } from './paypalPaymentTokenCustomerType.js';
 import {
-  PaypalPaymentTokenUsageType,
-  paypalPaymentTokenUsageTypeSchema,
-} from './paypalPaymentTokenUsageType.js';
-import {
   StoreInVaultInstruction,
   storeInVaultInstructionSchema,
 } from './storeInVaultInstruction.js';
 import { UsagePattern, usagePatternSchema } from './usagePattern.js';
+import { UsageType, usageTypeSchema } from './usageType.js';
 
-export interface PaypalWalletVaultInstruction {
+/** Resource consolidating common request and response attributes for vaulting PayPal Wallet. */
+export interface PaypalWalletVaultBase {
   /** Defines how and when the payment source gets vaulted. */
   storeInVault?: StoreInVaultInstruction;
   /** The description displayed to PayPal consumer on the approval flow for PayPal, as well as on the PayPal payment token management experience on PayPal.com. */
@@ -27,19 +25,19 @@ export interface PaypalWalletVaultInstruction {
   /** Expected business/pricing model for the billing agreement. */
   usagePattern?: UsagePattern;
   /** The usage type associated with the PayPal payment token. */
-  usageType: PaypalPaymentTokenUsageType;
+  usageType?: UsageType;
   /** The customer type associated with the PayPal payment token. This is to indicate whether the customer acting on the merchant / platform is either a business or a consumer. */
   customerType?: PaypalPaymentTokenCustomerType;
   /** Create multiple payment tokens for the same payer, merchant/platform combination. Use this when the customer has not logged in at merchant/platform. The payment token thus generated, can then also be used to create the customer account at merchant/platform. Use this also when multiple payment tokens are required for the same payer, different customer at merchant/platform. This helps to identify customers distinctly even though they may share the same PayPal account. This only applies to PayPal payment source. */
   permitMultiplePaymentTokens?: boolean;
 }
 
-export const paypalWalletVaultInstructionSchema: Schema<PaypalWalletVaultInstruction> = object(
+export const paypalWalletVaultBaseSchema: Schema<PaypalWalletVaultBase> = object(
   {
     storeInVault: ['store_in_vault', optional(storeInVaultInstructionSchema)],
     description: ['description', optional(string())],
     usagePattern: ['usage_pattern', optional(usagePatternSchema)],
-    usageType: ['usage_type', paypalPaymentTokenUsageTypeSchema],
+    usageType: ['usage_type', optional(usageTypeSchema)],
     customerType: [
       'customer_type',
       optional(paypalPaymentTokenCustomerTypeSchema),
