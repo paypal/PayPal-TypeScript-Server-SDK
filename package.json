@@ -13,8 +13,9 @@
     "node": ">=14.17.0"
   },
   "scripts": {
-    "build": "rimraf dist && tsc -p tsconfig.esm.json & tsc -p tsconfig.cjs.json",
-    "prepare": "rimraf dist && tsc -p tsconfig.esm.json & tsc -p tsconfig.cjs.json",
+    "build": "rimraf dist && tsc -p tsconfig.esm.json && tsc -p tsconfig.cjs.json && node scripts/write-dist-package-jsons.cjs && npm run verify:dist",
+    "prepare": "npm run build",
+    "verify:dist": "node scripts/verify-dist-exports.cjs",
     "lint": "eslint **/*.ts --ignore-path .eslintignore",
     "lint:fix": "eslint **/*.ts --ignore-path .eslintignore --fix"
   },
