@@ -80,6 +80,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof CustomError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -167,6 +170,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof CustomError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -251,6 +257,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof CustomError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -334,6 +343,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof CustomError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -407,6 +419,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof CustomError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -491,6 +506,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof CustomError) {
+      console.log(error.result);
+    }
   }
 }
 ```
@@ -568,6 +586,9 @@ try {
     console.log(error.headers);
     // Extracting response error body of type `string | Stream`.
     console.log(error.body);
+    if (error instanceof CustomError) {
+      console.log(error.result);
+    }
   }
 }
 ```

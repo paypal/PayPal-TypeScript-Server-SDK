@@ -1,5 +1,5 @@
 
-# Authorization Status With Details
+# Authorization Status with Details
 
 The status fields and status details for an authorized payment.
 

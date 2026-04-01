@@ -9,12 +9,12 @@ Documentation for accessing and setting credentials for Oauth2.
 
 | Name | Type | Description | Setter |
 |  --- | --- | --- | --- |
-| OAuthClientId | `string` | OAuth 2 Client ID | `oAuthClientId` |
-| OAuthClientSecret | `string` | OAuth 2 Client Secret | `oAuthClientSecret` |
-| OAuthToken | `OAuthToken` | Object for storing information about the OAuth token | `oAuthToken` |
-| OAuthClockSkew | `number` | Clock skew time in seconds applied while checking the OAuth Token expiry. | `clockSkew` |
-| OAuthTokenProvider | `(lastOAuthToken: OAuthToken \| undefined, authManager: ClientCredentialsAuthManager) => Promise<OAuthToken>` | Registers a callback for oAuth Token Provider used for automatic token fetching/refreshing. | `oAuthTokenProvider` |
-| OAuthOnTokenUpdate | `(token: OAuthToken) => void` | Registers a callback for token update event. | `oAuthOnTokenUpdate` |
+| oAuthClientId | `string` | OAuth 2 Client ID | `oAuthClientId` |
+| oAuthClientSecret | `string` | OAuth 2 Client Secret | `oAuthClientSecret` |
+| oAuthToken | `OAuthToken` | Object for storing information about the OAuth token | `oAuthToken` |
+| oAuthClockSkew | `number` | Clock skew time in seconds applied while checking the OAuth Token expiry. | `clockSkew` |
+| oAuthTokenProvider | `(lastOAuthToken: OAuthToken \| undefined, authManager: ClientCredentialsAuthManager) => Promise<OAuthToken>` | Registers a callback for oAuth Token Provider used for automatic token fetching/refreshing. | `oAuthTokenProvider` |
+| oAuthOnTokenUpdate | `(token: OAuthToken) => void` | Registers a callback for token update event. | `oAuthOnTokenUpdate` |
 
 
 

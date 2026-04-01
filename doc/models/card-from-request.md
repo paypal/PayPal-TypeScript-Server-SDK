@@ -1,5 +1,5 @@
 
-# Card From Request
+# Card from Request
 
 Representation of card details as received in the request.
 

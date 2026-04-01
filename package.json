@@ -1,5 +1,5 @@
 {
-  "version": "2.2.0",
+  "version": "2.3.0",
   "license": "MIT",
   "sideEffects": false,
   "main": "dist/cjs/index.js",
@@ -13,8 +13,8 @@
     "node": ">=14.17.0"
   },
   "scripts": {
-    "build": "rimraf dist && tsc -p tsconfig.esm.json & tsc -p tsconfig.cjs.json",
-    "prepare": "rimraf dist && tsc -p tsconfig.esm.json & tsc -p tsconfig.cjs.json",
+    "build": "rimraf dist && tsc -p tsconfig.esm.json & tsc -p tsconfig.cjs.json && node ./scripts/split-package-json.mjs",
+    "prepare": "rimraf dist && tsc -p tsconfig.esm.json & tsc -p tsconfig.cjs.json && node ./scripts/split-package-json.mjs",
     "lint": "eslint **/*.ts --ignore-path .eslintignore",
     "lint:fix": "eslint **/*.ts --ignore-path .eslintignore --fix"
   },

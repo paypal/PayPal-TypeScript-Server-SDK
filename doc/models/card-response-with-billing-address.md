@@ -1,5 +1,5 @@
 
-# Card Response With Billing Address
+# Card Response with Billing Address
 
 The payment card used to fund the payment. Card can be a credit or debit card.
 
