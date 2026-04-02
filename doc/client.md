@@ -5,7 +5,7 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| environment | `Environment` | The API environment. <br> **Default: `Environment.Sandbox`** |
+| environment | [`Environment`](../README.md#environments) | The API environment. <br> **Default: `Environment.Sandbox`** |
 | timeout | `number` | Timeout for API calls.<br>*Default*: `0` |
 | httpClientOptions | [`Partial<HttpClientOptions>`](../doc/http-client-options.md) | Stable configurable http client options. |
 | unstableHttpClientOptions | `any` | Unstable configurable http client options. |

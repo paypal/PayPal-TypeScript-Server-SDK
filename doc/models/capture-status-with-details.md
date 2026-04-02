@@ -1,5 +1,5 @@
 
-# Capture Status With Details
+# Capture Status with Details
 
 The status and status details of a captured payment.
 

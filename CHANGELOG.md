@@ -1,3 +1,7 @@
+## 2.3.0
+- Bug Fixes:
+  - Resolves issue with building differences for ESM and CJS distributions.
+
 ## 2.2.0
 - Bug Fixes:
   - Add missing `email_address` & `payer_id` field to `Subscriber Response Information`
