@@ -16,6 +16,10 @@ import {
 import { Payer, payerSchema } from './payer.js';
 import { PaymentSource, paymentSourceSchema } from './paymentSource.js';
 import {
+  ProcessingInstruction,
+  processingInstructionSchema,
+} from './processingInstruction.js';
+import {
   PurchaseUnitRequest,
   purchaseUnitRequestSchema,
 } from './purchaseUnitRequest.js';
@@ -32,6 +36,8 @@ export interface OrderRequest {
   paymentSource?: PaymentSource;
   /** Customizes the payer experience during the approval process for the payment with PayPal. Note: Partners and Marketplaces might configure brand_name and shipping_preference during partner account setup, which overrides the request values. */
   applicationContext?: OrderApplicationContext;
+  /** The instruction to process an order. */
+  processingInstruction?: ProcessingInstruction;
 }
 
 export const orderRequestSchema: Schema<OrderRequest> = lazy(() =>
@@ -43,6 +49,10 @@ export const orderRequestSchema: Schema<OrderRequest> = lazy(() =>
     applicationContext: [
       'application_context',
       optional(orderApplicationContextSchema),
+    ],
+    processingInstruction: [
+      'processing_instruction',
+      optional(processingInstructionSchema),
     ],
   })
 );

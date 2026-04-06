@@ -273,6 +273,7 @@ export type { PricingScheme } from './models/pricingScheme.js';
 export type { PricingTier } from './models/pricingTier.js';
 export type { ProcessorResponse } from './models/processorResponse.js';
 export { ProcessorResponseCode } from './models/processorResponseCode.js';
+export { ProcessingInstruction } from './models/processingInstruction.js';
 export type { PurchaseUnit } from './models/purchaseUnit.js';
 export type { PurchaseUnitRequest } from './models/purchaseUnitRequest.js';
 export { ReasonCode } from './models/reasonCode.js';
