@@ -50,6 +50,10 @@ async createBillingPlan(
 ): Promise<ApiResponse<BillingPlan>>
 ```
 
+## Authentication
+
+This endpoint requires [Oauth2](../../doc/auth/oauth-2-client-credentials-grant.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -60,6 +64,8 @@ async createBillingPlan(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: A successful request returns the HTTP `200 OK` status code and a JSON response body that shows billing plan details.
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`BillingPlan`](../../doc/models/billing-plan.md).
 
@@ -154,6 +160,10 @@ async listBillingPlans(
 ): Promise<ApiResponse<PlanCollection>>
 ```
 
+## Authentication
+
+This endpoint requires [Oauth2](../../doc/auth/oauth-2-client-credentials-grant.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -166,6 +176,8 @@ async listBillingPlans(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: A successful request returns the HTTP `200 OK` status code and a JSON response body that lists billing plans.
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`PlanCollection`](../../doc/models/plan-collection.md).
 
@@ -229,6 +241,10 @@ async getBillingPlan(
 ): Promise<ApiResponse<BillingPlan>>
 ```
 
+## Authentication
+
+This endpoint requires [Oauth2](../../doc/auth/oauth-2-client-credentials-grant.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -237,6 +253,8 @@ async getBillingPlan(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: A successful request returns the HTTP `200 OK` status code and a JSON response body that shows plan details.
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`BillingPlan`](../../doc/models/billing-plan.md).
 
@@ -300,6 +318,10 @@ async patchBillingPlan(
 ): Promise<ApiResponse<void>>
 ```
 
+## Authentication
+
+This endpoint requires [Oauth2](../../doc/auth/oauth-2-client-credentials-grant.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -309,6 +331,8 @@ async patchBillingPlan(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**204**: A successful request returns the HTTP `204 No Content` status code with no JSON response body.
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 
@@ -375,6 +399,10 @@ async activateBillingPlan(
 ): Promise<ApiResponse<void>>
 ```
 
+## Authentication
+
+This endpoint requires [Oauth2](../../doc/auth/oauth-2-client-credentials-grant.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -383,6 +411,8 @@ async activateBillingPlan(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**204**: A successful request returns the HTTP `204 No Content` status code with no JSON response body.
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 
@@ -441,6 +471,10 @@ async deactivateBillingPlan(
 ): Promise<ApiResponse<void>>
 ```
 
+## Authentication
+
+This endpoint requires [Oauth2](../../doc/auth/oauth-2-client-credentials-grant.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -449,6 +483,8 @@ async deactivateBillingPlan(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**204**: A successful request returns the HTTP `204 No Content` status code with no JSON response body.
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 
@@ -513,6 +549,10 @@ async updateBillingPlanPricingSchemes(
 ): Promise<ApiResponse<void>>
 ```
 
+## Authentication
+
+This endpoint requires [Oauth2](../../doc/auth/oauth-2-client-credentials-grant.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -522,6 +562,8 @@ async updateBillingPlanPricingSchemes(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**204**: A successful request returns the HTTP `204 No Content` status code with no JSON response body.
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 
@@ -602,6 +644,10 @@ async createSubscription(
 ): Promise<ApiResponse<Subscription>>
 ```
 
+## Authentication
+
+This endpoint requires [Oauth2](../../doc/auth/oauth-2-client-credentials-grant.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -613,6 +659,8 @@ async createSubscription(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: A successful request returns the HTTP `200 OK` status code and a JSON response body that shows subscription details.
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Subscription`](../../doc/models/subscription.md).
 
@@ -699,6 +747,10 @@ async listSubscriptions(
 ): Promise<ApiResponse<SubscriptionCollection>>
 ```
 
+## Authentication
+
+This endpoint requires [Oauth2](../../doc/auth/oauth-2-client-credentials-grant.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -716,6 +768,8 @@ async listSubscriptions(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: A successful request returns the HTTP `200 OK` status code and a JSON response body that lists the subscriptions.
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionCollection`](../../doc/models/subscription-collection.md).
 
@@ -782,6 +836,10 @@ async getSubscription(
 ): Promise<ApiResponse<Subscription>>
 ```
 
+## Authentication
+
+This endpoint requires [Oauth2](../../doc/auth/oauth-2-client-credentials-grant.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -791,6 +849,8 @@ async getSubscription(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: A successful request returns the HTTP `200 OK` status code and a JSON response body that shows subscription details.
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Subscription`](../../doc/models/subscription.md).
 
@@ -856,6 +916,10 @@ async patchSubscription(
 ): Promise<ApiResponse<void>>
 ```
 
+## Authentication
+
+This endpoint requires [Oauth2](../../doc/auth/oauth-2-client-credentials-grant.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -865,6 +929,8 @@ async patchSubscription(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**204**: A successful request returns the HTTP `204 No Content` status code with no JSON response body.
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 
@@ -937,6 +1003,10 @@ async reviseSubscription(
 ): Promise<ApiResponse<ModifySubscriptionResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [Oauth2](../../doc/auth/oauth-2-client-credentials-grant.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -946,6 +1016,8 @@ async reviseSubscription(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: A successful request returns the HTTP `200 OK` status code and a JSON response body that shows subscription details.
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`ModifySubscriptionResponse`](../../doc/models/modify-subscription-response.md).
 
@@ -1013,6 +1085,10 @@ async suspendSubscription(
 ): Promise<ApiResponse<void>>
 ```
 
+## Authentication
+
+This endpoint requires [Oauth2](../../doc/auth/oauth-2-client-credentials-grant.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -1022,6 +1098,8 @@ async suspendSubscription(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**204**: A successful request returns the HTTP `204 No Content` status code with no JSON response body.
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 
@@ -1089,6 +1167,10 @@ async cancelSubscription(
 ): Promise<ApiResponse<void>>
 ```
 
+## Authentication
+
+This endpoint requires [Oauth2](../../doc/auth/oauth-2-client-credentials-grant.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -1098,6 +1180,8 @@ async cancelSubscription(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**204**: A successful request returns the HTTP `204 No Content` status code with no JSON response body.
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 
@@ -1165,6 +1249,10 @@ async activateSubscription(
 ): Promise<ApiResponse<void>>
 ```
 
+## Authentication
+
+This endpoint requires [Oauth2](../../doc/auth/oauth-2-client-credentials-grant.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -1174,6 +1262,8 @@ async activateSubscription(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**204**: A successful request returns the HTTP `204 No Content` status code with no JSON response body.
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 
@@ -1243,6 +1333,10 @@ async captureSubscription(
 ): Promise<ApiResponse<SubscriptionTransactionDetails | null>>
 ```
 
+## Authentication
+
+This endpoint requires [Oauth2](../../doc/auth/oauth-2-client-credentials-grant.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -1253,6 +1347,8 @@ async captureSubscription(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: A successful request returns the HTTP `200 OK` status code and a JSON response body that shows subscription details.
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SubscriptionTransactionDetails | null`](../../doc/models/subscription-transaction-details.md).
 
@@ -1322,6 +1418,10 @@ async listSubscriptionTransactions(
 ): Promise<ApiResponse<TransactionsList>>
 ```
 
+## Authentication
+
+This endpoint requires [Oauth2](../../doc/auth/oauth-2-client-credentials-grant.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -1332,6 +1432,8 @@ async listSubscriptionTransactions(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: A successful request returns the HTTP `200 OK` status code and a JSON response body that shows subscription details.
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`TransactionsList`](../../doc/models/transactions-list.md).
 

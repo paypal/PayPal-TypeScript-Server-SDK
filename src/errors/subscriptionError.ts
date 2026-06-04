@@ -22,7 +22,7 @@ interface Subscription {
   information_link?: string;
   /** An array of additional details about the error. */
   details?: ErrorDetails[];
-  /** An array of request-related [HATEOAS links](/api/rest/responses/#hateoas-links). */
+  /** An array of request-related [HATEOAS links](https://developer.paypal.com/api/rest/responses/#hateoas-links). */
   links?: LinkDescription[];
 }
 

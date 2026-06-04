@@ -57,6 +57,10 @@ async searchTransactions(
 ): Promise<ApiResponse<SearchResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [Oauth2](../../doc/auth/oauth-2-client-credentials-grant.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -67,7 +71,7 @@ async searchTransactions(
 | `transactionType` | `string \| undefined` | Query, Optional | Filters the transactions in the response by a PayPal transaction event code. See [Transaction event codes](/docs/integration/direct/transaction-search/transaction-event-codes/). |
 | `transactionStatus` | `string \| undefined` | Query, Optional | Filters the transactions in the response by a PayPal transaction status code. Value is: Status code Description D PayPal or merchant rules denied the transaction. P The transaction is pending. The transaction was created but waits for another payment process to complete, such as an ACH transaction, before the status changes to S. S The transaction successfully completed without a denial and after any pending statuses. V A successful transaction was reversed and funds were refunded to the original sender. |
 | `transactionAmount` | `string \| undefined` | Query, Optional | Filters the transactions in the response by a gross transaction amount range. Specify the range as `TO`, where ` ` is the lower limit of the gross PayPal transaction amount and ` ` is the upper limit of the gross transaction amount. Specify the amounts in lower denominations. For example, to search for transactions from $5.00 to $10.05, specify `[500 TO 1005]`. Note:The values must be URL encoded. |
-| `transactionCurrency` | `string \| undefined` | Query, Optional | Filters the transactions in the response by a [three-character ISO-4217 currency code](/api/rest/reference/currency-codes/) for the PayPal transaction currency. |
+| `transactionCurrency` | `string \| undefined` | Query, Optional | Filters the transactions in the response by a [three-character ISO-4217 currency code](https://developer.paypal.com/api/rest/reference/currency-codes/) for the PayPal transaction currency. |
 | `paymentInstrumentType` | `string \| undefined` | Query, Optional | Filters the transactions in the response by a payment instrument type. Value is either: CREDITCARD. Returns a direct credit card transaction with a corresponding value. DEBITCARD. Returns a debit card transaction with a corresponding value. If you omit this parameter, the API does not apply this filter. |
 | `storeId` | `string \| undefined` | Query, Optional | Filters the transactions in the response by a store ID. |
 | `terminalId` | `string \| undefined` | Query, Optional | Filters the transactions in the response by a terminal ID. |
@@ -78,6 +82,8 @@ async searchTransactions(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: A successful request returns the HTTP `200 OK` status code and a JSON response body that lists transactions .
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SearchResponse`](../../doc/models/search-response.md).
 
@@ -144,15 +150,21 @@ async searchBalances(
 ): Promise<ApiResponse<BalancesResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [Oauth2](../../doc/auth/oauth-2-client-credentials-grant.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `asOfTime` | `string \| undefined` | Query, Optional | List balances in the response at the date time provided, will return the last refreshed balance in the system when not provided.<br><br>**Constraints**: *Minimum Length*: `20`, *Maximum Length*: `64`, *Pattern*: `^[0-9]{4}-(0[1-9]\|1[0-2])-(0[1-9]\|[1-2][0-9]\|3[0-1])[T,t]([0-1][0-9]\|2[0-3]):[0-5][0-9]:([0-5][0-9]\|60)([.][0-9]+)?([Zz]\|[+-][0-9]{2}:[0-9]{2})$` |
-| `currencyCode` | `string \| undefined` | Query, Optional | Filters the transactions in the response by a [three-character ISO-4217 currency code](/api/rest/reference/currency-codes/) for the PayPal transaction currency.<br><br>**Constraints**: *Minimum Length*: `3`, *Maximum Length*: `3` |
+| `currencyCode` | `string \| undefined` | Query, Optional | Filters the transactions in the response by a [three-character ISO-4217 currency code](https://developer.paypal.com/api/rest/reference/currency-codes/) for the PayPal transaction currency.<br><br>**Constraints**: *Minimum Length*: `3`, *Maximum Length*: `3` |
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: A successful request returns the HTTP `200 OK` status code and a JSON response body that lists balances .
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`BalancesResponse`](../../doc/models/balances-response.md).
 

@@ -16,6 +16,10 @@ import {
 } from './orderAuthorizeResponsePaymentSource.js';
 import { OrderStatus, orderStatusSchema } from './orderStatus.js';
 import { Payer, payerSchema } from './payer.js';
+import {
+  ProcessingInstruction,
+  processingInstructionSchema,
+} from './processingInstruction.js';
 import { PurchaseUnit, purchaseUnitSchema } from './purchaseUnit.js';
 
 /** The order authorize response. */
@@ -30,6 +34,8 @@ export interface OrderAuthorizeResponse {
   paymentSource?: OrderAuthorizeResponsePaymentSource;
   /** The intent to either capture payment immediately or authorize a payment for an order after order creation. */
   intent?: CheckoutPaymentIntent;
+  /** The instruction to process an order. */
+  processingInstruction?: ProcessingInstruction;
   /** The customer who approves and pays for the order. The customer is also known as the payer. */
   payer?: Payer;
   /** An array of purchase units. Each purchase unit establishes a contract between a customer and merchant. Each purchase unit represents either a full or partial order that the customer intends to purchase from the merchant. */
@@ -51,6 +57,10 @@ export const orderAuthorizeResponseSchema: Schema<OrderAuthorizeResponse> = lazy
         optional(orderAuthorizeResponsePaymentSourceSchema),
       ],
       intent: ['intent', optional(checkoutPaymentIntentSchema)],
+      processingInstruction: [
+        'processing_instruction',
+        optional(processingInstructionSchema),
+      ],
       payer: ['payer', optional(payerSchema)],
       purchaseUnits: ['purchase_units', optional(array(purchaseUnitSchema))],
       status: ['status', optional(orderStatusSchema)],

@@ -271,6 +271,7 @@ export type { PlatformFee } from './models/platformFee.js';
 export { PricingModel } from './models/pricingModel.js';
 export type { PricingScheme } from './models/pricingScheme.js';
 export type { PricingTier } from './models/pricingTier.js';
+export { ProcessingInstruction } from './models/processingInstruction.js';
 export type { ProcessorResponse } from './models/processorResponse.js';
 export { ProcessorResponseCode } from './models/processorResponseCode.js';
 export type { PurchaseUnit } from './models/purchaseUnit.js';

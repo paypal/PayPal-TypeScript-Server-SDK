@@ -10,11 +10,17 @@ import {
   orderConfirmApplicationContextSchema,
 } from './orderConfirmApplicationContext.js';
 import { PaymentSource, paymentSourceSchema } from './paymentSource.js';
+import {
+  ProcessingInstruction,
+  processingInstructionSchema,
+} from './processingInstruction.js';
 
 /** Payer confirms the intent to pay for the Order using the provided payment source. */
 export interface ConfirmOrderRequest {
   /** The payment source definition. */
   paymentSource: PaymentSource;
+  /** The instruction to process an order. */
+  processingInstruction?: ProcessingInstruction;
   /** Customizes the payer confirmation experience. */
   applicationContext?: OrderConfirmApplicationContext;
 }
@@ -22,6 +28,10 @@ export interface ConfirmOrderRequest {
 export const confirmOrderRequestSchema: Schema<ConfirmOrderRequest> = lazy(() =>
   object({
     paymentSource: ['payment_source', paymentSourceSchema],
+    processingInstruction: [
+      'processing_instruction',
+      optional(processingInstructionSchema),
+    ],
     applicationContext: [
       'application_context',
       optional(orderConfirmApplicationContextSchema),

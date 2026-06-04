@@ -12,9 +12,9 @@ The payment card to use to fund a payment. Card can be a credit or debit card.
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `name` | `string \| undefined` | Optional | The card holder's name as it appears on the card.<br><br>**Constraints**: *Minimum Length*: `2`, *Maximum Length*: `300` |
-| `lastDigits` | `string \| undefined` | Optional | The last digits of the payment card.<br><br>**Constraints**: *Pattern*: `[0-9]{2,}` |
+| `lastDigits` | `string \| undefined` | Optional, Read-only | The last digits of the payment card.<br><br>**Constraints**: *Pattern*: `[0-9]{2,}` |
 | `brand` | [`CardBrand \| undefined`](../../doc/models/card-brand.md) | Optional | The card network or brand. Applies to credit, debit, gift, and payment cards.<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `255`, *Pattern*: `^[A-Z_]+$` |
-| `availableNetworks` | [`CardBrand[] \| undefined`](../../doc/models/card-brand.md) | Optional | Array of brands or networks associated with the card.<br><br>**Constraints**: *Minimum Items*: `1`, *Maximum Items*: `256`, *Minimum Length*: `1`, *Maximum Length*: `255`, *Pattern*: `^[A-Z_]+$` |
+| `availableNetworks` | [`CardBrand[] \| undefined`](../../doc/models/card-brand.md) | Optional, Read-only | Array of brands or networks associated with the card.<br><br>**Constraints**: *Minimum Items*: `1`, *Maximum Items*: `256`, *Minimum Length*: `1`, *Maximum Length*: `255`, *Pattern*: `^[A-Z_]+$` |
 | `type` | [`CardType \| undefined`](../../doc/models/card-type.md) | Optional | Type of card. i.e Credit, Debit and so on.<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `255`, *Pattern*: `^[A-Z_]+$` |
 | `authenticationResult` | [`AuthenticationResponse \| undefined`](../../doc/models/authentication-response.md) | Optional | Results of Authentication such as 3D Secure. |
 | `attributes` | [`CardAttributesResponse \| undefined`](../../doc/models/card-attributes-response.md) | Optional | Additional attributes associated with the use of this card. |
