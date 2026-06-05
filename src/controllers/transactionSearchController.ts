@@ -59,8 +59,9 @@ export class TransactionSearchController extends BaseController {
    *                                                 $5.00 to $10.05, specify `[500 TO 1005]`. Note:The values must be
    *                                                 URL encoded.
    * @param transactionCurrency            Filters the transactions in the response by a [three-character
-   *                                                 ISO-4217 currency code](/api/rest/reference/currency-codes/) for
-   *                                                 the PayPal transaction currency.
+   *                                                 ISO-4217 currency code](https://developer.paypal.
+   *                                                 com/api/rest/reference/currency-codes/) for the PayPal transaction
+   *                                                 currency.
    * @param paymentInstrumentType          Filters the transactions in the response by a payment instrument
    *                                                 type. Value is either: CREDITCARD. Returns a direct credit card
    *                                                 transaction with a corresponding value. DEBITCARD. Returns a debit
@@ -195,7 +196,8 @@ export class TransactionSearchController extends BaseController {
    * @param asOfTime      List balances in the response at the date time provided, will return the last
    *                                refreshed balance in the system when not provided.
    * @param currencyCode  Filters the transactions in the response by a [three-character ISO-4217 currency
-   *                                code](/api/rest/reference/currency-codes/) for the PayPal transaction currency.
+   *                                code](https://developer.paypal.com/api/rest/reference/currency-codes/) for the
+   *                                PayPal transaction currency.
    * @return Response from the API call
    */
   async searchBalances(

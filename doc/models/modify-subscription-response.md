@@ -16,8 +16,8 @@ The response to a request to update the quantity of the product or service in a 
 | `shippingAmount` | [`Money \| undefined`](../../doc/models/money.md) | Optional | The currency and amount for a financial transaction, such as a balance or payment due. |
 | `shippingAddress` | [`ShippingDetails \| undefined`](../../doc/models/shipping-details.md) | Optional | The shipping details. |
 | `plan` | [`PlanOverride \| undefined`](../../doc/models/plan-override.md) | Optional | An inline plan object to customise the subscription. You can override plan level default attributes by providing customised values for the subscription in this object. |
-| `planOverridden` | `boolean \| undefined` | Optional | Indicates whether the subscription has overridden any plan attributes. |
-| `links` | [`LinkDescription[] \| undefined`](../../doc/models/link-description.md) | Optional | An array of request-related [HATEOAS links](/docs/api/reference/api-responses/#hateoas-links). |
+| `planOverridden` | `boolean \| undefined` | Optional, Read-only | Indicates whether the subscription has overridden any plan attributes. |
+| `links` | [`LinkDescription[] \| undefined`](../../doc/models/link-description.md) | Optional, Read-only | An array of request-related [HATEOAS links](/docs/api/reference/api-responses/#hateoas-links). |
 
 ## Example (as JSON)
 

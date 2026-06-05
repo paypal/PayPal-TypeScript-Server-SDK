@@ -1,3 +1,9 @@
+## 2.4.0
+- New Features:
+  - Adds `processing_instruction` field to order models.
+- Bug Fixes:
+  - Fixes URLs for documentation
+
 ## 2.3.0
 - Bug Fixes:
   - Resolves issue with building differences for ESM and CJS distributions.

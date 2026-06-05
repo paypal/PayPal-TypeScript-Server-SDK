@@ -12,6 +12,7 @@ The order request details.
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `intent` | [`CheckoutPaymentIntent`](../../doc/models/checkout-payment-intent.md) | Required | The intent to either capture payment immediately or authorize a payment for an order after order creation. |
+| `processingInstruction` | [`ProcessingInstruction \| undefined`](../../doc/models/processing-instruction.md) | Optional | The instruction to process an order. |
 | `payer` | [`Payer \| undefined`](../../doc/models/payer.md) | Optional | DEPRECATED. The customer is also known as the payer. The Payer object was intended to only be used with the `payment_source.paypal` object. In order to make this design more clear, the details in the `payer` object are now available under `payment_source.paypal`. Please use `payment_source.paypal`. |
 | `purchaseUnits` | [`PurchaseUnitRequest[]`](../../doc/models/purchase-unit-request.md) | Required | An array of purchase units. Each purchase unit establishes a contract between a payer and the payee. Each purchase unit represents either a full or partial order that the payer intends to purchase from the payee.<br><br>**Constraints**: *Minimum Items*: `1`, *Maximum Items*: `10` |
 | `paymentSource` | [`PaymentSource \| undefined`](../../doc/models/payment-source.md) | Optional | The payment source definition. |
@@ -96,6 +97,7 @@ The order request details.
       "custom_id": "custom_id4"
     }
   ],
+  "processing_instruction": "ORDER_COMPLETE_ON_PAYMENT_APPROVAL",
   "payer": {
     "email_address": "email_address6",
     "payer_id": "payer_id6",
