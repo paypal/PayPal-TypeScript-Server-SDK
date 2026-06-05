@@ -40,6 +40,10 @@ async getAuthorizedPayment(
 ): Promise<ApiResponse<PaymentAuthorization>>
 ```
 
+## Authentication
+
+This endpoint requires [Oauth2](../../doc/auth/oauth-2-client-credentials-grant.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -50,6 +54,8 @@ async getAuthorizedPayment(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: A successful request returns the HTTP 200 OK status code and a JSON response body that shows authorization details.
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`PaymentAuthorization`](../../doc/models/payment-authorization.md).
 
@@ -123,6 +129,10 @@ async captureAuthorizedPayment(
 ): Promise<ApiResponse<CapturedPayment>>
 ```
 
+## Authentication
+
+This endpoint requires [Oauth2](../../doc/auth/oauth-2-client-credentials-grant.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -136,6 +146,8 @@ async captureAuthorizedPayment(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: A successful request returns the HTTP 200 OK status code and a JSON response body that shows captured payment details.
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CapturedPayment`](../../doc/models/captured-payment.md).
 
@@ -214,6 +226,10 @@ async reauthorizePayment(
 ): Promise<ApiResponse<PaymentAuthorization>>
 ```
 
+## Authentication
+
+This endpoint requires [Oauth2](../../doc/auth/oauth-2-client-credentials-grant.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -226,6 +242,8 @@ async reauthorizePayment(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: A successful request returns the HTTP 200 OK status code and a JSON response body that shows the reauthorized payment details.
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`PaymentAuthorization`](../../doc/models/payment-authorization.md).
 
@@ -300,6 +318,10 @@ async voidPayment(
 ): Promise<ApiResponse<PaymentAuthorization | null>>
 ```
 
+## Authentication
+
+This endpoint requires [Oauth2](../../doc/auth/oauth-2-client-credentials-grant.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -312,6 +334,8 @@ async voidPayment(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: A successful request returns the HTTP 200 OK status code and a JSON response body that shows authorization details. This response is returned when the Prefer header is set to return=representation.
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`PaymentAuthorization | null`](../../doc/models/payment-authorization.md).
 
@@ -380,6 +404,10 @@ async getCapturedPayment(
 ): Promise<ApiResponse<CapturedPayment>>
 ```
 
+## Authentication
+
+This endpoint requires [Oauth2](../../doc/auth/oauth-2-client-credentials-grant.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -389,6 +417,8 @@ async getCapturedPayment(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: A successful request returns the HTTP 200 OK status code and a JSON response body that shows captured payment details.
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CapturedPayment`](../../doc/models/captured-payment.md).
 
@@ -462,6 +492,10 @@ async refundCapturedPayment(
 ): Promise<ApiResponse<Refund>>
 ```
 
+## Authentication
+
+This endpoint requires [Oauth2](../../doc/auth/oauth-2-client-credentials-grant.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -475,6 +509,8 @@ async refundCapturedPayment(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: A successful request returns the HTTP 200 OK status code and a JSON response body that shows refund details.
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Refund`](../../doc/models/refund.md).
 
@@ -546,6 +582,10 @@ async getRefund(
 ): Promise<ApiResponse<Refund>>
 ```
 
+## Authentication
+
+This endpoint requires [Oauth2](../../doc/auth/oauth-2-client-credentials-grant.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -556,6 +596,8 @@ async getRefund(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: A successful request returns the HTTP 200 OK status code and a JSON response body that shows refund details.
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`Refund`](../../doc/models/refund.md).
 

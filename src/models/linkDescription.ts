@@ -7,7 +7,7 @@
 import { object, optional, Schema, string } from '../schema.js';
 import { LinkHttpMethod, linkHttpMethodSchema } from './linkHttpMethod.js';
 
-/** The request-related [HATEOAS link](/api/rest/responses/#hateoas-links) information. */
+/** The request-related [HATEOAS link](https://developer.paypal.com/api/rest/responses/#hateoas-links) information., The request-related [HATEOAS link](/api/rest/responses/#hateoas-links) information., The request-related [HATEOAS link](https://developer.paypal.com/api/rest/responses/#hateoas-links) information. */
 export interface LinkDescription {
   /** The complete target URL. To make the related call, combine the method with this [URI Template-formatted](https://tools.ietf.org/html/rfc6570) link. For pre-processing, include the `$`, `(`, and `)` characters. The `href` is the key HATEOAS component that links a completed call with a subsequent call. */
   href: string;

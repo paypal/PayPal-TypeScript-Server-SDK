@@ -17,7 +17,7 @@ export interface ErrorDetails {
   location?: string;
   /** The unique, fine-grained application-level error code. */
   issue: string;
-  /** An array of request-related [HATEOAS links](/api/rest/responses/#hateoas-links) that are either relevant to the issue by providing additional information or offering potential resolutions. */
+  /** An array of request-related [HATEOAS links](https://developer.paypal.com/api/rest/responses/#hateoas-links) that are either relevant to the issue by providing additional information or offering potential resolutions. */
   links?: LinkDescription[];
   /** The human-readable description for an issue. The description can change over the lifetime of an API, so clients must not depend on this value. */
   description?: string;

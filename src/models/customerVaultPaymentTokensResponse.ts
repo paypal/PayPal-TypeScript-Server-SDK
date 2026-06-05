@@ -24,7 +24,7 @@ export interface CustomerVaultPaymentTokensResponse {
   /** This object defines a customer in your system. Use it to manage customer profiles, save payment methods and contact details. */
   customer?: VaultResponseCustomer;
   paymentTokens?: PaymentTokenResponse[];
-  /** An array of related [HATEOAS links](/api/rest/responses/#hateoas). */
+  /** An array of related [HATEOAS links](https://developer.paypal.com/api/rest/responses/#hateoas). */
   links?: LinkDescription[];
 }
 

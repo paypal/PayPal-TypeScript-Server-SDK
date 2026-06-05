@@ -37,7 +37,7 @@ export interface SearchResponse {
   totalItems?: number;
   /** The total number of pages, as an `integer`, when the `total_items` is divided into pages of the specified `page_size`. */
   totalPages?: number;
-  /** An array of request-related [HATEOAS links](/api/rest/responses/#hateoas-links). */
+  /** An array of request-related [HATEOAS links](https://developer.paypal.com/api/rest/responses/#hateoas-links). */
   links?: LinkDescription[];
 }
 

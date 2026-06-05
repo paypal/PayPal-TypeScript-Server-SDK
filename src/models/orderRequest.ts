@@ -16,6 +16,10 @@ import {
 import { Payer, payerSchema } from './payer.js';
 import { PaymentSource, paymentSourceSchema } from './paymentSource.js';
 import {
+  ProcessingInstruction,
+  processingInstructionSchema,
+} from './processingInstruction.js';
+import {
   PurchaseUnitRequest,
   purchaseUnitRequestSchema,
 } from './purchaseUnitRequest.js';
@@ -24,6 +28,8 @@ import {
 export interface OrderRequest {
   /** The intent to either capture payment immediately or authorize a payment for an order after order creation. */
   intent: CheckoutPaymentIntent;
+  /** The instruction to process an order. */
+  processingInstruction?: ProcessingInstruction;
   /** DEPRECATED. The customer is also known as the payer. The Payer object was intended to only be used with the `payment_source.paypal` object. In order to make this design more clear, the details in the `payer` object are now available under `payment_source.paypal`. Please use `payment_source.paypal`. */
   payer?: Payer;
   /** An array of purchase units. Each purchase unit establishes a contract between a payer and the payee. Each purchase unit represents either a full or partial order that the payer intends to purchase from the payee. */
@@ -37,6 +43,10 @@ export interface OrderRequest {
 export const orderRequestSchema: Schema<OrderRequest> = lazy(() =>
   object({
     intent: ['intent', checkoutPaymentIntentSchema],
+    processingInstruction: [
+      'processing_instruction',
+      optional(processingInstructionSchema),
+    ],
     payer: ['payer', optional(payerSchema)],
     purchaseUnits: ['purchase_units', array(purchaseUnitRequestSchema)],
     paymentSource: ['payment_source', optional(paymentSourceSchema)],

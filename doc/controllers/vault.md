@@ -37,6 +37,10 @@ async createPaymentToken(
 ): Promise<ApiResponse<PaymentTokenResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [Oauth2](../../doc/auth/oauth-2-client-credentials-grant.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -46,6 +50,8 @@ async createPaymentToken(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: Idempotent response for a successful creation of payment token.
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`PaymentTokenResponse`](../../doc/models/payment-token-response.md).
 
@@ -118,6 +124,10 @@ async listCustomerPaymentTokens(
 ): Promise<ApiResponse<CustomerVaultPaymentTokensResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [Oauth2](../../doc/auth/oauth-2-client-credentials-grant.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -129,6 +139,8 @@ async listCustomerPaymentTokens(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: Successful execution.
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`CustomerVaultPaymentTokensResponse`](../../doc/models/customer-vault-payment-tokens-response.md).
 
@@ -189,6 +201,10 @@ async getPaymentToken(
 ): Promise<ApiResponse<PaymentTokenResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [Oauth2](../../doc/auth/oauth-2-client-credentials-grant.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -197,6 +213,8 @@ async getPaymentToken(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: Successful execution.
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`PaymentTokenResponse`](../../doc/models/payment-token-response.md).
 
@@ -253,6 +271,10 @@ async deletePaymentToken(
 ): Promise<ApiResponse<void>>
 ```
 
+## Authentication
+
+This endpoint requires [Oauth2](../../doc/auth/oauth-2-client-credentials-grant.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -261,6 +283,8 @@ async deletePaymentToken(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**204**: The server has successfully executed the method, but there is no entity body to return.
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance.
 
@@ -322,6 +346,10 @@ async createSetupToken(
 ): Promise<ApiResponse<SetupTokenResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [Oauth2](../../doc/auth/oauth-2-client-credentials-grant.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -331,6 +359,8 @@ async createSetupToken(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: Idempotent response for a successful creation of setup token.
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SetupTokenResponse`](../../doc/models/setup-token-response.md).
 
@@ -392,6 +422,10 @@ async getSetupToken(
 ): Promise<ApiResponse<SetupTokenResponse>>
 ```
 
+## Authentication
+
+This endpoint requires [Oauth2](../../doc/auth/oauth-2-client-credentials-grant.md)
+
 ## Parameters
 
 | Parameter | Type | Tags | Description |
@@ -400,6 +434,8 @@ async getSetupToken(
 | `requestOptions` | `RequestOptions \| undefined` | Optional | Pass additional request options. |
 
 ## Response Type
+
+**200**: Found requested setup-token, returned a payment method associated with the token.
 
 This method returns an [`ApiResponse`](../../doc/api-response.md) instance. The `result` property of this instance returns the response data which is of type [`SetupTokenResponse`](../../doc/models/setup-token-response.md).
 
