@@ -1,3 +1,5 @@
 .gitignore
+.gitattributes
 .github/**
 CHANGELOG.md
+CONTRIBUTING.md
