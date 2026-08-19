@@ -14,14 +14,18 @@ The refund status with details.
 | `status` | [`RefundStatus \| undefined`](../../doc/models/refund-status.md) | Optional, Read-only | The status of the refund. |
 | `statusDetails` | [`RefundStatusDetails \| undefined`](../../doc/models/refund-status-details.md) | Optional | The details of the refund status. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "status": "PENDING",
-  "status_details": {
-    "reason": "ECHECK"
-  }
-}
+```ts
+import {
+  RefundIncompleteReason,
+  RefundStatusWithDetails,
+} from '@paypal/paypal-server-sdk';
+
+const refundStatusWithDetails: RefundStatusWithDetails = {
+  statusDetails: {
+    reason: RefundIncompleteReason.Echeck,
+  },
+};
 ```
 

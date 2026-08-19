@@ -14,46 +14,50 @@ The update pricing scheme request details.
 | `billingCycleSequence` | `number` | Required | The billing cycle sequence.<br><br>**Constraints**: `>= 1`, `<= 99` |
 | `pricingScheme` | [`SubscriptionPricingScheme`](../../doc/models/subscription-pricing-scheme.md) | Required | The pricing scheme details. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "billing_cycle_sequence": 99,
-  "pricing_scheme": {
-    "version": 10,
-    "fixed_price": {
-      "currency_code": "currency_code4",
-      "value": "value0"
+```ts
+import {
+  SubscriptionPricingModel,
+  UpdatePricingScheme,
+} from '@paypal/paypal-server-sdk';
+
+const updatePricingScheme: UpdatePricingScheme = {
+  billingCycleSequence: 99,
+  pricingScheme: {
+    fixedPrice: {
+      currencyCode: 'currency_code4',
+      value: 'value0',
     },
-    "pricing_model": "VOLUME",
-    "tiers": [
+    pricingModel: SubscriptionPricingModel.Volume,
+    tiers: [
       {
-        "starting_quantity": "starting_quantity8",
-        "ending_quantity": "ending_quantity6",
-        "amount": {
-          "currency_code": "currency_code6",
-          "value": "value0"
-        }
+        startingQuantity: 'starting_quantity8',
+        amount: {
+          currencyCode: 'currency_code6',
+          value: 'value0',
+        },
+        endingQuantity: 'ending_quantity6',
       },
       {
-        "starting_quantity": "starting_quantity8",
-        "ending_quantity": "ending_quantity6",
-        "amount": {
-          "currency_code": "currency_code6",
-          "value": "value0"
-        }
+        startingQuantity: 'starting_quantity8',
+        amount: {
+          currencyCode: 'currency_code6',
+          value: 'value0',
+        },
+        endingQuantity: 'ending_quantity6',
       },
       {
-        "starting_quantity": "starting_quantity8",
-        "ending_quantity": "ending_quantity6",
-        "amount": {
-          "currency_code": "currency_code6",
-          "value": "value0"
-        }
+        startingQuantity: 'starting_quantity8',
+        amount: {
+          currencyCode: 'currency_code6',
+          value: 'value0',
+        },
+        endingQuantity: 'ending_quantity6',
       }
     ],
-    "create_time": "create_time4"
-  }
-}
+    createTime: 'create_time4',
+  },
+};
 ```
 

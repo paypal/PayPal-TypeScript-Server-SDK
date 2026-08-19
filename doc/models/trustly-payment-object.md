@@ -17,15 +17,17 @@ Information needed to pay using Trustly.
 | `bic` | `string \| undefined` | Optional | The business identification code (BIC). In payments systems, a BIC is used to identify a specific business, most commonly a bank.<br><br>**Constraints**: *Minimum Length*: `8`, *Maximum Length*: `11`, *Pattern*: `^[A-Z-a-z0-9]{4}[A-Z-a-z]{2}[A-Z-a-z0-9]{2}([A-Z-a-z0-9]{3})?$` |
 | `ibanLastChars` | `string \| undefined` | Optional | The last characters of the IBAN used to pay.<br><br>**Constraints**: *Minimum Length*: `4`, *Maximum Length*: `34`, *Pattern*: `[a-zA-Z0-9]{4}` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "name": "name6",
-  "country_code": "country_code6",
-  "email": "email0",
-  "bic": "bic8",
-  "iban_last_chars": "iban_last_chars4"
-}
+```ts
+import { TrustlyPaymentObject } from '@paypal/paypal-server-sdk';
+
+const trustlyPaymentObject: TrustlyPaymentObject = {
+  name: 'name6',
+  countryCode: 'country_code6',
+  email: 'email0',
+  bic: 'bic8',
+  ibanLastChars: 'iban_last_chars4',
+};
 ```
 

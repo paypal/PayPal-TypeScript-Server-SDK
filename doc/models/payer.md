@@ -19,23 +19,25 @@ The customer who approves and pays for the order. The customer is also known as 
 | `taxInfo` | [`TaxInfo \| undefined`](../../doc/models/tax-info.md) | Optional | The tax ID of the customer. The customer is also known as the payer. Both `tax_id` and `tax_id_type` are required. |
 | `address` | [`Address \| undefined`](../../doc/models/address.md) | Optional | The portable international postal address. Maps to [AddressValidationMetadata](https://github.com/googlei18n/libaddressinput/wiki/AddressValidationMetadata) and HTML 5.1 [Autofilling form controls: the autocomplete attribute](https://www.w3.org/TR/html51/sec-forms.html#autofilling-form-controls-the-autocomplete-attribute). |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "email_address": "email_address8",
-  "payer_id": "payer_id8",
-  "name": {
-    "given_name": "given_name2",
-    "surname": "surname8"
+```ts
+import { Payer, PhoneType } from '@paypal/paypal-server-sdk';
+
+const payer: Payer = {
+  emailAddress: 'email_address6',
+  payerId: 'payer_id6',
+  name: {
+    givenName: 'given_name2',
+    surname: 'surname8',
   },
-  "phone": {
-    "phone_type": "OTHER",
-    "phone_number": {
-      "national_number": "national_number6"
-    }
+  phone: {
+    phoneNumber: {
+      nationalNumber: 'national_number6',
+    },
+    phoneType: PhoneType.Other,
   },
-  "birth_date": "birth_date6"
-}
+  birthDate: 'birth_date4',
+};
 ```
 

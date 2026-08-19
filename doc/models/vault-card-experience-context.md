@@ -18,16 +18,22 @@ A resource representing an experience context of vault a card.
 | `vaultInstruction` | [`VaultInstructionAction \| undefined`](../../doc/models/vault-instruction-action.md) | Optional | DEPRECATED. Vault Instruction on action to be performed after a successful payer approval.<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `255`, *Pattern*: `^[A-Z_]+$` |
 | `userAction` | [`VaultUserAction \| undefined`](../../doc/models/vault-user-action.md) | Optional | User Action on action to be performed after a successful payer approval.<br><br>**Default**: `VaultUserAction.Continue`<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `255`, *Pattern*: `^[A-Z_]+$` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "user_action": "CONTINUE",
-  "brand_name": "brand_name4",
-  "locale": "locale8",
-  "return_url": "return_url4",
-  "cancel_url": "cancel_url8",
-  "vault_instruction": "ON_CREATE_PAYMENT_TOKENS"
-}
+```ts
+import {
+  VaultCardExperienceContext,
+  VaultInstructionAction,
+  VaultUserAction,
+} from '@paypal/paypal-server-sdk';
+
+const vaultCardExperienceContext: VaultCardExperienceContext = {
+  brandName: 'brand_name2',
+  locale: 'locale6',
+  returnUrl: 'return_url4',
+  cancelUrl: 'cancel_url6',
+  vaultInstruction: VaultInstructionAction.OnCreatePaymentTokens,
+  userAction: VaultUserAction.Continue,
+};
 ```
 

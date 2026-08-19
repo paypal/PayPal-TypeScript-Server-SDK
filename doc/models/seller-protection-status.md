@@ -15,3 +15,11 @@ Indicates whether the transaction is eligible for seller protection. For informa
 | `PartiallyEligible` | Your PayPal balance remains intact if the customer claims that they did not receive an item. |
 | `NotEligible` | This transaction is not eligible for seller protection. |
 
+## Example
+
+```ts
+import { SellerProtectionStatus } from '@paypal/paypal-server-sdk';
+
+const sellerProtectionStatus = SellerProtectionStatus.PartiallyEligible;
+```
+

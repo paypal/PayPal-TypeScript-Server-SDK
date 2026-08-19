@@ -17,24 +17,26 @@ The Balance information.
 | `availableBalance` | [`Money \| undefined`](../../doc/models/money.md) | Optional | The currency and amount for a financial transaction, such as a balance or payment due. |
 | `withheldBalance` | [`Money \| undefined`](../../doc/models/money.md) | Optional | The currency and amount for a financial transaction, such as a balance or payment due. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "currency": "currency4",
-  "primary": false,
-  "total_balance": {
-    "currency_code": "currency_code6",
-    "value": "value2"
+```ts
+import { BalanceInformation } from '@paypal/paypal-server-sdk';
+
+const balanceInformation: BalanceInformation = {
+  currency: 'currency2',
+  totalBalance: {
+    currencyCode: 'currency_code6',
+    value: 'value2',
   },
-  "available_balance": {
-    "currency_code": "currency_code8",
-    "value": "value4"
+  primary: false,
+  availableBalance: {
+    currencyCode: 'currency_code8',
+    value: 'value4',
   },
-  "withheld_balance": {
-    "currency_code": "currency_code2",
-    "value": "value8"
-  }
-}
+  withheldBalance: {
+    currencyCode: 'currency_code2',
+    value: 'value8',
+  },
+};
 ```
 

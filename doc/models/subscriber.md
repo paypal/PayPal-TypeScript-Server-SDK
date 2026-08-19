@@ -17,54 +17,60 @@ The subscriber response information.
 | `shippingAddress` | [`ShippingDetails \| undefined`](../../doc/models/shipping-details.md) | Optional | The shipping details. |
 | `paymentSource` | [`SubscriptionPaymentSourceResponse \| undefined`](../../doc/models/subscription-payment-source-response.md) | Optional | The payment source used to fund the payment. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "email_address": "email_address2",
-  "payer_id": "payer_id2",
-  "name": {
-    "given_name": "given_name2",
-    "surname": "surname8"
+```ts
+import {
+  FulfillmentType,
+  ShippingType,
+  Subscriber,
+} from '@paypal/paypal-server-sdk';
+
+const subscriber: Subscriber = {
+  emailAddress: 'email_address8',
+  payerId: 'payer_id8',
+  name: {
+    givenName: 'given_name2',
+    surname: 'surname8',
   },
-  "shipping_address": {
-    "name": {
-      "full_name": "full_name6"
+  shippingAddress: {
+    name: {
+      fullName: 'full_name6',
     },
-    "email_address": "email_address8",
-    "phone_number": {
-      "country_code": "country_code2",
-      "national_number": "national_number6"
+    emailAddress: 'email_address8',
+    phoneNumber: {
+      countryCode: 'country_code2',
+      nationalNumber: 'national_number6',
     },
-    "type": "PICKUP_IN_STORE",
-    "options": [
+    type: FulfillmentType.PickupInStore,
+    options: [
       {
-        "id": "id2",
-        "label": "label2",
-        "type": "SHIPPING",
-        "amount": {
-          "currency_code": "currency_code6",
-          "value": "value0"
+        id: 'id2',
+        label: 'label2',
+        selected: false,
+        type: ShippingType.Shipping,
+        amount: {
+          currencyCode: 'currency_code6',
+          value: 'value0',
         },
-        "selected": false
       }
-    ]
+    ],
   },
-  "payment_source": {
-    "card": {
-      "name": "name6",
-      "billing_address": {
-        "address_line_1": "address_line_12",
-        "address_line_2": "address_line_28",
-        "admin_area_2": "admin_area_28",
-        "admin_area_1": "admin_area_14",
-        "postal_code": "postal_code0",
-        "country_code": "country_code8"
+  paymentSource: {
+    card: {
+      name: 'name6',
+      billingAddress: {
+        countryCode: 'country_code8',
+        addressLine1: 'address_line_12',
+        addressLine2: 'address_line_28',
+        adminArea2: 'admin_area_28',
+        adminArea1: 'admin_area_14',
+        postalCode: 'postal_code0',
       },
-      "expiry": "expiry4",
-      "currency_code": "currency_code2"
-    }
-  }
-}
+      expiry: 'expiry4',
+      currencyCode: 'currency_code2',
+    },
+  },
+};
 ```
 

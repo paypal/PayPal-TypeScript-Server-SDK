@@ -37,3 +37,11 @@ The card network or brand. Applies to credit, debit, gift, and payment cards.
 | `Eftpos` | The Electronic Fund Transfer At Point of Sale(EFTPOS) Debit card payment network. |
 | `Unknown` | UNKNOWN payment network. |
 
+## Example
+
+```ts
+import { SubscriptionsCardBrand } from '@paypal/paypal-server-sdk';
+
+const subscriptionsCardBrand = SubscriptionsCardBrand.Switch;
+```
+

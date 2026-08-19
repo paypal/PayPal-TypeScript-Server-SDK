@@ -15,95 +15,107 @@ Payer confirms the intent to pay for the Order using the provided payment source
 | `processingInstruction` | [`ProcessingInstruction \| undefined`](../../doc/models/processing-instruction.md) | Optional | The instruction to process an order. |
 | `applicationContext` | [`OrderConfirmApplicationContext \| undefined`](../../doc/models/order-confirm-application-context.md) | Optional | Customizes the payer confirmation experience. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "payment_source": {
-    "card": {
-      "name": "name6",
-      "number": "number6",
-      "expiry": "expiry4",
-      "security_code": "security_code8",
-      "billing_address": {
-        "address_line_1": "address_line_12",
-        "address_line_2": "address_line_28",
-        "admin_area_2": "admin_area_28",
-        "admin_area_1": "admin_area_14",
-        "postal_code": "postal_code0",
-        "country_code": "country_code8"
-      }
-    },
-    "token": {
-      "id": "id6",
-      "type": "BILLING_AGREEMENT"
-    },
-    "paypal": {
-      "vault_id": "vault_id0",
-      "email_address": "email_address0",
-      "name": {
-        "given_name": "given_name2",
-        "surname": "surname8"
+```ts
+import {
+  CardBrand,
+  ConfirmOrderRequest,
+  ExperienceContextShippingPreference,
+  PaymentInitiator,
+  PhoneType,
+  ProcessingInstruction,
+  StoredPaymentSourcePaymentType,
+  StoredPaymentSourceUsageType,
+  TokenType,
+} from '@paypal/paypal-server-sdk';
+
+const confirmOrderRequest: ConfirmOrderRequest = {
+  paymentSource: {
+    card: {
+      name: 'name6',
+      number: 'number6',
+      expiry: 'expiry4',
+      securityCode: 'security_code8',
+      billingAddress: {
+        countryCode: 'country_code8',
+        addressLine1: 'address_line_12',
+        addressLine2: 'address_line_28',
+        adminArea2: 'admin_area_28',
+        adminArea1: 'admin_area_14',
+        postalCode: 'postal_code0',
       },
-      "phone": {
-        "phone_type": "OTHER",
-        "phone_number": {
-          "national_number": "national_number6"
-        }
-      },
-      "birth_date": "birth_date8"
     },
-    "bancontact": {
-      "name": "name0",
-      "country_code": "country_code0",
-      "experience_context": {
-        "brand_name": "brand_name2",
-        "locale": "locale6",
-        "shipping_preference": "NO_SHIPPING",
-        "return_url": "return_url4",
-        "cancel_url": "cancel_url6"
-      }
+    token: {
+      id: 'id6',
+      type: TokenType.BillingAgreement,
     },
-    "blik": {
-      "name": "name2",
-      "country_code": "country_code2",
-      "email": "email4",
-      "experience_context": {
-        "brand_name": "brand_name2",
-        "locale": "locale6",
-        "shipping_preference": "NO_SHIPPING",
-        "return_url": "return_url4",
-        "cancel_url": "cancel_url6"
+    paypal: {
+      vaultId: 'vault_id0',
+      emailAddress: 'email_address0',
+      name: {
+        givenName: 'given_name2',
+        surname: 'surname8',
       },
-      "level_0": {
-        "auth_code": "auth_code8"
+      phone: {
+        phoneNumber: {
+          nationalNumber: 'national_number6',
+        },
+        phoneType: PhoneType.Other,
       },
-      "one_click": {
-        "auth_code": "auth_code0",
-        "consumer_reference": "consumer_reference2",
-        "alias_label": "alias_label6",
-        "alias_key": "alias_key4"
-      }
-    }
+      birthDate: 'birth_date8',
+    },
+    bancontact: {
+      name: 'name0',
+      countryCode: 'country_code0',
+      experienceContext: {
+        brandName: 'brand_name2',
+        locale: 'locale6',
+        shippingPreference: ExperienceContextShippingPreference.NoShipping,
+        returnUrl: 'return_url4',
+        cancelUrl: 'cancel_url6',
+      },
+    },
+    blik: {
+      name: 'name2',
+      countryCode: 'country_code2',
+      email: 'email4',
+      experienceContext: {
+        brandName: 'brand_name2',
+        locale: 'locale6',
+        shippingPreference: ExperienceContextShippingPreference.NoShipping,
+        returnUrl: 'return_url4',
+        cancelUrl: 'cancel_url6',
+      },
+      level0: {
+        authCode: 'auth_code8',
+      },
+      oneClick: {
+        consumerReference: 'consumer_reference2',
+        authCode: 'auth_code0',
+        aliasLabel: 'alias_label6',
+        aliasKey: 'alias_key4',
+      },
+    },
   },
-  "processing_instruction": "ORDER_COMPLETE_ON_PAYMENT_APPROVAL",
-  "application_context": {
-    "brand_name": "brand_name8",
-    "locale": "locale2",
-    "return_url": "return_url0",
-    "cancel_url": "cancel_url2",
-    "stored_payment_source": {
-      "payment_initiator": "CUSTOMER",
-      "payment_type": "RECURRING",
-      "usage": "FIRST",
-      "previous_network_transaction_reference": {
-        "id": "id6",
-        "date": "date2",
-        "network": "CONFIDIS",
-        "acquirer_reference_number": "acquirer_reference_number8"
-      }
-    }
-  }
-}
+  processingInstruction: ProcessingInstruction.OrderCompleteOnPaymentApproval,
+  applicationContext: {
+    brandName: 'brand_name8',
+    locale: 'locale2',
+    returnUrl: 'return_url0',
+    cancelUrl: 'cancel_url2',
+    storedPaymentSource: {
+      paymentInitiator: PaymentInitiator.Customer,
+      paymentType: StoredPaymentSourcePaymentType.Recurring,
+      usage: StoredPaymentSourceUsageType.First,
+      previousNetworkTransactionReference: {
+        id: 'id6',
+        date: 'date2',
+        network: CardBrand.Confidis,
+        acquirerReferenceNumber: 'acquirer_reference_number8',
+      },
+    },
+  },
+};
 ```
 

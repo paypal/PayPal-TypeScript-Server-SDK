@@ -18,53 +18,55 @@ Captures either a portion or the full authorized amount of an authorized payment
 | `noteToPayer` | `string \| undefined` | Optional | An informational note about this settlement. Appears in both the payer's transaction history and the emails that the payer receives.<br><br>**Constraints**: *Maximum Length*: `255` |
 | `softDescriptor` | `string \| undefined` | Optional | The payment descriptor on the payer's account statement.<br><br>**Constraints**: *Maximum Length*: `22` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "final_capture": false,
-  "amount": {
-    "currency_code": "currency_code6",
-    "value": "value0"
+```ts
+import { CaptureRequest, DisbursementMode } from '@paypal/paypal-server-sdk';
+
+const captureRequest: CaptureRequest = {
+  amount: {
+    currencyCode: 'currency_code6',
+    value: 'value0',
   },
-  "invoice_id": "invoice_id4",
-  "payment_instruction": {
-    "platform_fees": [
+  invoiceId: 'invoice_id8',
+  finalCapture: false,
+  paymentInstruction: {
+    platformFees: [
       {
-        "amount": {
-          "currency_code": "currency_code6",
-          "value": "value0"
+        amount: {
+          currencyCode: 'currency_code6',
+          value: 'value0',
         },
-        "payee": {
-          "email_address": "email_address4",
-          "merchant_id": "merchant_id6"
-        }
+        payee: {
+          emailAddress: 'email_address4',
+          merchantId: 'merchant_id6',
+        },
       },
       {
-        "amount": {
-          "currency_code": "currency_code6",
-          "value": "value0"
+        amount: {
+          currencyCode: 'currency_code6',
+          value: 'value0',
         },
-        "payee": {
-          "email_address": "email_address4",
-          "merchant_id": "merchant_id6"
-        }
+        payee: {
+          emailAddress: 'email_address4',
+          merchantId: 'merchant_id6',
+        },
       },
       {
-        "amount": {
-          "currency_code": "currency_code6",
-          "value": "value0"
+        amount: {
+          currencyCode: 'currency_code6',
+          value: 'value0',
         },
-        "payee": {
-          "email_address": "email_address4",
-          "merchant_id": "merchant_id6"
-        }
+        payee: {
+          emailAddress: 'email_address4',
+          merchantId: 'merchant_id6',
+        },
       }
     ],
-    "disbursement_mode": "INSTANT",
-    "payee_receivable_fx_rate_id": "payee_receivable_fx_rate_id0"
+    disbursementMode: DisbursementMode.Instant,
+    payeeReceivableFxRateId: 'payee_receivable_fx_rate_id0',
   },
-  "note_to_payer": "note_to_payer6"
-}
+  noteToPayer: 'note_to_payer0',
+};
 ```
 

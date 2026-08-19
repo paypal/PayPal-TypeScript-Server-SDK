@@ -20,157 +20,162 @@ The plan details.
 | `taxes` | [`Taxes \| undefined`](../../doc/models/taxes.md) | Optional | The tax details. |
 | `quantitySupported` | `boolean \| undefined` | Optional | Indicates whether you can subscribe to this plan by providing a quantity for the goods or service.<br><br>**Default**: `false` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "quantity_supported": false,
-  "product_id": "product_id6",
-  "name": "name8",
-  "description": "description2",
-  "billing_cycles": [
+```ts
+import {
+  IntervalUnit,
+  PlanDetails,
+  SetupFeeFailureAction,
+  SubscriptionPricingModel,
+  TenureType,
+} from '@paypal/paypal-server-sdk';
+
+const planDetails: PlanDetails = {
+  productId: 'product_id4',
+  name: 'name8',
+  description: 'description2',
+  billingCycles: [
     {
-      "pricing_scheme": {
-        "version": 10,
-        "fixed_price": {
-          "currency_code": "currency_code4",
-          "value": "value0"
+      frequency: {
+        intervalUnit: IntervalUnit.Day,
+        intervalCount: 94,
+      },
+      tenureType: TenureType.Regular,
+      sequence: 8,
+      pricingScheme: {
+        fixedPrice: {
+          currencyCode: 'currency_code4',
+          value: 'value0',
         },
-        "pricing_model": "VOLUME",
-        "tiers": [
+        pricingModel: SubscriptionPricingModel.Volume,
+        tiers: [
           {
-            "starting_quantity": "starting_quantity8",
-            "ending_quantity": "ending_quantity6",
-            "amount": {
-              "currency_code": "currency_code6",
-              "value": "value0"
-            }
+            startingQuantity: 'starting_quantity8',
+            amount: {
+              currencyCode: 'currency_code6',
+              value: 'value0',
+            },
+            endingQuantity: 'ending_quantity6',
           },
           {
-            "starting_quantity": "starting_quantity8",
-            "ending_quantity": "ending_quantity6",
-            "amount": {
-              "currency_code": "currency_code6",
-              "value": "value0"
-            }
+            startingQuantity: 'starting_quantity8',
+            amount: {
+              currencyCode: 'currency_code6',
+              value: 'value0',
+            },
+            endingQuantity: 'ending_quantity6',
           },
           {
-            "starting_quantity": "starting_quantity8",
-            "ending_quantity": "ending_quantity6",
-            "amount": {
-              "currency_code": "currency_code6",
-              "value": "value0"
-            }
+            startingQuantity: 'starting_quantity8',
+            amount: {
+              currencyCode: 'currency_code6',
+              value: 'value0',
+            },
+            endingQuantity: 'ending_quantity6',
           }
         ],
-        "create_time": "create_time4"
+        createTime: 'create_time4',
       },
-      "frequency": {
-        "interval_unit": "DAY",
-        "interval_count": 94
-      },
-      "tenure_type": "REGULAR",
-      "sequence": 8,
-      "total_cycles": 198
+      totalCycles: 198,
     },
     {
-      "pricing_scheme": {
-        "version": 10,
-        "fixed_price": {
-          "currency_code": "currency_code4",
-          "value": "value0"
+      frequency: {
+        intervalUnit: IntervalUnit.Day,
+        intervalCount: 94,
+      },
+      tenureType: TenureType.Regular,
+      sequence: 8,
+      pricingScheme: {
+        fixedPrice: {
+          currencyCode: 'currency_code4',
+          value: 'value0',
         },
-        "pricing_model": "VOLUME",
-        "tiers": [
+        pricingModel: SubscriptionPricingModel.Volume,
+        tiers: [
           {
-            "starting_quantity": "starting_quantity8",
-            "ending_quantity": "ending_quantity6",
-            "amount": {
-              "currency_code": "currency_code6",
-              "value": "value0"
-            }
+            startingQuantity: 'starting_quantity8',
+            amount: {
+              currencyCode: 'currency_code6',
+              value: 'value0',
+            },
+            endingQuantity: 'ending_quantity6',
           },
           {
-            "starting_quantity": "starting_quantity8",
-            "ending_quantity": "ending_quantity6",
-            "amount": {
-              "currency_code": "currency_code6",
-              "value": "value0"
-            }
+            startingQuantity: 'starting_quantity8',
+            amount: {
+              currencyCode: 'currency_code6',
+              value: 'value0',
+            },
+            endingQuantity: 'ending_quantity6',
           },
           {
-            "starting_quantity": "starting_quantity8",
-            "ending_quantity": "ending_quantity6",
-            "amount": {
-              "currency_code": "currency_code6",
-              "value": "value0"
-            }
+            startingQuantity: 'starting_quantity8',
+            amount: {
+              currencyCode: 'currency_code6',
+              value: 'value0',
+            },
+            endingQuantity: 'ending_quantity6',
           }
         ],
-        "create_time": "create_time4"
+        createTime: 'create_time4',
       },
-      "frequency": {
-        "interval_unit": "DAY",
-        "interval_count": 94
-      },
-      "tenure_type": "REGULAR",
-      "sequence": 8,
-      "total_cycles": 198
+      totalCycles: 198,
     },
     {
-      "pricing_scheme": {
-        "version": 10,
-        "fixed_price": {
-          "currency_code": "currency_code4",
-          "value": "value0"
+      frequency: {
+        intervalUnit: IntervalUnit.Day,
+        intervalCount: 94,
+      },
+      tenureType: TenureType.Regular,
+      sequence: 8,
+      pricingScheme: {
+        fixedPrice: {
+          currencyCode: 'currency_code4',
+          value: 'value0',
         },
-        "pricing_model": "VOLUME",
-        "tiers": [
+        pricingModel: SubscriptionPricingModel.Volume,
+        tiers: [
           {
-            "starting_quantity": "starting_quantity8",
-            "ending_quantity": "ending_quantity6",
-            "amount": {
-              "currency_code": "currency_code6",
-              "value": "value0"
-            }
+            startingQuantity: 'starting_quantity8',
+            amount: {
+              currencyCode: 'currency_code6',
+              value: 'value0',
+            },
+            endingQuantity: 'ending_quantity6',
           },
           {
-            "starting_quantity": "starting_quantity8",
-            "ending_quantity": "ending_quantity6",
-            "amount": {
-              "currency_code": "currency_code6",
-              "value": "value0"
-            }
+            startingQuantity: 'starting_quantity8',
+            amount: {
+              currencyCode: 'currency_code6',
+              value: 'value0',
+            },
+            endingQuantity: 'ending_quantity6',
           },
           {
-            "starting_quantity": "starting_quantity8",
-            "ending_quantity": "ending_quantity6",
-            "amount": {
-              "currency_code": "currency_code6",
-              "value": "value0"
-            }
+            startingQuantity: 'starting_quantity8',
+            amount: {
+              currencyCode: 'currency_code6',
+              value: 'value0',
+            },
+            endingQuantity: 'ending_quantity6',
           }
         ],
-        "create_time": "create_time4"
+        createTime: 'create_time4',
       },
-      "frequency": {
-        "interval_unit": "DAY",
-        "interval_count": 94
-      },
-      "tenure_type": "REGULAR",
-      "sequence": 8,
-      "total_cycles": 198
+      totalCycles: 198,
     }
   ],
-  "payment_preferences": {
-    "auto_bill_outstanding": false,
-    "setup_fee": {
-      "currency_code": "currency_code8",
-      "value": "value4"
+  paymentPreferences: {
+    autoBillOutstanding: false,
+    setupFee: {
+      currencyCode: 'currency_code8',
+      value: 'value4',
     },
-    "setup_fee_failure_action": "CONTINUE",
-    "payment_failure_threshold": 104
-  }
-}
+    setupFeeFailureAction: SetupFeeFailureAction.Continue,
+    paymentFailureThreshold: 104,
+  },
+  quantitySupported: false,
+};
 ```
 

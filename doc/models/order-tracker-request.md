@@ -18,31 +18,36 @@ The tracking details of an order.
 | `notifyPayer` | `boolean \| undefined` | Optional | If true, PayPal will send an email notification to the payer of the PayPal transaction. The email contains the tracking details provided through the Orders tracking API request. Independent of any value passed for `notify_payer`, the payer may receive tracking notifications within the PayPal app, based on the user's notification preferences.<br><br>**Default**: `false` |
 | `items` | [`OrderTrackerItem[] \| undefined`](../../doc/models/order-tracker-item.md) | Optional | An array of details of items in the shipment. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "capture_id": "capture_id0",
-  "notify_payer": false,
-  "tracking_number": "tracking_number6",
-  "carrier": "ACS_GR",
-  "carrier_name_other": "carrier_name_other0",
-  "items": [
+```ts
+import {
+  OrderTrackerRequest,
+  ShipmentCarrier,
+} from '@paypal/paypal-server-sdk';
+
+const orderTrackerRequest: OrderTrackerRequest = {
+  captureId: 'capture_id2',
+  trackingNumber: 'tracking_number8',
+  carrier: ShipmentCarrier.PostaRo,
+  carrierNameOther: 'carrier_name_other2',
+  notifyPayer: false,
+  items: [
     {
-      "name": "name8",
-      "quantity": "quantity4",
-      "sku": "sku6",
-      "url": "url2",
-      "image_url": "image_url4"
+      name: 'name8',
+      quantity: 'quantity4',
+      sku: 'sku6',
+      url: 'url2',
+      imageUrl: 'image_url4',
     },
     {
-      "name": "name8",
-      "quantity": "quantity4",
-      "sku": "sku6",
-      "url": "url2",
-      "image_url": "image_url4"
+      name: 'name8',
+      quantity: 'quantity4',
+      sku: 'sku6',
+      url: 'url2',
+      imageUrl: 'image_url4',
     }
-  ]
-}
+  ],
+};
 ```
 

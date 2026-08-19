@@ -16,22 +16,24 @@ This object represents a merchant’s customer, allowing them to store contact d
 | `phone` | [`PhoneWithType \| undefined`](../../doc/models/phone-with-type.md) | Optional | The phone information. |
 | `name` | [`Name \| undefined`](../../doc/models/name.md) | Optional | The name of the party. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": "id6",
-  "email_address": "email_address4",
-  "phone": {
-    "phone_type": "OTHER",
-    "phone_number": {
-      "national_number": "national_number6"
-    }
+```ts
+import { CustomerInformation, PhoneType } from '@paypal/paypal-server-sdk';
+
+const customerInformation: CustomerInformation = {
+  id: 'id6',
+  emailAddress: 'email_address4',
+  phone: {
+    phoneNumber: {
+      nationalNumber: 'national_number6',
+    },
+    phoneType: PhoneType.Other,
   },
-  "name": {
-    "given_name": "given_name2",
-    "surname": "surname8"
-  }
-}
+  name: {
+    givenName: 'given_name2',
+    surname: 'surname8',
+  },
+};
 ```
 

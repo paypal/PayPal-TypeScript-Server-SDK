@@ -22,78 +22,79 @@ The order authorize response.
 | `status` | [`OrderStatus \| undefined`](../../doc/models/order-status.md) | Optional | The order status.<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `255`, *Pattern*: `^[0-9A-Z_]+$` |
 | `links` | [`LinkDescription[] \| undefined`](../../doc/models/link-description.md) | Optional, Read-only | An array of request-related HATEOAS links. To complete payer approval, use the `approve` link to redirect the payer. The API caller has 6 hours (default setting, this which can be changed by your account manager to 24/48/72 hours to accommodate your use case) from the time the order is created, to redirect your payer. Once redirected, the API caller has 6 hours for the payer to approve the order and either authorize or capture the order. If you are not using the PayPal JavaScript SDK to initiate PayPal Checkout (in context) ensure that you include `application_context.return_url` is specified or you will get "We're sorry, Things don't appear to be working at the moment" after the payer approves the payment. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "create_time": "create_time0",
-  "update_time": "update_time4",
-  "id": "id4",
-  "payment_source": {
-    "card": {
-      "name": "name6",
-      "last_digits": "last_digits0",
-      "brand": "CB_NATIONALE",
-      "available_networks": [
-        "DELTA"
-      ],
-      "type": "UNKNOWN"
+```ts
+import {
+  CardBrand,
+  CardType,
+  CheckoutPaymentIntent,
+  OrderAuthorizeResponse,
+  PhoneType,
+} from '@paypal/paypal-server-sdk';
+
+const orderAuthorizeResponse: OrderAuthorizeResponse = {
+  createTime: 'create_time8',
+  updateTime: 'update_time4',
+  paymentSource: {
+    card: {
+      name: 'name6',
+      brand: CardBrand.CbNationale,
+      type: CardType.Unknown,
     },
-    "paypal": {
-      "email_address": "email_address0",
-      "account_id": "account_id4",
-      "account_status": "VERIFIED",
-      "name": {
-        "given_name": "given_name2",
-        "surname": "surname8"
+    paypal: {
+      emailAddress: 'email_address0',
+      accountId: 'account_id4',
+      name: {
+        givenName: 'given_name2',
+        surname: 'surname8',
       },
-      "phone_type": "FAX"
+      phoneType: PhoneType.Fax,
     },
-    "apple_pay": {
-      "id": "id0",
-      "token": "token6",
-      "name": "name0",
-      "email_address": "email_address8",
-      "phone_number": {
-        "national_number": "national_number6"
-      }
-    },
-    "google_pay": {
-      "name": "name8",
-      "email_address": "email_address6",
-      "phone_number": {
-        "country_code": "country_code2",
-        "national_number": "national_number6"
+    applePay: {
+      id: 'id0',
+      token: 'token6',
+      name: 'name0',
+      emailAddress: 'email_address8',
+      phoneNumber: {
+        nationalNumber: 'national_number6',
       },
-      "card": {
-        "name": "name6",
-        "last_digits": "last_digits0",
-        "type": "UNKNOWN",
-        "brand": "CB_NATIONALE",
-        "billing_address": {
-          "address_line_1": "address_line_12",
-          "address_line_2": "address_line_28",
-          "admin_area_2": "admin_area_28",
-          "admin_area_1": "admin_area_14",
-          "postal_code": "postal_code0",
-          "country_code": "country_code8"
-        }
-      }
     },
-    "venmo": {
-      "email_address": "email_address4",
-      "account_id": "account_id8",
-      "user_name": "user_name2",
-      "name": {
-        "given_name": "given_name2",
-        "surname": "surname8"
+    googlePay: {
+      name: 'name8',
+      emailAddress: 'email_address6',
+      phoneNumber: {
+        countryCode: 'country_code2',
+        nationalNumber: 'national_number6',
       },
-      "phone_number": {
-        "national_number": "national_number6"
-      }
-    }
+      card: {
+        name: 'name6',
+        type: CardType.Unknown,
+        brand: CardBrand.CbNationale,
+        billingAddress: {
+          countryCode: 'country_code8',
+          addressLine1: 'address_line_12',
+          addressLine2: 'address_line_28',
+          adminArea2: 'admin_area_28',
+          adminArea1: 'admin_area_14',
+          postalCode: 'postal_code0',
+        },
+      },
+    },
+    venmo: {
+      emailAddress: 'email_address4',
+      accountId: 'account_id8',
+      userName: 'user_name2',
+      name: {
+        givenName: 'given_name2',
+        surname: 'surname8',
+      },
+      phoneNumber: {
+        nationalNumber: 'national_number6',
+      },
+    },
   },
-  "intent": "CAPTURE"
-}
+  intent: CheckoutPaymentIntent.Capture,
+};
 ```
 

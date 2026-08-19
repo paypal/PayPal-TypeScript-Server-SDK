@@ -16,38 +16,37 @@ The list of plans with details.
 | `totalPages` | `number \| undefined` | Optional | The total number of pages.<br><br>**Constraints**: `>= 0`, `<= 100000000` |
 | `links` | [`LinkDescription[] \| undefined`](../../doc/models/link-description.md) | Optional, Read-only | An array of request-related [HATEOAS links](/docs/api/reference/api-responses/#hateoas-links).<br><br>**Constraints**: *Minimum Items*: `1`, *Maximum Items*: `10` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "plans": [
+```ts
+import {
+  PlanCollection,
+  SubscriptionPlanStatus,
+} from '@paypal/paypal-server-sdk';
+
+const planCollection: PlanCollection = {
+  plans: [
     {
-      "id": "id4",
-      "product_id": "product_id0",
-      "name": "name4",
-      "status": "INACTIVE",
-      "description": "description4"
+      productId: 'product_id0',
+      name: 'name4',
+      status: SubscriptionPlanStatus.Inactive,
+      description: 'description4',
+    },
+    {
+      productId: 'product_id0',
+      name: 'name4',
+      status: SubscriptionPlanStatus.Inactive,
+      description: 'description4',
+    },
+    {
+      productId: 'product_id0',
+      name: 'name4',
+      status: SubscriptionPlanStatus.Inactive,
+      description: 'description4',
     }
   ],
-  "total_items": 158,
-  "total_pages": 194,
-  "links": [
-    {
-      "href": "href6",
-      "rel": "rel0",
-      "method": "HEAD"
-    },
-    {
-      "href": "href6",
-      "rel": "rel0",
-      "method": "HEAD"
-    },
-    {
-      "href": "href6",
-      "rel": "rel0",
-      "method": "HEAD"
-    }
-  ]
-}
+  totalItems: 244,
+  totalPages: 24,
+};
 ```
 

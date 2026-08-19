@@ -15,22 +15,14 @@ This object defines a customer in your system. Use it to manage customer profile
 | `merchantCustomerId` | `string \| undefined` | Optional | Merchants and partners may already have a data-store where their customer information is persisted. Use merchant_customer_id to associate the PayPal-generated customer.id to your representation of a customer.<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `64`, *Pattern*: `^[0-9a-zA-Z-_.^*$@#]+$` |
 | `links` | `unknown[] \| undefined` | Optional, Read-only | DEPRECATED. This field is DEPRECATED.<br><br>**Constraints**: *Maximum Items*: `16` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": "id4",
-  "merchant_customer_id": "merchant_customer_id6",
-  "links": [
-    {
-      "key1": "val1",
-      "key2": "val2"
-    },
-    {
-      "key1": "val1",
-      "key2": "val2"
-    }
-  ]
-}
+```ts
+import { VaultResponseCustomer } from '@paypal/paypal-server-sdk';
+
+const vaultResponseCustomer: VaultResponseCustomer = {
+  id: 'id4',
+  merchantCustomerId: 'merchant_customer_id6',
+};
 ```
 

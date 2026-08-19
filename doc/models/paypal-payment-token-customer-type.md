@@ -14,3 +14,11 @@ The customer type associated with the PayPal payment token. This is to indicate 
 | `Consumer` | The customer vaulting the PayPal payment token is a consumer on the merchant / platform. |
 | `Business` | The customer vaulting the PayPal payment token is a business on merchant / platform. |
 
+## Example
+
+```ts
+import { PaypalPaymentTokenCustomerType } from '@paypal/paypal-server-sdk';
+
+const paypalPaymentTokenCustomerType = PaypalPaymentTokenCustomerType.Consumer;
+```
+

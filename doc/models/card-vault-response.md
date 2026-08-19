@@ -16,39 +16,33 @@ The details about a saved Card payment source.
 | `links` | [`LinkDescription[] \| undefined`](../../doc/models/link-description.md) | Optional, Read-only | An array of request-related HATEOAS links.<br><br>**Constraints**: *Minimum Items*: `1`, *Maximum Items*: `10` |
 | `customer` | [`CardCustomerInformation \| undefined`](../../doc/models/card-customer-information.md) | Optional | The details about a customer in PayPal's system of record. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": "id6",
-  "status": "VAULTED",
-  "links": [
-    {
-      "href": "href6",
-      "rel": "rel0",
-      "method": "HEAD"
+```ts
+import {
+  CardVaultResponse,
+  PhoneType,
+  VaultStatus,
+} from '@paypal/paypal-server-sdk';
+
+const cardVaultResponse: CardVaultResponse = {
+  id: 'id0',
+  status: VaultStatus.Vaulted,
+  customer: {
+    id: 'id0',
+    emailAddress: 'email_address2',
+    phone: {
+      phoneNumber: {
+        nationalNumber: 'national_number6',
+      },
+      phoneType: PhoneType.Other,
     },
-    {
-      "href": "href6",
-      "rel": "rel0",
-      "method": "HEAD"
-    }
-  ],
-  "customer": {
-    "id": "id0",
-    "email_address": "email_address2",
-    "phone": {
-      "phone_type": "OTHER",
-      "phone_number": {
-        "national_number": "national_number6"
-      }
+    name: {
+      givenName: 'given_name2',
+      surname: 'surname8',
     },
-    "name": {
-      "given_name": "given_name2",
-      "surname": "surname8"
-    },
-    "merchant_customer_id": "merchant_customer_id2"
-  }
-}
+    merchantCustomerId: 'merchant_customer_id2',
+  },
+};
 ```
 

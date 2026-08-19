@@ -16,65 +16,92 @@ The list transactions for a subscription request details.
 | `totalPages` | `number \| undefined` | Optional | The total number of pages.<br><br>**Constraints**: `>= 0`, `<= 100000000` |
 | `links` | [`LinkDescription[] \| undefined`](../../doc/models/link-description.md) | Optional, Read-only | An array of request-related [HATEOAS links](/docs/api/reference/api-responses/#hateoas-links).<br><br>**Constraints**: *Minimum Items*: `1`, *Maximum Items*: `10` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "transactions": [
+```ts
+import { TransactionsList } from '@paypal/paypal-server-sdk';
+
+const transactionsList: TransactionsList = {
+  transactions: [
     {
-      "status": "PARTIALLY_REFUNDED",
-      "id": "id8",
-      "amount_with_breakdown": {
-        "gross_amount": {
-          "currency_code": "currency_code4",
-          "value": "value0"
+      id: '',
+      amountWithBreakdown: {
+        grossAmount: {
+          currencyCode: 'currency_code4',
+          value: 'value0',
         },
-        "total_item_amount": {
-          "currency_code": "currency_code8",
-          "value": "value4"
+        totalItemAmount: {
+          currencyCode: 'currency_code8',
+          value: 'value4',
         },
-        "fee_amount": {
-          "currency_code": "currency_code2",
-          "value": "value4"
+        feeAmount: {
+          currencyCode: 'currency_code2',
+          value: 'value4',
         },
-        "shipping_amount": {
-          "currency_code": "currency_code0",
-          "value": "value6"
+        shippingAmount: {
+          currencyCode: 'currency_code0',
+          value: 'value6',
         },
-        "tax_amount": {
-          "currency_code": "currency_code2",
-          "value": "value8"
+        taxAmount: {
+          currencyCode: 'currency_code2',
+          value: 'value8',
         },
-        "net_amount": {
-          "currency_code": "currency_code6",
-          "value": "value2"
-        }
+        netAmount: {
+          currencyCode: 'currency_code6',
+          value: 'value2',
+        },
       },
-      "payer_name": {
-        "prefix": "prefix8",
-        "given_name": "given_name2",
-        "surname": "surname8",
-        "middle_name": "middle_name0",
-        "suffix": "suffix0"
+      time: 'time8',
+      payerName: {
+        prefix: 'prefix8',
+        givenName: 'given_name2',
+        surname: 'surname8',
+        middleName: 'middle_name0',
+        suffix: 'suffix0',
       },
-      "payer_email": "payer_email6",
-      "time": "time8"
-    }
-  ],
-  "total_items": 254,
-  "total_pages": 34,
-  "links": [
-    {
-      "href": "href6",
-      "rel": "rel0",
-      "method": "HEAD"
+      payerEmail: 'payer_email6',
     },
     {
-      "href": "href6",
-      "rel": "rel0",
-      "method": "HEAD"
+      id: '',
+      amountWithBreakdown: {
+        grossAmount: {
+          currencyCode: 'currency_code4',
+          value: 'value0',
+        },
+        totalItemAmount: {
+          currencyCode: 'currency_code8',
+          value: 'value4',
+        },
+        feeAmount: {
+          currencyCode: 'currency_code2',
+          value: 'value4',
+        },
+        shippingAmount: {
+          currencyCode: 'currency_code0',
+          value: 'value6',
+        },
+        taxAmount: {
+          currencyCode: 'currency_code2',
+          value: 'value8',
+        },
+        netAmount: {
+          currencyCode: 'currency_code6',
+          value: 'value2',
+        },
+      },
+      time: 'time8',
+      payerName: {
+        prefix: 'prefix8',
+        givenName: 'given_name2',
+        surname: 'surname8',
+        middleName: 'middle_name0',
+        suffix: 'suffix0',
+      },
+      payerEmail: 'payer_email6',
     }
-  ]
-}
+  ],
+  totalItems: 36,
+  totalPages: 72,
+};
 ```
 

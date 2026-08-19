@@ -13,35 +13,34 @@ Additional attributes associated with the use of a Venmo Wallet.
 |  --- | --- | --- | --- |
 | `vault` | [`VenmoVaultResponse \| undefined`](../../doc/models/venmo-vault-response.md) | Optional | The details about a saved venmo payment source. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "vault": {
-    "id": "id6",
-    "status": "APPROVED",
-    "links": [
-      {
-        "href": "href6",
-        "rel": "rel0",
-        "method": "HEAD"
-      }
-    ],
-    "customer": {
-      "id": "id0",
-      "email_address": "email_address2",
-      "phone": {
-        "phone_type": "OTHER",
-        "phone_number": {
-          "national_number": "national_number6"
-        }
+```ts
+import {
+  PhoneType,
+  VenmoVaultResponseStatus,
+  VenmoWalletAttributesResponse,
+} from '@paypal/paypal-server-sdk';
+
+const venmoWalletAttributesResponse: VenmoWalletAttributesResponse = {
+  vault: {
+    id: 'id6',
+    status: VenmoVaultResponseStatus.Approved,
+    customer: {
+      id: 'id0',
+      emailAddress: 'email_address2',
+      phone: {
+        phoneNumber: {
+          nationalNumber: 'national_number6',
+        },
+        phoneType: PhoneType.Other,
       },
-      "name": {
-        "given_name": "given_name2",
-        "surname": "surname8"
-      }
-    }
-  }
-}
+      name: {
+        givenName: 'given_name2',
+        surname: 'surname8',
+      },
+    },
+  },
+};
 ```
 

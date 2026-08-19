@@ -5,6 +5,7 @@
  */
 
 import { lazy, number, object, optional, Schema, string } from '../schema.js';
+import { CycleFrequency, cycleFrequencySchema } from './cycleFrequency.js';
 import { PricingScheme, pricingSchemeSchema } from './pricingScheme.js';
 import { TenureType, tenureTypeSchema } from './tenureType.js';
 
@@ -20,6 +21,8 @@ export interface BillingCycle {
   sequence?: number;
   /** The stand-alone date, in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6). To represent special legal values, such as a date of birth, you should use dates with no associated time or time-zone data. Whenever possible, use the standard `date_time` type. This regular expression does not validate all dates. For example, February 31 is valid and nothing is known about leap years. */
   startDate?: string;
+  /** The frequency of the terms reset cycle. */
+  frequency?: CycleFrequency;
 }
 
 export const billingCycleSchema: Schema<BillingCycle> = lazy(() =>
@@ -29,5 +32,6 @@ export const billingCycleSchema: Schema<BillingCycle> = lazy(() =>
     totalCycles: ['total_cycles', optional(number())],
     sequence: ['sequence', optional(number())],
     startDate: ['start_date', optional(string())],
+    frequency: ['frequency', optional(cycleFrequencySchema)],
   })
 );

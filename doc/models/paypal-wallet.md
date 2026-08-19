@@ -23,23 +23,25 @@ A resource that identifies a PayPal Wallet is used for payment.
 | `billingAgreementId` | `string \| undefined` | Optional | The PayPal billing agreement ID. References an approved recurring payment for goods or services.<br><br>**Constraints**: *Minimum Length*: `2`, *Maximum Length*: `128`, *Pattern*: `^[a-zA-Z0-9-]+$` |
 | `storedCredential` | [`PaypalWalletStoredCredential \| undefined`](../../doc/models/paypal-wallet-stored-credential.md) | Optional | Provides additional details to process a payment using the PayPal wallet billing agreement or a vaulted payment method that has been stored or is intended to be stored. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "vault_id": "vault_id8",
-  "email_address": "email_address8",
-  "name": {
-    "given_name": "given_name2",
-    "surname": "surname8"
+```ts
+import { PaypalWallet, PhoneType } from '@paypal/paypal-server-sdk';
+
+const paypalWallet: PaypalWallet = {
+  vaultId: 'vault_id4',
+  emailAddress: 'email_address6',
+  name: {
+    givenName: 'given_name2',
+    surname: 'surname8',
   },
-  "phone": {
-    "phone_type": "OTHER",
-    "phone_number": {
-      "national_number": "national_number6"
-    }
+  phone: {
+    phoneNumber: {
+      nationalNumber: 'national_number6',
+    },
+    phoneType: PhoneType.Other,
   },
-  "birth_date": "birth_date4"
-}
+  birthDate: 'birth_date8',
+};
 ```
 

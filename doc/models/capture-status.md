@@ -18,3 +18,11 @@ The status of the captured payment.
 | `Refunded` | An amount greater than or equal to this captured payment's amount was refunded to the payer. |
 | `Failed` | There was an error while capturing payment. |
 
+## Example
+
+```ts
+import { CaptureStatus } from '@paypal/paypal-server-sdk';
+
+const captureStatus = CaptureStatus.Completed;
+```
+

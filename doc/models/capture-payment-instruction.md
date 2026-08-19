@@ -15,34 +15,39 @@ Any additional payment instructions to be consider during payment processing. Th
 | `disbursementMode` | [`DisbursementMode \| undefined`](../../doc/models/disbursement-mode.md) | Optional | The funds that are held on behalf of the merchant.<br><br>**Default**: `DisbursementMode.Instant`<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `16`, *Pattern*: `^[A-Z_]+$` |
 | `payeeReceivableFxRateId` | `string \| undefined` | Optional | FX identifier generated returned by PayPal to be used for payment processing in order to honor FX rate (for eligible integrations) to be used when amount is settled/received into the payee account.<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `4000`, *Pattern*: `^.*$` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "disbursement_mode": "INSTANT",
-  "platform_fees": [
+```ts
+import {
+  CapturePaymentInstruction,
+  DisbursementMode,
+} from '@paypal/paypal-server-sdk';
+
+const capturePaymentInstruction: CapturePaymentInstruction = {
+  platformFees: [
     {
-      "amount": {
-        "currency_code": "currency_code6",
-        "value": "value0"
+      amount: {
+        currencyCode: 'currency_code6',
+        value: 'value0',
       },
-      "payee": {
-        "email_address": "email_address4",
-        "merchant_id": "merchant_id6"
-      }
+      payee: {
+        emailAddress: 'email_address4',
+        merchantId: 'merchant_id6',
+      },
     },
     {
-      "amount": {
-        "currency_code": "currency_code6",
-        "value": "value0"
+      amount: {
+        currencyCode: 'currency_code6',
+        value: 'value0',
       },
-      "payee": {
-        "email_address": "email_address4",
-        "merchant_id": "merchant_id6"
-      }
+      payee: {
+        emailAddress: 'email_address4',
+        merchantId: 'merchant_id6',
+      },
     }
   ],
-  "payee_receivable_fx_rate_id": "payee_receivable_fx_rate_id8"
-}
+  disbursementMode: DisbursementMode.Instant,
+  payeeReceivableFxRateId: 'payee_receivable_fx_rate_id8',
+};
 ```
 

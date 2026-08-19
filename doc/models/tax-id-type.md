@@ -14,3 +14,11 @@ The customer's tax ID type.
 | `BrCpf` | The individual tax ID type, typically is 11 characters long. |
 | `BrCnpj` | The business tax ID type, typically is 14 characters long. |
 
+## Example
+
+```ts
+import { TaxIdType } from '@paypal/paypal-server-sdk';
+
+const taxIdType = TaxIdType.BrCpf;
+```
+

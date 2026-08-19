@@ -19,30 +19,32 @@ The breakdown of the amount. Breakdown provides details such as total item amoun
 | `shippingDiscount` | [`Money \| undefined`](../../doc/models/money.md) | Optional | The currency and amount for a financial transaction, such as a balance or payment due. |
 | `discount` | [`Money \| undefined`](../../doc/models/money.md) | Optional | The discount amount and currency code. For list of supported currencies and decimal precision, see the PayPal REST APIs Currency Codes. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "item_total": {
-    "currency_code": "currency_code0",
-    "value": "value6"
+```ts
+import { AmountBreakdown } from '@paypal/paypal-server-sdk';
+
+const amountBreakdown: AmountBreakdown = {
+  itemTotal: {
+    currencyCode: 'currency_code0',
+    value: 'value6',
   },
-  "shipping": {
-    "currency_code": "currency_code0",
-    "value": "value6"
+  shipping: {
+    currencyCode: 'currency_code0',
+    value: 'value6',
   },
-  "handling": {
-    "currency_code": "currency_code2",
-    "value": "value8"
+  handling: {
+    currencyCode: 'currency_code2',
+    value: 'value8',
   },
-  "tax_total": {
-    "currency_code": "currency_code4",
-    "value": "value0"
+  taxTotal: {
+    currencyCode: 'currency_code4',
+    value: 'value0',
   },
-  "insurance": {
-    "currency_code": "currency_code2",
-    "value": "value8"
-  }
-}
+  insurance: {
+    currencyCode: 'currency_code2',
+    value: 'value8',
+  },
+};
 ```
 

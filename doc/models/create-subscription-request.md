@@ -21,58 +21,65 @@ The create subscription request details.
 | `customId` | `string \| undefined` | Optional | The custom id for the subscription. Can be invoice id.<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `127`, *Pattern*: `^[\x20-\x7E]+` |
 | `plan` | [`PlanOverride \| undefined`](../../doc/models/plan-override.md) | Optional | An inline plan object to customise the subscription. You can override plan level default attributes by providing customised values for the subscription in this object. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "plan_id": "plan_id8",
-  "auto_renewal": false,
-  "start_time": "start_time0",
-  "quantity": "quantity2",
-  "shipping_amount": {
-    "currency_code": "currency_code0",
-    "value": "value6"
+```ts
+import {
+  CardType,
+  CreateSubscriptionRequest,
+  FulfillmentType,
+  ShippingType,
+} from '@paypal/paypal-server-sdk';
+
+const createSubscriptionRequest: CreateSubscriptionRequest = {
+  planId: 'plan_id8',
+  startTime: 'start_time0',
+  quantity: 'quantity2',
+  shippingAmount: {
+    currencyCode: 'currency_code0',
+    value: 'value6',
   },
-  "subscriber": {
-    "email_address": "email_address8",
-    "payer_id": "payer_id8",
-    "name": {
-      "given_name": "given_name2",
-      "surname": "surname8"
+  subscriber: {
+    emailAddress: 'email_address8',
+    payerId: 'payer_id8',
+    name: {
+      givenName: 'given_name2',
+      surname: 'surname8',
     },
-    "shipping_address": {
-      "name": {
-        "full_name": "full_name6"
+    shippingAddress: {
+      name: {
+        fullName: 'full_name6',
       },
-      "email_address": "email_address8",
-      "phone_number": {
-        "country_code": "country_code2",
-        "national_number": "national_number6"
+      emailAddress: 'email_address8',
+      phoneNumber: {
+        countryCode: 'country_code2',
+        nationalNumber: 'national_number6',
       },
-      "type": "PICKUP_IN_STORE",
-      "options": [
+      type: FulfillmentType.PickupInStore,
+      options: [
         {
-          "id": "id2",
-          "label": "label2",
-          "type": "SHIPPING",
-          "amount": {
-            "currency_code": "currency_code6",
-            "value": "value0"
+          id: 'id2',
+          label: 'label2',
+          selected: false,
+          type: ShippingType.Shipping,
+          amount: {
+            currencyCode: 'currency_code6',
+            value: 'value0',
           },
-          "selected": false
         }
-      ]
+      ],
     },
-    "payment_source": {
-      "card": {
-        "name": "name6",
-        "number": "number6",
-        "expiry": "expiry4",
-        "security_code": "security_code8",
-        "type": "UNKNOWN"
-      }
-    }
-  }
-}
+    paymentSource: {
+      card: {
+        name: 'name6',
+        number: 'number6',
+        expiry: 'expiry4',
+        securityCode: 'security_code8',
+        type: CardType.Unknown,
+      },
+    },
+  },
+  autoRenewal: false,
+};
 ```
 

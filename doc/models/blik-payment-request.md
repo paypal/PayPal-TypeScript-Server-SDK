@@ -18,29 +18,34 @@ Information needed to pay using BLIK.
 | `level0` | [`BlikLevel0PaymentObject \| undefined`](../../doc/models/blik-level-0-payment-object.md) | Optional | Information used to pay using BLIK level_0 flow. |
 | `oneClick` | [`BlikOneClickPaymentRequest \| undefined`](../../doc/models/blik-one-click-payment-request.md) | Optional | Information used to pay using BLIK one-click flow. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "name": "name8",
-  "country_code": "country_code8",
-  "email": "email8",
-  "experience_context": {
-    "brand_name": "brand_name2",
-    "locale": "locale6",
-    "shipping_preference": "NO_SHIPPING",
-    "return_url": "return_url4",
-    "cancel_url": "cancel_url6"
+```ts
+import {
+  BlikPaymentRequest,
+  ExperienceContextShippingPreference,
+} from '@paypal/paypal-server-sdk';
+
+const blikPaymentRequest: BlikPaymentRequest = {
+  name: 'name6',
+  countryCode: 'country_code6',
+  email: 'email0',
+  experienceContext: {
+    brandName: 'brand_name2',
+    locale: 'locale6',
+    shippingPreference: ExperienceContextShippingPreference.NoShipping,
+    returnUrl: 'return_url4',
+    cancelUrl: 'cancel_url6',
   },
-  "level_0": {
-    "auth_code": "auth_code8"
+  level0: {
+    authCode: 'auth_code8',
   },
-  "one_click": {
-    "auth_code": "auth_code0",
-    "consumer_reference": "consumer_reference2",
-    "alias_label": "alias_label6",
-    "alias_key": "alias_key4"
-  }
-}
+  oneClick: {
+    consumerReference: 'consumer_reference2',
+    authCode: 'auth_code0',
+    aliasLabel: 'alias_label6',
+    aliasKey: 'alias_key4',
+  },
+};
 ```
 

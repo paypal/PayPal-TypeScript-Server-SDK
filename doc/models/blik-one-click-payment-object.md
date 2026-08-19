@@ -13,11 +13,13 @@ Information used to pay using BLIK one-click flow.
 |  --- | --- | --- | --- |
 | `consumerReference` | `string \| undefined` | Optional | The merchant generated, unique reference serving as a primary identifier for accounts connected between Blik and a merchant.<br><br>**Constraints**: *Minimum Length*: `3`, *Maximum Length*: `64`, *Pattern*: `^[ -~]{3,64}$` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "consumer_reference": "consumer_reference0"
-}
+```ts
+import { BlikOneClickPaymentObject } from '@paypal/paypal-server-sdk';
+
+const blikOneClickPaymentObject: BlikOneClickPaymentObject = {
+  consumerReference: 'consumer_reference6',
+};
 ```
 

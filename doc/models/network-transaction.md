@@ -16,14 +16,16 @@ Reference values used by the card network to identify a transaction.
 | `network` | [`CardBrand \| undefined`](../../doc/models/card-brand.md) | Optional | The card network or brand. Applies to credit, debit, gift, and payment cards.<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `255`, *Pattern*: `^[A-Z_]+$` |
 | `acquirerReferenceNumber` | `string \| undefined` | Optional | Reference ID issued for the card transaction. This ID can be used to track the transaction across processors, card brands and issuing banks.<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `36`, *Pattern*: `^[a-zA-Z0-9]+$` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": "id0",
-  "date": "date4",
-  "network": "CETELEM",
-  "acquirer_reference_number": "acquirer_reference_number8"
-}
+```ts
+import { CardBrand, NetworkTransaction } from '@paypal/paypal-server-sdk';
+
+const networkTransaction: NetworkTransaction = {
+  id: 'id8',
+  date: 'date4',
+  network: CardBrand.CarteBancaire,
+  acquirerReferenceNumber: 'acquirer_reference_number0',
+};
 ```
 

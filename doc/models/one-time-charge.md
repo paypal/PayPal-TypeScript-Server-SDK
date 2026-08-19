@@ -18,34 +18,36 @@ The one-time charge info at the time of checkout.
 | `subtotal` | [`Money \| undefined`](../../doc/models/money.md) | Optional | The currency and amount for a financial transaction, such as a balance or payment due. |
 | `totalAmount` | [`Money`](../../doc/models/money.md) | Required | The currency and amount for a financial transaction, such as a balance or payment due. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "setup_fee": {
-    "currency_code": "currency_code8",
-    "value": "value4"
+```ts
+import { OneTimeCharge } from '@paypal/paypal-server-sdk';
+
+const oneTimeCharge: OneTimeCharge = {
+  totalAmount: {
+    currencyCode: 'currency_code2',
+    value: 'value8',
   },
-  "shipping_amount": {
-    "currency_code": "currency_code0",
-    "value": "value6"
+  setupFee: {
+    currencyCode: 'currency_code8',
+    value: 'value4',
   },
-  "taxes": {
-    "currency_code": "currency_code6",
-    "value": "value2"
+  shippingAmount: {
+    currencyCode: 'currency_code0',
+    value: 'value6',
   },
-  "product_price": {
-    "currency_code": "currency_code6",
-    "value": "value2"
+  taxes: {
+    currencyCode: 'currency_code6',
+    value: 'value2',
   },
-  "subtotal": {
-    "currency_code": "currency_code2",
-    "value": "value8"
+  productPrice: {
+    currencyCode: 'currency_code6',
+    value: 'value2',
   },
-  "total_amount": {
-    "currency_code": "currency_code2",
-    "value": "value8"
-  }
-}
+  subtotal: {
+    currencyCode: 'currency_code2',
+    value: 'value8',
+  },
+};
 ```
 

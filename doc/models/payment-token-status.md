@@ -17,3 +17,11 @@ The status of the payment token.
 | `Vaulted` | The payment token has been vaulted. |
 | `Tokenized` | A vaulted payment method token has been tokenized for short term (one time) use. |
 
+## Example
+
+```ts
+import { PaymentTokenStatus } from '@paypal/paypal-server-sdk';
+
+const paymentTokenStatus = PaymentTokenStatus.PayerActionRequired;
+```
+

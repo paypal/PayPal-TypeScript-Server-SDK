@@ -14,3 +14,11 @@ The usage type associated with the PayPal payment token.
 | `Merchant` | The PayPal Payment Token will be used for future transaction directly with a merchant. |
 | `Platform` | The PayPal Payment Token will be used for future transaction on a platform. A platform is typically a marketplace or a channel that a payer can purchase goods and services from multiple merchants. |
 
+## Example
+
+```ts
+import { UsageType } from '@paypal/paypal-server-sdk';
+
+const usageType = UsageType.Merchant;
+```
+

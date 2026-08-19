@@ -13,11 +13,13 @@ The activate subscription request details.
 |  --- | --- | --- | --- |
 | `reason` | `string \| undefined` | Optional | The reason for activation of a subscription. Required to reactivate the subscription.<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `128`, *Pattern*: `^.*$` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "reason": "reason4"
-}
+```ts
+import { ActivateSubscriptionRequest } from '@paypal/paypal-server-sdk';
+
+const activateSubscriptionRequest: ActivateSubscriptionRequest = {
+  reason: 'reason6',
+};
 ```
 

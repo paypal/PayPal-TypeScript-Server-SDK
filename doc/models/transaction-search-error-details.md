@@ -17,15 +17,17 @@ The error details. Required for client-side `4XX` errors.
 | `issue` | `string` | Required | The unique, fine-grained application-level error code. |
 | `description` | `string \| undefined` | Optional | The human-readable description for an issue. The description can change over the lifetime of an API, so clients must not depend on this value. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "location": "body",
-  "issue": "issue2",
-  "field": "field0",
-  "value": "value8",
-  "description": "description6"
-}
+```ts
+import { TransactionSearchErrorDetails } from '@paypal/paypal-server-sdk';
+
+const transactionSearchErrorDetails: TransactionSearchErrorDetails = {
+  issue: 'issue8',
+  field: 'field6',
+  value: 'value4',
+  location: 'body',
+  description: 'description2',
+};
 ```
 

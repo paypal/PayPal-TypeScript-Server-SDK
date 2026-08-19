@@ -14,3 +14,11 @@ Merchant preference on how the buyer can navigate back to merchant website post 
 | `Auto` | After payment approval in the PayPal App, buyer will automatically be redirected to the merchant website. |
 | `Manual` | After payment approval in the PayPal App, buyer will be asked to manually navigate back to the merchant website where they started the transaction from. The buyer is shown a message like 'Return to Merchant' to return to the source where the transaction actually started. |
 
+## Example
+
+```ts
+import { MobileReturnFlow } from '@paypal/paypal-server-sdk';
+
+const mobileReturnFlow = MobileReturnFlow.Auto;
+```
+

@@ -14,3 +14,11 @@ The action to take on the subscription if the initial payment for the setup fail
 | `Continue` | Continues the subscription if the initial payment for the setup fails. |
 | `Cancel` | Cancels the subscription if the initial payment for the setup fails. |
 
+## Example
+
+```ts
+import { SetupFeeFailureAction } from '@paypal/paypal-server-sdk';
+
+const setupFeeFailureAction = SetupFeeFailureAction.Continue;
+```
+

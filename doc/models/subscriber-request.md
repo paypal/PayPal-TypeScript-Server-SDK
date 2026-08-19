@@ -18,48 +18,55 @@ The subscriber request information .
 | `paymentSource` | [`SubscriptionPaymentSource \| undefined`](../../doc/models/subscription-payment-source.md) | Optional | The payment source definition. To be eligible to create subscription using debit or credit card, you will need to sign up here (https://www.paypal.com/bizsignup/entry/product/ppcp). Please note, its available only for non-3DS cards and for merchants in US and AU regions. |
 | `phone` | [`PhoneWithType \| undefined`](../../doc/models/phone-with-type.md) | Optional | The phone information. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "email_address": "email_address0",
-  "payer_id": "payer_id0",
-  "name": {
-    "given_name": "given_name2",
-    "surname": "surname8"
+```ts
+import {
+  CardType,
+  FulfillmentType,
+  ShippingType,
+  SubscriberRequest,
+} from '@paypal/paypal-server-sdk';
+
+const subscriberRequest: SubscriberRequest = {
+  emailAddress: 'email_address4',
+  payerId: 'payer_id4',
+  name: {
+    givenName: 'given_name2',
+    surname: 'surname8',
   },
-  "shipping_address": {
-    "name": {
-      "full_name": "full_name6"
+  shippingAddress: {
+    name: {
+      fullName: 'full_name6',
     },
-    "email_address": "email_address8",
-    "phone_number": {
-      "country_code": "country_code2",
-      "national_number": "national_number6"
+    emailAddress: 'email_address8',
+    phoneNumber: {
+      countryCode: 'country_code2',
+      nationalNumber: 'national_number6',
     },
-    "type": "PICKUP_IN_STORE",
-    "options": [
+    type: FulfillmentType.PickupInStore,
+    options: [
       {
-        "id": "id2",
-        "label": "label2",
-        "type": "SHIPPING",
-        "amount": {
-          "currency_code": "currency_code6",
-          "value": "value0"
+        id: 'id2',
+        label: 'label2',
+        selected: false,
+        type: ShippingType.Shipping,
+        amount: {
+          currencyCode: 'currency_code6',
+          value: 'value0',
         },
-        "selected": false
       }
-    ]
+    ],
   },
-  "payment_source": {
-    "card": {
-      "name": "name6",
-      "number": "number6",
-      "expiry": "expiry4",
-      "security_code": "security_code8",
-      "type": "UNKNOWN"
-    }
-  }
-}
+  paymentSource: {
+    card: {
+      name: 'name6',
+      number: 'number6',
+      expiry: 'expiry4',
+      securityCode: 'security_code8',
+      type: CardType.Unknown,
+    },
+  },
+};
 ```
 

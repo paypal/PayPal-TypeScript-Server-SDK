@@ -18,51 +18,37 @@ The shipping details.
 | `options` | [`ShippingOption[] \| undefined`](../../doc/models/shipping-option.md) | Optional | An array of shipping options that the payee or merchant offers to the payer to ship or pick up their items.<br><br>**Constraints**: *Minimum Items*: `0`, *Maximum Items*: `10` |
 | `address` | [`Address \| undefined`](../../doc/models/address.md) | Optional | The portable international postal address. Maps to [AddressValidationMetadata](https://github.com/googlei18n/libaddressinput/wiki/AddressValidationMetadata) and HTML 5.1 [Autofilling form controls: the autocomplete attribute](https://www.w3.org/TR/html51/sec-forms.html#autofilling-form-controls-the-autocomplete-attribute). |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "name": {
-    "full_name": "full_name6"
+```ts
+import {
+  FulfillmentType,
+  ShippingDetails,
+  ShippingType,
+} from '@paypal/paypal-server-sdk';
+
+const shippingDetails: ShippingDetails = {
+  name: {
+    fullName: 'full_name6',
   },
-  "email_address": "email_address2",
-  "phone_number": {
-    "country_code": "country_code2",
-    "national_number": "national_number6"
+  emailAddress: 'email_address2',
+  phoneNumber: {
+    countryCode: 'country_code2',
+    nationalNumber: 'national_number6',
   },
-  "type": "PICKUP_IN_STORE",
-  "options": [
+  type: FulfillmentType.Shipping,
+  options: [
     {
-      "id": "id2",
-      "label": "label2",
-      "type": "SHIPPING",
-      "amount": {
-        "currency_code": "currency_code6",
-        "value": "value0"
+      id: 'id2',
+      label: 'label2',
+      selected: false,
+      type: ShippingType.Shipping,
+      amount: {
+        currencyCode: 'currency_code6',
+        value: 'value0',
       },
-      "selected": false
-    },
-    {
-      "id": "id2",
-      "label": "label2",
-      "type": "SHIPPING",
-      "amount": {
-        "currency_code": "currency_code6",
-        "value": "value0"
-      },
-      "selected": false
-    },
-    {
-      "id": "id2",
-      "label": "label2",
-      "type": "SHIPPING",
-      "amount": {
-        "currency_code": "currency_code6",
-        "value": "value0"
-      },
-      "selected": false
     }
-  ]
-}
+  ],
+};
 ```
 

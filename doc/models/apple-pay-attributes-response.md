@@ -13,28 +13,26 @@ Additional attributes associated with the use of Apple Pay.
 |  --- | --- | --- | --- |
 | `vault` | [`VaultResponse \| undefined`](../../doc/models/vault-response.md) | Optional | The details about a saved payment source. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "vault": {
-    "id": "id6",
-    "status": "APPROVED",
-    "customer": {
-      "id": "id0",
-      "name": {
-        "given_name": "given_name2",
-        "surname": "surname8"
-      }
+```ts
+import {
+  ApplePayAttributesResponse,
+  VaultStatus,
+} from '@paypal/paypal-server-sdk';
+
+const applePayAttributesResponse: ApplePayAttributesResponse = {
+  vault: {
+    id: 'id6',
+    status: VaultStatus.Approved,
+    customer: {
+      id: 'id0',
+      name: {
+        givenName: 'given_name2',
+        surname: 'surname8',
+      },
     },
-    "links": [
-      {
-        "href": "href6",
-        "rel": "rel0",
-        "method": "HEAD"
-      }
-    ]
-  }
-}
+  },
+};
 ```
 

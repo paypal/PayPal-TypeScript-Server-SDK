@@ -21,15 +21,22 @@ Customizes the payer experience during the approval process for the payment with
 | `cancelUrl` | `string \| undefined` | Optional | DEPRECATED. The URL where the customer is redirected after the customer cancels the payment. The fields in `application_context` are now available in the `experience_context` object under the `payment_source` which supports them (eg. `payment_source.paypal.experience_context.cancel_url`). Please specify this field in the `experience_context` object instead of the `application_context` object. |
 | `storedPaymentSource` | [`StoredPaymentSource \| undefined`](../../doc/models/stored-payment-source.md) | Optional | DEPRECATED. Provides additional details to process a payment using a `payment_source` that has been stored or is intended to be stored (also referred to as stored_credential or card-on-file). Parameter compatibility: `payment_type=ONE_TIME` is compatible only with `payment_initiator=CUSTOMER`. `usage=FIRST` is compatible only with `payment_initiator=CUSTOMER`. `previous_transaction_reference` or `previous_network_transaction_reference` is compatible only with `payment_initiator=MERCHANT`. Only one of the parameters - `previous_transaction_reference` and `previous_network_transaction_reference` - can be present in the request. .  The fields in `stored_payment_source` are now available in the `stored_credential` object under the `payment_source` which supports them (eg. `payment_source.card.stored_credential.payment_initiator`). Please specify this field in the `payment_source` object instead of the `application_context` object. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "landing_page": "NO_PREFERENCE",
-  "shipping_preference": "GET_FROM_FILE",
-  "user_action": "CONTINUE",
-  "brand_name": "brand_name2",
-  "locale": "locale6"
-}
+```ts
+import {
+  OrderApplicationContext,
+  OrderApplicationContextLandingPage,
+  OrderApplicationContextShippingPreference,
+  OrderApplicationContextUserAction,
+} from '@paypal/paypal-server-sdk';
+
+const orderApplicationContext: OrderApplicationContext = {
+  brandName: 'brand_name0',
+  locale: 'locale4',
+  landingPage: OrderApplicationContextLandingPage.NoPreference,
+  shippingPreference: OrderApplicationContextShippingPreference.GetFromFile,
+  userAction: OrderApplicationContextUserAction.Continue,
+};
 ```
 
