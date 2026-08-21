@@ -1,5 +1,5 @@
 {
-  "version": "2.4.0",
+  "version": "2.5.0",
   "license": "MIT",
   "sideEffects": false,
   "main": "dist/cjs/index.js",
@@ -39,15 +39,15 @@
     "jest": "^29.4.3",
     "rimraf": "^3.0.2",
     "ts-jest": "29.2.6",
-    "tslib": "^2.5.0",
     "typescript": "^5.2.0"
   },
   "dependencies": {
     "@apimatic/authentication-adapters": "^0.5.14",
     "@apimatic/axios-client-adapter": "^0.3.20",
-    "@apimatic/core": "^0.10.28",
+    "@apimatic/core": "^0.10.30",
     "@apimatic/oauth-adapters": "^0.4.18",
-    "@apimatic/schema": "^0.7.21"
+    "@apimatic/schema": "^0.7.21",
+    "tslib": "^2.5.0"
   },
   "repository": {
     "type": "git",

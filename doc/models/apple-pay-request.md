@@ -21,37 +21,42 @@ Information needed to pay using ApplePay.
 | `attributes` | [`ApplePayAttributes \| undefined`](../../doc/models/apple-pay-attributes.md) | Optional | Additional attributes associated with apple pay. |
 | `experienceContext` | [`ApplePayExperienceContext \| undefined`](../../doc/models/apple-pay-experience-context.md) | Optional | Customizes the payer experience during the approval process for the payment. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": "id6",
-  "name": "name6",
-  "email_address": "email_address4",
-  "phone_number": {
-    "national_number": "national_number6"
+```ts
+import {
+  ApplePayPaymentDataType,
+  ApplePayRequest,
+  CardType,
+} from '@paypal/paypal-server-sdk';
+
+const applePayRequest: ApplePayRequest = {
+  id: 'id0',
+  name: 'name0',
+  emailAddress: 'email_address8',
+  phoneNumber: {
+    nationalNumber: 'national_number6',
   },
-  "decrypted_token": {
-    "transaction_amount": {
-      "currency_code": "currency_code6",
-      "value": "value2"
+  decryptedToken: {
+    tokenizedCard: {
+      name: 'name4',
+      number: 'number2',
+      expiry: 'expiry2',
+      type: CardType.Unknown,
     },
-    "tokenized_card": {
-      "name": "name4",
-      "number": "number2",
-      "expiry": "expiry2",
-      "card_type": "VISA",
-      "type": "UNKNOWN"
+    transactionAmount: {
+      currencyCode: 'currency_code6',
+      value: 'value2',
     },
-    "device_manufacturer_id": "device_manufacturer_id6",
-    "payment_data_type": "3DSECURE",
-    "payment_data": {
-      "cryptogram": "cryptogram6",
-      "eci_indicator": "eci_indicator0",
-      "emv_data": "emv_data0",
-      "pin": "pin4"
-    }
-  }
-}
+    deviceManufacturerId: 'device_manufacturer_id6',
+    paymentDataType: ApplePayPaymentDataType.Enum3Dsecure,
+    paymentData: {
+      cryptogram: 'cryptogram6',
+      eciIndicator: 'eci_indicator0',
+      emvData: 'emv_data0',
+      pin: 'pin4',
+    },
+  },
+};
 ```
 

@@ -18,3 +18,11 @@ The status for the authorized payment.
 | `Voided` | The authorized payment was voided. No more captured payments can be made against this authorized payment. |
 | `Pending` | The created authorization is in pending state. For more information, see status.details. |
 
+## Example
+
+```ts
+import { AuthorizationStatus } from '@paypal/paypal-server-sdk';
+
+const authorizationStatus = AuthorizationStatus.Voided;
+```
+

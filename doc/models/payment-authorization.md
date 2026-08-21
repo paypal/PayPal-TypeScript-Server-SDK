@@ -26,20 +26,22 @@ The authorized payment transaction.
 | `supplementaryData` | [`PaymentSupplementaryData \| undefined`](../../doc/models/payment-supplementary-data.md) | Optional | The supplementary data. |
 | `payee` | [`PayeeBase \| undefined`](../../doc/models/payee-base.md) | Optional | The details for the merchant who receives the funds and fulfills the order. The merchant is also known as the payee. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "status": "VOIDED",
-  "status_details": {
-    "reason": "PENDING_REVIEW"
+```ts
+import {
+  AuthorizationIncompleteReason,
+  PaymentAuthorization,
+} from '@paypal/paypal-server-sdk';
+
+const paymentAuthorization: PaymentAuthorization = {
+  statusDetails: {
+    reason: AuthorizationIncompleteReason.PendingReview,
   },
-  "id": "id0",
-  "amount": {
-    "currency_code": "currency_code6",
-    "value": "value0"
+  amount: {
+    currencyCode: 'currency_code6',
+    value: 'value0',
   },
-  "invoice_id": "invoice_id0"
-}
+};
 ```
 

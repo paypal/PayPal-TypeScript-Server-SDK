@@ -36,3 +36,11 @@ The address verification code for Visa, Discover, Mastercard, or American Expres
 | `Avs3` | For Maestro, the merchant did not provide AVS information. It was not processed. |
 | `Avs4` | For Maestro, the address was not checked or the acquirer had no response. The service is not available. |
 
+## Example
+
+```ts
+import { AvsCode } from '@paypal/paypal-server-sdk';
+
+const avsCode = AvsCode.AvsM;
+```
+

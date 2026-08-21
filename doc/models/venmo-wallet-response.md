@@ -20,21 +20,23 @@ Venmo wallet response.
 | `returnFlow` | [`ReturnFlow \| undefined`](../../doc/models/return-flow.md) | Optional, Read-only | Merchant preference on how the buyer can navigate back to merchant website post approving the transaction on the Venmo App.<br><br>**Default**: `ReturnFlow.Auto`<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `6`, *Pattern*: `^[A-Z_]+$` |
 | `attributes` | [`VenmoWalletAttributesResponse \| undefined`](../../doc/models/venmo-wallet-attributes-response.md) | Optional | Additional attributes associated with the use of a Venmo Wallet. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "return_flow": "AUTO",
-  "email_address": "email_address6",
-  "account_id": "account_id8",
-  "user_name": "user_name2",
-  "name": {
-    "given_name": "given_name2",
-    "surname": "surname8"
+```ts
+import { ReturnFlow, VenmoWalletResponse } from '@paypal/paypal-server-sdk';
+
+const venmoWalletResponse: VenmoWalletResponse = {
+  emailAddress: 'email_address0',
+  accountId: 'account_id4',
+  userName: 'user_name8',
+  name: {
+    givenName: 'given_name2',
+    surname: 'surname8',
   },
-  "phone_number": {
-    "national_number": "national_number6"
-  }
-}
+  phoneNumber: {
+    nationalNumber: 'national_number6',
+  },
+  returnFlow: ReturnFlow.Auto,
+};
 ```
 

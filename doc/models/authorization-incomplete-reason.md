@@ -14,3 +14,11 @@ The reason why the authorized status is `PENDING`.
 | `PendingReview` | Authorization is pending manual review. |
 | `DeclinedByRiskFraudFilters` | Risk Filter set by the payee failed for the transaction. |
 
+## Example
+
+```ts
+import { AuthorizationIncompleteReason } from '@paypal/paypal-server-sdk';
+
+const authorizationIncompleteReason = AuthorizationIncompleteReason.PendingReview;
+```
+

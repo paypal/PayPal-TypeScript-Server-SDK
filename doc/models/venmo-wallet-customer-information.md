@@ -16,22 +16,27 @@ The details about a customer in PayPal's system of record.
 | `phone` | [`PhoneWithType \| undefined`](../../doc/models/phone-with-type.md) | Optional | The phone information. |
 | `name` | [`Name \| undefined`](../../doc/models/name.md) | Optional | The name of the party. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": "id4",
-  "email_address": "email_address2",
-  "phone": {
-    "phone_type": "OTHER",
-    "phone_number": {
-      "national_number": "national_number6"
-    }
+```ts
+import {
+  PhoneType,
+  VenmoWalletCustomerInformation,
+} from '@paypal/paypal-server-sdk';
+
+const venmoWalletCustomerInformation: VenmoWalletCustomerInformation = {
+  id: 'id0',
+  emailAddress: 'email_address8',
+  phone: {
+    phoneNumber: {
+      nationalNumber: 'national_number6',
+    },
+    phoneType: PhoneType.Other,
   },
-  "name": {
-    "given_name": "given_name2",
-    "surname": "surname8"
-  }
-}
+  name: {
+    givenName: 'given_name2',
+    surname: 'surname8',
+  },
+};
 ```
 

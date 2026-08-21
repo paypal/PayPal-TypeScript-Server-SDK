@@ -13,11 +13,16 @@ The details of the refund status.
 |  --- | --- | --- | --- |
 | `reason` | [`RefundIncompleteReason \| undefined`](../../doc/models/refund-incomplete-reason.md) | Optional | The reason why the refund has the `PENDING` or `FAILED` status. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "reason": "ECHECK"
-}
+```ts
+import {
+  RefundIncompleteReason,
+  RefundStatusDetails,
+} from '@paypal/paypal-server-sdk';
+
+const refundStatusDetails: RefundStatusDetails = {
+  reason: RefundIncompleteReason.Echeck,
+};
 ```
 

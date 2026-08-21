@@ -21,78 +21,86 @@ The create plan request details.
 | `taxes` | [`Taxes \| undefined`](../../doc/models/taxes.md) | Optional | The tax details. |
 | `quantitySupported` | `boolean \| undefined` | Optional | Indicates whether you can subscribe to this plan by providing a quantity for the goods or service.<br><br>**Default**: `false` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "product_id": "product_id2",
-  "name": "name2",
-  "status": "ACTIVE",
-  "billing_cycles": [
+```ts
+import {
+  IntervalUnit,
+  PlanRequest,
+  PlanRequestStatus,
+  SetupFeeFailureAction,
+  SubscriptionPricingModel,
+  TenureType,
+} from '@paypal/paypal-server-sdk';
+
+const planRequest: PlanRequest = {
+  productId: 'product_id4',
+  name: 'name0',
+  billingCycles: [
     {
-      "frequency": {
-        "interval_unit": "DAY",
-        "interval_count": 1
+      frequency: {
+        intervalUnit: IntervalUnit.Day,
+        intervalCount: 1,
       },
-      "tenure_type": "REGULAR",
-      "sequence": 8,
-      "total_cycles": 1,
-      "pricing_scheme": {
-        "version": 10,
-        "fixed_price": {
-          "currency_code": "currency_code4",
-          "value": "value0"
+      tenureType: TenureType.Regular,
+      sequence: 8,
+      pricingScheme: {
+        fixedPrice: {
+          currencyCode: 'currency_code4',
+          value: 'value0',
         },
-        "pricing_model": "VOLUME",
-        "tiers": [
+        pricingModel: SubscriptionPricingModel.Volume,
+        tiers: [
           {
-            "starting_quantity": "starting_quantity8",
-            "ending_quantity": "ending_quantity6",
-            "amount": {
-              "currency_code": "currency_code6",
-              "value": "value0"
-            }
+            startingQuantity: 'starting_quantity8',
+            amount: {
+              currencyCode: 'currency_code6',
+              value: 'value0',
+            },
+            endingQuantity: 'ending_quantity6',
           },
           {
-            "starting_quantity": "starting_quantity8",
-            "ending_quantity": "ending_quantity6",
-            "amount": {
-              "currency_code": "currency_code6",
-              "value": "value0"
-            }
+            startingQuantity: 'starting_quantity8',
+            amount: {
+              currencyCode: 'currency_code6',
+              value: 'value0',
+            },
+            endingQuantity: 'ending_quantity6',
           },
           {
-            "starting_quantity": "starting_quantity8",
-            "ending_quantity": "ending_quantity6",
-            "amount": {
-              "currency_code": "currency_code6",
-              "value": "value0"
-            }
+            startingQuantity: 'starting_quantity8',
+            amount: {
+              currencyCode: 'currency_code6',
+              value: 'value0',
+            },
+            endingQuantity: 'ending_quantity6',
           }
         ],
-        "create_time": "create_time4"
-      }
+        createTime: 'create_time4',
+      },
+      totalCycles: 1,
     }
   ],
-  "payment_preferences": {
-    "auto_bill_outstanding": true,
-    "setup_fee_failure_action": "CANCEL",
-    "payment_failure_threshold": 0,
-    "setup_fee": {
-      "currency_code": "currency_code8",
-      "value": "value4"
-    }
+  paymentPreferences: {
+    autoBillOutstanding: true,
+    setupFee: {
+      currencyCode: 'currency_code8',
+      value: 'value4',
+    },
+    setupFeeFailureAction: SetupFeeFailureAction.Cancel,
+    paymentFailureThreshold: 0,
   },
-  "quantity_supported": false,
-  "description": "description8",
-  "merchant_preferences": {
-    "return_url": "return_url4",
-    "cancel_url": "cancel_url6"
+  status: PlanRequestStatus.Active,
+  description: 'description0',
+  merchantPreferences: {
+    returnUrl: 'return_url4',
+    cancelUrl: 'cancel_url6',
   },
-  "taxes": {
-    "percentage": "percentage8",
-    "inclusive": false
-  }
-}
+  taxes: {
+    percentage: 'percentage8',
+    inclusive: false,
+  },
+  quantitySupported: false,
+};
 ```
 

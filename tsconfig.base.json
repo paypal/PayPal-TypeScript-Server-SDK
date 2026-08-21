@@ -1,6 +1,7 @@
 {
   "include": ["src", "types"],
   "compilerOptions": {
+    "skipLibCheck": true,
     "importHelpers": true,
     "declaration": true,
     "declarationMap": true,

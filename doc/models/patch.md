@@ -16,17 +16,16 @@ The JSON patch object to apply partial updates to resources.
 | `value` | `unknown \| undefined` | Optional | The value to apply. The remove, copy, and move operations do not require a value. Since JSON Patch allows any type for value, the type property is not specified. |
 | `from` | `string \| undefined` | Optional | The JSON Pointer to the target document location from which to move the value. Required for the move operation. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "op": "add",
-  "path": "path6",
-  "value": {
-    "key1": "val1",
-    "key2": "val2"
-  },
-  "from": "from0"
-}
+```ts
+import { Patch, PatchOp } from '@paypal/paypal-server-sdk';
+
+const patch: Patch = {
+  op: PatchOp.Copy,
+  path: 'path4',
+  value: { 'key1': 'val1', 'key2': 'val2' },
+  from: 'from2',
+};
 ```
 

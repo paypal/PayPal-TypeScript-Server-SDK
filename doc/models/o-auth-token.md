@@ -19,17 +19,19 @@ OAuth 2 Authorization endpoint response
 | `refreshToken` | `string \| undefined` | Optional | Refresh token<br>Used to get a new access token when it expires. |
 | `idToken` | `string \| undefined` | Optional | An ID token response type is of JSON Web Token (JWT) that contains claims about the identity of the authenticated user. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "access_token": "access_token4",
-  "token_type": "token_type6",
-  "expires_in": 74,
-  "scope": "scope6",
-  "expiry": 88,
-  "refresh_token": "refresh_token6",
-  "id_token": "id_token6"
-}
+```ts
+import { OAuthToken } from '@paypal/paypal-server-sdk';
+
+const oAuthToken: OAuthToken = {
+  accessToken: 'access_token2',
+  tokenType: 'token_type2',
+  expiresIn: BigInt(84),
+  scope: 'scope8',
+  expiry: BigInt(78),
+  refreshToken: 'refresh_token4',
+  idToken: 'id_token8',
+};
 ```
 

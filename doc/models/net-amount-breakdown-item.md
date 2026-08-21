@@ -15,23 +15,20 @@ The net amount. Returned when the currency of the refund is different from the c
 | `convertedAmount` | [`Money \| undefined`](../../doc/models/money.md) | Optional | The currency and amount for a financial transaction, such as a balance or payment due. |
 | `exchangeRate` | [`ExchangeRate \| undefined`](../../doc/models/exchange-rate.md) | Optional, Read-only | The exchange rate that determines the amount to convert from one currency to another currency. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "payable_amount": {
-    "currency_code": "currency_code8",
-    "value": "value4"
+```ts
+import { NetAmountBreakdownItem } from '@paypal/paypal-server-sdk';
+
+const netAmountBreakdownItem: NetAmountBreakdownItem = {
+  payableAmount: {
+    currencyCode: 'currency_code8',
+    value: 'value4',
   },
-  "converted_amount": {
-    "currency_code": "currency_code0",
-    "value": "value6"
+  convertedAmount: {
+    currencyCode: 'currency_code0',
+    value: 'value6',
   },
-  "exchange_rate": {
-    "source_currency": "source_currency4",
-    "target_currency": "target_currency6",
-    "value": "value6"
-  }
-}
+};
 ```
 

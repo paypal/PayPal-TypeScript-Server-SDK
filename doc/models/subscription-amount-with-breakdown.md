@@ -18,34 +18,36 @@ The breakdown details for the amount. Includes the gross, tax, fee, and shipping
 | `taxAmount` | [`Money \| undefined`](../../doc/models/money.md) | Optional | The currency and amount for a financial transaction, such as a balance or payment due. |
 | `netAmount` | [`Money \| undefined`](../../doc/models/money.md) | Optional | The currency and amount for a financial transaction, such as a balance or payment due. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "gross_amount": {
-    "currency_code": "currency_code4",
-    "value": "value0"
+```ts
+import { SubscriptionAmountWithBreakdown } from '@paypal/paypal-server-sdk';
+
+const subscriptionAmountWithBreakdown: SubscriptionAmountWithBreakdown = {
+  grossAmount: {
+    currencyCode: 'currency_code4',
+    value: 'value0',
   },
-  "total_item_amount": {
-    "currency_code": "currency_code8",
-    "value": "value4"
+  totalItemAmount: {
+    currencyCode: 'currency_code8',
+    value: 'value4',
   },
-  "fee_amount": {
-    "currency_code": "currency_code2",
-    "value": "value4"
+  feeAmount: {
+    currencyCode: 'currency_code2',
+    value: 'value4',
   },
-  "shipping_amount": {
-    "currency_code": "currency_code0",
-    "value": "value6"
+  shippingAmount: {
+    currencyCode: 'currency_code0',
+    value: 'value6',
   },
-  "tax_amount": {
-    "currency_code": "currency_code2",
-    "value": "value8"
+  taxAmount: {
+    currencyCode: 'currency_code2',
+    value: 'value8',
   },
-  "net_amount": {
-    "currency_code": "currency_code6",
-    "value": "value2"
-  }
-}
+  netAmount: {
+    currencyCode: 'currency_code6',
+    value: 'value2',
+  },
+};
 ```
 

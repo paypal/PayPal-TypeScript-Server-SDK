@@ -23,80 +23,85 @@ The purchase unit request. Includes required information for the payment contrac
 | `shipping` | [`ShippingDetails \| undefined`](../../doc/models/shipping-details.md) | Optional | The shipping details. |
 | `supplementaryData` | [`SupplementaryData \| undefined`](../../doc/models/supplementary-data.md) | Optional | Supplementary data about a payment. This object passes information that can be used to improve risk assessments and processing costs, for example, by providing Level 2 and Level 3 payment data. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "reference_id": "reference_id6",
-  "amount": {
-    "currency_code": "currency_code6",
-    "value": "value0",
-    "breakdown": {
-      "item_total": {
-        "currency_code": "currency_code0",
-        "value": "value6"
+```ts
+import {
+  DisbursementMode,
+  PurchaseUnitRequest,
+} from '@paypal/paypal-server-sdk';
+
+const purchaseUnitRequest: PurchaseUnitRequest = {
+  amount: {
+    currencyCode: 'currency_code6',
+    value: 'value0',
+    breakdown: {
+      itemTotal: {
+        currencyCode: 'currency_code0',
+        value: 'value6',
       },
-      "shipping": {
-        "currency_code": "currency_code0",
-        "value": "value6"
+      shipping: {
+        currencyCode: 'currency_code0',
+        value: 'value6',
       },
-      "handling": {
-        "currency_code": "currency_code2",
-        "value": "value8"
+      handling: {
+        currencyCode: 'currency_code2',
+        value: 'value8',
       },
-      "tax_total": {
-        "currency_code": "currency_code4",
-        "value": "value0"
+      taxTotal: {
+        currencyCode: 'currency_code4',
+        value: 'value0',
       },
-      "insurance": {
-        "currency_code": "currency_code2",
-        "value": "value8"
-      }
-    }
+      insurance: {
+        currencyCode: 'currency_code2',
+        value: 'value8',
+      },
+    },
   },
-  "payee": {
-    "email_address": "email_address4",
-    "merchant_id": "merchant_id6"
+  referenceId: 'reference_id8',
+  payee: {
+    emailAddress: 'email_address4',
+    merchantId: 'merchant_id6',
   },
-  "payment_instruction": {
-    "platform_fees": [
+  paymentInstruction: {
+    platformFees: [
       {
-        "amount": {
-          "currency_code": "currency_code6",
-          "value": "value0"
+        amount: {
+          currencyCode: 'currency_code6',
+          value: 'value0',
         },
-        "payee": {
-          "email_address": "email_address4",
-          "merchant_id": "merchant_id6"
-        }
+        payee: {
+          emailAddress: 'email_address4',
+          merchantId: 'merchant_id6',
+        },
       },
       {
-        "amount": {
-          "currency_code": "currency_code6",
-          "value": "value0"
+        amount: {
+          currencyCode: 'currency_code6',
+          value: 'value0',
         },
-        "payee": {
-          "email_address": "email_address4",
-          "merchant_id": "merchant_id6"
-        }
+        payee: {
+          emailAddress: 'email_address4',
+          merchantId: 'merchant_id6',
+        },
       },
       {
-        "amount": {
-          "currency_code": "currency_code6",
-          "value": "value0"
+        amount: {
+          currencyCode: 'currency_code6',
+          value: 'value0',
         },
-        "payee": {
-          "email_address": "email_address4",
-          "merchant_id": "merchant_id6"
-        }
+        payee: {
+          emailAddress: 'email_address4',
+          merchantId: 'merchant_id6',
+        },
       }
     ],
-    "disbursement_mode": "INSTANT",
-    "payee_pricing_tier_id": "payee_pricing_tier_id2",
-    "payee_receivable_fx_rate_id": "payee_receivable_fx_rate_id0"
+    disbursementMode: DisbursementMode.Instant,
+    payeePricingTierId: 'payee_pricing_tier_id2',
+    payeeReceivableFxRateId: 'payee_receivable_fx_rate_id0',
   },
-  "description": "description6",
-  "custom_id": "custom_id4"
-}
+  description: 'description0',
+  customId: 'custom_id8',
+};
 ```
 

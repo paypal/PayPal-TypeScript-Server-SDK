@@ -23,24 +23,26 @@ The details for the items to be purchased.
 | `upc` | [`UniversalProductCode \| undefined`](../../doc/models/universal-product-code.md) | Optional | The Universal Product Code of the item. |
 | `billingPlan` | [`OrderBillingPlan \| undefined`](../../doc/models/order-billing-plan.md) | Optional | Metadata for merchant-managed recurring billing plans. Valid only during the saved payment method token or billing agreement creation. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "name": "name2",
-  "unit_amount": {
-    "currency_code": "currency_code2",
-    "value": "value8"
+```ts
+import { Item, ItemCategory } from '@paypal/paypal-server-sdk';
+
+const item: Item = {
+  name: 'name2',
+  unitAmount: {
+    currencyCode: 'currency_code2',
+    value: 'value8',
   },
-  "tax": {
-    "currency_code": "currency_code0",
-    "value": "value6"
+  quantity: 'quantity8',
+  tax: {
+    currencyCode: 'currency_code0',
+    value: 'value6',
   },
-  "quantity": "quantity8",
-  "description": "description2",
-  "sku": "sku8",
-  "url": "url6",
-  "category": "DIGITAL_GOODS"
-}
+  description: 'description2',
+  sku: 'sku8',
+  url: 'url6',
+  category: ItemCategory.Donation,
+};
 ```
 

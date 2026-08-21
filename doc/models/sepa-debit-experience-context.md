@@ -15,13 +15,15 @@ Customizes the payer experience during the approval process for the SEPA Debit p
 | `returnUrl` | `string` | Required | Describes the URL. |
 | `cancelUrl` | `string` | Required | Describes the URL. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "locale": "locale8",
-  "return_url": "return_url6",
-  "cancel_url": "cancel_url8"
-}
+```ts
+import { SepaDebitExperienceContext } from '@paypal/paypal-server-sdk';
+
+const sepaDebitExperienceContext: SepaDebitExperienceContext = {
+  returnUrl: 'return_url4',
+  cancelUrl: 'cancel_url6',
+  locale: 'locale6',
+};
 ```
 

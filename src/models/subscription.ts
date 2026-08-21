@@ -21,6 +21,10 @@ import {
   SubscriptionBillingInformation,
   subscriptionBillingInformationSchema,
 } from './subscriptionBillingInformation.js';
+import {
+  SubscriptionStatus,
+  subscriptionStatusSchema,
+} from './subscriptionStatus.js';
 
 /** The subscription details. */
 export interface Subscription {
@@ -50,6 +54,12 @@ export interface Subscription {
   plan?: PlanDetails;
   /** An array of request-related [HATEOAS links](/docs/api/reference/api-responses/#hateoas-links). */
   links?: LinkDescription[];
+  /** The status of the subscription. */
+  status?: SubscriptionStatus;
+  /** The reason or notes for the status of the subscription. */
+  statusChangeNote?: string;
+  /** The date and time, in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6). Seconds are required while fractional seconds are optional. Note: The regular expression provides guidance but does not reject all invalid dates. */
+  statusUpdateTime?: string;
 }
 
 export const subscriptionSchema: Schema<Subscription> = lazy(() =>
@@ -70,5 +80,8 @@ export const subscriptionSchema: Schema<Subscription> = lazy(() =>
     planOverridden: ['plan_overridden', optional(boolean())],
     plan: ['plan', optional(planDetailsSchema)],
     links: ['links', optional(array(linkDescriptionSchema))],
+    status: ['status', optional(subscriptionStatusSchema)],
+    statusChangeNote: ['status_change_note', optional(string())],
+    statusUpdateTime: ['status_update_time', optional(string())],
   })
 );

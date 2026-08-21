@@ -16,43 +16,32 @@ The details about a saved venmo payment source.
 | `links` | [`LinkDescription[] \| undefined`](../../doc/models/link-description.md) | Optional, Read-only | An array of request-related HATEOAS links.<br><br>**Constraints**: *Minimum Items*: `1`, *Maximum Items*: `10` |
 | `customer` | [`CustomerInformation \| undefined`](../../doc/models/customer-information.md) | Optional | This object represents a merchant’s customer, allowing them to store contact details, and track all payments associated with the same customer. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": "id2",
-  "status": "CREATED",
-  "links": [
-    {
-      "href": "href6",
-      "rel": "rel0",
-      "method": "HEAD"
+```ts
+import {
+  PhoneType,
+  VenmoVaultResponse,
+  VenmoVaultResponseStatus,
+} from '@paypal/paypal-server-sdk';
+
+const venmoVaultResponse: VenmoVaultResponse = {
+  id: 'id4',
+  status: VenmoVaultResponseStatus.Approved,
+  customer: {
+    id: 'id0',
+    emailAddress: 'email_address2',
+    phone: {
+      phoneNumber: {
+        nationalNumber: 'national_number6',
+      },
+      phoneType: PhoneType.Other,
     },
-    {
-      "href": "href6",
-      "rel": "rel0",
-      "method": "HEAD"
+    name: {
+      givenName: 'given_name2',
+      surname: 'surname8',
     },
-    {
-      "href": "href6",
-      "rel": "rel0",
-      "method": "HEAD"
-    }
-  ],
-  "customer": {
-    "id": "id0",
-    "email_address": "email_address2",
-    "phone": {
-      "phone_type": "OTHER",
-      "phone_number": {
-        "national_number": "national_number6"
-      }
-    },
-    "name": {
-      "given_name": "given_name2",
-      "surname": "surname8"
-    }
-  }
-}
+  },
+};
 ```
 

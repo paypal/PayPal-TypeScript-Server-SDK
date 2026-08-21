@@ -20,3 +20,11 @@ The HTTP method required to make the related call.
 | `Options` | The HTTP OPTIONS method. |
 | `Patch` | The HTTP PATCH method. |
 
+## Example
+
+```ts
+import { LinkHttpMethod } from '@paypal/paypal-server-sdk';
+
+const linkHttpMethod = LinkHttpMethod.Head;
+```
+

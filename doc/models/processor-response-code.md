@@ -166,3 +166,11 @@ Processor response code for the non-PayPal payment processor errors.
 | `ResponsePpve` | VALIDATION_ERROR. |
 | `ResponsePpvt` | VIRTUAL_TERMINAL_UNSUPPORTED. |
 
+## Example
+
+```ts
+import { ProcessorResponseCode } from '@paypal/paypal-server-sdk';
+
+const processorResponseCode = ProcessorResponseCode.ResponsePpd3;
+```
+

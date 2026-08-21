@@ -18,16 +18,24 @@ Resource consolidating common request and response attirbutes for vaulting Venmo
 | `customerType` | [`VenmoPaymentTokenCustomerType \| undefined`](../../doc/models/venmo-payment-token-customer-type.md) | Optional | The customer type associated with the Venmo payment token. This is to indicate whether the customer acting on the merchant / platform is either a business or a consumer.<br><br>**Default**: `VenmoPaymentTokenCustomerType.Consumer`<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `255`, *Pattern*: `^[0-9A-Z_]+$` |
 | `permitMultiplePaymentTokens` | `boolean \| undefined` | Optional | Create multiple payment tokens for the same payer, merchant/platform combination. Use this when the customer has not logged in at merchant/platform. The payment token thus generated, can then also be used to create the customer account at merchant/platform. Use this also when multiple payment tokens are required for the same payer, different customer at merchant/platform. This helps to identify customers distinctly even though they may share the same Venmo account.<br><br>**Default**: `false` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "store_in_vault": "ON_SUCCESS",
-  "usage_type": "MERCHANT",
-  "customer_type": "CONSUMER",
-  "permit_multiple_payment_tokens": false,
-  "description": "description6",
-  "usage_pattern": "RECURRING_PREPAID"
-}
+```ts
+import {
+  StoreInVaultInstruction,
+  VenmoPaymentTokenCustomerType,
+  VenmoPaymentTokenUsagePattern,
+  VenmoPaymentTokenUsageType,
+  VenmoWalletVaultAttributes,
+} from '@paypal/paypal-server-sdk';
+
+const venmoWalletVaultAttributes: VenmoWalletVaultAttributes = {
+  storeInVault: StoreInVaultInstruction.OnSuccess,
+  usageType: VenmoPaymentTokenUsageType.Merchant,
+  description: 'description8',
+  usagePattern: VenmoPaymentTokenUsagePattern.RecurringPrepaid,
+  customerType: VenmoPaymentTokenCustomerType.Consumer,
+  permitMultiplePaymentTokens: false,
+};
 ```
 

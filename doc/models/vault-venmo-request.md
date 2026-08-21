@@ -19,33 +19,40 @@ A resource representing a request to vault Venmo.
 | `customerType` | [`PaypalPaymentTokenCustomerType \| undefined`](../../doc/models/paypal-payment-token-customer-type.md) | Optional | The customer type associated with a digital wallet payment token. This is to indicate whether the customer acting on the merchant / platform is either a business or a consumer.<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `255`, *Pattern*: `^[0-9A-Z_]+$` |
 | `experienceContext` | [`VenmoExperienceContext \| undefined`](../../doc/models/venmo-experience-context.md) | Optional | A resource representing an experience context of vault a venmo account. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "permit_multiple_payment_tokens": false,
-  "description": "description0",
-  "usage_pattern": "UNSCHEDULED_PREPAID",
-  "shipping": {
-    "name": {
-      "full_name": "full_name6"
+```ts
+import {
+  FulfillmentType,
+  PaypalPaymentTokenUsageType,
+  UsagePattern,
+  VaultVenmoRequest,
+} from '@paypal/paypal-server-sdk';
+
+const vaultVenmoRequest: VaultVenmoRequest = {
+  description: 'description2',
+  usagePattern: UsagePattern.UnscheduledPrepaid,
+  shipping: {
+    name: {
+      fullName: 'full_name6',
     },
-    "email_address": "email_address2",
-    "phone_number": {
-      "country_code": "country_code2",
-      "national_number": "national_number6"
+    emailAddress: 'email_address2',
+    phoneNumber: {
+      countryCode: 'country_code2',
+      nationalNumber: 'national_number6',
     },
-    "type": "SHIPPING",
-    "address": {
-      "address_line_1": "address_line_16",
-      "address_line_2": "address_line_26",
-      "admin_area_2": "admin_area_20",
-      "admin_area_1": "admin_area_12",
-      "postal_code": "postal_code8",
-      "country_code": "country_code6"
-    }
+    type: FulfillmentType.Shipping,
+    address: {
+      countryCode: 'country_code6',
+      addressLine1: 'address_line_16',
+      addressLine2: 'address_line_26',
+      adminArea2: 'admin_area_20',
+      adminArea1: 'admin_area_12',
+      postalCode: 'postal_code8',
+    },
   },
-  "usage_type": "MERCHANT"
-}
+  permitMultiplePaymentTokens: false,
+  usageType: PaypalPaymentTokenUsageType.Merchant,
+};
 ```
 

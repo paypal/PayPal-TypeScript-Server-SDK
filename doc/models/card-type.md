@@ -17,3 +17,11 @@ Type of card. i.e Credit, Debit and so on.
 | `Store` | A store card. |
 | `Unknown` | Card type cannot be determined. |
 
+## Example
+
+```ts
+import { CardType } from '@paypal/paypal-server-sdk';
+
+const cardType = CardType.Unknown;
+```
+

@@ -15,13 +15,19 @@ Results of 3D Secure Authentication.
 | `enrollmentStatus` | [`EnrollmentStatus \| undefined`](../../doc/models/enrollment-status.md) | Optional | Status of Authentication eligibility.<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `255`, *Pattern*: `^[0-9A-Z_]+$` |
 | `authenticationId` | `string \| undefined` | Optional | The externally received 3ds authentication id, to be returned in card detokenization response.<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `255`, *Pattern*: `^[0-9a-zA-Z_-]+$` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "authentication_status": "D",
-  "enrollment_status": "U",
-  "authentication_id": "authentication_id2"
-}
+```ts
+import {
+  EnrollmentStatus,
+  PaResStatus,
+  ThreeDSecureCardAuthenticationResponse,
+} from '@paypal/paypal-server-sdk';
+
+const threeDSecureCardAuthenticationResponse: ThreeDSecureCardAuthenticationResponse = {
+  authenticationStatus: PaResStatus.UnableToCompleteAuthentication,
+  enrollmentStatus: EnrollmentStatus.Unavailable,
+  authenticationId: 'authentication_id4',
+};
 ```
 

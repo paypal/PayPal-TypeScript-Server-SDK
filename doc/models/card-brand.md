@@ -42,3 +42,11 @@ The card network or brand. Applies to credit, debit, gift, and payment cards.
 | `Accel` | The Accel payment network. |
 | `Unknown` | UNKNOWN payment network. |
 
+## Example
+
+```ts
+import { CardBrand } from '@paypal/paypal-server-sdk';
+
+const cardBrand = CardBrand.Discover;
+```
+

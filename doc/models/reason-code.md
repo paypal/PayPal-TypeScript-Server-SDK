@@ -20,3 +20,11 @@ The reason code for the payment failure.
 | `TransactionReceivingLimitExceeded` | The transaction exceeds the receiver's receiving limit. |
 | `CurrencyMismatch` | The transaction is declined due to a currency mismatch. |
 
+## Example
+
+```ts
+import { ReasonCode } from '@paypal/paypal-server-sdk';
+
+const reasonCode = ReasonCode.TransactionReceivingLimitExceeded;
+```
+

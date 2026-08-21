@@ -17,15 +17,17 @@ Information used to pay Bancontact.
 | `ibanLastChars` | `string \| undefined` | Optional | The last characters of the IBAN used to pay.<br><br>**Constraints**: *Minimum Length*: `4`, *Maximum Length*: `34`, *Pattern*: `[a-zA-Z0-9]{4}` |
 | `cardLastDigits` | `string \| undefined` | Optional | The last digits of the card used to fund the Bancontact payment.<br><br>**Constraints**: *Minimum Length*: `4`, *Maximum Length*: `4`, *Pattern*: `[0-9]{4}` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "name": "name6",
-  "country_code": "country_code6",
-  "bic": "bic8",
-  "iban_last_chars": "iban_last_chars4",
-  "card_last_digits": "card_last_digits0"
-}
+```ts
+import { BancontactPaymentObject } from '@paypal/paypal-server-sdk';
+
+const bancontactPaymentObject: BancontactPaymentObject = {
+  name: 'name6',
+  countryCode: 'country_code6',
+  bic: 'bic8',
+  ibanLastChars: 'iban_last_chars4',
+  cardLastDigits: 'card_last_digits0',
+};
 ```
 

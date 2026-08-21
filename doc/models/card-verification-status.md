@@ -14,3 +14,11 @@ Verification status of Card.
 | `Verified` | Card has been verified |
 | `Failed` | Card verification has failed |
 
+## Example
+
+```ts
+import { CardVerificationStatus } from '@paypal/paypal-server-sdk';
+
+const cardVerificationStatus = CardVerificationStatus.Verified;
+```
+

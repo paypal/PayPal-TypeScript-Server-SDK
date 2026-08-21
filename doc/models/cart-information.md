@@ -15,21 +15,23 @@ The cart information.
 | `taxInclusive` | `boolean \| undefined` | Optional | Indicates whether the item amount or the shipping amount already includes tax.<br><br>**Default**: `false` |
 | `paypalInvoiceId` | `string \| undefined` | Optional | The ID of the invoice. Appears for only PayPal-generated invoices.<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `127`, *Pattern*: `^[a-zA-Z0-9_'\-., ":;\!?]*$` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "tax_inclusive": false,
-  "item_details": [
+```ts
+import { CartInformation } from '@paypal/paypal-server-sdk';
+
+const cartInformation: CartInformation = {
+  itemDetails: [
     {
-      "item_code": "item_code0",
-      "item_name": "item_name8",
-      "item_description": "item_description4",
-      "item_options": "item_options2",
-      "item_quantity": "item_quantity2"
+      itemCode: 'item_code0',
+      itemName: 'item_name8',
+      itemDescription: 'item_description4',
+      itemOptions: 'item_options2',
+      itemQuantity: 'item_quantity2',
     }
   ],
-  "paypal_invoice_id": "paypal_invoice_id2"
-}
+  taxInclusive: false,
+  paypalInvoiceId: 'paypal_invoice_id4',
+};
 ```
 

@@ -15,3 +15,11 @@ The item category type.
 | `PhysicalGoods` | A tangible item that can be shipped with proof of delivery. |
 | `Donation` | A contribution or gift for which no good or service is exchanged, usually to a not for profit organization. |
 
+## Example
+
+```ts
+import { ItemCategory } from '@paypal/paypal-server-sdk';
+
+const itemCategory = ItemCategory.PhysicalGoods;
+```
+

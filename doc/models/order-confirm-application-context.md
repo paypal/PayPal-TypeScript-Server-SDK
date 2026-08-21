@@ -17,25 +17,33 @@ Customizes the payer confirmation experience.
 | `cancelUrl` | `string \| undefined` | Optional | The URL where the customer is redirected after the customer cancels the payment.<br><br>**Constraints**: *Minimum Length*: `10`, *Maximum Length*: `4000` |
 | `storedPaymentSource` | [`StoredPaymentSource \| undefined`](../../doc/models/stored-payment-source.md) | Optional | Provides additional details to process a payment using a `payment_source` that has been stored or is intended to be stored (also referred to as stored_credential or card-on-file). Parameter compatibility: `payment_type=ONE_TIME` is compatible only with `payment_initiator=CUSTOMER`. `usage=FIRST` is compatible only with `payment_initiator=CUSTOMER`. `previous_transaction_reference` or `previous_network_transaction_reference` is compatible only with `payment_initiator=MERCHANT`. Only one of the parameters - `previous_transaction_reference` and `previous_network_transaction_reference` - can be present in the request. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "brand_name": "brand_name6",
-  "locale": "locale0",
-  "return_url": "return_url8",
-  "cancel_url": "cancel_url0",
-  "stored_payment_source": {
-    "payment_initiator": "CUSTOMER",
-    "payment_type": "RECURRING",
-    "usage": "FIRST",
-    "previous_network_transaction_reference": {
-      "id": "id6",
-      "date": "date2",
-      "network": "CONFIDIS",
-      "acquirer_reference_number": "acquirer_reference_number8"
-    }
-  }
-}
+```ts
+import {
+  CardBrand,
+  OrderConfirmApplicationContext,
+  PaymentInitiator,
+  StoredPaymentSourcePaymentType,
+  StoredPaymentSourceUsageType,
+} from '@paypal/paypal-server-sdk';
+
+const orderConfirmApplicationContext: OrderConfirmApplicationContext = {
+  brandName: 'brand_name4',
+  locale: 'locale8',
+  returnUrl: 'return_url6',
+  cancelUrl: 'cancel_url8',
+  storedPaymentSource: {
+    paymentInitiator: PaymentInitiator.Customer,
+    paymentType: StoredPaymentSourcePaymentType.Recurring,
+    usage: StoredPaymentSourceUsageType.First,
+    previousNetworkTransactionReference: {
+      id: 'id6',
+      date: 'date2',
+      network: CardBrand.Confidis,
+      acquirerReferenceNumber: 'acquirer_reference_number8',
+    },
+  },
+};
 ```
 

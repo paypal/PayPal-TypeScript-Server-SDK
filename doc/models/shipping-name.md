@@ -13,11 +13,13 @@ The name of the party.
 |  --- | --- | --- | --- |
 | `fullName` | `string \| undefined` | Optional | When the party is a person, the party's full name.<br><br>**Constraints**: *Maximum Length*: `300` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "full_name": "full_name6"
-}
+```ts
+import { ShippingName } from '@paypal/paypal-server-sdk';
+
+const shippingName: ShippingName = {
+  fullName: 'full_name8',
+};
 ```
 

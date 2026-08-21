@@ -16,21 +16,28 @@ Customizes the buyer experience during the approval process for payment with Ven
 | `orderUpdateCallbackConfig` | [`CallbackConfiguration \| undefined`](../../doc/models/callback-configuration.md) | Optional | CallBack Configuration that the merchant can provide to PayPal/Venmo. |
 | `userAction` | [`VenmoWalletExperienceContextUserAction \| undefined`](../../doc/models/venmo-wallet-experience-context-user-action.md) | Optional | Configures a Continue or Pay Now checkout flow.<br><br>**Default**: `VenmoWalletExperienceContextUserAction.Continue`<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `8`, *Pattern*: `^[0-9A-Z_]+$` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "shipping_preference": "GET_FROM_FILE",
-  "user_action": "CONTINUE",
-  "brand_name": "brand_name6",
-  "order_update_callback_config": {
-    "callback_events": [
-      "SHIPPING_OPTIONS",
-      "SHIPPING_ADDRESS",
-      "SHIPPING_OPTIONS"
+```ts
+import {
+  CallbackEvents,
+  VenmoWalletExperienceContext,
+  VenmoWalletExperienceContextShippingPreference,
+  VenmoWalletExperienceContextUserAction,
+} from '@paypal/paypal-server-sdk';
+
+const venmoWalletExperienceContext: VenmoWalletExperienceContext = {
+  brandName: 'brand_name8',
+  shippingPreference: VenmoWalletExperienceContextShippingPreference.GetFromFile,
+  orderUpdateCallbackConfig: {
+    callbackEvents: [
+      CallbackEvents.ShippingOptions,
+      CallbackEvents.ShippingAddress,
+      CallbackEvents.ShippingOptions
     ],
-    "callback_url": "callback_url6"
-  }
-}
+    callbackUrl: 'callback_url6',
+  },
+  userAction: VenmoWalletExperienceContextUserAction.Continue,
+};
 ```
 

@@ -26,49 +26,51 @@ The payment source used to fund the payment.
 | `googlePay` | [`GooglePayWalletResponse \| undefined`](../../doc/models/google-pay-wallet-response.md) | Optional | Google Pay Wallet payment data. |
 | `venmo` | [`VenmoWalletResponse \| undefined`](../../doc/models/venmo-wallet-response.md) | Optional | Venmo wallet response. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "card": {
-    "name": "name6",
-    "last_digits": "last_digits0",
-    "brand": "CB_NATIONALE",
-    "available_networks": [
-      "DELTA"
-    ],
-    "type": "UNKNOWN"
+```ts
+import {
+  CardBrand,
+  CardType,
+  PaymentSourceResponse,
+  PhoneType,
+} from '@paypal/paypal-server-sdk';
+
+const paymentSourceResponse: PaymentSourceResponse = {
+  card: {
+    name: 'name6',
+    brand: CardBrand.CbNationale,
+    type: CardType.Unknown,
   },
-  "paypal": {
-    "email_address": "email_address0",
-    "account_id": "account_id4",
-    "account_status": "VERIFIED",
-    "name": {
-      "given_name": "given_name2",
-      "surname": "surname8"
+  paypal: {
+    emailAddress: 'email_address0',
+    accountId: 'account_id4',
+    name: {
+      givenName: 'given_name2',
+      surname: 'surname8',
     },
-    "phone_type": "FAX"
+    phoneType: PhoneType.Fax,
   },
-  "bancontact": {
-    "name": "name0",
-    "country_code": "country_code0",
-    "bic": "bic2",
-    "iban_last_chars": "iban_last_chars8",
-    "card_last_digits": "card_last_digits4"
+  bancontact: {
+    name: 'name0',
+    countryCode: 'country_code0',
+    bic: 'bic2',
+    ibanLastChars: 'iban_last_chars8',
+    cardLastDigits: 'card_last_digits4',
   },
-  "blik": {
-    "name": "name2",
-    "country_code": "country_code2",
-    "email": "email4",
-    "one_click": {
-      "consumer_reference": "consumer_reference2"
-    }
+  blik: {
+    name: 'name2',
+    countryCode: 'country_code2',
+    email: 'email4',
+    oneClick: {
+      consumerReference: 'consumer_reference2',
+    },
   },
-  "eps": {
-    "name": "name6",
-    "country_code": "country_code6",
-    "bic": "bic8"
-  }
-}
+  eps: {
+    name: 'name6',
+    countryCode: 'country_code6',
+    bic: 'bic8',
+  },
+};
 ```
 

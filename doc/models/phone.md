@@ -15,13 +15,15 @@ The phone number, in its canonical international [E.164 numbering plan format](h
 | `nationalNumber` | `string` | Required | The national number, in its canonical international [E.164 numbering plan format](https://www.itu.int/rec/T-REC-E.164/en). The combined length of the country calling code (CC) and the national number must not be greater than 15 digits. The national number consists of a national destination code (NDC) and subscriber number (SN).<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `14`, *Pattern*: `^[0-9]{1,14}?$` |
 | `extensionNumber` | `string \| undefined` | Optional | The extension number.<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `15`, *Pattern*: `^[0-9]{1,15}?$` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "country_code": "country_code8",
-  "national_number": "national_number2",
-  "extension_number": "extension_number2"
-}
+```ts
+import { Phone } from '@paypal/paypal-server-sdk';
+
+const phone: Phone = {
+  countryCode: 'country_code0',
+  nationalNumber: 'national_number4',
+  extensionNumber: 'extension_number0',
+};
 ```
 

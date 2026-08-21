@@ -15,56 +15,67 @@ The merchant level Recurring Billing plan metadata for the Billing Agreement.
 | `oneTimeCharges` | [`OneTimeCharge`](../../doc/models/one-time-charge.md) | Required | The one-time charge info at the time of checkout. |
 | `name` | `string \| undefined` | Optional | Name of the recurring plan.<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `127`, *Pattern*: `^[A-Za-z0-9() +',.:-]+$` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "billing_cycles": [
+```ts
+import {
+  FrequencyIntervalUnit,
+  Plan,
+  PricingModel,
+  TenureType,
+} from '@paypal/paypal-server-sdk';
+
+const plan: Plan = {
+  billingCycles: [
     {
-      "tenure_type": "REGULAR",
-      "total_cycles": 1,
-      "sequence": 1,
-      "pricing_scheme": {
-        "price": {
-          "currency_code": "currency_code8",
-          "value": "value4"
+      tenureType: TenureType.Regular,
+      pricingScheme: {
+        pricingModel: PricingModel.AutoReload,
+        price: {
+          currencyCode: 'currency_code8',
+          value: 'value4',
         },
-        "pricing_model": "AUTO_RELOAD",
-        "reload_threshold_amount": {
-          "currency_code": "currency_code0",
-          "value": "value6"
-        }
+        reloadThresholdAmount: {
+          currencyCode: 'currency_code0',
+          value: 'value6',
+        },
       },
-      "start_date": "start_date6"
+      totalCycles: 1,
+      sequence: 1,
+      startDate: 'start_date6',
+      frequency: {
+        intervalUnit: FrequencyIntervalUnit.Lifetime,
+        intervalCount: 94,
+      },
     }
   ],
-  "one_time_charges": {
-    "setup_fee": {
-      "currency_code": "currency_code8",
-      "value": "value4"
+  oneTimeCharges: {
+    totalAmount: {
+      currencyCode: 'currency_code2',
+      value: 'value8',
     },
-    "shipping_amount": {
-      "currency_code": "currency_code0",
-      "value": "value6"
+    setupFee: {
+      currencyCode: 'currency_code8',
+      value: 'value4',
     },
-    "taxes": {
-      "currency_code": "currency_code6",
-      "value": "value2"
+    shippingAmount: {
+      currencyCode: 'currency_code0',
+      value: 'value6',
     },
-    "product_price": {
-      "currency_code": "currency_code6",
-      "value": "value2"
+    taxes: {
+      currencyCode: 'currency_code6',
+      value: 'value2',
     },
-    "subtotal": {
-      "currency_code": "currency_code2",
-      "value": "value8"
+    productPrice: {
+      currencyCode: 'currency_code6',
+      value: 'value2',
     },
-    "total_amount": {
-      "currency_code": "currency_code2",
-      "value": "value8"
-    }
+    subtotal: {
+      currencyCode: 'currency_code2',
+      value: 'value8',
+    },
   },
-  "name": "name8"
-}
+  name: 'name4',
+};
 ```
 
