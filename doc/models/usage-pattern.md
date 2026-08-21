@@ -24,3 +24,11 @@ Expected business/pricing model for the billing agreement., Expected business/ch
 | `InstallmentPrepaid` | Merchant-managed installment plan when the "amount" to be paid and the "billing frequency" are fixed, but there is a defined number of payments with the payment due before the good/service is delivered. |
 | `InstallmentPostpaid` | Merchant-managed installment plan when the "amount" to be paid and the "billing frequency" are fixed, but there is a defined number of payments with the payment due after the goods/services are delivered. |
 
+## Example
+
+```ts
+import { UsagePattern } from '@paypal/paypal-server-sdk';
+
+const usagePattern = UsagePattern.InstallmentPrepaid;
+```
+

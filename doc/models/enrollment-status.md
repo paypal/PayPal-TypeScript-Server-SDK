@@ -16,3 +16,11 @@ Status of Authentication eligibility.
 | `Unavailable` | Unavailable. The DS or ACS is not available for authentication at the time of the request. |
 | `Bypass` | Bypass. The merchant authentication rule is triggered to bypass authentication. |
 
+## Example
+
+```ts
+import { EnrollmentStatus } from '@paypal/paypal-server-sdk';
+
+const enrollmentStatus = EnrollmentStatus.Unavailable;
+```
+

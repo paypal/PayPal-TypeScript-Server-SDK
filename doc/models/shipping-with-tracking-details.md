@@ -17,73 +17,40 @@
 | `options` | [`ShippingOption[] \| undefined`](../../doc/models/shipping-option.md) | Optional | An array of shipping options that the payee or merchant offers to the payer to ship or pick up their items.<br><br>**Constraints**: *Minimum Items*: `0`, *Maximum Items*: `10` |
 | `address` | [`Address \| undefined`](../../doc/models/address.md) | Optional | The portable international postal address. Maps to [AddressValidationMetadata](https://github.com/googlei18n/libaddressinput/wiki/AddressValidationMetadata) and HTML 5.1 [Autofilling form controls: the autocomplete attribute](https://www.w3.org/TR/html51/sec-forms.html#autofilling-form-controls-the-autocomplete-attribute). |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "trackers": [
+```ts
+import {
+  FulfillmentType,
+  OrderTrackerStatus,
+  ShippingWithTrackingDetails,
+} from '@paypal/paypal-server-sdk';
+
+const shippingWithTrackingDetails: ShippingWithTrackingDetails = {
+  trackers: [
     {
-      "id": "id2",
-      "status": "CANCELLED",
-      "items": [
+      status: OrderTrackerStatus.Cancelled,
+      items: [
         {
-          "name": "name8",
-          "quantity": "quantity4",
-          "sku": "sku6",
-          "url": "url2",
-          "image_url": "image_url4"
+          name: 'name8',
+          quantity: 'quantity4',
+          sku: 'sku6',
+          url: 'url2',
+          imageUrl: 'image_url4',
         }
       ],
-      "links": [
-        {
-          "href": "href6",
-          "rel": "rel0",
-          "method": "HEAD"
-        },
-        {
-          "href": "href6",
-          "rel": "rel0",
-          "method": "HEAD"
-        }
-      ],
-      "create_time": "create_time8"
-    },
-    {
-      "id": "id2",
-      "status": "CANCELLED",
-      "items": [
-        {
-          "name": "name8",
-          "quantity": "quantity4",
-          "sku": "sku6",
-          "url": "url2",
-          "image_url": "image_url4"
-        }
-      ],
-      "links": [
-        {
-          "href": "href6",
-          "rel": "rel0",
-          "method": "HEAD"
-        },
-        {
-          "href": "href6",
-          "rel": "rel0",
-          "method": "HEAD"
-        }
-      ],
-      "create_time": "create_time8"
+      createTime: 'create_time8',
     }
   ],
-  "name": {
-    "full_name": "full_name6"
+  name: {
+    fullName: 'full_name6',
   },
-  "email_address": "email_address2",
-  "phone_number": {
-    "country_code": "country_code2",
-    "national_number": "national_number6"
+  emailAddress: 'email_address6',
+  phoneNumber: {
+    nationalNumber: 'national_number6',
+    countryCode: 'country_code2',
   },
-  "type": "SHIPPING"
-}
+  type: FulfillmentType.PickupInStore,
+};
 ```
 

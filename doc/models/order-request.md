@@ -18,175 +18,188 @@ The order request details.
 | `paymentSource` | [`PaymentSource \| undefined`](../../doc/models/payment-source.md) | Optional | The payment source definition. |
 | `applicationContext` | [`OrderApplicationContext \| undefined`](../../doc/models/order-application-context.md) | Optional | Customizes the payer experience during the approval process for the payment with PayPal. Note: Partners and Marketplaces might configure brand_name and shipping_preference during partner account setup, which overrides the request values. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "intent": "CAPTURE",
-  "purchase_units": [
+```ts
+import {
+  CheckoutPaymentIntent,
+  DisbursementMode,
+  ExperienceContextShippingPreference,
+  OrderApplicationContextLandingPage,
+  OrderApplicationContextShippingPreference,
+  OrderApplicationContextUserAction,
+  OrderRequest,
+  PhoneType,
+  ProcessingInstruction,
+  TokenType,
+} from '@paypal/paypal-server-sdk';
+
+const orderRequest: OrderRequest = {
+  intent: CheckoutPaymentIntent.Capture,
+  purchaseUnits: [
     {
-      "reference_id": "reference_id4",
-      "amount": {
-        "currency_code": "currency_code6",
-        "value": "value0",
-        "breakdown": {
-          "item_total": {
-            "currency_code": "currency_code0",
-            "value": "value6"
+      amount: {
+        currencyCode: 'currency_code6',
+        value: 'value0',
+        breakdown: {
+          itemTotal: {
+            currencyCode: 'currency_code0',
+            value: 'value6',
           },
-          "shipping": {
-            "currency_code": "currency_code0",
-            "value": "value6"
+          shipping: {
+            currencyCode: 'currency_code0',
+            value: 'value6',
           },
-          "handling": {
-            "currency_code": "currency_code2",
-            "value": "value8"
+          handling: {
+            currencyCode: 'currency_code2',
+            value: 'value8',
           },
-          "tax_total": {
-            "currency_code": "currency_code4",
-            "value": "value0"
+          taxTotal: {
+            currencyCode: 'currency_code4',
+            value: 'value0',
           },
-          "insurance": {
-            "currency_code": "currency_code2",
-            "value": "value8"
-          }
-        }
+          insurance: {
+            currencyCode: 'currency_code2',
+            value: 'value8',
+          },
+        },
       },
-      "payee": {
-        "email_address": "email_address4",
-        "merchant_id": "merchant_id6"
+      referenceId: 'reference_id4',
+      payee: {
+        emailAddress: 'email_address4',
+        merchantId: 'merchant_id6',
       },
-      "payment_instruction": {
-        "platform_fees": [
+      paymentInstruction: {
+        platformFees: [
           {
-            "amount": {
-              "currency_code": "currency_code6",
-              "value": "value0"
+            amount: {
+              currencyCode: 'currency_code6',
+              value: 'value0',
             },
-            "payee": {
-              "email_address": "email_address4",
-              "merchant_id": "merchant_id6"
-            }
+            payee: {
+              emailAddress: 'email_address4',
+              merchantId: 'merchant_id6',
+            },
           },
           {
-            "amount": {
-              "currency_code": "currency_code6",
-              "value": "value0"
+            amount: {
+              currencyCode: 'currency_code6',
+              value: 'value0',
             },
-            "payee": {
-              "email_address": "email_address4",
-              "merchant_id": "merchant_id6"
-            }
+            payee: {
+              emailAddress: 'email_address4',
+              merchantId: 'merchant_id6',
+            },
           },
           {
-            "amount": {
-              "currency_code": "currency_code6",
-              "value": "value0"
+            amount: {
+              currencyCode: 'currency_code6',
+              value: 'value0',
             },
-            "payee": {
-              "email_address": "email_address4",
-              "merchant_id": "merchant_id6"
-            }
+            payee: {
+              emailAddress: 'email_address4',
+              merchantId: 'merchant_id6',
+            },
           }
         ],
-        "disbursement_mode": "INSTANT",
-        "payee_pricing_tier_id": "payee_pricing_tier_id2",
-        "payee_receivable_fx_rate_id": "payee_receivable_fx_rate_id0"
+        disbursementMode: DisbursementMode.Instant,
+        payeePricingTierId: 'payee_pricing_tier_id2',
+        payeeReceivableFxRateId: 'payee_receivable_fx_rate_id0',
       },
-      "description": "description6",
-      "custom_id": "custom_id4"
+      description: 'description6',
+      customId: 'custom_id4',
     }
   ],
-  "processing_instruction": "ORDER_COMPLETE_ON_PAYMENT_APPROVAL",
-  "payer": {
-    "email_address": "email_address6",
-    "payer_id": "payer_id6",
-    "name": {
-      "given_name": "given_name2",
-      "surname": "surname8"
+  processingInstruction: ProcessingInstruction.OrderCompleteOnPaymentApproval,
+  payer: {
+    emailAddress: 'email_address6',
+    payerId: 'payer_id6',
+    name: {
+      givenName: 'given_name2',
+      surname: 'surname8',
     },
-    "phone": {
-      "phone_type": "OTHER",
-      "phone_number": {
-        "national_number": "national_number6"
-      }
+    phone: {
+      phoneNumber: {
+        nationalNumber: 'national_number6',
+      },
+      phoneType: PhoneType.Other,
     },
-    "birth_date": "birth_date4"
+    birthDate: 'birth_date4',
   },
-  "payment_source": {
-    "card": {
-      "name": "name6",
-      "number": "number6",
-      "expiry": "expiry4",
-      "security_code": "security_code8",
-      "billing_address": {
-        "address_line_1": "address_line_12",
-        "address_line_2": "address_line_28",
-        "admin_area_2": "admin_area_28",
-        "admin_area_1": "admin_area_14",
-        "postal_code": "postal_code0",
-        "country_code": "country_code8"
-      }
-    },
-    "token": {
-      "id": "id6",
-      "type": "BILLING_AGREEMENT"
-    },
-    "paypal": {
-      "vault_id": "vault_id0",
-      "email_address": "email_address0",
-      "name": {
-        "given_name": "given_name2",
-        "surname": "surname8"
+  paymentSource: {
+    card: {
+      name: 'name6',
+      number: 'number6',
+      expiry: 'expiry4',
+      securityCode: 'security_code8',
+      billingAddress: {
+        countryCode: 'country_code8',
+        addressLine1: 'address_line_12',
+        addressLine2: 'address_line_28',
+        adminArea2: 'admin_area_28',
+        adminArea1: 'admin_area_14',
+        postalCode: 'postal_code0',
       },
-      "phone": {
-        "phone_type": "OTHER",
-        "phone_number": {
-          "national_number": "national_number6"
-        }
-      },
-      "birth_date": "birth_date8"
     },
-    "bancontact": {
-      "name": "name0",
-      "country_code": "country_code0",
-      "experience_context": {
-        "brand_name": "brand_name2",
-        "locale": "locale6",
-        "shipping_preference": "NO_SHIPPING",
-        "return_url": "return_url4",
-        "cancel_url": "cancel_url6"
-      }
+    token: {
+      id: 'id6',
+      type: TokenType.BillingAgreement,
     },
-    "blik": {
-      "name": "name2",
-      "country_code": "country_code2",
-      "email": "email4",
-      "experience_context": {
-        "brand_name": "brand_name2",
-        "locale": "locale6",
-        "shipping_preference": "NO_SHIPPING",
-        "return_url": "return_url4",
-        "cancel_url": "cancel_url6"
+    paypal: {
+      vaultId: 'vault_id0',
+      emailAddress: 'email_address0',
+      name: {
+        givenName: 'given_name2',
+        surname: 'surname8',
       },
-      "level_0": {
-        "auth_code": "auth_code8"
+      phone: {
+        phoneNumber: {
+          nationalNumber: 'national_number6',
+        },
+        phoneType: PhoneType.Other,
       },
-      "one_click": {
-        "auth_code": "auth_code0",
-        "consumer_reference": "consumer_reference2",
-        "alias_label": "alias_label6",
-        "alias_key": "alias_key4"
-      }
-    }
+      birthDate: 'birth_date8',
+    },
+    bancontact: {
+      name: 'name0',
+      countryCode: 'country_code0',
+      experienceContext: {
+        brandName: 'brand_name2',
+        locale: 'locale6',
+        shippingPreference: ExperienceContextShippingPreference.NoShipping,
+        returnUrl: 'return_url4',
+        cancelUrl: 'cancel_url6',
+      },
+    },
+    blik: {
+      name: 'name2',
+      countryCode: 'country_code2',
+      email: 'email4',
+      experienceContext: {
+        brandName: 'brand_name2',
+        locale: 'locale6',
+        shippingPreference: ExperienceContextShippingPreference.NoShipping,
+        returnUrl: 'return_url4',
+        cancelUrl: 'cancel_url6',
+      },
+      level0: {
+        authCode: 'auth_code8',
+      },
+      oneClick: {
+        consumerReference: 'consumer_reference2',
+        authCode: 'auth_code0',
+        aliasLabel: 'alias_label6',
+        aliasKey: 'alias_key4',
+      },
+    },
   },
-  "application_context": {
-    "brand_name": "brand_name8",
-    "locale": "locale2",
-    "landing_page": "BILLING",
-    "shipping_preference": "SET_PROVIDED_ADDRESS",
-    "user_action": "CONTINUE"
-  }
-}
+  applicationContext: {
+    brandName: 'brand_name8',
+    locale: 'locale2',
+    landingPage: OrderApplicationContextLandingPage.Billing,
+    shippingPreference: OrderApplicationContextShippingPreference.SetProvidedAddress,
+    userAction: OrderApplicationContextUserAction.Continue,
+  },
+};
 ```
 

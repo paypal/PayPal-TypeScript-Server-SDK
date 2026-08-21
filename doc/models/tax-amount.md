@@ -13,14 +13,16 @@ The tax levied by a government on the purchase of goods or services.
 |  --- | --- | --- | --- |
 | `taxAmount` | [`Money \| undefined`](../../doc/models/money.md) | Optional | The currency and amount for a financial transaction, such as a balance or payment due. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "tax_amount": {
-    "currency_code": "currency_code2",
-    "value": "value8"
-  }
-}
+```ts
+import { TaxAmount } from '@paypal/paypal-server-sdk';
+
+const taxAmount: TaxAmount = {
+  taxAmount: {
+    currencyCode: 'currency_code2',
+    value: 'value8',
+  },
+};
 ```
 

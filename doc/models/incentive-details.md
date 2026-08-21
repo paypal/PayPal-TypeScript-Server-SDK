@@ -16,17 +16,19 @@ The incentive details.
 | `incentiveAmount` | [`Money \| undefined`](../../doc/models/money.md) | Optional | The currency and amount for a financial transaction, such as a balance or payment due. |
 | `incentiveProgramCode` | `string \| undefined` | Optional | The incentive program code that identifies a merchant loyalty or incentive program.<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `100`, *Pattern*: `^[a-zA-Z0-9_'\-., ":;\!?]*$` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "incentive_type": "incentive_type4",
-  "incentive_code": "incentive_code0",
-  "incentive_amount": {
-    "currency_code": "currency_code4",
-    "value": "value0"
+```ts
+import { IncentiveDetails } from '@paypal/paypal-server-sdk';
+
+const incentiveDetails: IncentiveDetails = {
+  incentiveType: 'incentive_type0',
+  incentiveCode: 'incentive_code6',
+  incentiveAmount: {
+    currencyCode: 'currency_code4',
+    value: 'value0',
   },
-  "incentive_program_code": "incentive_program_code4"
-}
+  incentiveProgramCode: 'incentive_program_code0',
+};
 ```
 

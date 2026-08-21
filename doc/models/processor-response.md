@@ -16,14 +16,12 @@ The processor response information for payment requests, such as direct credit c
 | `responseCode` | [`ProcessorResponseCode \| undefined`](../../doc/models/processor-response-code.md) | Optional, Read-only | Processor response code for the non-PayPal payment processor errors. |
 | `paymentAdviceCode` | [`PaymentAdviceCode \| undefined`](../../doc/models/payment-advice-code.md) | Optional, Read-only | The declined payment transactions might have payment advice codes. The card networks, like Visa and Mastercard, return payment advice codes. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "avs_code": "M",
-  "cvv_code": "U",
-  "response_code": "PPII",
-  "payment_advice_code": "03"
-}
+```ts
+import { ProcessorResponse } from '@paypal/paypal-server-sdk';
+
+const processorResponse: ProcessorResponse = {
+};
 ```
 

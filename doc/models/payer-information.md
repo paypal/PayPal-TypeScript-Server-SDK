@@ -20,19 +20,21 @@ The payer information.
 | `countryCode` | `string \| undefined` | Optional | The [two-character ISO 3166-1 code](/docs/integration/direct/rest/country-codes/) that identifies the country or region. Note: The country code for Great Britain is GB and not UK as used in the top-level domain names for that country. Use the `C2` country code for China worldwide for comparable uncontrolled price (CUP) method, bank card, and cross-border transactions.<br><br>**Constraints**: *Minimum Length*: `2`, *Maximum Length*: `2`, *Pattern*: `^([A-Z]{2}\|C2)$` |
 | `address` | [`SimplePostalAddressCoarseGrained \| undefined`](../../doc/models/simple-postal-address-coarse-grained.md) | Optional | A simple postal address with coarse-grained fields. Do not use for an international address. Use for backward compatibility only. Does not contain phone. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "account_id": "account_id6",
-  "email_address": "email_address2",
-  "phone_number": {
-    "country_code": "country_code2",
-    "national_number": "national_number6",
-    "extension_number": "extension_number8"
+```ts
+import { PayerInformation } from '@paypal/paypal-server-sdk';
+
+const payerInformation: PayerInformation = {
+  accountId: 'account_id4',
+  emailAddress: 'email_address0',
+  phoneNumber: {
+    countryCode: 'country_code2',
+    nationalNumber: 'national_number6',
+    extensionNumber: 'extension_number8',
   },
-  "address_status": "address_status2",
-  "payer_status": "payer_status8"
-}
+  addressStatus: 'address_status0',
+  payerStatus: 'payer_status0',
+};
 ```
 

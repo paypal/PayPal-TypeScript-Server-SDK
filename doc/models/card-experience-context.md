@@ -14,12 +14,14 @@ Customizes the payer experience during the 3DS Approval for payment.
 | `returnUrl` | `string \| undefined` | Optional | Describes the URL. |
 | `cancelUrl` | `string \| undefined` | Optional | Describes the URL. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "return_url": "return_url2",
-  "cancel_url": "cancel_url0"
-}
+```ts
+import { CardExperienceContext } from '@paypal/paypal-server-sdk';
+
+const cardExperienceContext: CardExperienceContext = {
+  returnUrl: 'return_url0',
+  cancelUrl: 'cancel_url2',
+};
 ```
 

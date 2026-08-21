@@ -15,16 +15,21 @@ The charge amount from the subscriber.
 | `captureType` | [`CaptureType`](../../doc/models/capture-type.md) | Required | The type of capture.<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `24`, *Pattern*: `^[A-Z_]+$` |
 | `amount` | [`Money`](../../doc/models/money.md) | Required | The currency and amount for a financial transaction, such as a balance or payment due. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "note": "note4",
-  "capture_type": "OUTSTANDING_BALANCE",
-  "amount": {
-    "currency_code": "currency_code6",
-    "value": "value0"
-  }
-}
+```ts
+import {
+  CaptureSubscriptionRequest,
+  CaptureType,
+} from '@paypal/paypal-server-sdk';
+
+const captureSubscriptionRequest: CaptureSubscriptionRequest = {
+  note: 'note2',
+  captureType: CaptureType.OutstandingBalance,
+  amount: {
+    currencyCode: 'currency_code6',
+    value: 'value0',
+  },
+};
 ```
 

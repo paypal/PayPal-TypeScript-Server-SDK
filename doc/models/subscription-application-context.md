@@ -19,19 +19,26 @@ The application context, which customizes the payer experience during the subscr
 | `returnUrl` | `string` | Required | The URL where the customer is redirected after the customer approves the payment.<br><br>**Constraints**: *Minimum Length*: `10`, *Maximum Length*: `4000` |
 | `cancelUrl` | `string` | Required | The URL where the customer is redirected after the customer cancels the payment.<br><br>**Constraints**: *Minimum Length*: `10`, *Maximum Length*: `4000` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "shipping_preference": "GET_FROM_FILE",
-  "user_action": "SUBSCRIBE_NOW",
-  "return_url": "return_url0",
-  "cancel_url": "cancel_url2",
-  "brand_name": "brand_name8",
-  "locale": "locale2",
-  "payment_method": {
-    "payee_preferred": "UNRESTRICTED"
-  }
-}
+```ts
+import {
+  ApplicationContextUserAction,
+  ExperienceContextShippingPreference,
+  PayeePaymentMethodPreference,
+  SubscriptionApplicationContext,
+} from '@paypal/paypal-server-sdk';
+
+const subscriptionApplicationContext: SubscriptionApplicationContext = {
+  returnUrl: 'return_url2',
+  cancelUrl: 'cancel_url4',
+  brandName: 'brand_name0',
+  locale: 'locale4',
+  shippingPreference: ExperienceContextShippingPreference.GetFromFile,
+  userAction: ApplicationContextUserAction.SubscribeNow,
+  paymentMethod: {
+    payeePreferred: PayeePaymentMethodPreference.Unrestricted,
+  },
+};
 ```
 

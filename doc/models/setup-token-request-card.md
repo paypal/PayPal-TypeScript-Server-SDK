@@ -20,15 +20,17 @@ A Resource representing a request to vault a Card.
 | `verificationMethod` | [`VaultCardVerificationMethod \| undefined`](../../doc/models/vault-card-verification-method.md) | Optional | The verification method of the card.<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `255`, *Pattern*: `^[0-9A-Z_]+$` |
 | `experienceContext` | [`VaultCardExperienceContext \| undefined`](../../doc/models/vault-card-experience-context.md) | Optional | A resource representing an experience context of vault a card. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "name": "name2",
-  "number": "number0",
-  "expiry": "expiry0",
-  "security_code": "security_code4",
-  "brand": "STAR"
-}
+```ts
+import { CardBrand, SetupTokenRequestCard } from '@paypal/paypal-server-sdk';
+
+const setupTokenRequestCard: SetupTokenRequestCard = {
+  name: 'name8',
+  number: 'number4',
+  expiry: 'expiry6',
+  securityCode: 'security_code0',
+  brand: CardBrand.Discover,
+};
 ```
 

@@ -21,208 +21,147 @@ The search response information.
 | `totalPages` | `number \| undefined` | Optional | The total number of pages, as an `integer`, when the `total_items` is divided into pages of the specified `page_size`.<br><br>**Constraints**: `>= 0`, `<= 2147483647` |
 | `links` | [`LinkDescription[] \| undefined`](../../doc/models/link-description.md) | Optional, Read-only | An array of request-related [HATEOAS links](https://developer.paypal.com/api/rest/responses/#hateoas-links).<br><br>**Constraints**: *Minimum Items*: `1`, *Maximum Items*: `32767` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "transaction_details": [
+```ts
+import {
+  PaypalReferenceIdType,
+  SearchResponse,
+} from '@paypal/paypal-server-sdk';
+
+const searchResponse: SearchResponse = {
+  transactionDetails: [
     {
-      "transaction_info": {
-        "paypal_account_id": "paypal_account_id4",
-        "transaction_id": "transaction_id0",
-        "paypal_reference_id": "paypal_reference_id2",
-        "paypal_reference_id_type": "ODR",
-        "transaction_event_code": "transaction_event_code6"
+      transactionInfo: {
+        paypalAccountId: 'paypal_account_id4',
+        paypalReferenceId: 'paypal_reference_id2',
+        paypalReferenceIdType: PaypalReferenceIdType.Odr,
+        transactionEventCode: 'transaction_event_code6',
       },
-      "payer_info": {
-        "account_id": "account_id2",
-        "email_address": "email_address2",
-        "phone_number": {
-          "country_code": "country_code2",
-          "national_number": "national_number6",
-          "extension_number": "extension_number8"
+      payerInfo: {
+        accountId: 'account_id2',
+        emailAddress: 'email_address2',
+        phoneNumber: {
+          countryCode: 'country_code2',
+          nationalNumber: 'national_number6',
+          extensionNumber: 'extension_number8',
         },
-        "address_status": "address_status2",
-        "payer_status": "payer_status2"
+        addressStatus: 'address_status2',
+        payerStatus: 'payer_status2',
       },
-      "shipping_info": {
-        "name": "name0",
-        "method": "method4",
-        "address": {
-          "line1": "line18",
-          "line2": "line20",
-          "city": "city6",
-          "state": "state2",
-          "country_code": "country_code6",
-          "postal_code": "postal_code8"
+      shippingInfo: {
+        name: 'name0',
+        method: 'method4',
+        address: {
+          line1: 'line18',
+          city: 'city6',
+          countryCode: 'country_code6',
+          line2: 'line20',
+          state: 'state2',
+          postalCode: 'postal_code8',
         },
-        "secondary_shipping_address": {
-          "line1": "line16",
-          "line2": "line28",
-          "city": "city4",
-          "state": "state0",
-          "country_code": "country_code4",
-          "postal_code": "postal_code6"
-        }
+        secondaryShippingAddress: {
+          line1: 'line16',
+          city: 'city4',
+          countryCode: 'country_code4',
+          line2: 'line28',
+          state: 'state0',
+          postalCode: 'postal_code6',
+        },
       },
-      "cart_info": {
-        "item_details": [
+      cartInfo: {
+        itemDetails: [
           {
-            "item_code": "item_code0",
-            "item_name": "item_name8",
-            "item_description": "item_description4",
-            "item_options": "item_options2",
-            "item_quantity": "item_quantity2"
+            itemCode: 'item_code0',
+            itemName: 'item_name8',
+            itemDescription: 'item_description4',
+            itemOptions: 'item_options2',
+            itemQuantity: 'item_quantity2',
           },
           {
-            "item_code": "item_code0",
-            "item_name": "item_name8",
-            "item_description": "item_description4",
-            "item_options": "item_options2",
-            "item_quantity": "item_quantity2"
+            itemCode: 'item_code0',
+            itemName: 'item_name8',
+            itemDescription: 'item_description4',
+            itemOptions: 'item_options2',
+            itemQuantity: 'item_quantity2',
           }
         ],
-        "tax_inclusive": false,
-        "paypal_invoice_id": "paypal_invoice_id6"
+        taxInclusive: false,
+        paypalInvoiceId: 'paypal_invoice_id6',
       },
-      "store_info": {
-        "store_id": "store_id2",
-        "terminal_id": "terminal_id6"
-      }
+      storeInfo: {
+        storeId: 'store_id2',
+        terminalId: 'terminal_id6',
+      },
     },
     {
-      "transaction_info": {
-        "paypal_account_id": "paypal_account_id4",
-        "transaction_id": "transaction_id0",
-        "paypal_reference_id": "paypal_reference_id2",
-        "paypal_reference_id_type": "ODR",
-        "transaction_event_code": "transaction_event_code6"
+      transactionInfo: {
+        paypalAccountId: 'paypal_account_id4',
+        paypalReferenceId: 'paypal_reference_id2',
+        paypalReferenceIdType: PaypalReferenceIdType.Odr,
+        transactionEventCode: 'transaction_event_code6',
       },
-      "payer_info": {
-        "account_id": "account_id2",
-        "email_address": "email_address2",
-        "phone_number": {
-          "country_code": "country_code2",
-          "national_number": "national_number6",
-          "extension_number": "extension_number8"
+      payerInfo: {
+        accountId: 'account_id2',
+        emailAddress: 'email_address2',
+        phoneNumber: {
+          countryCode: 'country_code2',
+          nationalNumber: 'national_number6',
+          extensionNumber: 'extension_number8',
         },
-        "address_status": "address_status2",
-        "payer_status": "payer_status2"
+        addressStatus: 'address_status2',
+        payerStatus: 'payer_status2',
       },
-      "shipping_info": {
-        "name": "name0",
-        "method": "method4",
-        "address": {
-          "line1": "line18",
-          "line2": "line20",
-          "city": "city6",
-          "state": "state2",
-          "country_code": "country_code6",
-          "postal_code": "postal_code8"
+      shippingInfo: {
+        name: 'name0',
+        method: 'method4',
+        address: {
+          line1: 'line18',
+          city: 'city6',
+          countryCode: 'country_code6',
+          line2: 'line20',
+          state: 'state2',
+          postalCode: 'postal_code8',
         },
-        "secondary_shipping_address": {
-          "line1": "line16",
-          "line2": "line28",
-          "city": "city4",
-          "state": "state0",
-          "country_code": "country_code4",
-          "postal_code": "postal_code6"
-        }
+        secondaryShippingAddress: {
+          line1: 'line16',
+          city: 'city4',
+          countryCode: 'country_code4',
+          line2: 'line28',
+          state: 'state0',
+          postalCode: 'postal_code6',
+        },
       },
-      "cart_info": {
-        "item_details": [
+      cartInfo: {
+        itemDetails: [
           {
-            "item_code": "item_code0",
-            "item_name": "item_name8",
-            "item_description": "item_description4",
-            "item_options": "item_options2",
-            "item_quantity": "item_quantity2"
+            itemCode: 'item_code0',
+            itemName: 'item_name8',
+            itemDescription: 'item_description4',
+            itemOptions: 'item_options2',
+            itemQuantity: 'item_quantity2',
           },
           {
-            "item_code": "item_code0",
-            "item_name": "item_name8",
-            "item_description": "item_description4",
-            "item_options": "item_options2",
-            "item_quantity": "item_quantity2"
+            itemCode: 'item_code0',
+            itemName: 'item_name8',
+            itemDescription: 'item_description4',
+            itemOptions: 'item_options2',
+            itemQuantity: 'item_quantity2',
           }
         ],
-        "tax_inclusive": false,
-        "paypal_invoice_id": "paypal_invoice_id6"
+        taxInclusive: false,
+        paypalInvoiceId: 'paypal_invoice_id6',
       },
-      "store_info": {
-        "store_id": "store_id2",
-        "terminal_id": "terminal_id6"
-      }
-    },
-    {
-      "transaction_info": {
-        "paypal_account_id": "paypal_account_id4",
-        "transaction_id": "transaction_id0",
-        "paypal_reference_id": "paypal_reference_id2",
-        "paypal_reference_id_type": "ODR",
-        "transaction_event_code": "transaction_event_code6"
+      storeInfo: {
+        storeId: 'store_id2',
+        terminalId: 'terminal_id6',
       },
-      "payer_info": {
-        "account_id": "account_id2",
-        "email_address": "email_address2",
-        "phone_number": {
-          "country_code": "country_code2",
-          "national_number": "national_number6",
-          "extension_number": "extension_number8"
-        },
-        "address_status": "address_status2",
-        "payer_status": "payer_status2"
-      },
-      "shipping_info": {
-        "name": "name0",
-        "method": "method4",
-        "address": {
-          "line1": "line18",
-          "line2": "line20",
-          "city": "city6",
-          "state": "state2",
-          "country_code": "country_code6",
-          "postal_code": "postal_code8"
-        },
-        "secondary_shipping_address": {
-          "line1": "line16",
-          "line2": "line28",
-          "city": "city4",
-          "state": "state0",
-          "country_code": "country_code4",
-          "postal_code": "postal_code6"
-        }
-      },
-      "cart_info": {
-        "item_details": [
-          {
-            "item_code": "item_code0",
-            "item_name": "item_name8",
-            "item_description": "item_description4",
-            "item_options": "item_options2",
-            "item_quantity": "item_quantity2"
-          },
-          {
-            "item_code": "item_code0",
-            "item_name": "item_name8",
-            "item_description": "item_description4",
-            "item_options": "item_options2",
-            "item_quantity": "item_quantity2"
-          }
-        ],
-        "tax_inclusive": false,
-        "paypal_invoice_id": "paypal_invoice_id6"
-      },
-      "store_info": {
-        "store_id": "store_id2",
-        "terminal_id": "terminal_id6"
-      }
     }
   ],
-  "account_number": "account_number8",
-  "start_date": "start_date2",
-  "end_date": "end_date8",
-  "last_refreshed_datetime": "last_refreshed_datetime4"
-}
+  accountNumber: 'account_number4',
+  startDate: 'start_date0',
+  endDate: 'end_date6',
+  lastRefreshedDatetime: 'last_refreshed_datetime8',
+};
 ```
 

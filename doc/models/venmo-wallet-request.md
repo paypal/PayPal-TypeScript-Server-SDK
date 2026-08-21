@@ -16,49 +16,61 @@ Information needed to pay using Venmo.
 | `experienceContext` | [`VenmoWalletExperienceContext \| undefined`](../../doc/models/venmo-wallet-experience-context.md) | Optional | Customizes the buyer experience during the approval process for payment with Venmo. Note: Partners and Marketplaces might configure shipping_preference during partner account setup, which overrides the request values. |
 | `attributes` | [`VenmoWalletAdditionalAttributes \| undefined`](../../doc/models/venmo-wallet-additional-attributes.md) | Optional | Additional attributes associated with the use of this Venmo Wallet. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "vault_id": "vault_id2",
-  "email_address": "email_address2",
-  "experience_context": {
-    "brand_name": "brand_name2",
-    "shipping_preference": "NO_SHIPPING",
-    "order_update_callback_config": {
-      "callback_events": [
-        "SHIPPING_OPTIONS",
-        "SHIPPING_ADDRESS",
-        "SHIPPING_OPTIONS"
+```ts
+import {
+  CallbackEvents,
+  PhoneType,
+  StoreInVaultInstruction,
+  VenmoPaymentTokenCustomerType,
+  VenmoPaymentTokenUsagePattern,
+  VenmoPaymentTokenUsageType,
+  VenmoWalletExperienceContextShippingPreference,
+  VenmoWalletExperienceContextUserAction,
+  VenmoWalletRequest,
+} from '@paypal/paypal-server-sdk';
+
+const venmoWalletRequest: VenmoWalletRequest = {
+  vaultId: 'vault_id8',
+  emailAddress: 'email_address8',
+  experienceContext: {
+    brandName: 'brand_name2',
+    shippingPreference: VenmoWalletExperienceContextShippingPreference.NoShipping,
+    orderUpdateCallbackConfig: {
+      callbackEvents: [
+        CallbackEvents.ShippingOptions,
+        CallbackEvents.ShippingAddress,
+        CallbackEvents.ShippingOptions
       ],
-      "callback_url": "callback_url6"
+      callbackUrl: 'callback_url6',
     },
-    "user_action": "CONTINUE"
+    userAction: VenmoWalletExperienceContextUserAction.Continue,
   },
-  "attributes": {
-    "customer": {
-      "id": "id0",
-      "email_address": "email_address2",
-      "phone": {
-        "phone_type": "OTHER",
-        "phone_number": {
-          "national_number": "national_number6"
-        }
+  attributes: {
+    customer: {
+      id: 'id0',
+      emailAddress: 'email_address2',
+      phone: {
+        phoneNumber: {
+          nationalNumber: 'national_number6',
+        },
+        phoneType: PhoneType.Other,
       },
-      "name": {
-        "given_name": "given_name2",
-        "surname": "surname8"
-      }
+      name: {
+        givenName: 'given_name2',
+        surname: 'surname8',
+      },
     },
-    "vault": {
-      "store_in_vault": "ON_SUCCESS",
-      "description": "description6",
-      "usage_pattern": "THRESHOLD_PREPAID",
-      "usage_type": "MERCHANT",
-      "customer_type": "CONSUMER",
-      "permit_multiple_payment_tokens": false
-    }
-  }
-}
+    vault: {
+      storeInVault: StoreInVaultInstruction.OnSuccess,
+      usageType: VenmoPaymentTokenUsageType.Merchant,
+      description: 'description6',
+      usagePattern: VenmoPaymentTokenUsagePattern.ThresholdPrepaid,
+      customerType: VenmoPaymentTokenCustomerType.Consumer,
+      permitMultiplePaymentTokens: false,
+    },
+  },
+};
 ```
 

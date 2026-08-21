@@ -15,142 +15,145 @@ An inline plan object to customise the subscription. You can override plan level
 | `paymentPreferences` | [`PaymentPreferencesOverride \| undefined`](../../doc/models/payment-preferences-override.md) | Optional | The payment preferences to override at subscription level. |
 | `taxes` | [`TaxesOverride \| undefined`](../../doc/models/taxes-override.md) | Optional | The tax details. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "billing_cycles": [
+```ts
+import {
+  PlanOverride,
+  SetupFeeFailureAction,
+  SubscriptionPricingModel,
+} from '@paypal/paypal-server-sdk';
+
+const planOverride: PlanOverride = {
+  billingCycles: [
     {
-      "pricing_scheme": {
-        "version": 10,
-        "fixed_price": {
-          "currency_code": "currency_code4",
-          "value": "value0"
+      sequence: 8,
+      pricingScheme: {
+        fixedPrice: {
+          currencyCode: 'currency_code4',
+          value: 'value0',
         },
-        "pricing_model": "VOLUME",
-        "tiers": [
+        pricingModel: SubscriptionPricingModel.Volume,
+        tiers: [
           {
-            "starting_quantity": "starting_quantity8",
-            "ending_quantity": "ending_quantity6",
-            "amount": {
-              "currency_code": "currency_code6",
-              "value": "value0"
-            }
+            startingQuantity: 'starting_quantity8',
+            amount: {
+              currencyCode: 'currency_code6',
+              value: 'value0',
+            },
+            endingQuantity: 'ending_quantity6',
           },
           {
-            "starting_quantity": "starting_quantity8",
-            "ending_quantity": "ending_quantity6",
-            "amount": {
-              "currency_code": "currency_code6",
-              "value": "value0"
-            }
+            startingQuantity: 'starting_quantity8',
+            amount: {
+              currencyCode: 'currency_code6',
+              value: 'value0',
+            },
+            endingQuantity: 'ending_quantity6',
           },
           {
-            "starting_quantity": "starting_quantity8",
-            "ending_quantity": "ending_quantity6",
-            "amount": {
-              "currency_code": "currency_code6",
-              "value": "value0"
-            }
+            startingQuantity: 'starting_quantity8',
+            amount: {
+              currencyCode: 'currency_code6',
+              value: 'value0',
+            },
+            endingQuantity: 'ending_quantity6',
           }
         ],
-        "create_time": "create_time4"
+        createTime: 'create_time4',
       },
-      "sequence": 8,
-      "total_cycles": 198
+      totalCycles: 198,
     },
     {
-      "pricing_scheme": {
-        "version": 10,
-        "fixed_price": {
-          "currency_code": "currency_code4",
-          "value": "value0"
+      sequence: 8,
+      pricingScheme: {
+        fixedPrice: {
+          currencyCode: 'currency_code4',
+          value: 'value0',
         },
-        "pricing_model": "VOLUME",
-        "tiers": [
+        pricingModel: SubscriptionPricingModel.Volume,
+        tiers: [
           {
-            "starting_quantity": "starting_quantity8",
-            "ending_quantity": "ending_quantity6",
-            "amount": {
-              "currency_code": "currency_code6",
-              "value": "value0"
-            }
+            startingQuantity: 'starting_quantity8',
+            amount: {
+              currencyCode: 'currency_code6',
+              value: 'value0',
+            },
+            endingQuantity: 'ending_quantity6',
           },
           {
-            "starting_quantity": "starting_quantity8",
-            "ending_quantity": "ending_quantity6",
-            "amount": {
-              "currency_code": "currency_code6",
-              "value": "value0"
-            }
+            startingQuantity: 'starting_quantity8',
+            amount: {
+              currencyCode: 'currency_code6',
+              value: 'value0',
+            },
+            endingQuantity: 'ending_quantity6',
           },
           {
-            "starting_quantity": "starting_quantity8",
-            "ending_quantity": "ending_quantity6",
-            "amount": {
-              "currency_code": "currency_code6",
-              "value": "value0"
-            }
+            startingQuantity: 'starting_quantity8',
+            amount: {
+              currencyCode: 'currency_code6',
+              value: 'value0',
+            },
+            endingQuantity: 'ending_quantity6',
           }
         ],
-        "create_time": "create_time4"
+        createTime: 'create_time4',
       },
-      "sequence": 8,
-      "total_cycles": 198
+      totalCycles: 198,
     },
     {
-      "pricing_scheme": {
-        "version": 10,
-        "fixed_price": {
-          "currency_code": "currency_code4",
-          "value": "value0"
+      sequence: 8,
+      pricingScheme: {
+        fixedPrice: {
+          currencyCode: 'currency_code4',
+          value: 'value0',
         },
-        "pricing_model": "VOLUME",
-        "tiers": [
+        pricingModel: SubscriptionPricingModel.Volume,
+        tiers: [
           {
-            "starting_quantity": "starting_quantity8",
-            "ending_quantity": "ending_quantity6",
-            "amount": {
-              "currency_code": "currency_code6",
-              "value": "value0"
-            }
+            startingQuantity: 'starting_quantity8',
+            amount: {
+              currencyCode: 'currency_code6',
+              value: 'value0',
+            },
+            endingQuantity: 'ending_quantity6',
           },
           {
-            "starting_quantity": "starting_quantity8",
-            "ending_quantity": "ending_quantity6",
-            "amount": {
-              "currency_code": "currency_code6",
-              "value": "value0"
-            }
+            startingQuantity: 'starting_quantity8',
+            amount: {
+              currencyCode: 'currency_code6',
+              value: 'value0',
+            },
+            endingQuantity: 'ending_quantity6',
           },
           {
-            "starting_quantity": "starting_quantity8",
-            "ending_quantity": "ending_quantity6",
-            "amount": {
-              "currency_code": "currency_code6",
-              "value": "value0"
-            }
+            startingQuantity: 'starting_quantity8',
+            amount: {
+              currencyCode: 'currency_code6',
+              value: 'value0',
+            },
+            endingQuantity: 'ending_quantity6',
           }
         ],
-        "create_time": "create_time4"
+        createTime: 'create_time4',
       },
-      "sequence": 8,
-      "total_cycles": 198
+      totalCycles: 198,
     }
   ],
-  "payment_preferences": {
-    "auto_bill_outstanding": false,
-    "setup_fee": {
-      "currency_code": "currency_code8",
-      "value": "value4"
+  paymentPreferences: {
+    autoBillOutstanding: false,
+    setupFee: {
+      currencyCode: 'currency_code8',
+      value: 'value4',
     },
-    "setup_fee_failure_action": "CONTINUE",
-    "payment_failure_threshold": 104
+    setupFeeFailureAction: SetupFeeFailureAction.Continue,
+    paymentFailureThreshold: 104,
   },
-  "taxes": {
-    "percentage": "percentage8",
-    "inclusive": false
-  }
-}
+  taxes: {
+    percentage: 'percentage8',
+    inclusive: false,
+  },
+};
 ```
 

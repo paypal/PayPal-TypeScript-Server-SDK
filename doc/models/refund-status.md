@@ -16,3 +16,11 @@ The status of the refund.
 | `Pending` | The refund is pending. For more information, see status_details.reason. |
 | `Completed` | The funds for this transaction were debited to the customer's account. |
 
+## Example
+
+```ts
+import { RefundStatus } from '@paypal/paypal-server-sdk';
+
+const refundStatus = RefundStatus.Pending;
+```
+

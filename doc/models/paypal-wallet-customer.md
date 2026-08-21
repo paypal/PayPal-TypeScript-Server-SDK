@@ -17,23 +17,25 @@ The details about a customer in PayPal's system of record.
 | `name` | [`Name \| undefined`](../../doc/models/name.md) | Optional | The name of the party. |
 | `merchantCustomerId` | `string \| undefined` | Optional | Merchants and partners may already have a data-store where their customer information is persisted. Use merchant_customer_id to associate the PayPal-generated customer.id to your representation of a customer.<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `64`, *Pattern*: `^[0-9a-zA-Z-_.^*$@#]+$` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": "id8",
-  "email_address": "email_address4",
-  "phone": {
-    "phone_type": "OTHER",
-    "phone_number": {
-      "national_number": "national_number6"
-    }
+```ts
+import { PaypalWalletCustomer, PhoneType } from '@paypal/paypal-server-sdk';
+
+const paypalWalletCustomer: PaypalWalletCustomer = {
+  id: 'id6',
+  emailAddress: 'email_address4',
+  phone: {
+    phoneNumber: {
+      nationalNumber: 'national_number6',
+    },
+    phoneType: PhoneType.Other,
   },
-  "name": {
-    "given_name": "given_name2",
-    "surname": "surname8"
+  name: {
+    givenName: 'given_name2',
+    surname: 'surname8',
   },
-  "merchant_customer_id": "merchant_customer_id0"
-}
+  merchantCustomerId: 'merchant_customer_id8',
+};
 ```
 

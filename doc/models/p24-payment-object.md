@@ -18,15 +18,17 @@ Information used to pay using P24(Przelewy24).
 | `methodId` | `string \| undefined` | Optional | Numeric identifier of the payment scheme or bank used for the payment.<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `300` |
 | `methodDescription` | `string \| undefined` | Optional | Friendly name of the payment scheme or bank used for the payment.<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `2000` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "name": "name4",
-  "email": "email2",
-  "country_code": "country_code4",
-  "payment_descriptor": "payment_descriptor8",
-  "method_id": "method_id8"
-}
+```ts
+import { P24PaymentObject } from '@paypal/paypal-server-sdk';
+
+const p24PaymentObject: P24PaymentObject = {
+  name: 'name0',
+  email: 'email6',
+  countryCode: 'country_code0',
+  paymentDescriptor: 'payment_descriptor4',
+  methodId: 'method_id4',
+};
 ```
 

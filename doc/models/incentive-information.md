@@ -13,39 +13,23 @@ The incentive details.
 |  --- | --- | --- | --- |
 | `incentiveDetails` | [`IncentiveDetails[] \| undefined`](../../doc/models/incentive-details.md) | Optional | An array of incentive details.<br><br>**Constraints**: *Minimum Items*: `1`, *Maximum Items*: `32767` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "incentive_details": [
+```ts
+import { IncentiveInformation } from '@paypal/paypal-server-sdk';
+
+const incentiveInformation: IncentiveInformation = {
+  incentiveDetails: [
     {
-      "incentive_type": "incentive_type4",
-      "incentive_code": "incentive_code0",
-      "incentive_amount": {
-        "currency_code": "currency_code4",
-        "value": "value0"
+      incentiveType: 'incentive_type4',
+      incentiveCode: 'incentive_code0',
+      incentiveAmount: {
+        currencyCode: 'currency_code4',
+        value: 'value0',
       },
-      "incentive_program_code": "incentive_program_code4"
-    },
-    {
-      "incentive_type": "incentive_type4",
-      "incentive_code": "incentive_code0",
-      "incentive_amount": {
-        "currency_code": "currency_code4",
-        "value": "value0"
-      },
-      "incentive_program_code": "incentive_program_code4"
-    },
-    {
-      "incentive_type": "incentive_type4",
-      "incentive_code": "incentive_code0",
-      "incentive_amount": {
-        "currency_code": "currency_code4",
-        "value": "value0"
-      },
-      "incentive_program_code": "incentive_program_code4"
+      incentiveProgramCode: 'incentive_program_code4',
     }
-  ]
-}
+  ],
+};
 ```
 

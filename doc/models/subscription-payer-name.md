@@ -18,15 +18,17 @@ The name of the party.
 | `suffix` | `string \| undefined` | Optional | The suffix for the party's name.<br><br>**Constraints**: *Maximum Length*: `140` |
 | `fullName` | `string \| undefined` | Optional | When the party is a person, the party's full name.<br><br>**Constraints**: *Maximum Length*: `300` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "prefix": "prefix4",
-  "given_name": "given_name8",
-  "surname": "surname2",
-  "middle_name": "middle_name4",
-  "suffix": "suffix4"
-}
+```ts
+import { SubscriptionPayerName } from '@paypal/paypal-server-sdk';
+
+const subscriptionPayerName: SubscriptionPayerName = {
+  prefix: 'prefix8',
+  givenName: 'given_name2',
+  surname: 'surname8',
+  middleName: 'middle_name0',
+  suffix: 'suffix0',
+};
 ```
 

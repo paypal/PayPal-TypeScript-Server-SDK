@@ -17,15 +17,20 @@ Customizes the payer experience during the approval process for the payment.
 | `returnUrl` | `string \| undefined` | Optional | Describes the URL. |
 | `cancelUrl` | `string \| undefined` | Optional | Describes the URL. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "shipping_preference": "GET_FROM_FILE",
-  "brand_name": "brand_name0",
-  "locale": "locale4",
-  "return_url": "return_url2",
-  "cancel_url": "cancel_url4"
-}
+```ts
+import {
+  ExperienceContext,
+  ExperienceContextShippingPreference,
+} from '@paypal/paypal-server-sdk';
+
+const experienceContext: ExperienceContext = {
+  brandName: 'brand_name0',
+  locale: 'locale4',
+  shippingPreference: ExperienceContextShippingPreference.GetFromFile,
+  returnUrl: 'return_url2',
+  cancelUrl: 'cancel_url4',
+};
 ```
 

@@ -27,75 +27,82 @@ The payment source definition.
 | `googlePay` | [`GooglePayRequest \| undefined`](../../doc/models/google-pay-request.md) | Optional | Information needed to pay using Google Pay. |
 | `venmo` | [`VenmoWalletRequest \| undefined`](../../doc/models/venmo-wallet-request.md) | Optional | Information needed to pay using Venmo. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "card": {
-    "name": "name6",
-    "number": "number6",
-    "expiry": "expiry4",
-    "security_code": "security_code8",
-    "billing_address": {
-      "address_line_1": "address_line_12",
-      "address_line_2": "address_line_28",
-      "admin_area_2": "admin_area_28",
-      "admin_area_1": "admin_area_14",
-      "postal_code": "postal_code0",
-      "country_code": "country_code8"
-    }
-  },
-  "token": {
-    "id": "id6",
-    "type": "BILLING_AGREEMENT"
-  },
-  "paypal": {
-    "vault_id": "vault_id0",
-    "email_address": "email_address0",
-    "name": {
-      "given_name": "given_name2",
-      "surname": "surname8"
+```ts
+import {
+  ExperienceContextShippingPreference,
+  PaymentSource,
+  PhoneType,
+  TokenType,
+} from '@paypal/paypal-server-sdk';
+
+const paymentSource: PaymentSource = {
+  card: {
+    name: 'name6',
+    number: 'number6',
+    expiry: 'expiry4',
+    securityCode: 'security_code8',
+    billingAddress: {
+      countryCode: 'country_code8',
+      addressLine1: 'address_line_12',
+      addressLine2: 'address_line_28',
+      adminArea2: 'admin_area_28',
+      adminArea1: 'admin_area_14',
+      postalCode: 'postal_code0',
     },
-    "phone": {
-      "phone_type": "OTHER",
-      "phone_number": {
-        "national_number": "national_number6"
-      }
-    },
-    "birth_date": "birth_date8"
   },
-  "bancontact": {
-    "name": "name0",
-    "country_code": "country_code0",
-    "experience_context": {
-      "brand_name": "brand_name2",
-      "locale": "locale6",
-      "shipping_preference": "NO_SHIPPING",
-      "return_url": "return_url4",
-      "cancel_url": "cancel_url6"
-    }
+  token: {
+    id: 'id6',
+    type: TokenType.BillingAgreement,
   },
-  "blik": {
-    "name": "name2",
-    "country_code": "country_code2",
-    "email": "email4",
-    "experience_context": {
-      "brand_name": "brand_name2",
-      "locale": "locale6",
-      "shipping_preference": "NO_SHIPPING",
-      "return_url": "return_url4",
-      "cancel_url": "cancel_url6"
+  paypal: {
+    vaultId: 'vault_id0',
+    emailAddress: 'email_address0',
+    name: {
+      givenName: 'given_name2',
+      surname: 'surname8',
     },
-    "level_0": {
-      "auth_code": "auth_code8"
+    phone: {
+      phoneNumber: {
+        nationalNumber: 'national_number6',
+      },
+      phoneType: PhoneType.Other,
     },
-    "one_click": {
-      "auth_code": "auth_code0",
-      "consumer_reference": "consumer_reference2",
-      "alias_label": "alias_label6",
-      "alias_key": "alias_key4"
-    }
-  }
-}
+    birthDate: 'birth_date8',
+  },
+  bancontact: {
+    name: 'name0',
+    countryCode: 'country_code0',
+    experienceContext: {
+      brandName: 'brand_name2',
+      locale: 'locale6',
+      shippingPreference: ExperienceContextShippingPreference.NoShipping,
+      returnUrl: 'return_url4',
+      cancelUrl: 'cancel_url6',
+    },
+  },
+  blik: {
+    name: 'name2',
+    countryCode: 'country_code2',
+    email: 'email4',
+    experienceContext: {
+      brandName: 'brand_name2',
+      locale: 'locale6',
+      shippingPreference: ExperienceContextShippingPreference.NoShipping,
+      returnUrl: 'return_url4',
+      cancelUrl: 'cancel_url6',
+    },
+    level0: {
+      authCode: 'auth_code8',
+    },
+    oneClick: {
+      consumerReference: 'consumer_reference2',
+      authCode: 'auth_code0',
+      aliasLabel: 'alias_label6',
+      aliasKey: 'alias_key4',
+    },
+  },
+};
 ```
 

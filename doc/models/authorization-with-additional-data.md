@@ -25,20 +25,22 @@ The authorization with additional payment details, such as risk assessment and p
 | `updateTime` | `string \| undefined` | Optional | The date and time, in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6). Seconds are required while fractional seconds are optional. Note: The regular expression provides guidance but does not reject all invalid dates.<br><br>**Constraints**: *Minimum Length*: `20`, *Maximum Length*: `64`, *Pattern*: `^[0-9]{4}-(0[1-9]\|1[0-2])-(0[1-9]\|[1-2][0-9]\|3[0-1])[T,t]([0-1][0-9]\|2[0-3]):[0-5][0-9]:([0-5][0-9]\|60)([.][0-9]+)?([Zz]\|[+-][0-9]{2}:[0-9]{2})$` |
 | `processorResponse` | [`ProcessorResponse \| undefined`](../../doc/models/processor-response.md) | Optional | The processor response information for payment requests, such as direct credit card transactions. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "status": "VOIDED",
-  "status_details": {
-    "reason": "PENDING_REVIEW"
+```ts
+import {
+  AuthorizationIncompleteReason,
+  AuthorizationWithAdditionalData,
+} from '@paypal/paypal-server-sdk';
+
+const authorizationWithAdditionalData: AuthorizationWithAdditionalData = {
+  statusDetails: {
+    reason: AuthorizationIncompleteReason.PendingReview,
   },
-  "id": "id6",
-  "amount": {
-    "currency_code": "currency_code6",
-    "value": "value0"
+  amount: {
+    currencyCode: 'currency_code6',
+    value: 'value0',
   },
-  "invoice_id": "invoice_id6"
-}
+};
 ```
 

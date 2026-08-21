@@ -18,3 +18,11 @@ OAuth 2 Authorization error codes
 | `UnsupportedGrantType` | The authorization grant type is not supported by the authorization server. |
 | `InvalidScope` | The requested scope is invalid, unknown, malformed, or exceeds the scope granted by the resource owner. |
 
+## Example
+
+```ts
+import { OAuthProviderError } from '@paypal/paypal-server-sdk';
+
+const oAuthProviderError = OAuthProviderError.InvalidRequest;
+```
+

@@ -16,3 +16,11 @@ This field indicates the status of PayPal's Checkout experience throughout the o
 | `Canceled` | PayPal checkout is canceled (by closing the checkout window or clicking cancel) before the order approval. |
 | `Approved` | Order is approved. User has completed the checkout process. |
 
+## Example
+
+```ts
+import { ExperienceStatus } from '@paypal/paypal-server-sdk';
+
+const experienceStatus = ExperienceStatus.Canceled;
+```
+

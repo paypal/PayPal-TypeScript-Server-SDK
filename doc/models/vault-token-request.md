@@ -14,12 +14,17 @@ The Tokenized Payment Source representing a Request to Vault a Token.
 | `id` | `string` | Required | The PayPal-generated ID for the token.<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `255`, *Pattern*: `^[0-9A-Za-z_-]+$` |
 | `type` | [`VaultTokenRequestType`](../../doc/models/vault-token-request-type.md) | Required | The tokenization method that generated the ID.<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `255`, *Pattern*: `^[0-9A-Z_-]+$` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "id": "id8",
-  "type": "SETUP_TOKEN"
-}
+```ts
+import {
+  VaultTokenRequest,
+  VaultTokenRequestType,
+} from '@paypal/paypal-server-sdk';
+
+const vaultTokenRequest: VaultTokenRequest = {
+  id: 'id0',
+  type: VaultTokenRequestType.SetupToken,
+};
 ```
 

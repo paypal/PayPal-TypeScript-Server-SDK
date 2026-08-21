@@ -14,3 +14,11 @@ The merchant-preferred payment methods.
 | `Unrestricted` | Accepts any type of payment from the customer. |
 | `ImmediatePaymentRequired` | Accepts only immediate payment from the customer. For example, credit card, PayPal balance, or instant ACH. Ensures that at the time of capture, the payment does not have the `pending` status. |
 
+## Example
+
+```ts
+import { PayeePaymentMethodPreference } from '@paypal/paypal-server-sdk';
+
+const payeePaymentMethodPreference = PayeePaymentMethodPreference.Unrestricted;
+```
+

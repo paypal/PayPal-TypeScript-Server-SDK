@@ -18,15 +18,17 @@ The details of the items in the shipment.
 | `imageUrl` | `string \| undefined` | Optional | The URL of the item's image. File type and size restrictions apply. An image that violates these restrictions will not be honored.<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `2048`, *Pattern*: `^(https:)([/\|.\|\w\|\s\|-])*\.(?:jpg\|gif\|png\|jpeg\|JPG\|GIF\|PNG\|JPEG)` |
 | `upc` | [`UniversalProductCode \| undefined`](../../doc/models/universal-product-code.md) | Optional | The Universal Product Code of the item. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "name": "name6",
-  "quantity": "quantity2",
-  "sku": "sku2",
-  "url": "url0",
-  "image_url": "image_url2"
-}
+```ts
+import { OrderTrackerItem } from '@paypal/paypal-server-sdk';
+
+const orderTrackerItem: OrderTrackerItem = {
+  name: 'name8',
+  quantity: 'quantity4',
+  sku: 'sku6',
+  url: 'url2',
+  imageUrl: 'image_url4',
+};
 ```
 

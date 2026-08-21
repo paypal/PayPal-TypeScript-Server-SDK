@@ -13,11 +13,13 @@ The suspend subscription request details.
 |  --- | --- | --- | --- |
 | `reason` | `string` | Required | The reason for suspension of the Subscription.<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `128`, *Pattern*: `^.*$` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "reason": "reason4"
-}
+```ts
+import { SuspendSubscription } from '@paypal/paypal-server-sdk';
+
+const suspendSubscription: SuspendSubscription = {
+  reason: 'reason4',
+};
 ```
 

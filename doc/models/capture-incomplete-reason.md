@@ -24,3 +24,11 @@ The reason why the captured payment status is `PENDING` or `DENIED`.
 | `VerificationRequired` | The payee's PayPal account is not verified. |
 | `DeclinedByRiskFraudFilters` | Risk Filter set by the payee failed for the transaction. |
 
+## Example
+
+```ts
+import { CaptureIncompleteReason } from '@paypal/paypal-server-sdk';
+
+const captureIncompleteReason = CaptureIncompleteReason.Other;
+```
+

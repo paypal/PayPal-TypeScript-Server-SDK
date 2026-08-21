@@ -16,19 +16,27 @@ Provides additional details to process a payment using a `payment_source` that h
 | `usage` | [`StoredPaymentSourceUsageType \| undefined`](../../doc/models/stored-payment-source-usage-type.md) | Optional | Indicates if this is a `first` or `subsequent` payment using a stored payment source (also referred to as stored credential or card on file).<br><br>**Default**: `StoredPaymentSourceUsageType.Derived`<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `255`, *Pattern*: `^[0-9A-Z_]+$` |
 | `previousNetworkTransactionReference` | [`NetworkTransaction \| undefined`](../../doc/models/network-transaction.md) | Optional | Reference values used by the card network to identify a transaction. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "payment_initiator": "CUSTOMER",
-  "payment_type": "RECURRING",
-  "usage": "DERIVED",
-  "previous_network_transaction_reference": {
-    "id": "id6",
-    "date": "date2",
-    "network": "CONFIDIS",
-    "acquirer_reference_number": "acquirer_reference_number8"
-  }
-}
+```ts
+import {
+  CardBrand,
+  PaymentInitiator,
+  StoredPaymentSource,
+  StoredPaymentSourcePaymentType,
+  StoredPaymentSourceUsageType,
+} from '@paypal/paypal-server-sdk';
+
+const storedPaymentSource: StoredPaymentSource = {
+  paymentInitiator: PaymentInitiator.Customer,
+  paymentType: StoredPaymentSourcePaymentType.OneTime,
+  usage: StoredPaymentSourceUsageType.Derived,
+  previousNetworkTransactionReference: {
+    id: 'id6',
+    date: 'date2',
+    network: CardBrand.Confidis,
+    acquirerReferenceNumber: 'acquirer_reference_number8',
+  },
+};
 ```
 

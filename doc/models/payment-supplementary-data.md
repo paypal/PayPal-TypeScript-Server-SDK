@@ -13,15 +13,17 @@ The supplementary data.
 |  --- | --- | --- | --- |
 | `relatedIds` | [`RelatedIdentifiers \| undefined`](../../doc/models/related-identifiers.md) | Optional | Identifiers related to a specific resource. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "related_ids": {
-    "order_id": "order_id2",
-    "authorization_id": "authorization_id0",
-    "capture_id": "capture_id0"
-  }
-}
+```ts
+import { PaymentSupplementaryData } from '@paypal/paypal-server-sdk';
+
+const paymentSupplementaryData: PaymentSupplementaryData = {
+  relatedIds: {
+    orderId: 'order_id2',
+    authorizationId: 'authorization_id0',
+    captureId: 'capture_id0',
+  },
+};
 ```
 

@@ -20,15 +20,17 @@ The payment card to use to fund a payment. Can be a credit or debit card.
 | `billingAddress` | [`Address \| undefined`](../../doc/models/address.md) | Optional | The portable international postal address. Maps to [AddressValidationMetadata](https://github.com/googlei18n/libaddressinput/wiki/AddressValidationMetadata) and HTML 5.1 [Autofilling form controls: the autocomplete attribute](https://www.w3.org/TR/html51/sec-forms.html#autofilling-form-controls-the-autocomplete-attribute). |
 | `attributes` | [`SubscriptionsCardAttributes \| undefined`](../../doc/models/subscriptions-card-attributes.md) | Optional | Additional attributes associated with the use of this card. |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "name": "name6",
-  "number": "number6",
-  "expiry": "expiry4",
-  "security_code": "security_code8",
-  "type": "UNKNOWN"
-}
+```ts
+import { CardType, SubscriptionCardRequest } from '@paypal/paypal-server-sdk';
+
+const subscriptionCardRequest: SubscriptionCardRequest = {
+  name: 'name8',
+  number: 'number4',
+  expiry: 'expiry6',
+  securityCode: 'security_code0',
+  type: CardType.Prepaid,
+};
 ```
 

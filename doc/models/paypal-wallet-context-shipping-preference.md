@@ -15,3 +15,13 @@ The location from which the shipping address is derived.
 | `NoShipping` | Removes the shipping address information from the API response and the Paypal site. However, the shipping.phone_number and shipping.email_address fields will still be returned to allow for digital goods delivery. |
 | `SetProvidedAddress` | Get the merchant-provided address. The customer cannot change this address on the PayPal site. If merchant does not pass an address, customer can choose the address on PayPal pages. |
 
+## Example
+
+```ts
+import {
+  PaypalWalletContextShippingPreference,
+} from '@paypal/paypal-server-sdk';
+
+const paypalWalletContextShippingPreference = PaypalWalletContextShippingPreference.GetFromFile;
+```
+

@@ -31,15 +31,17 @@ The item details.
 | `invoiceNumber` | `string \| undefined` | Optional | The invoice number. An alphanumeric string that identifies a billing for a merchant.<br><br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `200`, *Pattern*: `^[a-zA-Z0-9_'\-., ":;\!?]*$` |
 | `checkoutOptions` | [`CheckoutOption[] \| undefined`](../../doc/models/checkout-option.md) | Optional | An array of checkout options. Each option has a name and value.<br><br>**Constraints**: *Minimum Items*: `1`, *Maximum Items*: `32767` |
 
-## Example (as JSON)
+## Example
 
-```json
-{
-  "item_code": "item_code4",
-  "item_name": "item_name2",
-  "item_description": "item_description0",
-  "item_options": "item_options4",
-  "item_quantity": "item_quantity4"
-}
+```ts
+import { ItemDetails } from '@paypal/paypal-server-sdk';
+
+const itemDetails: ItemDetails = {
+  itemCode: 'item_code2',
+  itemName: 'item_name0',
+  itemDescription: 'item_description8',
+  itemOptions: 'item_options4',
+  itemQuantity: 'item_quantity4',
+};
 ```
 
